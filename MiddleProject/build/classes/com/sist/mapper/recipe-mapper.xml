@@ -33,4 +33,7 @@
 			#{made}
 		)
 	</insert>
+	<select id="RecipeAllData" resultType="RecipeVO">
+		select * from recipe
+	</select>
 </mapper>
