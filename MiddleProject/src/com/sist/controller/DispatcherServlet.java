@@ -36,6 +36,7 @@ public class DispatcherServlet extends HttpServlet {
 				for(String cls:clsList){ // 가져온 클래스를  list에 추가
 					System.out.println("cls="+cls);
 					list.add(cls);
+					
 				}
 			}
 		} catch (Exception e) {
@@ -74,6 +75,7 @@ public class DispatcherServlet extends HttpServlet {
 					if(cmd.equals(rm.value())){ //cmd요청 클래스와 requestmapping한 값이 같은지 확인
 						Model model = new Model(request, response); //request,response를 감춤 Model클래스의 private
 						String jsp =(String)m.invoke(obj, model); //MainModel m = new Mainmodel(); => m.main_page()
+						System.out.println(jsp);
 						if(jsp.startsWith("redirect")){
 							//화면 이동
 							response.sendRedirect(jsp.substring(jsp.indexOf(":")+1));// return 값 redirect:(<-짜름)main.do

@@ -17,6 +17,7 @@ public class RecipeVO {
 	private int hit;
 	private String ingre;
 	private String made;
+	
 	public int getNo() {
 		return no;
 	}

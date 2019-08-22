@@ -2,21 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.Recipe-mapper">
 	<insert id="RecipeDataInsert" parameterType="RecipeVO">
-	<!-- 
-	 NO                                        NOT NULL NUMBER
- POSTER                                             VARCHAR2(3000)
- SUMMARY                                            VARCHAR2(1000)
- SUMMARY_IN                                         VARCHAR2(2000)
- INGRE                                              VARCHAR2(3000)
- MADE                                               VARCHAR2(100)
- HIT                                                NUMBER
- STEP                                               CLOB
- STEP_POSTER                                        CLOB
- COMPLETE                                           VARCHAR2(2000)
- TIP                                                VARCHAR2(100)
- TAG
-  -->
-		insert into recipe values(
+		insert into recipe(no,poster,summary_in,info,step,STEP_POSTER,summary,complete,tag,tip,hit,ingre,made) values(
 			(select NVL(max(no)+1,1) from recipe),
 			#{poster},
 			#{summary_in},
@@ -25,7 +11,6 @@
 			#{STEP_POSTER},
 			#{summary},
 			#{complete},
-			#{regdate},
 			#{tag},
 			#{tip},
 			#{hit},
@@ -33,7 +18,26 @@
 			#{made}
 		)
 	</insert>
+	<!-- list data -->
+	<select id="recipeListData" parameterType="java.util.Map" resultType="RecipeVO" >
+		select hit,made,tag,TO_CHAR(regdate,'YYYY-MM-DD')as regdate,poster,info,summary,num 
+		from (select hit,made,tag,regdate,poster,info,summary,rownum as num
+		from (select hit,made,tag,regdate,poster,info,summary
+		from recipe order by no desc))
+		where num between #{start} and #{end}
+	</select>
+	<!-- 레시피 전체 데이터 -->
 	<select id="RecipeAllData" resultType="RecipeVO">
 		select * from recipe
 	</select>
+	<!-- 레시피 카운터 -->
+	<select id="RecipeCount" resultType="int">
+		select count(*) from recipe
+	</select>
+	<select id="RecipeTotalPage" resultType="int">
+      SELECT CEIL(COUNT(*)/10.0) FROM recipe
+   </select>
+
+	
+	
 </mapper>
