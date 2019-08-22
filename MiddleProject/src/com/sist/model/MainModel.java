@@ -16,6 +16,6 @@ public class MainModel {
 		List<RecipeVO> list = RecipeDAO.recipeAllData(); 
 		model.addAttribute("list", list);
 	
-		return "../EX/step.jsp";
+		return "../main/main.jsp";
 	}
 }
