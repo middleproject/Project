@@ -6,9 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="../main/style.css" rel="stylesheet">
-<link href="../main/css/responsive/responsive.css" rel="stylesheet">
-<link rel="icon" href="img/core-img/favicon.ico">
+
 </head>
 <body>
 	<section class="archive-area section_padding_80">

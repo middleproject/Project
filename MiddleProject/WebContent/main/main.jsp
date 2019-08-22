@@ -10,15 +10,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Yummy Blog - Food Blog Template</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
-
-    <!-- Core Stylesheet -->
-    <link href="style.css" rel="stylesheet">
-
-    <!-- Responsive CSS -->
-    <link href="css/responsive/responsive.css" rel="stylesheet">
+    <link rel="icon" href="../main/img/core-img/favicon.ico">
+    <link href="../main/style.css" rel="stylesheet">
+    <link href="../main/css/responsive/responsive.css" rel="stylesheet">
 </head>
 
 <body>
@@ -109,14 +103,14 @@
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
                                         <a class="dropdown-item" href="main.do">홈</a>
-                                        <a class="dropdown-item" href="archive.do">레시피</a>
+                                        <a class="dropdown-item" href="../recipe/recipe_list.do">레시피</a>
                                         <a class="dropdown-item" href="single.do">커뮤니티</a>
                                         <a class="dropdown-item" href="static.do">예약</a>
                                         <a class="dropdown-item" href="contact.do">마이페이지</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">레시피</a>
+                                    <a class="nav-link" href="../recipe/recipe_list.do">레시피</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">커뮤니티</a>
