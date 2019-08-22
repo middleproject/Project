@@ -19,17 +19,18 @@
 		insert into recipe values(
 			(select NVL(max(no)+1,1) from recipe),
 			#{poster},
-			#{summary},
 			#{summary_in},
-			#{ingre},
-			#{made},
-			#{hit},
+			#{info},
 			#{step},
 			#{STEP_POSTER},
+			#{summary},
 			#{complete},
-			#{tag},
 			#{regdate},
-			#{tip}
+			#{tag},
+			#{tip},
+			#{hit},
+			#{ingre},
+			#{made}
 		)
 	</insert>
 </mapper>

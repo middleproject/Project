@@ -19,12 +19,12 @@ public class RecipeManager {
 			System.out.println(i);
 			i++;
 		}
-		System.out.println("¿Ï·á");
+		System.out.println("ï¿½Ï·ï¿½");
 	}
 	public List<RecipeVO> recipeAllData(){
 		List<RecipeVO> list = new ArrayList<RecipeVO>();
 		try {
-			for(int k=0; k<5;k++){
+			for(int k=10; k<11;k++){
 				Document doc = Jsoup.connect("http://www.10000recipe.com/recipe/list.html?order=date&niresource=%2Frecipe%2F6917457&page="+k).get();
 				Elements summary = doc.select("div.row div.caption h4");
 				Elements poster = doc.select("div.row div.col-xs-4 img");
@@ -71,18 +71,18 @@ public class RecipeManager {
 					for(int b=0;b<comple.size();b++){
 						complete += comple.get(b).attr("src")+",";
 					}
-					System.out.println("¼³¸í:"+sumary_in.text());
-					System.out.println("Á¦¸ñ:"+summary.get(i).text());
-					System.out.println("ÀÛ¼ºÀÚ:"+made.get(i).text());
-					System.out.println("³¯Â¥:"+date.text());
-					System.out.println("¿ä¸®¼ø¼­:"+step);
-					System.out.println("¿ä¸® ¼ø¼­ Æ÷½ºÅÍ:"+step_poster);
-					System.out.println("¸ÞÀÎÆ÷½ºÅÍ:"+poster.get(i).attr("src"));
-					System.out.println("¿Ï·á Æ÷½ºÅÍ:"+complete);
-					System.out.println("ÄÚ¸àÆ®:"+comment.text());
-					System.out.println("ÆÁ:"+tip.text());
-					System.out.println("Á¶È¸¼ö:"+hit.text());
-					System.out.println("ÅÂ±×:"+tag);
+//					System.out.println("ï¿½ï¿½ï¿½ï¿½:"+sumary_in.text());
+//					System.out.println("ï¿½ï¿½ï¿½ï¿½:"+summary.get(i).text());
+//					System.out.println("ï¿½Û¼ï¿½ï¿½ï¿½:"+made.get(i).text());
+//					System.out.println("ï¿½ï¿½Â¥:"+date.text());
+//					System.out.println("ï¿½ä¸®ï¿½ï¿½ï¿½ï¿½:"+step);
+//					System.out.println("ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:"+step_poster);
+//					System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:"+poster.get(i).attr("src"));
+//					System.out.println("ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:"+complete);
+//					System.out.println("ï¿½Ú¸ï¿½Æ®:"+comment.text());
+//					System.out.println("ï¿½ï¿½:"+tip.text());
+//					System.out.println("ï¿½ï¿½È¸ï¿½ï¿½:"+hit.text());
+//					System.out.println("ï¿½Â±ï¿½:"+tag);
 					
 					RecipeVO vo = new RecipeVO();
 					vo.setSummary(summary.get(i).text());
@@ -97,6 +97,7 @@ public class RecipeManager {
 					vo.setIngre(ingre.text());
 					vo.setTag(tag);
 					vo.setTip(tip.text());
+					vo.setInfo(info);
 					list.add(vo);
 					}
 				
