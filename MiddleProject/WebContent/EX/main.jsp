@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<center>안녕하세요</center>
+	<center>안녕하세요 주란이빈다</center>
 </body>
 </html>
