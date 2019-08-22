@@ -42,10 +42,19 @@ public class RecipeManager {
 						 info +=docinfo.get(j).text()+"##";
 					}
 					String ingre ="";
+					String ingreunit ="";
+					String s="";
 					Elements ingre12 = doc2.select("div.ready_ingre3 li");
-					for(int w=0;w < 1; w++){
-						ingre += ingre12.text();
+					Elements ingre123 = doc2.select("div.ready_ingre3 li span");
+					for(int w=0;w < ingre12.size(); w++){
+						ingre = ingre12.get(w).html();
+						
+						s += ingre.substring(0, ingre.indexOf("<"))+",";
 					}
+					s=s.substring(0, s.lastIndexOf(","));
+					
+					
+					
 					
 					Elements instep = doc2.select("div.media-body");
 					Elements instep_poster =doc2.select("div.view_step_cont img");
@@ -73,7 +82,7 @@ public class RecipeManager {
 						complete += comple.get(b).attr("src")+",";
 					}
 //					System.out.println("ï¿½ï¿½ï¿½ï¿½:"+sumary_in.text());
-//					System.out.println("ï¿½ï¿½ï¿½ï¿½:"+summary.get(i).text());
+					System.out.println("Á¦¸ñ:"+summary.get(i).text());
 //					System.out.println("ï¿½Û¼ï¿½ï¿½ï¿½:"+made.get(i).text());
 //					System.out.println("ï¿½ï¿½Â¥:"+date.text());
 //					ready_ingre3
@@ -85,7 +94,8 @@ public class RecipeManager {
 //					System.out.println("ï¿½ï¿½:"+tip.text());
 //					System.out.println("ï¿½ï¿½È¸ï¿½ï¿½:"+hit.text());
 //					System.out.println("ï¿½Â±ï¿½:"+tag);
-					System.out.println("ìž¬ë£Œ:"+ingre);
+					System.out.println("Àç·á:"+s);
+					System.out.println("´ÜÀ§:"+ingreunit);
 					RecipeVO vo = new RecipeVO();
 					vo.setSummary(summary.get(i).text());
 					vo.setMade(made.get(i).text());
