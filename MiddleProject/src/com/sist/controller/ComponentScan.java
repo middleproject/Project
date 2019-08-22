@@ -7,7 +7,7 @@ public class ComponentScan {
 	public static List<String> componenetFileData(String pack){
 		List<String> list = new ArrayList<String>();
 		try {
-			String path="C:\\mvcDev\\mvcStudy\\JSPMVCLastProject\\src";
+			String path="C:\\Project\\MiddleProject\\src";
 			path=path+"\\"+pack.replace(".", "\\");
 			File dir= new File(path); // File : file,directory Á¤º¸
 			File[] fList=dir.listFiles();

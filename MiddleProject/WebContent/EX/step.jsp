@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:forEach var="vo" items="list">
+	<c:forEach var="vo" items="${list }">
 		${vo.step }<br>
 	</c:forEach>
 </body>
