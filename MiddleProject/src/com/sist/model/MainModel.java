@@ -13,9 +13,9 @@ public class MainModel {
 	@RequestMapping("main/main.do")
 	public String main_page(Model model){
 		
-		List<RecipeVO> list = RecipeDAO.recipeAllData(); 
-		model.addAttribute("list", list);
-	
+		//List<RecipeVO> list = RecipeDAO.recipeAllData(); 
+		//model.addAttribute("list", list);
+		model.addAttribute("main_jsp", "../main/home.jsp");
 		return "../main/main.jsp";
 	}
 }
