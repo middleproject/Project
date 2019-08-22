@@ -43,8 +43,8 @@ public class RecipeManager {
 					}
 					String ingre ="";
 					Elements ingre12 = doc2.select("div.ready_ingre3 li");
-					for(int w=0;w < ingre12.size(); w++){
-						ingre += ingre12.text()+"##";
+					for(int w=0;w < 1; w++){
+						ingre += ingre12.text();
 					}
 					
 					Elements instep = doc2.select("div.media-body");
