@@ -22,9 +22,10 @@ public class RecipeManager {
 		System.out.println("Save end");
 	}
 	public List<RecipeVO> recipeAllData(){
+		int q=0;
 		List<RecipeVO> list = new ArrayList<RecipeVO>();
 		try {
-			for(int k=10; k<11;k++){
+			for(int k=1; k<1700;k++){
 				Document doc = Jsoup.connect("http://www.10000recipe.com/recipe/list.html?order=date&niresource=%2Frecipe%2F6917457&page="+k).get();
 				Elements summary = doc.select("div.row div.caption h4");
 				Elements poster = doc.select("div.row div.col-xs-4 img");
@@ -42,16 +43,18 @@ public class RecipeManager {
 						 info +=docinfo.get(j).text()+"##";
 					}
 					String ingre ="";
-					String ingreunit ="";
+
 					String s="";
 					Elements ingre12 = doc2.select("div.ready_ingre3 li");
-					Elements ingre123 = doc2.select("div.ready_ingre3 li span");
+					if(ingre12==null){
+						continue;
+					}
 					for(int w=0;w < ingre12.size(); w++){
 						ingre = ingre12.get(w).html();
 						
 						s += ingre.substring(0, ingre.indexOf("<"))+",";
 					}
-					s=s.substring(0, s.lastIndexOf(","));
+					//s=s.substring(0, s.lastIndexOf(","));
 					
 					
 					
@@ -82,7 +85,7 @@ public class RecipeManager {
 						complete += comple.get(b).attr("src")+",";
 					}
 //					System.out.println("ï¿½ï¿½ï¿½ï¿½:"+sumary_in.text());
-					System.out.println("Á¦¸ñ:"+summary.get(i).text());
+					//System.out.println("ï¿½ï¿½ï¿½ï¿½:"+summary.get(i).text());
 //					System.out.println("ï¿½Û¼ï¿½ï¿½ï¿½:"+made.get(i).text());
 //					System.out.println("ï¿½ï¿½Â¥:"+date.text());
 //					ready_ingre3
@@ -94,8 +97,9 @@ public class RecipeManager {
 //					System.out.println("ï¿½ï¿½:"+tip.text());
 //					System.out.println("ï¿½ï¿½È¸ï¿½ï¿½:"+hit.text());
 //					System.out.println("ï¿½Â±ï¿½:"+tag);
-					System.out.println("Àç·á:"+s);
-					System.out.println("´ÜÀ§:"+ingreunit);
+					
+					System.out.println(q);
+				
 					RecipeVO vo = new RecipeVO();
 					vo.setSummary(summary.get(i).text());
 					vo.setMade(made.get(i).text());
@@ -106,11 +110,12 @@ public class RecipeManager {
 					vo.setPoster(poster.get(i).attr("src"));
 					vo.setComplete(complete);
 					vo.setHit(Integer.parseInt(hit.text().replace(",", "")));
-					vo.setIngre(ingre);
+					vo.setIngre(s);
 					vo.setTag(tag);
 					vo.setTip(tip.text());
 					vo.setInfo(info);
 					list.add(vo);
+					q++;
 					}
 				
 			}
