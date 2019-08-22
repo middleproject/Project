@@ -14,7 +14,7 @@
 	<section class="archive-area section_padding_80">
         <div class="container">
             <div class="row">
-				<c:forEach var="vo" items=${list }>
+				<%-- <c:forEach var="vo" items="${list }">--%>
                 <!-- Single Post -->
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="single-post wow fadeInUp" data-wow-delay="0.1s">
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-                </c:forEach>
+                <%-- </c:forEach>--%>
                 
                 <!-- 페이지 나누는 곳 -->
                 <div class="col-12">
@@ -76,7 +76,7 @@
                         </nav>
                         <!-- 총 페이지 -->
                         <div class="page-status">
-                            <p>Page ${curpage } of ${total } results</p>
+                           <%--  <p>Page ${curpage } of ${total } results</p>--%>
                         </div>
                     </div>
                 </div>
