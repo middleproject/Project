@@ -134,7 +134,15 @@
         </div>
     </header>
     
+    
+    
+    
      <jsp:include page="${main_jsp }"></jsp:include>
+    
+    
+    
+    
+    
     
     <!-- ****** Footer Menu Area Start ****** -->
     <footer class="footer_area">
@@ -203,3 +211,4 @@
     <!-- Active JS -->
     <script src="js/active.js"></script>
 </body>
+</html>
