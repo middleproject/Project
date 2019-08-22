@@ -1,5 +1,5 @@
 package com.sist.dao;
-
+import java.util.*;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -15,5 +15,12 @@ public class RecipeDAO {
 		SqlSession session =ssf.openSession(true); //commit(auto)
 		session.insert("RecipeDataInsert",vo);
 		session.close();
+	}
+	public static List<RecipeVO> recipeAllData(){
+		List<RecipeVO> list = new ArrayList<RecipeVO>();
+		SqlSession session = ssf.openSession();
+		list = session.selectList("RecipeAllData");
+		session.close();
+		return list;
 	}
 }
