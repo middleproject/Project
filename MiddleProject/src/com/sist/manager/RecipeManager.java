@@ -19,7 +19,7 @@ public class RecipeManager {
 			System.out.println(i);
 			i++;
 		}
-		System.out.println("�Ϸ�");
+		System.out.println("Save end");
 	}
 	public List<RecipeVO> recipeAllData(){
 		List<RecipeVO> list = new ArrayList<RecipeVO>();
@@ -41,9 +41,11 @@ public class RecipeManager {
 					for(int j=0;j<docinfo.size();j++){
 						 info +=docinfo.get(j).text()+"##";
 					}
-					
-					Elements ingre = doc2.select("div.cont_ingre");
-	
+					String ingre ="";
+					Elements ingre12 = doc2.select("div.ready_ingre3 li");
+					for(int w=0;w < ingre12.size(); w++){
+						ingre += ingre12.text()+"##";
+					}
 					
 					Elements instep = doc2.select("div.media-body");
 					Elements instep_poster =doc2.select("div.view_step_cont img");
@@ -51,7 +53,6 @@ public class RecipeManager {
 					String step ="";
 					for(int y=0;y<instep.size();y++){
 						step += instep.get(y).text()+"##";
-						
 					}
 					for(int c=0;c<instep_poster.size();c++){
 						step_poster+= instep_poster.get(c).attr("src")+"##";
@@ -75,6 +76,7 @@ public class RecipeManager {
 //					System.out.println("����:"+summary.get(i).text());
 //					System.out.println("�ۼ���:"+made.get(i).text());
 //					System.out.println("��¥:"+date.text());
+//					ready_ingre3
 //					System.out.println("�丮����:"+step);
 //					System.out.println("�丮 ���� ������:"+step_poster);
 //					System.out.println("����������:"+poster.get(i).attr("src"));
@@ -83,7 +85,7 @@ public class RecipeManager {
 //					System.out.println("��:"+tip.text());
 //					System.out.println("��ȸ��:"+hit.text());
 //					System.out.println("�±�:"+tag);
-					
+					System.out.println("재료:"+ingre);
 					RecipeVO vo = new RecipeVO();
 					vo.setSummary(summary.get(i).text());
 					vo.setMade(made.get(i).text());
@@ -94,7 +96,7 @@ public class RecipeManager {
 					vo.setPoster(poster.get(i).attr("src"));
 					vo.setComplete(complete);
 					vo.setHit(Integer.parseInt(hit.text().replace(",", "")));
-					vo.setIngre(ingre.text());
+					vo.setIngre(ingre);
 					vo.setTag(tag);
 					vo.setTip(tip.text());
 					vo.setInfo(info);
