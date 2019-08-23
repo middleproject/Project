@@ -17,7 +17,14 @@ public class RecipeVO {
 	private int hit;
 	private String ingre;
 	private String made;
+	private String image;
 	
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	public int getNo() {
 		return no;
 	}

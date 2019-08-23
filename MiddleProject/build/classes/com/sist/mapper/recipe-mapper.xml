@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.Recipe-mapper">
 	<insert id="RecipeDataInsert" parameterType="RecipeVO">
-		insert into recipe(no,poster,summary_in,info,step,STEP_POSTER,summary,complete,tag,tip,hit,ingre,made) values(
+		insert into recipe(no,poster,summary_in,info,step,STEP_POSTER,summary,complete,tag,tip,hit,ingre,made,image) values(
 			(select NVL(max(no)+1,1) from recipe),
 			#{poster},
 			#{summary_in},
@@ -15,7 +15,8 @@
 			#{tip},
 			#{hit},
 			#{ingre},
-			#{made}
+			#{made},
+			#{image}
 		)
 	</insert>
 	<!-- list data -->
