@@ -25,7 +25,7 @@ public class RecipeManager {
 		int q=0;
 		List<RecipeVO> list = new ArrayList<RecipeVO>();
 		try {
-			for(int k=1; k<4;k++){
+			for(int k=2; k<350;k++){
 				Document doc = Jsoup.connect("http://www.10000recipe.com/recipe/list.html?order=date&niresource=%2Frecipe%2F6917457&page="+k).get();
 				Elements summary = doc.select("div.row div.caption h4");
 				
@@ -37,7 +37,8 @@ public class RecipeManager {
 					Elements sumary_in = doc2.select("div.view2_summary_in");
 					Elements poster = doc2.select("div.centeredcrop img");
 					Elements docinfo = doc2.select("div.view2_summary span");
-					
+					Elements img = doc2.select("div.user_info2 img");
+					String image = img.attr("src");
 					String info ="";
 					for(int j=0;j<docinfo.size();j++){
 						 info +=docinfo.get(j).text()+"##";
@@ -63,9 +64,15 @@ public class RecipeManager {
 					Elements instep_poster =doc2.select("div.view_step_cont img");
 					String step_poster="";
 					String step ="";
+				
+					if(instep.size()==0) {
+						instep = doc2.select("div.view_step");
+						instep_poster =doc2.select("div.view_step img");
+					}
 					for(int y=0;y<instep.size();y++){
 						step += instep.get(y).text()+"##";
 					}
+					
 					for(int c=0;c<instep_poster.size();c++){
 						step_poster+= instep_poster.get(c).attr("src")+"##";
 					}
@@ -99,7 +106,8 @@ public class RecipeManager {
 //					System.out.println("�±�:"+tag);
 					
 					System.out.println(q);
-				
+					if(instep.size()==0) continue;
+					
 					RecipeVO vo = new RecipeVO();
 					vo.setSummary(summary.get(i).text());
 					vo.setMade(made.get(i).text());
@@ -114,6 +122,7 @@ public class RecipeManager {
 					vo.setTag(tag);
 					vo.setTip(tip.text());
 					vo.setInfo(info);
+					vo.setImage(image);
 					list.add(vo);
 					q++;
 					}
