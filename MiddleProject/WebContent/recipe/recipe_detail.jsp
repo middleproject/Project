@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html">
 <html>
 <head>
@@ -11,6 +12,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 ftco-animate">
+					<table class="table">
 					<h2 class="mb-3">${vo.summary }</h2>
 					<p>${vo.summary_in }</p>
 					<p>
@@ -22,6 +24,7 @@
 						illo eum ullam incidunt rem assumenda eveniet eaque sequi deleniti
 						tenetur dolore amet fugit perspiciatis ipsa, odit. Nesciunt dolor
 						minima esse vero ut ea, repudiandae suscipit!</p>
+						</table>
 					<h2 class="mb-3 mt-5">#2. Creative WordPress Themes</h2>
 					<p>Temporibus ad error suscipit exercitationem hic molestiae
 						totam obcaecati rerum, eius aut, in. Exercitationem atque quidem
@@ -69,7 +72,7 @@
 
 					<div class="about-author d-flex p-4 bg-light">
 						<div class="bio align-self-md-center mr-4">
-							<img src="images/person_1.jpg" alt="Image placeholder"
+							<img src="${vo.image }" style="height:50px;width:50px;" alt="Image placeholder"
 								class="img-fluid mb-4">
 						</div>
 						<div class="desc align-self-md-center">
@@ -78,6 +81,7 @@
 						</div>
 						
 					</div>
+					
 					
 				</div>
 				    <div class="col-lg-4 sidebar ftco-animate">
@@ -100,41 +104,22 @@
             </div>
 
             <div class="sidebar-box ftco-animate">
-              <h3 class="heading">Recent Blog</h3>
+              <h3 class="heading">Hot Recipe</h3>
+              <c:forEach var="hvo" items="${list }">
               <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                <a class="blog-img mr-4" style="background-image: url(${hvo.poster});"></a>
                 <div class="text">
-                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <h3 class="heading-1"><a href="../recipe/recipe_detail.do?no=${hvo.no }">${hvo.summary }</a></h3>
                   <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                    <div><a href="#"><span class="icon-calendar"></span> ${hvo.regdate }</a></div>
+                    <div><a href="#"><span class="icon-person"></span> ${hvo.made }</a></div>
+                    <div><a href="#"><span class="icon-chat"></span> ${hvo.hit }</a></div>
                   </div>
                 </div>
               </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
+              </c:forEach>
               </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
 
             <div class="sidebar-box ftco-animate">
               <h3 class="heading">Tag Cloud</h3>
@@ -157,7 +142,5 @@
 			
 		</div>
 	</section>
-
-
 </body>
 </html>

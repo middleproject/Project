@@ -46,8 +46,9 @@ public class RecipeModel {
 		String no = model.getRequest().getParameter("no");
 		
 		RecipeVO vo = RecipeDAO.recipeDetailData(Integer.parseInt(no));
+		List<RecipeVO> list = RecipeDAO.recipeHotRecipe(3);
 		
-		
+		model.addAttribute("list", list);
 		model.addAttribute("vo", vo);
 		model.addAttribute("main_jsp", "../recipe/recipe_detail.jsp");
 		return "../main/main.jsp";

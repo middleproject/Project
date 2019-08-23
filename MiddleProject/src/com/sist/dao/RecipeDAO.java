@@ -59,4 +59,12 @@ public class RecipeDAO {
 		   session.close();
 		   return vo;
 	   }
+	   // hot Recipe
+	   public static List<RecipeVO> recipeHotRecipe(int num){
+		   SqlSession session = ssf.openSession();
+		   List<RecipeVO> list = session.selectList("HotRecipe",num);
+		   session.close();
+		   return list;
+		   
+	   }
 }

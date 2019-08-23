@@ -54,7 +54,7 @@
             </div>
 
             <div class="sidebar-box ftco-animate">
-              <h3 class="heading">Recent Blog</h3>
+              <h3 class="heading">Hot Recipe</h3>
               <div class="block-21 mb-4 d-flex">
                 <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
                 <div class="text">
@@ -127,7 +127,9 @@
 	                	<li><a href="../recipe/recipe_list.do?page=${i}">${i }</a></li>
 	                </c:if>
                 </c:forEach>
+                <c:if test="${totalpage!=curpage }">
                 <li><a href="../recipe/recipe_list.do?page=${curpage+1 }">&gt;</a></li>
+                </c:if>
               </ul>
             </div>
           </div>
