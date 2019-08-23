@@ -20,9 +20,9 @@
 	</insert>
 	<!-- list data -->
 	<select id="recipeListData" parameterType="java.util.Map" resultType="RecipeVO" >
-		select hit,made,tag,TO_CHAR(regdate,'YYYY-MM-DD')as regdate,poster,info,summary,num 
-		from (select hit,made,tag,regdate,poster,info,summary,rownum as num
-		from (select hit,made,tag,regdate,poster,info,summary
+		select no,hit,made,tag,TO_CHAR(regdate,'YYYY-MM-DD')as regdate,poster,info,summary,num 
+		from (select no,hit,made,tag,regdate,poster,info,summary,rownum as num
+		from (select no,hit,made,tag,regdate,poster,info,summary
 		from recipe order by no desc))
 		where num between #{start} and #{end}
 	</select>
@@ -37,7 +37,10 @@
 	<select id="RecipeTotalPage" resultType="int">
       SELECT CEIL(COUNT(*)/15.0) FROM recipe
    </select>
-
 	
+	<!-- DetailData -->
+	<select id="detailData" parameterType="int" resultType="RecipeVO">
+		select * from recipe where no=#{no}
+	</select>	
 	
 </mapper>

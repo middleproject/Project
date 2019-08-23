@@ -41,5 +41,15 @@ public class RecipeModel {
 		model.addAttribute("main_jsp", "../recipe/recipe_list.jsp");
 		return "../main/main.jsp";
 	}
-
+	@RequestMapping("recipe/recipe_detail.do")
+	public static String recipe_detail(Model model){
+		String no = model.getRequest().getParameter("no");
+		
+		RecipeVO vo = RecipeDAO.recipeDetailData(Integer.parseInt(no));
+		
+		
+		model.addAttribute("vo", vo);
+		model.addAttribute("main_jsp", "../recipe/recipe_detail.jsp");
+		return "../main/main.jsp";
+	}
 }

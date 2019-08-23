@@ -5,8 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
 </head>
 <body>
 	<section class="archive-area section_padding_80">
@@ -18,7 +16,7 @@
                     <div class="single-post wow fadeInUp" data-wow-delay="0.1s">
                         <!-- Post Thumb -->
                          
-                        <div class="post-thumb">
+                        <div class="single-populer-post d-flex">
                           <a href="../recipe/recipe_detail.do?no=${vo.no }">  <img src="${vo.poster }"></a>
                         </div>
                         <!-- Post Content -->
@@ -70,7 +68,7 @@
                                 <li class="page-item"><a class="page-link" href="#">2</a></li>
                                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                                 <li class="page-item">
-                                    <a class="page-link" href="../recipe/recipe_list.do?pgae=${curpage+1 }">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                    <a class="page-link" href="../recipe/recipe_list.do?page=${curpage+1 }">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                                 </li>
                             </ul>
                         </nav>

@@ -51,4 +51,12 @@ public class RecipeDAO {
 		   session.close();
 		   return count;
 	   }
+	   //Detail
+	   public static RecipeVO recipeDetailData(int no){
+		   RecipeVO vo = new RecipeVO();
+		   SqlSession session = ssf.openSession();
+		   vo = session.selectOne("detailData",no);
+		   session.close();
+		   return vo;
+	   }
 }
