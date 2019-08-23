@@ -12,13 +12,14 @@
 	<section class="archive-area section_padding_80">
         <div class="container">
             <div class="row">
-				<%-- <c:forEach var="vo" items="${list }">--%>
+				<c:forEach var="vo" items="${list }">
                 <!-- Single Post -->
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="single-post wow fadeInUp" data-wow-delay="0.1s">
                         <!-- Post Thumb -->
+                         
                         <div class="post-thumb">
-                            <img src="../main/img/blog-img/2.jpg" alt="">
+                          <a href="../recipe/recipe_detail.do?no=${vo.no }">  <img src="${vo.poster }"></a>
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
@@ -26,11 +27,11 @@
                                 <div class="post-author-date-area d-flex">
                                     <!-- Post Author -->
                                     <div class="post-author">
-                                        <a href="#">By Marian</a>
+                                        <a href="#">${vo.made }</a>
                                     </div>
                                     <!-- Post Date -->
                                     <div class="post-date">
-                                        <a href="#">May 19, 2017</a>
+                                        <a href="#">${vo.regdate }</a>
                                     </div>
                                 </div>
                                 <!-- Post Comment & Share Area -->
@@ -41,7 +42,7 @@
                                     </div>
                                     <!-- Post Comments -->
                                     <div class="post-comments">
-                                        <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> 12</a>
+                                        <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i>${vo.hit }</a>
                                     </div>
                                     <!-- Post Share -->
                                     <div class="post-share">
@@ -49,13 +50,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
-                                <h4 class="post-headline">Where To Get The Best Sunday Roast In The Cotswolds</h4>
+                            <a href="../recipe/recipe_detail.do?no=${vo.no }">
+                                <h4 class="post-headline">${vo.summary }</h4>
                             </a>
                         </div>
                     </div>
+                   
                 </div>
-                <%-- </c:forEach>--%>
+                 </c:forEach>
                 
                 <!-- 페이지 나누는 곳 -->
                 <div class="col-12">
@@ -68,13 +70,13 @@
                                 <li class="page-item"><a class="page-link" href="#">2</a></li>
                                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                                 <li class="page-item">
-                                    <a class="page-link" href="#">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                    <a class="page-link" href="../recipe/recipe_list.do?pgae=${curpage+1 }">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                                 </li>
                             </ul>
                         </nav>
                         <!-- 총 페이지 -->
                         <div class="page-status">
-                           <%--  <p>Page ${curpage } of ${total } results</p>--%>
+                             <p>Page ${curpage } of  ${total } results</p>
                         </div>
                     </div>
                 </div>

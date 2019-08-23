@@ -35,7 +35,7 @@
 		select count(*) from recipe
 	</select>
 	<select id="RecipeTotalPage" resultType="int">
-      SELECT CEIL(COUNT(*)/10.0) FROM recipe
+      SELECT CEIL(COUNT(*)/15.0) FROM recipe
    </select>
 
 	
