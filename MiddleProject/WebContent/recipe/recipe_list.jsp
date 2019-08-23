@@ -43,7 +43,7 @@
                         <!-- Post Thumb -->
                          
                         <div class="single-populer-post d-flex">
-                          <a href="../recipe/recipe_detail.do?no=${vo.no }">  <img src="${vo.poster }" style="height:350px;width:350px;"></a>
+                          <a href="../recipe/recipe_detail.do?no=${vo.no }">  <img src="${vo.poster }" style="height:350px;width:350px;border-radius: 10%;" ></a>
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
