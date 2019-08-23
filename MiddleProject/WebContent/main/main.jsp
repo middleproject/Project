@@ -83,9 +83,10 @@
 	         <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown06" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">마이페이지</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
+              	<a class="dropdown-item" href="#">마이페이지</a>
+              	<a class="dropdown-item" href="../member/signup.do">회원가입</a>
               	<a class="dropdown-item" href="#">회원수정</a>
               	<a class="dropdown-item" href="#">회원삭제</a>
-                <a class="dropdown-item" href="#">마이페이지</a>
               </div>
             </li>
 	          
