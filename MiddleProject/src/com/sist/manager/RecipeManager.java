@@ -25,17 +25,17 @@ public class RecipeManager {
 		int q=0;
 		List<RecipeVO> list = new ArrayList<RecipeVO>();
 		try {
-			for(int k=1; k<1700;k++){
+			for(int k=1; k<4;k++){
 				Document doc = Jsoup.connect("http://www.10000recipe.com/recipe/list.html?order=date&niresource=%2Frecipe%2F6917457&page="+k).get();
 				Elements summary = doc.select("div.row div.caption h4");
-				Elements poster = doc.select("div.row div.col-xs-4 img");
+				
 				Elements made = doc.select("div.row div.caption p");	
 				Elements in =doc.select("a.thumbnail");	
 				
 				for(int i=0; i<summary.size();i++){
 					Document doc2 = Jsoup.connect("http://www.10000recipe.com"+in.get(i).attr("href")).get();
 					Elements sumary_in = doc2.select("div.view2_summary_in");
-					
+					Elements poster = doc2.select("div.centeredcrop img");
 					Elements docinfo = doc2.select("div.view2_summary span");
 					
 					String info ="";
@@ -107,7 +107,7 @@ public class RecipeManager {
 					vo.setRegdate(date.text());
 					vo.setStep(step);
 					vo.setSTEP_POSTER(step_poster);
-					vo.setPoster(poster.get(i).attr("src"));
+					vo.setPoster(poster.attr("src"));
 					vo.setComplete(complete);
 					vo.setHit(Integer.parseInt(hit.text().replace(",", "")));
 					vo.setIngre(s);
