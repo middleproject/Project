@@ -48,10 +48,10 @@
                     <div class="signup-search-area d-flex align-items-center justify-content-end">
                         <div class="login_register_area d-flex">
                             <div class="login">
-                                <a href="register.do">Sing in</a>
+                                <a href="register.do">로그인</a>
                             </div>
                             <div class="register">
-                                <a href="register.do">Sing up</a>
+                                <a href="register.do">회원가입</a>
                             </div>
                         </div>
                         <!-- Search Button Area -->
