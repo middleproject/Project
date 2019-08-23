@@ -23,7 +23,7 @@ public class RecipeModel {
 		}
 		int curpage=Integer.parseInt(page);
 		Map map=new HashMap();
-		int rowSize=15;
+		int rowSize=6;
 		int start=(curpage*rowSize)-(rowSize-1);
 		int end=curpage*rowSize;
 		  
