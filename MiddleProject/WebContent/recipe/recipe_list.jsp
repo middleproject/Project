@@ -7,107 +7,134 @@
 <meta charset="UTF-8">
 </head>
 <body>
- <!-- ****** Breadcumb Area Start ****** -->
-    <div class="breadcumb-area" style="background-image: url(../main/img/bg-img/breadcumb.jpg);">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center">
-                <div class="col-12">
-                    <div class="bradcumb-title text-center">
-                        <h2>Archive Page</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="breadcumb-nav">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Archive Page</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-	<section class="archive-area section_padding_80">
-        <div class="container">
-            <div class="row">
+
+	 <section class="ftco-section ftco-degree-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 ftco-animate">
+			<div class="row">
 				<c:forEach var="vo" items="${list }">
-                <!-- Single Post -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-post wow fadeInUp" data-wow-delay="0.1s">
-                        <!-- Post Thumb -->
-                         
-                        <div class="single-populer-post d-flex">
-                          <a href="../recipe/recipe_detail.do?no=${vo.no }">  <img src="${vo.poster }" style="height:350px;width:350px;border-radius: 10%;" ></a>
-                        </div>
-                        <!-- Post Content -->
-                        <div class="post-content">
-                            <div class="post-meta d-flex">
-                                <div class="post-author-date-area d-flex">
-                                    <!-- Post Author -->
-                                    <div class="post-author">
-                                        <a href="#">${vo.made }</a>
-                                    </div>
-                                    <!-- Post Date -->
-                                    <div class="post-date">
-                                        <a href="#">${vo.regdate }</a>
-                                    </div>
-                                </div>
-                                <!-- Post Comment & Share Area -->
-                                <div class="post-comment-share-area d-flex">
-                                    <!-- Post Favourite -->
-                                    <div class="post-favourite">
-                                        <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> 10</a>
-                                    </div>
-                                    <!-- Post Comments -->
-                                    <div class="post-comments">
-                                        <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i>${vo.hit }</a>
-                                    </div>
-                                    <!-- Post Share -->
-                                    <div class="post-share">
-                                        <a href="#"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="../recipe/recipe_detail.do?no=${vo.no }">
-                                <h4 class="post-headline">${vo.summary }</h4>
-                            </a>
-                        </div>
-                    </div>
-                   
+					<div class="col-md-12 d-flex ftco-animate">
+			            <div class="blog-entry align-self-stretch d-md-flex">
+			              <a href="../recipe/recipe_detail.do?no=${vo.no }&page=${curpage}" class="block-20" style="background-image: url('${vo.poster}');">
+			              </a>
+			              <div class="text d-block pl-md-4">
+			              	<div class="meta mb-3">
+			                  <div><a href="#">${vo.regdate }</a></div>
+			                  <div><a href="#">${vo.made }</a></div>
+			                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span>${vo.hit }</a></div>
+			                </div>
+			                <h3 class="heading"><a href="#">${vo.summary }</a></h3>
+			                <p>${vo.summary_in}</p>
+			                
+			                <p><a href="../recipe/recipe_detail.do?no=${vo.no }&page=${curpage}" class="btn btn-primary py-2 px-3">Read more</a></p>
+			              </div>
+			            </div>
+		          	</div>
+		          </c:forEach>
                 </div>
-                 </c:forEach>
-                
-                <!-- 페이지 나누는 곳 -->
-                <div class="col-12">
-                    <div class="pagination-area d-sm-flex mt-15">
-                        <nav aria-label="#">
-                            <ul class="pagination">
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="../recipe/recipe_list.do?page=${curpage+1 }">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <!-- 총 페이지 -->
-                        <div class="page-status">
-                             <p>Page ${curpage } of  ${total } results</p>
-                        </div>
-                    </div>
                 </div>
-
-
+                <div class="col-lg-4 sidebar ftco-animate">
+            <div class="sidebar-box">
+              <form action="#" class="search-form">
+                <div class="form-group">
+                  <span class="icon ion-ios-search"></span>
+                  <input type="text" class="form-control" placeholder="Search...">
+                </div>
+              </form>
             </div>
+            <div class="sidebar-box ftco-animate">
+            	<h3 class="heading">Categories</h3>
+              <ul class="categories">
+                <li><a href="#">Vegetables <span>(12)</span></a></li>
+                <li><a href="#">Fruits <span>(22)</span></a></li>
+                <li><a href="#">Juice <span>(37)</span></a></li>
+                <li><a href="#">Dries <span>(42)</span></a></li>
+              </ul>
+            </div>
+
+            <div class="sidebar-box ftco-animate">
+              <h3 class="heading">Recent Blog</h3>
+              <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                <div class="text">
+                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <div class="meta">
+                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
+                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                  </div>
+                </div>
+              </div>
+              <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+                <div class="text">
+                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <div class="meta">
+                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
+                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                  </div>
+                </div>
+              </div>
+              <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
+                <div class="text">
+                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <div class="meta">
+                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
+                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="sidebar-box ftco-animate">
+              <h3 class="heading">Tag Cloud</h3>
+              <div class="tagcloud">
+                <a href="#" class="tag-cloud-link">고기</a>
+                <a href="#" class="tag-cloud-link">곡류</a>
+                <a href="#" class="tag-cloud-link">과일</a>
+                <a href="#" class="tag-cloud-link">가공식품</a>
+                <a href="#" class="tag-cloud-link">채소</a>
+                <a href="#" class="tag-cloud-link">해산물</a>
+                <a href="#" class="tag-cloud-link">1인분</a>
+              </div>
+            </div>
+
+            <div class="sidebar-box ftco-animate">
+              <h3 class="heading">Paragraph</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+            </div>
+          </div>
+                </div>
+                
+                </div>
+                
+                
+                <!-- 페이지 나누기 -->
+                <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul>
+                <li><a href="../recipe/recipe_list.do?page=${curpage-1 }">&lt;</a></li>
+                <c:forEach var="i" begin="${curpage}" end="${curpage+4 }" step="1">
+	                <c:if test="${i==curpage }">
+	                	<li class="active"><span>${i}</span></li>
+	                </c:if>
+	                <c:if test="${i!=curpage }">
+	                	<li><a href="../recipe/recipe_list.do?page=${i}">${i }</a></li>
+	                </c:if>
+                </c:forEach>
+                <li><a href="../recipe/recipe_list.do?page=${curpage+1 }">&gt;</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
+    	
+                
     </section>
+    
 	</body>
 </html>

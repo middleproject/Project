@@ -1,90 +1,163 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html">
 <html>
 <head>
 <meta charset="UTF-8">
 </head>
 <body>
-	
 
-    <!-- ****** Single Blog Area Start ****** -->
-    <section class="single_blog_area section_padding_80">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-lg-8">
-                    <div class="row no-gutters">
+	<section class="ftco-section ftco-degree-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 ftco-animate">
+					<h2 class="mb-3">${vo.summary }</h2>
+					<p>${vo.summary_in }</p>
+					<p>
+						<img src="${vo.poster }" alt="" class="img-fluid">
+					</p>
+					<p>Molestiae cupiditate inventore animi, maxime sapiente optio,
+						illo est nemo veritatis repellat sunt doloribus nesciunt! Minima
+						laborum magni reiciendis qui voluptate quisquam voluptatem soluta
+						illo eum ullam incidunt rem assumenda eveniet eaque sequi deleniti
+						tenetur dolore amet fugit perspiciatis ipsa, odit. Nesciunt dolor
+						minima esse vero ut ea, repudiandae suscipit!</p>
+					<h2 class="mb-3 mt-5">#2. Creative WordPress Themes</h2>
+					<p>Temporibus ad error suscipit exercitationem hic molestiae
+						totam obcaecati rerum, eius aut, in. Exercitationem atque quidem
+						tempora maiores ex architecto voluptatum aut officia doloremque.
+						Error dolore voluptas, omnis molestias odio dignissimos culpa ex
+						earum nisi consequatur quos odit quasi repellat qui officiis
+						reiciendis incidunt hic non? Debitis commodi aut, adipisci.</p>
+					<p>
+						<img src="images/image_2.jpg" alt="" class="img-fluid">
+					</p>
+					<p>Quisquam esse aliquam fuga distinctio, quidem delectus
+						veritatis reiciendis. Nihil explicabo quod, est eos ipsum. Unde
+						aut non tenetur tempore, nisi culpa voluptate maiores officiis
+						quis vel ab consectetur suscipit veritatis nulla quos quia
+						aspernatur perferendis, libero sint. Error, velit, porro. Deserunt
+						minus, quibusdam iste enim veniam, modi rem maiores.</p>
+					<p>Odit voluptatibus, eveniet vel nihil cum ullam dolores
+						laborum, quo velit commodi rerum eum quidem pariatur! Quia fuga
+						iste tenetur, ipsa vel nisi in dolorum consequatur, veritatis
+						porro explicabo soluta commodi libero voluptatem similique id
+						quidem? Blanditiis voluptates aperiam non magni. Reprehenderit
+						nobis odit inventore, quia laboriosam harum excepturi ea.</p>
+					<p>Adipisci vero culpa, eius nobis soluta. Dolore, maxime ullam
+						ipsam quidem, dolor distinctio similique asperiores voluptas enim,
+						exercitationem ratione aut adipisci modi quod quibusdam iusto,
+						voluptates beatae iure nemo itaque laborum. Consequuntur et
+						pariatur totam fuga eligendi vero dolorum provident. Voluptatibus,
+						veritatis. Beatae numquam nam ab voluptatibus culpa, tenetur
+						recusandae!</p>
+					<p>Voluptas dolores dignissimos dolorum temporibus, autem
+						aliquam ducimus at officia adipisci quasi nemo a perspiciatis
+						provident magni laboriosam repudiandae iure iusto commodi debitis
+						est blanditiis alias laborum sint dolore. Dolores, iure,
+						reprehenderit. Error provident, pariatur cupiditate soluta
+						doloremque aut ratione. Harum voluptates mollitia illo minus
+						praesentium, rerum ipsa debitis, inventore?</p>
+					<div class="tag-widget post-tag-container mb-5 mt-5">
+						<div class="tagcloud">
+							<a href="#" class="tag-cloud-link">Life</a> <a href="#"
+								class="tag-cloud-link">Sport</a> <a href="#"
+								class="tag-cloud-link">Tech</a> <a href="#"
+								class="tag-cloud-link">Travel</a>
+						</div>
+					</div>
 
-                  
-
-                        <!-- Single Post -->
-                        <div class="col-10 col-sm-11">
-                            <div class="single-post">
-                                <!-- Post Thumb -->
-                                <div class="post-thumb"> 
-                                    <img src="${vo.poster }" style="height:330px;width:635.5px;">
-                                </div> 
-                                <!-- Post Content -->
-                                <div class="post-content">
-                                    <div class="post-meta d-flex">
-                                        <div class="post-author-date-area d-flex">
-                                            <!-- Post Author -->
-                                            <div class="post-author">
-                                                <a href="#">${vo.made }</a>
-                                            </div>
-                                            <!-- Post Date -->
-                                            <div class="post-date">
-                                                <a href="#">${vo.regdate }</a>
-                                            </div>
-                                        </div>
-                                        <!-- Post Comment & Share Area -->
-                                        <div class="post-comment-share-area d-flex">
-                                            <!-- Post Favourite -->
-                                            <div class="post-favourite">
-                                                <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> 10</a>
-                                            </div>
-                                            <!-- Post Comments -->
-                                            <div class="post-comments">
-                                                <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> 12</a>
-                                            </div>
-                                            <!-- Post Share -->
-                                            <div class="post-share">
-                                                <a href="#"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a href="#">
-                                        <h2 class="post-headline">${vo.summary }</h2>
-                                    </a>
-                                    <p>${vo.summary_in }</p>
-
-                                    <blockquote class="yummy-blockquote mt-30 mb-30">
-                                        <!--<h5 class="mb-30">“Technology is nothing. What's important is that you have a faith in people, that they're basically good and smart, and if you give them tools, they'll do wonderful things with them.”</h5> -->
-                                        <h3 class="text-muted">${vo.info }</h6>
-                                        
-                                    </blockquote>
-
-                                    <h4>You Can Buy For Less Than A College Degree</h4>
-                                    <p>Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-
-                                    <img class="br-30 mb-30" src="img/blog-img/11.jpg" alt="">
-                                    <ul class="mb-30">
-                                        <li>1/3 cup Lonsectetur adipisicing elit.Lorem ipsum</li>
-                                        <li>1/2 cup Veniam, quis nostrud exercitation</li>
-                                        <li>Ut labore et dolore magna</li>
-                                        <li>Lonsectetur adipisicing elit.Lorem ipsum</li>
-                                        <li>Lonsectetur adipisicing elit.Lorem ipsum</li>
-                                        <li>Ut labore et dolore magna</li>
-                                        <li>Lonsectetur adipisicing elit.Lorem ipsum</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+					<div class="about-author d-flex p-4 bg-light">
+						<div class="bio align-self-md-center mr-4">
+							<img src="images/person_1.jpg" alt="Image placeholder"
+								class="img-fluid mb-4">
+						</div>
+						<div class="desc align-self-md-center">
+							<h3>${vo.made }</h3>
+							<p>${vo.tip }</p>
+						</div>
+						
+					</div>
+					
+				</div>
+				    <div class="col-lg-4 sidebar ftco-animate">
+            <div class="sidebar-box">
+              <form action="#" class="search-form">
+                <div class="form-group">
+                  <span class="icon ion-ios-search"></span>
+                  <input type="text" class="form-control" placeholder="Search...">
                 </div>
+              </form>
+            </div>
+            <div class="sidebar-box ftco-animate">
+            	<h3 class="heading">Categories</h3>
+              <ul class="categories">
+                <li><a href="#">Vegetables <span>(12)</span></a></li>
+                <li><a href="#">Fruits <span>(22)</span></a></li>
+                <li><a href="#">Juice <span>(37)</span></a></li>
+                <li><a href="#">Dries <span>(42)</span></a></li>
+              </ul>
+            </div>
+
+            <div class="sidebar-box ftco-animate">
+              <h3 class="heading">Recent Blog</h3>
+              <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                <div class="text">
+                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <div class="meta">
+                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
+                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                  </div>
                 </div>
+              </div>
+              <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+                <div class="text">
+                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <div class="meta">
+                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
+                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                  </div>
                 </div>
-                </section>
-                
+              </div>
+              <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
+                <div class="text">
+                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <div class="meta">
+                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
+                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="sidebar-box ftco-animate">
+              <h3 class="heading">Tag Cloud</h3>
+              <div class="tagcloud">
+                <a href="#" class="tag-cloud-link">고기</a>
+                <a href="#" class="tag-cloud-link">곡류</a>
+                <a href="#" class="tag-cloud-link">과일</a>
+                <a href="#" class="tag-cloud-link">가공식품</a>
+                <a href="#" class="tag-cloud-link">채소</a>
+                <a href="#" class="tag-cloud-link">해산물</a>
+                <a href="#" class="tag-cloud-link">1인분</a>
+              </div>
+            </div>
+
+            <div class="sidebar-box ftco-animate">
+              <h3 class="heading">Paragraph</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+            </div>
+			</div>
+			
+		</div>
+	</section>
+
+
 </body>
 </html>
