@@ -44,8 +44,17 @@
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
 						    <span class="text">qpp666@naver.com</span>
 					    </div>
-					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-						    <span class="text">3-5 Business days delivery &amp; Free Returns</span>
+					    <div class="col-md pr-1 d-flex topper align-items-left text-left">
+						    
+					    </div>
+					    <div class="col-md pr-1 d-flex topper align-items-left text-left">
+						    
+					    </div>
+					    <div class="col-md pr-1 d-flex topper align-items-left text-left">
+						    
+					    </div>
+					    <div class="col-md pr-1 d-flex topper align-items-left text-left">
+						    <a href="../main/main.do"><span class="text">login</span></a>
 					    </div>
 				    </div>
 			    </div>
@@ -54,7 +63,7 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">요리보고 조리보고</a>
+	      <a class="navbar-brand" href="../main/main.do">요리보고 조리보고</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -64,9 +73,9 @@
 	          <li class="nav-item active"><a href="../main/main.do" class="nav-link">홈</a></li>
 	          <li class="nav-item"><a href="#" class="nav-link">검색</a></li>
 	         <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">요리</a>
+              <a class="nav-link dropdown-toggle" href="../recipe/recipe_list.do" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">요리</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="#">요리보기</a>
+              	<a class="dropdown-item" href="../recipe/recipe_list.do">요리보기</a>
               	<a class="dropdown-item" href="#">식단</a>
                 <a class="dropdown-item" href="#">좋아하는 요리</a>
               </div>
@@ -91,70 +100,18 @@
             </li>
 	          
 	          <li class="nav-item"><a href="#" class="nav-link">예약확인?</a></li>
-	          <li class="nav-item"><a href="contact.html" class="nav-link">실시간 상담</a></li>
-	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">실시간 상담</a></li>
+	          <li class="nav-item cta cta-colored"><a href="#" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
 
 	        </ul>
 	      </div>
 	    </div>
 	  </nav>
-    <!-- END nav -->
 
-    <section id="home-section" class="hero">
-		  <div class="home-slider owl-carousel">
-	      <div class="slider-item" style="background-image: url(../main/images/bg_1.jpg);">
-	      	<div class="overlay"></div>
-	        <div class="container">
-	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
-
-	            <div class="col-md-12 ftco-animate text-center">
-	              <h1 class="mb-2">I have no any sanggak &amp; because</h1>
-	              <h2 class="subheading mb-4">I have no any sanggak  &amp; because</h2>
-	              <p><a href="#" class="btn btn-primary">최근 인기있는 요리법</a></p>
-	            </div>
-
-	          </div>
-	        </div>
-	      </div>
-
-	      <div class="slider-item" style="background-image: url(images/bg_2.jpg);">
-	      	<div class="overlay"></div>
-	        <div class="container">
-	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
-
-	            <div class="col-sm-12 ftco-animate text-center">
-	              <h1 class="mb-2">hi hello &amp; JSP</h1>
-	              <h2 class="subheading mb-4">안녕하세요 &amp; JAVA </h2>
-	              <p><a href="#" class="btn btn-primary">오라클 사세요</a></p>
-	            </div>
-
-	          </div>
-	        </div>
-	      </div>
-	    </div>
-    </section>
 
 	 <jsp:include page="${main_jsp }"></jsp:include>
 
-		<section class="ftco-section img" style="background-image: url(images/bg_3.jpg);">
-    	<div class="container">
-				<div class="row justify-content-end">
-          <div class="col-md-6 heading-section ftco-animate deal-of-the-day ftco-animate">
-          	<span class="subheading">Best Price For You</span>
-            <h2 class="mb-4">Deal of the day</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-            <h3><a href="#">Spinach</a></h3>
-            <span class="price">$10 <a href="#">now $5 only</a></span>
-            <div id="timer" class="d-flex mt-5">
-						  <div class="time" id="days"></div>
-						  <div class="time pl-3" id="hours"></div>
-						  <div class="time pl-3" id="minutes"></div>
-						  <div class="time pl-3" id="seconds"></div>
-						</div>
-          </div>
-        </div>   		
-    	</div>
-    </section>
+		
 
     
 
