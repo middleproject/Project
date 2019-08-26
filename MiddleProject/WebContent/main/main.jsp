@@ -63,7 +63,7 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="../main/main.do">요리보고 조리보고</a>
+	      <a class="navbar-brand" href="../main/main.do"><img src="../main/images/logo.png"></a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -71,7 +71,7 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item active"><a href="../main/main.do" class="nav-link">홈</a></li>
-	          <li class="nav-item"><a href="#" class="nav-link">검색</a></li>
+	          <li class="nav-item"><a href="../search/search.do" class="nav-link">검색</a></li>
 	         <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="../recipe/recipe_list.do" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">요리</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -118,24 +118,7 @@
     <hr>
 
 
-		<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-      <div class="container py-4">
-        <div class="row d-flex justify-content-center py-5">
-          <div class="col-md-6">
-          	<h2 style="font-size: 22px;" class="mb-0">Subcribe to our Newsletter</h2>
-          	<span>Get e-mail updates about our latest shops and special offers</span>
-          </div>
-          <div class="col-md-6 d-flex align-items-center">
-            <form action="#" class="subscribe-form">
-              <div class="form-group d-flex">
-                <input type="text" class="form-control" placeholder="Enter email address">
-                <input type="submit" value="Subscribe" class="submit px-3">
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
+
     <footer class="ftco-footer ftco-section">
       <div class="container">
       	<div class="row">
