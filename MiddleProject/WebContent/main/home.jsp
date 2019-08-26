@@ -5,6 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+<style type="text/css">
+section.hero > div.home-slider > div.slider-item div.doHyeon{
+    	font-family: 'Do Hyeon', sans-serif;
+    	font-size: 21px;
+  		color: black;
+    
+    } 
+</style>
 </head>
 <body>
     <!-- END nav -->
@@ -12,12 +21,15 @@
     <section id="home-section" class="hero">
 		  <div class="home-slider owl-carousel">
 	      <div class="slider-item" style="background-image: url(../main/images/bg_1.jpg);">
+	      	
 	      	<div class="overlay"></div>
 	        <div class="container">
-	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
-
+	        
+	          <div class="row slider-text justify-content-center align-items-center doHyeon" data-scrollax-parent="true">
+<h1>안녕I have no any sanggak</h1>
 	            <div class="col-md-12 ftco-animate text-center">
-	              <h1 class="mb-2">I have no any sanggak &amp; because</h1>
+	              
+	              <h1 class="mb-2">안녕I have no any sanggak &amp; because</h1>
 	              <h2 class="subheading mb-4">I have no any sanggak  &amp; because</h2>
 	              <p><a href="#" class="btn btn-primary">최근 인기있는 요리법</a></p>
 	            </div>
@@ -383,14 +395,15 @@
     		</div>
     	</div>
     </section>
- 	
-	<section class="ftco-section testimony-section">
+    
+	
+		<section class="ftco-section testimony-section">
       <div class="container">
         <div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 heading-section ftco-animate text-center">
           	<span class="subheading">평점 높은 요리사??Testimony</span>
-            <h2 class="mb-4">Our satisfied customer says</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
+            <h2 class="mb-4">평점 높은 요리사??Our satisfied customer says</h2>
+            <p>평점 높은 요리사??Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
           </div>
         </div>
         <div class="row ftco-animate">
@@ -477,11 +490,11 @@
     	<div class="container">
 				<div class="row justify-content-end">
           <div class="col-md-6 heading-section ftco-animate deal-of-the-day ftco-animate">
-          	<span class="subheading">한글Best Price For You</span>
-            <h2 class="mb-4">한글Deal of the day</h2>
-            <p>한글Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-            <h3><a href="#">한글Spinach</a></h3>
-            <span class="price">한글$10 <a href="#">한글now $5 only</a></span>
+          	<span class="subheading">방문자수Best Price For You</span>
+            <h2 class="mb-4">방문자수Deal of the day</h2>
+            <p>방문자수Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+            <h3><a href="#">방문자수Spinach</a></h3>
+            <span class="price">방문자수$10 <a href="#">방문자수now $5 only</a></span>
             <div id="timer" class="d-flex mt-5">
 						  <div class="time" id="days"></div>
 						  <div class="time pl-3" id="hours"></div>

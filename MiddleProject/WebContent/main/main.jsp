@@ -7,6 +7,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
+
+    <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+    
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
@@ -29,6 +32,19 @@
     <link rel="stylesheet" href="../main/css/flaticon.css">
     <link rel="stylesheet" href="../main/css/icomoon.css">
     <link rel="stylesheet" href="../main/css/style.css">
+    <style type="text/css">
+
+    .navbar-collapse > ul.navbar-nav li a.jua{
+    	font-family: 'Jua', sans-serif;
+    	font-size: 21px;
+    	display: block;
+  		padding: 0.5rem 1rem;
+  		color: black;
+    }
+
+    
+    
+    </style>
   </head>
   <body class="goto-here">
 		<div class="py-2 bg-primary">
@@ -70,38 +86,38 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="../main/main.do" class="nav-link">홈</a></li>
-	          <li class="nav-item"><a href="../search/search.do" class="nav-link">검색</a></li>
+	          <li class="nav-item active jua"><a href="../main/main.do" class="jua">홈</a></li>
+	          <li class="nav-item"><a href="../search/search.do" class="jua">검색</a></li>
 	         <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="../recipe/recipe_list.do" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">요리</a>
+              <a class="dropdown-toggle jua" href="../recipe/recipe_list.do" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">요리</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="../recipe/recipe_list.do">요리보기</a>
-              	<a class="dropdown-item" href="#">식단</a>
-                <a class="dropdown-item" href="#">좋아하는 요리</a>
+              	<a class="dropdown-item jua" href="../recipe/recipe_list.do">요리보기</a>
+              	<a class="dropdown-item jua" href="#">식단</a>
+                <a class="dropdown-item jua" href="#">좋아하는 요리</a>
               </div>
             </li>
 	         <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">게시판</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="#">자랑 게시판</a>
-              	<a class="dropdown-item" href="#">후기 게시판</a>
-                <a class="dropdown-item" href="#">문의 게시판</a>
-                <a class="dropdown-item" href="#">자유게시판</a>
+              <a class="jua dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">게시판</a>
+              <div class="dropdown-menu jua" aria-labelledby="dropdown04">
+              	<a class="dropdown-item jua" href="#">자랑 게시판</a>
+              	<a class="dropdown-item jua" href="#">후기 게시판</a>
+                <a class="dropdown-item jua" href="#">문의 게시판</a>
+                <a class="dropdown-item jua" href="#">자유게시판</a>
               </div>
             </li>
 	         <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown06" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">마이페이지</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="#">마이페이지</a>
-              	<a class="dropdown-item" href="../member/signup.do">회원가입</a>
-              	<a class="dropdown-item" href="#">회원수정</a>
-              	<a class="dropdown-item" href="#">회원삭제</a>
+              <a class="jua dropdown-toggle" href="#" id="dropdown06" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">마이페이지</a>
+              <div class="dropdown-menu jua" aria-labelledby="dropdown04">
+              	<a class="dropdown-item jua" href="#">마이페이지</a>
+              	<a class="dropdown-item jua" href="../member/signup.do">회원가입</a>
+              	<a class="dropdown-item jua" href="#">회원수정</a>
+              	<a class="dropdown-item jua" href="#">회원삭제</a>
               </div>
             </li>
 	          
-	          <li class="nav-item"><a href="#" class="nav-link">예약확인?</a></li>
-	          <li class="nav-item"><a href="#" class="nav-link">실시간 상담</a></li>
-	          <li class="nav-item cta cta-colored"><a href="#" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+	          <li class="nav-item"><a href="#" class="jua">예약확인?</a></li>
+	          <li class="nav-item"><a href="#" class="jua">실시간 상담</a></li>
+	          <li class="nav-item cta cta-colored"><a href="#" class="jua"><span class="icon-shopping_cart"></span>[0]</a></li>
 
 	        </ul>
 	      </div>
