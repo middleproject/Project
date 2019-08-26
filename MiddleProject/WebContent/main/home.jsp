@@ -383,17 +383,12 @@
     		</div>
     	</div>
     </section>
-    
-    <hr>
-   	평점 높은 요리사??
-    <hr>
-    
-	
-		<section class="ftco-section testimony-section">
+ 	
+	<section class="ftco-section testimony-section">
       <div class="container">
         <div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 heading-section ftco-animate text-center">
-          	<span class="subheading">Testimony</span>
+          	<span class="subheading">평점 높은 요리사??Testimony</span>
             <h2 class="mb-4">Our satisfied customer says</h2>
             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
           </div>
