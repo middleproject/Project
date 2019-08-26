@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,40 +55,20 @@
 
             <div class="sidebar-box ftco-animate">
               <h3 class="heading">Hot Recipe</h3>
+              <c:forEach var="hvo" items="${hlist }">
               <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                <a class="blog-img mr-4" style="background-image: url(${hvo.poster});"></a>
                 <div class="text">
-                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <h3 class="heading-1"><a href="../recipe/recipe_detail.do?no=${hvo.no }">${hvo.summary }</a></h3>
                   <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                    <div><a href="#"><span class="icon-calendar"></span> ${hvo.regdate }</a></div>
+                    <div><a href="#"><span class="icon-person"></span> ${hvo.made }</a></div>
+                    <div><a href="#"><span class="icon-chat"></span> ${hvo.hit }</a></div>
                   </div>
                 </div>
               </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
+              </c:forEach>
               </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <div class="sidebar-box ftco-animate">
               <h3 class="heading">Tag Cloud</h3>
@@ -112,22 +93,21 @@
                 </div>
                 
                 
-                <!-- 페이지 나누기 -->
+              
                 <div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
               <ul>
-                <li><a href="../recipe/recipe_list.do?page=${curpage-1 }">&lt;</a></li>
-                <c:forEach var="i" begin="${curpage}" end="${curpage+4 }" step="1">
-	                <c:if test="${i==curpage }">
-	                	<li class="active"><span>${i}</span></li>
-	                </c:if>
-	                <c:if test="${i!=curpage }">
-	                	<li><a href="../recipe/recipe_list.do?page=${i}">${i }</a></li>
-	                </c:if>
+              	<c:if test="${curpage>BLOCK}">
+                	<li><a href="../recipe/recipe_list.do?page=${startpage-1 }">&lt;</a></li>
+                </c:if>
+                
+                <c:forEach var="i" begin="${startpage}" end="${endpage }" step="1">
+	                	<li class=${i==curpage?"active":"" }><a href="../recipe/recipe_list.do?page=${i}">${i }</a></li>       
                 </c:forEach>
-                <c:if test="${totalpage!=curpage }">
-                <li><a href="../recipe/recipe_list.do?page=${curpage+1 }">&gt;</a></li>
+ 
+                <c:if test="${endpage<allpage }">
+                	<li><a href="../recipe/recipe_list.do?page=${endpage+1 }">&gt;</a></li>
                 </c:if>
               </ul>
             </div>

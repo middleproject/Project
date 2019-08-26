@@ -4,75 +4,142 @@
 <!DOCTYPE html">
 <html>
 <head>
+<style type="text/css">
+.table {
+    FONT-WEIGHT: 500;
+    min-width: 500px !important;
+    width: 100%;
+    text-align: center;
+}
+.chat-bubble {
+    background-color: #ededed;
+    border: 2px solid #666;
+    font-size: 35px;
+    line-height: 1.3em;
+    margin: 10px auto;
+    padding: 10px;
+    position: relative;
+    text-align: center;
+    width: 730px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-box-shadow: 0 0 5px #888;
+    -webkit-box-shadow: 0 0 5px #888;
+    font-family: 'Bangers', arial, serif; 
+}
+.chat-bubble-arrow-border {
+    border-color: #666 transparent transparent transparent;
+    border-style: solid;
+    border-width: 20px;
+    height: 0;
+    width: 0;
+    position: absolute;
+    bottom: -42px;
+    left: 30px;
+}
+.chat-bubble-arrow {
+    border-color: #ededed transparent transparent transparent;
+    border-style: solid;
+    border-width: 20px;
+    height: 0;
+    width: 0;
+    position: absolute;
+    bottom: -39px;
+    left: 30px;
+}
+.text-box {
+    position: relative;
+    float: right;
+    right: 0px;
+    top: 100px;
+    padding: 10px 25px;
+    width: 45%;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 8px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+.main-img {
+    height: 400px;
+    overflow: hidden;
+    background: url(http://css3.zerois.net/images/pic1.jpg) top center no-repeat;
+    background-size: cover;
+}
+.text-center {
+    text-align: center;
+}
+.container {
+    max-width: 1400px;
+}
+.divclass{
+	width:2000px;	
+}
+</style>
 <meta charset="UTF-8">
 </head>
 <body>
 
 	<section class="ftco-section ftco-degree-bg">
-		<div class="container">
+		<div class="container divclass">
 			<div class="row">
 				<div class="col-lg-8 ftco-animate">
 					<table class="table">
-					<h2 class="mb-3">${vo.summary }</h2>
-					<p>${vo.summary_in }</p>
-					<p>
-						<img src="${vo.poster }" alt="" class="img-fluid">
-					</p>
-					<p>Molestiae cupiditate inventore animi, maxime sapiente optio,
-						illo est nemo veritatis repellat sunt doloribus nesciunt! Minima
-						laborum magni reiciendis qui voluptate quisquam voluptatem soluta
-						illo eum ullam incidunt rem assumenda eveniet eaque sequi deleniti
-						tenetur dolore amet fugit perspiciatis ipsa, odit. Nesciunt dolor
-						minima esse vero ut ea, repudiandae suscipit!</p>
+						<div class="chat-bubble">
+							${vo.summary }
+						        <div class="chat-bubble-arrow-border"></div>
+						        <div class="chat-bubble-arrow"></div>
+						        </div><br>
+						        <p>
+						<img src="${vo.poster }" alt="" style="width:900px" class="img-fluid">
+						</p>
+				            <h2>${vo.summary_in }</h2>
+				            
+				    <table class="table">
+				    	<tr>
+				    		<td><img src="../recipe/multiple-users-silhouette.png"><br>${info[0] }</td>
+				    		<td><img src="../recipe/alarm-clock.png"><br>${info[1] }</td>
+						    <td><img src="../recipe/star.png"><br>${info[2] }</td> 
+					    <tr>
+					</table>
 						</table>
-					<h2 class="mb-3 mt-5">#2. Creative WordPress Themes</h2>
-					<p>Temporibus ad error suscipit exercitationem hic molestiae
-						totam obcaecati rerum, eius aut, in. Exercitationem atque quidem
-						tempora maiores ex architecto voluptatum aut officia doloremque.
-						Error dolore voluptas, omnis molestias odio dignissimos culpa ex
-						earum nisi consequatur quos odit quasi repellat qui officiis
-						reiciendis incidunt hic non? Debitis commodi aut, adipisci.</p>
-					<p>
-						<img src="images/image_2.jpg" alt="" class="img-fluid">
-					</p>
-					<p>Quisquam esse aliquam fuga distinctio, quidem delectus
-						veritatis reiciendis. Nihil explicabo quod, est eos ipsum. Unde
-						aut non tenetur tempore, nisi culpa voluptate maiores officiis
-						quis vel ab consectetur suscipit veritatis nulla quos quia
-						aspernatur perferendis, libero sint. Error, velit, porro. Deserunt
-						minus, quibusdam iste enim veniam, modi rem maiores.</p>
-					<p>Odit voluptatibus, eveniet vel nihil cum ullam dolores
-						laborum, quo velit commodi rerum eum quidem pariatur! Quia fuga
-						iste tenetur, ipsa vel nisi in dolorum consequatur, veritatis
-						porro explicabo soluta commodi libero voluptatem similique id
-						quidem? Blanditiis voluptates aperiam non magni. Reprehenderit
-						nobis odit inventore, quia laboriosam harum excepturi ea.</p>
-					<p>Adipisci vero culpa, eius nobis soluta. Dolore, maxime ullam
-						ipsam quidem, dolor distinctio similique asperiores voluptas enim,
-						exercitationem ratione aut adipisci modi quod quibusdam iusto,
-						voluptates beatae iure nemo itaque laborum. Consequuntur et
-						pariatur totam fuga eligendi vero dolorum provident. Voluptatibus,
-						veritatis. Beatae numquam nam ab voluptatibus culpa, tenetur
-						recusandae!</p>
-					<p>Voluptas dolores dignissimos dolorum temporibus, autem
-						aliquam ducimus at officia adipisci quasi nemo a perspiciatis
-						provident magni laboriosam repudiandae iure iusto commodi debitis
-						est blanditiis alias laborum sint dolore. Dolores, iure,
-						reprehenderit. Error provident, pariatur cupiditate soluta
-						doloremque aut ratione. Harum voluptates mollitia illo minus
-						praesentium, rerum ipsa debitis, inventore?</p>
+					<!-- 재료 테이블 -->
+					<table class="table">
+						<h2 class="text-left">재 료! <font size="4pt;" color="gray"><EM>Ingredients</EM></font></h2>
+						<div class="row">
+							<div class="col-lg-8 ftco-animate">
+								<c:forEach var="ingredetail" items="${ingre }" varStatus="s">
+									
+								</c:forEach>
+							</div>
+						</div>
+					</table>
+					<!-- 조리 순서 테이블 -->
+					<table class="table">
+						<h2 class="text-left">조리 순서! <font size="4pt;" color="gray"><EM>step</EM></font></h2>
+						<div class="row">
+							<div class="col-lg-8 ftco-animate">
+								<c:forEach var="poster" items="${step_poster }" varStatus="s">
+									<tr>
+										<td><h4 class="text-left">${step[s.index] }</h4></td>
+										<td><img src="${poster}" style="height:350px;width:350px;"></td>
+									</tr>
+								</c:forEach>
+							</div>
+						</div>
+					</table>
+ 					
+ 					<!-- 태그부터 만든이 Tip-->
 					<div class="tag-widget post-tag-container mb-5 mt-5">
 						<div class="tagcloud">
-							<a href="#" class="tag-cloud-link">Life</a> <a href="#"
-								class="tag-cloud-link">Sport</a> <a href="#"
-								class="tag-cloud-link">Tech</a> <a href="#"
-								class="tag-cloud-link">Travel</a>
+							<c:forEach var="tag" items="${tagStr }">
+							<a href="#" class="tag-cloud-link">${tag }</a> 
+							</c:forEach>
 						</div>
 					</div>
 
 					<div class="about-author d-flex p-4 bg-light">
 						<div class="bio align-self-md-center mr-4">
-							<img src="${vo.image }" style="height:50px;width:50px;" alt="Image placeholder"
+							<img src="${vo.image }" style="height:200px;width:200px;" alt="Image placeholder"
 								class="img-fluid mb-4">
 						</div>
 						<div class="desc align-self-md-center">
@@ -104,19 +171,21 @@
             </div>
 
             <div class="sidebar-box ftco-animate">
-              <h3 class="heading">Hot Recipe</h3>
+              <h3 class="heading">Related Recipe</h3>
               <c:forEach var="hvo" items="${list }">
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(${hvo.poster});"></a>
-                <div class="text">
-                  <h3 class="heading-1"><a href="../recipe/recipe_detail.do?no=${hvo.no }">${hvo.summary }</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> ${hvo.regdate }</a></div>
-                    <div><a href="#"><span class="icon-person"></span> ${hvo.made }</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> ${hvo.hit }</a></div>
-                  </div>
-                </div>
-              </div>
+              <c:if test="${vo.no!=hvo.no }">
+	              <div class="block-21 mb-4 d-flex">
+	                <a class="blog-img mr-4" style="background-image: url(${hvo.poster});"></a>
+	                <div class="text">
+	                  <h3 class="heading-1"><a href="../recipe/recipe_detail.do?no=${hvo.no }">${hvo.summary }</a></h3>
+	                  <div class="meta">
+	                    <div><a href="#"><span class="icon-calendar"></span> ${hvo.regdate }</a></div>
+	                    <div><a href="#"><span class="icon-person"></span> ${hvo.made }</a></div>
+	                    <div><a href="#"><span class="icon-chat"></span> ${hvo.hit }</a></div>
+	                  </div>
+	                </div>
+	              </div>
+              </c:if>
               </c:forEach>
               </div>
             
@@ -124,13 +193,9 @@
             <div class="sidebar-box ftco-animate">
               <h3 class="heading">Tag Cloud</h3>
               <div class="tagcloud">
-                <a href="#" class="tag-cloud-link">고기</a>
-                <a href="#" class="tag-cloud-link">곡류</a>
-                <a href="#" class="tag-cloud-link">과일</a>
-                <a href="#" class="tag-cloud-link">가공식품</a>
-                <a href="#" class="tag-cloud-link">채소</a>
-                <a href="#" class="tag-cloud-link">해산물</a>
-                <a href="#" class="tag-cloud-link">1인분</a>
+              <c:forEach var="tag" items="${tagStr }">
+                <a href="#" class="tag-cloud-link">${tag }</a>
+                </c:forEach>
               </div>
             </div>
 

@@ -20,9 +20,9 @@
 	</insert>
 	<!-- list data -->
 	<select id="recipeListData" parameterType="java.util.Map" resultType="RecipeVO" >
-		select no,hit,made,tag,TO_CHAR(regdate,'YYYY-MM-DD')as regdate,poster,info,summary,num 
-		from (select no,hit,made,tag,regdate,poster,info,summary,rownum as num
-		from (select no,hit,made,tag,regdate,poster,info,summary
+		select no,hit,made,tag,TO_CHAR(regdate,'YYYY-MM-DD')as regdate,poster,info,summary,summary_in,num 
+		from (select no,hit,made,tag,regdate,poster,info,summary,summary_in,rownum as num
+		from (select no,hit,made,tag,regdate,poster,info,summary,summary_in
 		from recipe order by no desc))
 		where num between #{start} and #{end}
 	</select>
@@ -64,5 +64,19 @@
 		from (select no,poster,summary_in,info,step,STEP_POSTER,summary,complete,regdate,tag,tip,hit,ingre,made,image,rownum as num
 		from recipe order by hit desc)
 		where num &lt;=#{num}
+	</select>
+	<!-- 태그 검색 
+	<foreach collection="name_List" item="item" separator="," open="(" close=")">
+			#{item}
+		</foreach>
+	-->
+	<select id="tagselect" parameterType="java.util.Map" resultType="RecipeVO">
+		select no,poster,summary,summary_in,hit,num from (select no,poster,summary,summary_in,hit,rownum as num 
+		from recipe <where>
+			<foreach collection="tagStr" item="tag" separator="or">
+				tag LIKE '%'||#{tag}||'%'
+			</foreach>
+		</where>)
+		where num &lt;=4
 	</select>
 </mapper>
