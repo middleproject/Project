@@ -18,9 +18,5 @@ public class MainModel {
 		model.addAttribute("main_jsp", "../main/home.jsp");
 		return "../main/main.jsp";
 	}
-	@RequestMapping("search/search.do")
-	public String search_main(Model model){
-		model.addAttribute("main_jsp", "../search/search.jsp");
-		return "../main/main.jsp";
-	}
+	
 }
