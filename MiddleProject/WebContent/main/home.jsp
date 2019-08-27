@@ -5,9 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+
 <style type="text/css">
-section.hero > div.home-slider > div.slider-item div.doHyeon{
+section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
     	font-family: 'Do Hyeon', sans-serif;
     	font-size: 21px;
   		color: black;
@@ -19,17 +19,17 @@ section.hero > div.home-slider > div.slider-item div.doHyeon{
     <!-- END nav -->
 
     <section id="home-section" class="hero">
-		  <div class="home-slider owl-carousel">
-	      <div class="slider-item" style="background-image: url(../main/images/bg_1.jpg);">
+		<div class="home-slider owl-carousel">
+	      
+	      <div class="slider-item" style="background-image: url(../main/images/1_guksu.jpg);">
 	      	
 	      	<div class="overlay"></div>
 	        <div class="container">
 	        
 	          <div class="row slider-text justify-content-center align-items-center doHyeon" data-scrollax-parent="true">
-<h1>안녕I have no any sanggak</h1>
 	            <div class="col-md-12 ftco-animate text-center">
 	              
-	              <h1 class="mb-2">안녕I have no any sanggak &amp; because</h1>
+	              <h1 class="mb-2">I have no any sanggak &amp; because</h1>
 	              <h2 class="subheading mb-4">I have no any sanggak  &amp; because</h2>
 	              <p><a href="#" class="btn btn-primary">최근 인기있는 요리법</a></p>
 	            </div>
@@ -38,20 +38,51 @@ section.hero > div.home-slider > div.slider-item div.doHyeon{
 	        </div>
 	      </div>
 
-	      <div class="slider-item" style="background-image: url(images/bg_2.jpg);">
+	      <div class="slider-item" style="background-image: url(../main/images/1_chck.jpg);">
 	      	<div class="overlay"></div>
 	        <div class="container">
 	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
 	            <div class="col-sm-12 ftco-animate text-center">
 	              <h1 class="mb-2">hi hello &amp; JSP</h1>
-	              <h2 class="subheading mb-4">안녕하세요 &amp; JAVA </h2>
+	              <h2 class="subheading mb-4">Spring &amp; JAVA </h2>
 	              <p><a href="#" class="btn btn-primary">오라클 사세요</a></p>
 	            </div>
 
 	          </div>
 	        </div>
 	      </div>
+	      
+	      <div class="slider-item" style="background-image: url(../main/images/1_kkochi.jpg);">
+	      	<div class="overlay"></div>
+	        <div class="container">
+	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+
+	            <div class="col-sm-12 ftco-animate text-center">
+	              <h1 class="mb-2">hi hello &amp; Spring</h1>
+	              <h2 class="subheading mb-4">nodes.js  &amp; JAVA </h2>
+	              <p><a href="#" class="btn btn-primary">JAVA 사세요</a></p>
+	            </div>
+
+	          </div>
+	        </div>
+	      </div>
+	      
+	      <div class="slider-item" style="background-image: url(../main/images/1_ram.jpg);">
+	      	<div class="overlay"></div>
+	        <div class="container">
+	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+
+	            <div class="col-sm-12 ftco-animate text-center">
+	              <h1 class="mb-2">hi hello &amp; Spring</h1>
+	              <h2 class="subheading mb-4">nodes.js  &amp; JAVA </h2>
+	              <p><a href="#" class="btn btn-primary">JAVA 사세요</a></p>
+	            </div>
+
+	          </div>
+	        </div>
+	      </div>
+	      
 	    </div>
     </section>
 <%-- --%>
@@ -63,9 +94,11 @@ section.hero > div.home-slider > div.slider-item div.doHyeon{
               <div class="icon bg-color-1 active d-flex justify-content-center align-items-center mb-2">
             		<span class="flaticon-shipped"></span>
               </div>
+              
               <div class="media-body">
-                <h3 class="heading">Free Shipping</h3>
-                <span>On order over $100</span>
+              	
+                <h3 class="heading">레시피 등록</h3>
+                <span>Recipe Registration</span>
               </div>
             </div>      
           </div>
@@ -75,8 +108,8 @@ section.hero > div.home-slider > div.slider-item div.doHyeon{
             		<span class="flaticon-diet"></span>
               </div>
               <div class="media-body">
-                <h3 class="heading">Always Fresh</h3>
-                <span>Product well package</span>
+                <h3 class="heading">예약하기</h3>
+                <span>Recipe reservation</span>
               </div>
             </div>    
           </div>
@@ -86,8 +119,8 @@ section.hero > div.home-slider > div.slider-item div.doHyeon{
             		<span class="flaticon-award"></span>
               </div>
               <div class="media-body">
-                <h3 class="heading">Superior Quality</h3>
-                <span>Quality Products</span>
+                <h3 class="heading">식단 구경</h3>
+                <span>Check the diet list</span>
               </div>
             </div>      
           </div>
@@ -97,7 +130,7 @@ section.hero > div.home-slider > div.slider-item div.doHyeon{
             		<span class="flaticon-customer-service"></span>
               </div>
               <div class="media-body">
-                <h3 class="heading">Support</h3>
+                <h3 class="heading">문의하기</h3>
                 <span>24/7 Support</span>
               </div>
             </div>      
@@ -120,19 +153,17 @@ section.hero > div.home-slider > div.slider-item div.doHyeon{
 									</div>
 								</div>
 							</div>
-							<div class="col-md-6">
-								<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url(images/category-1.jpg);">
-									<div class="text px-3 py-1">
-										<h2 class="mb-0"><a href="#">Fruits</a></h2>
-									</div>
+							
+							<div class="col-md-1">
+								<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end">
+									
 								</div>
-								<div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url(images/category-2.jpg);">
-									<div class="text px-3 py-1">
-										<h2 class="mb-0"><a href="#">Vegetables</a></h2>
-									</div>
+								<div class="category-wrap ftco-animate img d-flex align-items-end">
+									
 								</div>
 							</div>
-						</div>
+							
+						</div> 
 					</div>
 
 					<div class="col-md-4">
