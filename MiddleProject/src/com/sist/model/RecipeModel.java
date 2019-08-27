@@ -48,19 +48,22 @@ public class RecipeModel {
 			   endpage=allpage;
 		}
 		List<RecipeVO> hlist = RecipeDAO.recipeHotRecipe(3);
-		try {
-			List<RecipeVO> list = RecipeDAO.recipeListData(map);
-			for(RecipeVO vo:list){
+		List<RecipeVO> list = RecipeDAO.recipeListData(map);
+		
+		for(RecipeVO vo:list){
+			System.out.println("³Ñ¹ö:"+vo.getNo());
+			if(vo.getSummary_in()==null){
+				continue;
+			}else{
 				int len=vo.getSummary_in().length();
+				
 				if(len>100)
 				{
 					vo.setSummary_in(vo.getSummary_in().substring(0, 100)+"...");
 				}
 			}
-			model.addAttribute("list", list);
-		} catch (Exception e) {
 		}
-		
+		model.addAttribute("list", list);
 		model.addAttribute("startpage", startpage);
 		model.addAttribute("endpage", endpage);
 		model.addAttribute("curpage", curpage);
