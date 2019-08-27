@@ -105,23 +105,25 @@
 					<!-- 재료 테이블 -->
 					<table class="table">
 						<h2 class="text-left">재 료! <font size="4pt;" color="gray"><EM>Ingredients</EM></font></h2>
-						<div class="row">
+							
 							<div class="col-lg-8 ftco-animate">
 								<c:forEach var="ingredetail" items="${ingre }" varStatus="s">
-									
+									<th>${ingredetail }</th>
 								</c:forEach>
 							</div>
-						</div>
+						
 					</table>
 					<!-- 조리 순서 테이블 -->
 					<table class="table">
 						<h2 class="text-left">조리 순서! <font size="4pt;" color="gray"><EM>step</EM></font></h2>
 						<div class="row">
 							<div class="col-lg-8 ftco-animate">
-								<c:forEach var="poster" items="${step_poster }" varStatus="s">
+								<c:forEach var="step" items="${step }" varStatus="s">
 									<tr>
-										<td><h4 class="text-left">${step[s.index] }</h4></td>
-										<td><img src="${poster}" style="height:350px;width:350px;"></td>
+										<td><h4 class="text-left">${step}</h4></td>
+										<c:if test="${step_poster[s.index]!=null }">
+										<td><img src="${step_poster[s.index] }" style="height:350px;width:350px;"></td>
+										</c:if>
 									</tr>
 								</c:forEach>
 							</div>

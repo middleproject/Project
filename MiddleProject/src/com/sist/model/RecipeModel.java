@@ -51,7 +51,7 @@ public class RecipeModel {
 		List<RecipeVO> list = RecipeDAO.recipeListData(map);
 		
 		for(RecipeVO vo:list){
-			System.out.println("넘버:"+vo.getNo());
+			
 			if(vo.getSummary_in()==null){
 				continue;
 			}else{
@@ -72,7 +72,7 @@ public class RecipeModel {
 		
 		model.addAttribute("total", total);
 		model.addAttribute("count", count);
-		System.out.println("현재 페이지:"+curpage);
+		
 		model.addAttribute("hlist", hlist);
 		model.addAttribute("main_jsp", "../recipe/recipe_list.jsp");
 		return "../main/main.jsp";
@@ -90,14 +90,17 @@ public class RecipeModel {
 		Map map = new HashMap();
 		List<String> tagList = new ArrayList<String>();
 		List<String> sList = new ArrayList<String>();
+		String[] step_poster = new String[10];
 		try {
 			in = vo.getInfo().substring(4, vo.getInfo().length()-2);
 			info = in.split("##");
 			String ingre[] = vo.getIngre().split(",");
 			String[] tagStr = tag.split(",");
 			String[] step = vo.getStep().split("##");
-			String[] step_poster = vo.getSTEP_POSTER().split("##");
-			
+			if(vo.getSTEP_POSTER()!=null){
+				step_poster = vo.getSTEP_POSTER().split("##");
+			}
+			System.out.println(step_poster.length);
 			for(int i=0; i<tagStr.length;i++){
 				tagList.add(tagStr[i]);
 			}
@@ -109,11 +112,13 @@ public class RecipeModel {
 			model.addAttribute("ingre", ingre);
 			model.addAttribute("step", step);
 			model.addAttribute("step_poster", step_poster);
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		if(vo.getImage()==null){
 			vo.setImage("https://previews.123rf.com/images/julynx/julynx1408/julynx140800023/30746516-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%97%86%EA%B1%B0%EB%82%98-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%82%AC%EC%A7%84-%EC%97%86%EC%9D%8C.jpg");
 		}
-		System.out.println(in);
+		
 		model.addAttribute("vo", vo);
 		model.addAttribute("main_jsp", "../recipe/recipe_detail.jsp");
 		return "../main/main.jsp";
