@@ -9,12 +9,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 
 <link rel="stylesheet" href="css/bootstrap.min.css">
-<style type="text/css">
-	.row {
-		margin: 0px auto;
-		width: 900px;
-	}
-</style>
+
 <script type="text/javascript">
 var i= 0;
 var u= 0;
@@ -49,6 +44,7 @@ var u= 0;
 </script>
 </head>
 <body>
+		 <section class="ftco-section ftco-degree-bg">
 	<div class="container">
 		<h2 class="text-center">게시글 내용보기</h2>
 		<div class="row">
@@ -173,5 +169,6 @@ var u= 0;
 		</c:if>
 		</div>
 	</div>
+	</section>
 </body>
 </html>

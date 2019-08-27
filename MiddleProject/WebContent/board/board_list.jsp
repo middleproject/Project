@@ -6,13 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<style type="text/css">
-	.row {
-		margin: 0px auto;
-		width: 900px;
-	}
-</style>
+
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -29,6 +23,7 @@ $(function(){
 </script>
 </head>
 <body>
+	 <section class="ftco-section ftco-degree-bg">
 	<div class="container">
 		<h1 class="text-center">자유게시판</h1>
 		<div class="row">
@@ -38,7 +33,7 @@ $(function(){
 						${curpage } page / ${totalpage } pages
 					</td>
 					<td class="text-right">
-						<a href="../board/board_insert.do?boardDis=6" class="btn btn-sm btn-warning">글쓰기</a><!-- ♥ -->
+						<a href="../board/board_insert.do?boardDis=6" class="btn btn-primary">글쓰기</a><!-- ♥ -->
 					</td>
 				</tr>
 			</table>
@@ -78,7 +73,7 @@ $(function(){
 							<option value="content">내용</option>
 						</select>
 						<input type="text" name="textsearch" class="input-sm" size="15" id="textsearch">
-						<input type="button"  value="검색" class="btn btn-sm btn-warning"  id="findBtn">
+						<input type="button"  value="검색" class="btn btn-outline-primary"  id="findBtn">
 						</form>
 					</td>
 					<!-- 페이지 넘어가는 부분 -->
@@ -99,5 +94,6 @@ $(function(){
 			</table>
 		</div>
 	</div>
+	</section>
 </body>
 </html>

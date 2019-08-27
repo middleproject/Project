@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
 
 	<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
-
+	<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
 
     <link rel="stylesheet" href="../main/css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="../main/css/animate.css">
@@ -105,7 +105,7 @@
               	<a class="dropdown-item jua" href="#">자랑 게시판</a>
               	<a class="dropdown-item jua" href="#">후기 게시판</a>
                 <a class="dropdown-item jua" href="#">문의 게시판</a>
-                <a class="dropdown-item jua" href="#">자유게시판</a>
+                <a class="dropdown-item jua" href="../board/board_list.do">자유게시판</a>
                 <a class="dropdown-item jua" href="#">자료실</a>
               </div>
             </li>
