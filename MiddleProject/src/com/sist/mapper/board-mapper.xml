@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.board-mapper">
+
+<!-- ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ -->
+	<select id="boardListData" resultType="BoardVO" parameterType="java.util.Map">
+<!-- 	SELECT boardno,subject,memberid,dbday,hit,num
+		FROM (SELECT boardno,subject,memberid,TO_CHAR(day,'YYYY-MM-DD') as dbday,hit,rownum as num
+		FROM(SELECT boardno,subject,memberid,day,hit
+		FROM board ORDER BY boardno DESC))
+		WHERE num BETWEEN #{start} AND #{end} -->
+		SELECT boardno,subject,memberid,dbday,hit,num
+		FROM (SELECT boardno,subject,memberid,TO_CHAR(day,'YYYY-MM-DD') as dbday,hit,rownum as num
+		FROM(SELECT boardno,subject,memberid,day,hit
+		FROM board 
+		WHERE categoryno=#{categoryno}
+		ORDER BY boardno ASC))	
+		WHERE num BETWEEN #{start} AND #{end}
+		ORDER BY NUM DESC 
+	</select>
+	<!-- 
+	총페이지] CEIL쓴 이유 : 올림함수라서→ 11/10.0 => 1.1 CEIL(1.1) => 2!!! 
+	-->
+	<select id="boardTotalPage" resultType="int">
+		SELECT CEIL(COUNT(*)/5.0) FROM board
+	</select>
+	<select id="boardRowCount" resultType="int">
+		SELECT COUNT(*) FROM board
+	</select>
+	<insert id="boardInsert" parameterType="BoardVO">
+		INSERT INTO board(boardno,categoryno,subject,memberid,content,pwd) VALUES(
+    		board_no_seq.nextval,
+    		#{categoryno},
+    		#{subject}, 
+    		#{memberid}, <!--#안에 값이 이렇게 vo.getName() -->
+    		#{content},
+    		#{pwd}
+    	)
+	</insert>
+
+	<!-- 컬럼추가 sql문]
+	ALTER table testboard add pwd VARCHAR2(20) CONSTRAINT testboard_pwd_nn NOT NULL
+		  컬럼명 검색 sql문]
+	desc testboard;
+	 -->
+	 <!-- 상세보기 -->
+	 <select id="boardDetailData" resultType="BoardVO" parameterType="int">
+	 	SELECT boardno,memberid,subject,content,TO_CHAR(day,'YYYY-MM-DD') as dbday, hit
+	 	FROM board
+	 	WHERE boardno=#{boardno}
+	 </select>
+	 <update id="hit" parameterType="int">
+	 	UPDATE board SET
+	 	hit = hit+1
+	 	WHERE boardno=#{boardno}
+	 </update>
+	 <!-- 수정하기 -->
+	 <select id="boardGetPwd" resultType="String" parameterType="int">
+	 	SELECT pwd FROM board
+	 	WHERE boardno=#{boardno}
+	 </select>
+	 <update id="boardUpdate" parameterType="BoardVO">
+	 	UPDATE board SET
+	 	memberid=#{memberid}, subject=#{subject}, content=#{content}
+	 	WHERE boardno=#{boardno}
+	 </update>
+	<!-- 검색 -->
+    <select id="boardListDataTEST" resultType="BoardVO" parameterType="java.util.Map">
+		SELECT boardno,subject,memberid,dbday,hit,num ,content
+		FROM (SELECT boardno,subject,memberid,TO_CHAR(day,'YYYY-MM-DD') as dbday,hit,content,rownum as num
+		FROM(SELECT boardno,subject,memberid,day,hit ,content
+		FROM board ORDER BY boardno DESC))
+		WHERE num BETWEEN #{start} AND #{end}
+		AND ${fs} LIKE '%'|| #{textsearch} ||'%'
+	</select>
+    <!-- 댓글넣기 -->
+      <insert id="replyInsert" parameterType="ReplyVO">
+    	INSERT INTO Reply(replyno,boardno,name,msg,group_id) VALUES(
+	    	Reply_no_seq.nextval, <!-- 시퀀스만든것 자동증가에 nextval줌 -->
+	    	#{boardno},
+	    	#{name},
+	    	#{msg},
+	    	(SELECT NVL(MAX(group_id)+1,1) FROM Reply) 
+    	)	
+    </insert>
+    <!-- 댓글읽기 group_tab 답댓글이모티콘 들어갈때 한칸띄움-->
+    <select id="replyListData" resultType="ReplyVO" parameterType="int"> <!-- bno -->
+    	SELECT 
+    	replyno
+    	,boardno
+    	,msg
+    	,TO_CHAR(regdate,'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') as dbday
+    	,group_tab
+    	FROM Reply
+    	WHERE boardno=#{bno}
+    	ORDER BY group_id DESC, group_step ASC
+    </select>
+    
+     <!-- 댓글이 총 몇갠지 확인 board_detail.jsp에 댓글(1) 여기들어감 -->
+    <select id="replyListCount" resultType="int" parameterType="int">
+    	SELECT COUNT(*)
+    	FROM Reply
+    	WHERE boardno=#{bno}
+    </select>
+    <!-- 댓글정보 -->
+	<select id="replyParentInfo" resultType="ReplyVO" parameterType="int">
+		SELECT group_id, group_step, group_tab
+		FROM Reply
+		WHERE replyno=#{replyno}
+	</select>
+	<!-- step증가 -->
+	 <update id="replyStepIncrement" parameterType="ReplyVO">
+    	UPDATE Reply SET
+    	group_step=group_step+1 
+    	WHERE group_id=#{group_id} AND group_step>#{group_step} <!-- 댓글형 핵심문장 -->
+    </update>
+    <!-- 대댓글insert -->
+    <insert id="replyReInsert" parameterType="ReplyVO">
+    	INSERT INTO Reply(replyno,boardno,id,name,msg,group_id,group_step,group_tab,root) VALUES(
+	    	Reply_no_seq.nextval, 
+	    	#{boardno},
+	    	#{id},
+	    	#{name},
+	    	#{msg},
+	    	#{group_id},
+	    	#{group_step},
+	    	#{group_tab},
+	    	#{root}
+    	)	
+    </insert>
+    <!-- depth증가 -->
+    <update id="replyDepthIncrement" parameterType="int">
+  	  UPDATE Reply SET
+    	depth=depth+1
+    	WHERE replyno=#{replyno} <!-- 답변이 올라가기 시작함 틀리면 replyno나 boardno로 고치기-->
+    </update> <!-- depth(밑에달린 댓글수) 수정 -->
+    <update id="replyUpdate" parameterType="ReplyVO">
+    	UPDATE Reply SET
+    	msg=#{msg}
+    	WHERE boardno=#{boardno}
+    </update>
+    
+    <!-- DELETE -->
+    <select id="replyGetDepth" resultType="ReplyVO" parameterType="int">
+    	SELECT depth,root FROM Reply
+    	WHERE replyno=#{replyno}
+    </select>
+    <!-- depth가 0이냐 [딜리트]-->
+    <delete id="replyDelete" parameterType="int">
+    	DELETE FROM Reply
+    	WHERE replyno=#{replyno}
+    </delete>
+    <!-- depth가 0이아니냐[업데이트] -->
+    <update id="replyDataUpdate" parameterType="ReplyVO">
+    	UPDATE Reply SET
+    	msg=#{msg}
+    	WHERE replyno=#{replyno}
+    </update>
+    <!-- depth 감소 -->
+    <update id="replyDepthDecrement" parameterType="int">
+    	UPDATE Reply SET
+    	depth=depth-1
+    	WHERE replyno=#{replyno}
+    </update>
+    <!-- 게시물삭제 -->
+    <delete id="boardDelete" parameterType="int">
+    	DELETE FROM board
+    	WHERE boardno=#{boardno}
+    </delete>
+    <delete id="boardReplyDelete" parameterType="int">
+    	DELETE FROM Reply
+    	WHERE boardno=#{boardno} 
+    </delete>
+</mapper>
