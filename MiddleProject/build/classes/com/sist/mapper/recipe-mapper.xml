@@ -77,6 +77,6 @@
 				tag LIKE '%'||#{tag}||'%'
 			</foreach>
 		</where>)
-		where num &lt;=4
+		where num &lt;4
 	</select>
 </mapper>
