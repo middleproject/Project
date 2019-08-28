@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -109,18 +110,27 @@
                 <a class="dropdown-item jua" href="#">자료실</a>
               </div>
             </li>
-	         <li class="nav-item dropdown">
-              <a class="jua dropdown-toggle" href="#" id="dropdown06" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">마이페이지</a>
-              <div class="dropdown-menu jua" aria-labelledby="dropdown04">
-              	<a class="dropdown-item jua" href="#">마이페이지</a>
-              	<a class="dropdown-item jua" href="../member/signup.do">회원가입</a>
-              	<a class="dropdown-item jua" href="#">회원수정</a>
-              	<a class="dropdown-item jua" href="#">회원삭제</a>
-              </div>
-            </li>
+            
+            
+            
+            
+	         
 	          
 	          <li class="nav-item"><a href="#" class="jua">예약확인?</a></li>
 	          <li class="nav-item"><a href="#" class="jua">실시간 상담</a></li>
+	          <c:if test="${sessionScope.admin==0 || sessionScope.admin==2 }">
+	            <li class="nav-item dropdown">
+	              	  <a class="jua dropdown-toggle" href="#" id="dropdown06" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">회원정보</a>
+		              <div class="dropdown-menu jua" aria-labelledby="dropdown04">
+		              	<a class="dropdown-item jua" href="#">마이페이지</a>
+		              	<a class="dropdown-item jua" href="#">회원수정</a>
+		              	<a class="dropdown-item jua" href="#">회원삭제</a>
+		              </div>
+	            </li>
+	            </c:if>
+	            <c:if test="${sessionScope.admin==1 }">
+	            	<li class="nav-item"><a href="#" class="jua">회원관리</a></li>
+	            </c:if>
 	          <li class="nav-item cta cta-colored"><a href="#" class="jua"><span class="icon-shopping_cart"></span>[0]</a></li>
 
 	        </ul>
