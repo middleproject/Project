@@ -35,4 +35,9 @@ public class MemberModel {
 		
 		return "../member/signIn_ok.jsp";
 	}
+	
+	@RequestMapping("member/signUp.do")
+	public String member_signUp(Model model) {
+		return "../member/signUp.jsp";
+	}
 }
