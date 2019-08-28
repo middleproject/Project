@@ -40,38 +40,14 @@
 <link rel="stylesheet" href="../main/css/icomoon.css">
 <link rel="stylesheet" href="../main/css/style.css">
 
-<link rel="stylesheet" href="../shadow/css/shadowbox.css">
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
-<script type="text/javascript">
 
-Shadowbox.init({
-	players:['iframe']
-	
-})
-$(function(){
-	$('#postBtn').click(function(){
-		Shadowbox.open({
-			content:'../member/postfind.jsp',
-			player:'iframe',
-			title:'우편번호 검색',
-			width:550,
-			height:550
-		});
-	});
-	$('#checkBtn').click(function(){
-		Shadowbox.open({
-			content:'../member/idcheck.jsp',
-			player:'iframe',
-			title:'아이디 중복체크',
-			width:360,
-			height:200
-		});
-	});
-});
-</script>
+
+<link rel="stylesheet" href="../shadow/css/shadowbox.css">
 
 </head>
+
+
+
 	<div class="hero-wrap hero-bread"
 		style="background-image: url('../main/images/bg_1.jpg');">
 		<div class="container">
@@ -91,13 +67,14 @@ $(function(){
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
-					<form method="post" action="signUp_ok" class="signUp" >
+					<form id = "join_frm" method="post" action="signUp_ok.jsp" class="signUp"  
+					  onsubmit="return validate();">
 						<h3 class="mb-4 billing-heading">회원 가입</h3>
 						<div class="row align-items-end">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="id">*아이디</label> <input type="text"
-										class="form-control" placeholder="" id="id" readonly="readonly">
+									<label >*아이디</label> <input type="text"
+										class="form-control" placeholder="" id="id" readonly="readonly" required>
 								</div>
 							</div>
 
@@ -111,30 +88,31 @@ $(function(){
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="pwd">*비밀번호</label> <input type="text"
-										class="form-control" placeholder="" id="pwd">
+									<label >*비밀번호</label> <input type="password"
+										class="form-control" placeholder="" id="pwd" required >
 								</div>
 							</div>
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="pwdCheck">비밀번호 확인</label> <input type="text"
-										class="form-control" placeholder="" id="pwdCheck">
+									<label >비밀번호 확인</label> <input type="password"
+										class="form-control" placeholder="" id="pwd2" required>
 								</div>
+								<label id=lable></label>
 							</div>
 
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="name">*이름</label> <input type="text"
-										class="form-control" placeholder="" id="name">
+									<label>*이름</label> 
+									<input type="text" class="form-control" placeholder="" id="name" class="name" required >
 								</div>
 							</div>
 
 							<div class="w-100"></div>
 							<div class="col-md-8">
 								<div class="form-group">
-									<label for="sex">*성별</label>
+									<label >*성별</label>
 									<div class="w-100"></div>
 									<input type="radio" style="width: 40px; height: 20px;"
 										name="sex" value="남자" > <label style="font-size: 20px;">남자</label>
@@ -146,8 +124,8 @@ $(function(){
 							<div class="w-100"></div>
 							<div class="col-md-3">
 								<div class="form-group">
-									<label for="firstname">*생년월일</label> <input type="text"
-										class="form-control" id="birthday_year" placeholder="년">
+									<label >*생년월일</label> <input type="text"
+										class="form-control" id="birthday_year" placeholder="년" required>
 
 								</div>
 							</div>
@@ -156,7 +134,7 @@ $(function(){
 							<div class="col-md-3">
 								<div class="form-group">
 									<input type="text" class="form-control" id="birthday_month"
-										placeholder="월" >
+										placeholder="월"  required>
 
 								</div>
 							</div>
@@ -164,7 +142,7 @@ $(function(){
 							<div class="col-md-3">
 								<div class="form-group">
 									<input type="text" class="form-control" id="birthday_day"
-										placeholder="일">
+										placeholder="일" required>
 
 								</div>
 							</div>
@@ -173,7 +151,7 @@ $(function(){
 							<div class="w-100"></div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="email">이메일</label> <input type="text" id="email">
+									<label >*이메일</label> <input type="text" id="email1" required>
 								</div>
 							</div>
 
@@ -185,15 +163,16 @@ $(function(){
 
 							<div class="col-md-4">
 								<div class="form-group">
-									<input type="text" id="email2">
+									<input type="text" id="email2" required>
 								</div>
 							</div>
 							<div class="col-md-0">
 								<div class="form-group">
-									<select id ="email2" style="width: 80px; height: 33px;">
-										<option>네이버</option>
-										<option>다음</option>
-										<option>구글</option>
+									<select id ="emailSelection" name="emailSelection"  style="width: 120px; height: 33px;">
+										<option>직접입력</option>
+										<option>naver.com</option>
+										<option>daum.net</option>
+										<option>goole.com</option>
 
 									</select>
 								</div>
@@ -224,18 +203,22 @@ $(function(){
 										<option>010</option>
 										<option>011</option>
 										<option>016</option>
-									</select> - <input type="text" size="5px"> - <input type="text"
-										size="5px">
+									</select> - <input type="text" size="5px" required> - <input type="text"
+										size="5px" required>
 								</div>
 							</div>
 							<div class="w-100"></div>
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">*우편번호</label> <input type="text">
+									<label >*우편번호</label>
+										<div class="w-100"></div>
+									 <input type="text" readonly="readonly" required>
 
 								</div>
+								
 							</div>
-							<div class="col-md-0">
+						
+					<!-- 		<div class="col-md-0">
 								<div class="form-group">
 									<label>-</label>
 								</div>
@@ -245,23 +228,23 @@ $(function(){
 							<div class="col-md-4">
 								<div class="form-group">
 
-									<input type="text">
+									<input type="text" readonly="readonly">
 
 								</div>
-							</div>
+							</div> -->
 
 							<div class="col-md-2">
 								<div class="form-group">
 									<input type="button"
-										style="width: 110px; height: 35px; font-size: 15px"
-										class="btn-warning btn-lg" value="검색">
+										style="width: 90px; height: 35px; font-size: 15px"
+										class="btn-warning btn-lg" value="검색" id="postBtn">
 
 								</div>
 
 							</div>
 
 							<div class="w-100"></div>
-							<div class="col-md-12">
+							<div class="col-md-10">
 								<div class="form-group">
 									<input type="text" class="form-control" placeholder="상세주소">
 								</div>
@@ -281,7 +264,7 @@ $(function(){
 
 							<div class="col-md-2">
 								<div class="form-group">
-									<input type="button" class=" btn-warning btn-lg" value="가입완료"  >
+									<input type="submit" class=" btn-warning btn-lg" value="가입완료"  >
 								</div>
 							</div>
 							<div class="col-md-2"></div>
@@ -485,6 +468,89 @@ $(function(){
 
 		});
 	</script>
+	
+	
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
+
+<script type="text/javascript">
+
+Shadowbox.init({
+	players:['iframe']
+	
+})
+$(function(){
+	$('#postBtn').click(function(){
+		Shadowbox.open({
+			content:'../member/postfind.jsp',
+			player:'iframe',
+			title:'우편번호 검색',
+			width:550,
+			height:550
+		});
+	});
+	$('#checkBtn').click(function(){
+		Shadowbox.open({
+			content:'../member/idcheck.jsp',
+			player:'iframe',
+			title:'아이디 중복체크',
+			width:360,
+			height:200
+		});
+	});
+});
+</script>
+	
+<script type="text/javascript">
+	$(function(){
+
+//비밀번호 확인
+	$('#pwd2').keyup(function(){
+	   if($('#pwd').val() != $('#pwd2').val() ){
+	    	if($('#pwd2').val()!=''){
+	    		 document.getElementById('lable').style.color = "red";
+	    		   document.getElementById('lable').innerHTML = "비밀번호가 일치하지않습니다."; 
+
+	       }
+	    	   	
+	    	}
+	   else{
+   		 document.getElementById('lable').style.color = "blue";
+	   document.getElementById('lable').innerHTML = "비밀번호가 일치합니다.";  
+	    }
+	})  	   
+});
+</script>
+<script type="text/javascript">
+$(function(){	
+
+	$(document).ready(function(){
+
+		$('select[name=emailSelection]').change(function() {
+
+			if($(this).val()=="직접입력"){
+
+				$('#email2').val("");
+				$("#email2").attr("readonly", false);
+
+			} else {
+
+				$('#email2').val($(this).val());
+
+				$("#email2").attr("readonly", true);
+
+			}
+
+		});
+
+	});
+
+});
+</script>
+
+
+
+	
 
 </body>
 </html>

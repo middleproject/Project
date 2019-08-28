@@ -73,9 +73,11 @@
 					    <div class="col-md pr-1 d-flex topper align-items-left text-left">
 						    
 					    </div>
-					    <div class="col-md pr-1 d-flex topper align-items-left text-left">
-						    <a href="../main/main.do"><span class="text">login</span></a>
-					    </div>
+						    <a href="../member/signIn.do"><span class="text" style="color:white;">로그인</span></a>
+						  
+						        <span class="text" style="color:white;">　　　</span>
+					    
+						    <a href="../member/signUp.do"><span class="text" style="color:white;">회원 가입</span></a>		
 				    </div>
 			    </div>
 		    </div>

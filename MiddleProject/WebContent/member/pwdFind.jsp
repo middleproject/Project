@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>로그인</title>
+<title>비밀번호 찾기</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -35,11 +35,6 @@
 <link rel="stylesheet" type="text/css" href="css/util.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
-
-
-
-
-
 </head>
 <body>
 
@@ -54,18 +49,17 @@
 				</a>
 
 				<div class="wrap-input100 validate-input m-b-26">
-					<input class="input100" type="text" id = "id"
-						placeholder="아이디를 입력하세요"> 
-						<span class="focus-input100" id=id2   ></span>
+					<input class="input100" type="text" id="id"
+						placeholder="아이디를 입력하세요"> <span class="focus-input100"></span>
 				</div>
 
-				<div class="wrap-input100 validate-input m-b-45">
-					<input class="input100" type="password" id="pwd"
-						placeholder="비밀번호를 입력하세요"> <span class="focus-input100"></span>
+				<div class="wrap-input100 validate-input m-b-26">
+					<input class="input100" type="text" id="email"
+						placeholder="이메일을 입력하세요"> <span class="focus-input100"></span>
 				</div>
 
 				<div class="container-login100-form-btn validate-input m-b-20">
-					<button class="login100-form-btn" id="logBtn">로그인</button>
+					<button class="login100-form-btn">비밀번호 찾기</button>
 				</div>
 				<br>
 
@@ -73,14 +67,11 @@
 					<a href="signUp.jsp" class="txt2 hov1 validate-input m-b-10" > 회원가입 </a>
 				</div>
 
-<!-- 이메일로 찾음 -->
-				<div class="text-center">
-					<a href="idFind.jsp" class="txt2 hov1 validate-input m-b-10"> 아이디찾기 </a>
-				</div>
+
 
 <!-- 아이디하고 이메일로 찾음 -->
 				<div class="text-center">
-					<a href="pwdFind.jsp" class="txt2 hov1 validate-input m-b-10"> 비밀번호찾기 </a>
+					<a href="idFind.jsp" class="txt2 hov1 validate-input m-b-10"> 아이디 찾기 </a>
 				</div>
 			</form>
 
@@ -108,12 +99,6 @@
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
-
-
-
-
-
-
 
 </body>
 </html>
