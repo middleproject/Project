@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.search-mapper">
-
-<resultMap type="RecipeVO" id="recipeAllMap">
-   <result property="no" column="no"/>
-   <result property="poster" column="poster"/>
-   <result property="summary_in" column="summary_in"/>
-   <result property="info" column="info"/>
-   <result property="step" column="step"/>
-   <result property="STEP_POSTER" column="STEP_POSTER"/>
-   <result property="summary" column="summary"/>
-   <result property="complete" column="complete"/>
-   <result property="regdate" column="regdate"/>
-   <result property="tag" column="tag"/>
-   <result property="tip" column="tip"/>
-   <result property="hit" column="hit"/>
-   <result property="ingre" column="ingre"/>
-   <result property="made" column="made"/>
-   <result property="image" column="image"/>
-   
- </resultMap>
+<insert id="IngreInsert" parameterType="IngreVO">
+   INSERT INTO Ingre VALUES(
+     #{ingreno},
+     #{ingrename},
+     #{ingreposter},
+     #{ingreinfo}
+   )
+  </insert>
+  <select id="IngreListData" resultType="IngreVO">
+    SELECT * FROM Ingre
+  </select>
+  <select id="ingredetailData" resultType="ingredetailVO" parameterType="int">
+    SELECT *
+    FROM ingredetail
+    WHERE ino=#{ino}
+  </select> 
 </mapper>

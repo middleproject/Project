@@ -10,6 +10,9 @@
 		<typeAlias type="com.sist.vo.BoardCategoryVO" alias="BoardCategoryVO"/>
 		<typeAlias type="com.sist.vo.BoardVO" alias="BoardVO"/>
 		<typeAlias type="com.sist.vo.ReplyVO" alias="ReplyVO"/>
+		<!-- search -->
+		<typeAlias type="com.sist.vo.IngreVO" alias="IngreVO"/>
+		<typeAlias type="com.sist.vo.IngredetailVO" alias="IngredetailVO"/>
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -25,5 +28,6 @@
 	<mappers>
 		<mapper resource="com/sist/mapper/recipe-mapper.xml"/>
 		<mapper resource="com/sist/mapper/board-mapper.xml"/>
+		<mapper resource="com/sist/mapper/search-mapper.xml"/>
 	</mappers>
 </configuration>
