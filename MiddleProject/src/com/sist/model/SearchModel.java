@@ -29,8 +29,11 @@ public class SearchModel {
 	   public String search_searchlist(Model model)
 	   {
 		   String ino=model.getRequest().getParameter("ino");
-		   List<IngredetailVO> list=SearchDAO.IngredetailData();
-		   
+		   List<String> list=SearchDAO.IngredetailData(Integer.parseInt(ino));
+		   for(String s:list)
+		   {
+			   System.out.println(s);
+		   }
 		   
 		   model.addAttribute("list", list);
 		   return "searchlist.jsp";

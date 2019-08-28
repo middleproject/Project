@@ -17,10 +17,10 @@ public class SearchDAO {
 	 private static SqlSessionFactory ssf;
 	   static
 	   {
-		   // 초기화 블럭 => XML을 파싱 
+		   
 		   try
 		   {
-			   // XML읽기
+			   
 			   Reader reader=Resources.getResourceAsReader("Config.xml");
 			   ssf=new SqlSessionFactoryBuilder().build(reader);
 		   }catch(Exception ex)
@@ -64,24 +64,19 @@ public class SearchDAO {
 		   }
 		   return list;
 	   }
-	   public static List<IngredetailVO> IngredetailData()
-	   {
-		   List<IngredetailVO> list=new ArrayList<IngredetailVO>();
-		   SqlSession session=null;
-		   try
-		   {
-			   session=ssf.openSession();
-			   list=session.selectList("IngredetailData");
-		   }catch(Exception ex)
-		   {
-			   ex.printStackTrace();
-		   }
-		   finally
-		   {
-			   if(session!=null)
-				   session.close();
-		   }
-		   return list;
-}
+	   public static List<String> IngredetailData(int ino) {
+			List<String> list = new ArrayList<String>();
+			SqlSession session = null;
+			try {
+				session = ssf.openSession();
+				list = session.selectList("ingredetailData", ino);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			} finally {
+				if (session != null)
+					session.close();
+			}
+			return list;
+		}
 }
 

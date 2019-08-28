@@ -12,9 +12,9 @@
   <select id="IngreListData" resultType="IngreVO">
     SELECT * FROM Ingre
   </select>
-  <select id="ingredetailData" resultType="ingredetailVO" parameterType="int">
-    SELECT *
+  <select id="ingredetailData" resultType="String" parameterType="int">
+    SELECT ingredetailname
     FROM ingredetail
-    WHERE ino=#{ino}
+    WHERE ino=#{ino} and mno=1
   </select> 
 </mapper>

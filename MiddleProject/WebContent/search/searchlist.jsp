@@ -10,10 +10,9 @@
 </head>
 <body>
    <table class="table table-hover">
-    <c:forEach var="vo" items="${list }">
-     <tr class="recipelists" data-no="${vo.no }" data-ino="${vo.ino }" data-mno="${vo.mno }"
-      data-name="${vo.ingredetailname }"  data-unit="${vo.unit }" data-price="${vo.price }">
-      <td class="text-left">${vo.ingredetailname })</td>
+    <c:forEach var="ss" items="${list }">    
+     <tr>
+      <td class="text-left">${ss }</td>
      </tr>
    </c:forEach>
   </table>
