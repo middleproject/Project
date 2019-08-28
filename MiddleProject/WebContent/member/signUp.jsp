@@ -1,9 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html lang="ko">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원 가입</title>
-<meta charset="utf-8">
+
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -17,94 +21,59 @@
 	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
 	rel="stylesheet">
 
-<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-<link rel="stylesheet" href="css/animate.css">
+<link rel="stylesheet" href="../main/css/open-iconic-bootstrap.min.css">
+<link rel="stylesheet" href="../main/css/animate.css">
 
-<link rel="stylesheet" href="css/owl.carousel.min.css">
-<link rel="stylesheet" href="css/owl.theme.default.min.css">
-<link rel="stylesheet" href="css/magnific-popup.css">
+<link rel="stylesheet" href="../main/css/owl.carousel.min.css">
+<link rel="stylesheet" href="../main/css/owl.theme.default.min.css">
+<link rel="stylesheet" href="../main/css/magnific-popup.css">
 
-<link rel="stylesheet" href="css/aos.css">
+<link rel="stylesheet" href="../main/css/aos.css">
 
-<link rel="stylesheet" href="css/ionicons.min.css">
+<link rel="stylesheet" href="../main/css/ionicons.min.css">
 
-<link rel="stylesheet" href="css/bootstrap-datepicker.css">
-<link rel="stylesheet" href="css/jquery.timepicker.css">
+<link rel="stylesheet" href="../main/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="../main/css/jquery.timepicker.css">
 
 
-<link rel="stylesheet" href="css/flaticon.css">
-<link rel="stylesheet" href="css/icomoon.css">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="../main/css/flaticon.css">
+<link rel="stylesheet" href="../main/css/icomoon.css">
+<link rel="stylesheet" href="../main/css/style.css">
+
+<link rel="stylesheet" href="../shadow/css/shadowbox.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
+<script type="text/javascript">
+
+Shadowbox.init({
+	players:['iframe']
+	
+})
+$(function(){
+	$('#postBtn').click(function(){
+		Shadowbox.open({
+			content:'../member/postfind.jsp',
+			player:'iframe',
+			title:'우편번호 검색',
+			width:550,
+			height:550
+		});
+	});
+	$('#checkBtn').click(function(){
+		Shadowbox.open({
+			content:'../member/idcheck.jsp',
+			player:'iframe',
+			title:'아이디 중복체크',
+			width:360,
+			height:200
+		});
+	});
+});
+</script>
+
 </head>
-<body class="goto-here">
-	<div class="py-1 bg-primary">
-		<div class="container">
-			<div
-				class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-				<div class="col-lg-12 d-block">
-					<div class="row d-flex">
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-phone2"></span>
-							</div>
-							<span class="text">+ 1235 2355 98</span>
-						</div>
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-paper-plane"></span>
-							</div>
-							<span class="text">youremail@email.com</span>
-						</div>
-						<div
-							class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-							<span class="text">3-5 Business days delivery &amp; Free
-								Returns</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<nav
-		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-		id="ftco-navbar">
-		<div class="container">
-			<a class="navbar-brand" href="index.html">Vegefoods</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#ftco-nav" aria-controls="ftco-nav"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="oi oi-menu"></span> Menu
-			</button>
-
-			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-					<li class="nav-item active dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="dropdown04"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="shop.html">Shop</a> <a
-								class="dropdown-item" href="wishlist.html">Wishlist</a> <a
-								class="dropdown-item" href="product-single.html">Single
-								Product</a> <a class="dropdown-item" href="cart.html">Cart</a> <a
-								class="dropdown-item" href="checkout.html">Checkout</a>
-						</div></li>
-					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-					<li class="nav-item cta cta-colored"><a href="cart.html"
-						class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<!-- END nav -->
-
 	<div class="hero-wrap hero-bread"
-		style="background-image: url('images/bg_1.jpg');">
+		style="background-image: url('../main/images/bg_1.jpg');">
 		<div class="container">
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
@@ -122,13 +91,13 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
-					<form action="#" class="billing-form">
+					<form method="post" action="signUp_ok" class="signUp" >
 						<h3 class="mb-4 billing-heading">회원 가입</h3>
 						<div class="row align-items-end">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="id">*아이디</label> <input type="text"
-										class="form-control" placeholder="" id="id">
+										class="form-control" placeholder="" id="id" readonly="readonly">
 								</div>
 							</div>
 
@@ -136,7 +105,7 @@
 								<div class="form-group">
 
 									<input type="button" style="width: 120px; height: 57px;"
-										class="btn-warning btn-lg" value="중복체크">
+										class="btn-warning btn-lg" value="중복체크" id= "checkBtn">
 								</div>
 							</div>
 							<div class="w-100"></div>
@@ -284,7 +253,7 @@
 							<div class="col-md-2">
 								<div class="form-group">
 									<input type="button"
-										style="width: 160px; height: 35px; font-size: 15px"
+										style="width: 110px; height: 35px; font-size: 15px"
 										class="btn-warning btn-lg" value="검색">
 
 								</div>
@@ -312,7 +281,7 @@
 
 							<div class="col-md-2">
 								<div class="form-group">
-									<input type="button" class=" btn-warning btn-lg" value="가입완료">
+									<input type="button" class=" btn-warning btn-lg" value="가입완료"  >
 								</div>
 							</div>
 							<div class="col-md-2"></div>
@@ -463,23 +432,23 @@
 	</div>
 
 
-	<script src="js/jquery.min.js"></script>
-	<script src="js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.easing.1.3.js"></script>
-	<script src="js/jquery.waypoints.min.js"></script>
-	<script src="js/jquery.stellar.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/aos.js"></script>
-	<script src="js/jquery.animateNumber.min.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-	<script src="js/scrollax.min.js"></script>
+	<script src="../main/js/jquery.min.js"></script>
+	<script src="../main/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="../main/js/popper.min.js"></script>
+	<script src="../main/js/bootstrap.min.js"></script>
+	<script src="../main/js/jquery.easing.1.3.js"></script>
+	<script src="../main/js/jquery.waypoints.min.js"></script>
+	<script src="../main/js/jquery.stellar.min.js"></script>
+	<script src="../main/js/owl.carousel.min.js"></script>
+	<script src="../main/js/jquery.magnific-popup.min.js"></script>
+	<script src="../main/js/aos.js"></script>
+	<script src="../main/js/jquery.animateNumber.min.js"></script>
+	<script src="../main/js/bootstrap-datepicker.js"></script>
+	<script src="../main/js/scrollax.min.js"></script>
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="js/google-map.js"></script>
-	<script src="js/main.js"></script>
+	<script src="../main/js/google-map.js"></script>
+	<script src="../main/js/main.js"></script>
 
 	<script>
 		$(document).ready(function() {
