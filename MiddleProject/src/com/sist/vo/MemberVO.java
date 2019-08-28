@@ -20,11 +20,11 @@ public class MemberVO {
 	private String email;
 	private String tel;
 	private String phone;
-	private String addr1;
-	private String addr2;
-	private String sex;
+	private String addr1;	// zipcode
+	private String addr2;	// 상세주소
+	private String sex;	// 남자, 여자
 	private int age;
-	private int admin;
+	private int admin;	// 0: 일반유저, 1: 관리자, 2: 셰프
 	private int pay;
 	
 	public String getId() {
