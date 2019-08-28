@@ -74,7 +74,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label >*아이디</label> <input type="text"
-										class="form-control" placeholder="" id="id" readonly="readonly" required>
+										class="form-control" placeholder="" id="id"    name="id" readonly="readonly" required>
 								</div>
 							</div>
 
@@ -89,14 +89,14 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label >*비밀번호</label> <input type="password"
-										class="form-control" placeholder="" id="pwd" required >
+										class="form-control" placeholder="" id="pwd"  name="pwd" required >
 								</div>
 							</div>
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label >비밀번호 확인</label> <input type="password"
-										class="form-control" placeholder="" id="pwd2" required>
+										class="form-control" placeholder="" id="pwd2" name="pwd2" required>
 								</div>
 								<label id=lable></label>
 							</div>
@@ -105,7 +105,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>*이름</label> 
-									<input type="text" class="form-control" placeholder="" id="name" class="name" required >
+									<input type="text" class="form-control" placeholder="" id="name"  name="name"class="name" required >
 								</div>
 							</div>
 
@@ -115,7 +115,7 @@
 									<label >*성별</label>
 									<div class="w-100"></div>
 									<input type="radio" style="width: 40px; height: 20px;"
-										name="sex" value="남자" > <label style="font-size: 20px;">남자</label>
+										name="sex"   value="남자" > <label style="font-size: 20px;">남자</label>
 									<input type="radio" style="width: 40px; height: 20px;"
 										name="sex"  value="여자"> <label style="font-size: 20px;">여자</label>
 								</div>
@@ -125,7 +125,7 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<label >*생년월일</label> <input type="text"
-										class="form-control" id="birthday_year" placeholder="년" required>
+										class="form-control" id="birthday_year" name="bitrhday_year" placeholder="년" required>
 
 								</div>
 							</div>
@@ -134,7 +134,7 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<input type="text" class="form-control" id="birthday_month"
-										placeholder="월"  required>
+									name="birthday_month"	placeholder="월"  required>
 
 								</div>
 							</div>
@@ -142,7 +142,7 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<input type="text" class="form-control" id="birthday_day"
-										placeholder="일" required>
+										name="birthday_day" placeholder="일" required>
 
 								</div>
 							</div>
@@ -151,7 +151,7 @@
 							<div class="w-100"></div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label >*이메일</label> <input type="text" id="email1" required>
+									<label >*이메일</label> <input type="text" id="email1" name="email1" required>
 								</div>
 							</div>
 
@@ -163,12 +163,12 @@
 
 							<div class="col-md-4">
 								<div class="form-group">
-									<input type="text" id="email2" required>
+									<input type="text" id="email2"  name="email2" required>
 								</div>
 							</div>
 							<div class="col-md-0">
 								<div class="form-group">
-									<select id ="emailSelection" name="emailSelection"  style="width: 120px; height: 33px;">
+									<select id ="emailSelection" name="emailSelection"  name="emailSelection"  style="width: 120px; height: 33px;">
 										<option>직접입력</option>
 										<option>naver.com</option>
 										<option>daum.net</option>
@@ -185,12 +185,12 @@
 								<div class="form-group">
 									<label>집 전화</label>
 									<div class="w-100"></div>
-									<select style="width: 80px; height: 33px;">
+									<select style="width: 80px; height: 33px;" name="call">
 										<option>02</option>
 										<option>031</option>
 										<option>041</option>
-									</select> - <input type="text" size="5px"> - <input type="text"
-										size="5px">
+									</select> - <input type="text" size="5px"name = "call2"> - <input type="text"
+										size="5px" name = "call3">
 								</div>
 							</div>
 
@@ -199,12 +199,12 @@
 								<div class="form-group">
 									<label>*휴대 전화</label>
 									<div class="w-100"></div>
-									<select style="width: 80px; height: 33px;">
+									<select style="width: 80px; height: 33px;" name="phone">
 										<option>010</option>
 										<option>011</option>
 										<option>016</option>
-									</select> - <input type="text" size="5px" required> - <input type="text"
-										size="5px" required>
+									</select> - <input type="text" size="5px" required name="phone2"> - <input type="text"
+										size="5px" required name="phone3">
 								</div>
 							</div>
 							<div class="w-100"></div>
@@ -212,7 +212,7 @@
 								<div class="form-group">
 									<label >*우편번호</label>
 										<div class="w-100"></div>
-									 <input type="text" readonly="readonly" required>
+									 <input type="text" readonly="readonly" name="adress" required >
 
 								</div>
 								
@@ -246,7 +246,7 @@
 							<div class="w-100"></div>
 							<div class="col-md-10">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="상세주소">
+									<input type="text" class="form-control" placeholder="상세주소"  name="adress2">
 								</div>
 							</div>
 
