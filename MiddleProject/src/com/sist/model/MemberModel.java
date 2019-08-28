@@ -32,12 +32,13 @@ public class MemberModel {
 		System.out.println("±¸ºÐ:"+ vo.getAdmin());
 		
 		model.addAttribute("result", vo.getMsg());	// OK,NOID,NOPWD
-		
 		return "../member/signIn_ok.jsp";
 	}
 	
+	
 	@RequestMapping("member/signUp.do")
 	public String member_signUp(Model model) {
-		return "../member/signUp.jsp";
+		model.addAttribute("main_jsp", "../member/signUp.jsp");
+		return "../main/main.jsp";
 	}
 }
