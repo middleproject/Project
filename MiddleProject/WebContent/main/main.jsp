@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Welcome Yolibogo-Jolibogo</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
 
 	<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
-	<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+
 
     <link rel="stylesheet" href="../main/css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="../main/css/animate.css">
@@ -105,7 +105,7 @@
               	<a class="dropdown-item jua" href="#">자랑 게시판</a>
               	<a class="dropdown-item jua" href="#">후기 게시판</a>
                 <a class="dropdown-item jua" href="#">문의 게시판</a>
-                <a class="dropdown-item jua" href="../board/board_list.do">자유게시판</a>
+                <a class="dropdown-item jua" href="#">자유게시판</a>
                 <a class="dropdown-item jua" href="#">자료실</a>
               </div>
             </li>
@@ -151,8 +151,8 @@
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Vegefoods</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+              <h2 class="ftco-heading-2">요리보고 조리보고</h2>
+              <p>1조 프로젝트로 만개의 레시피를 모방하여 재구축시킨 사이트다 역시 영어가 간지나긴 한다.</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -164,10 +164,10 @@
             <div class="ftco-footer-widget mb-4 ml-md-5">
               <h2 class="ftco-heading-2">Menu</h2>
               <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Shop</a></li>
-                <li><a href="#" class="py-2 d-block">About</a></li>
-                <li><a href="#" class="py-2 d-block">Journal</a></li>
-                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+                <li><a href="#" class="py-2 d-block">검색</a></li>
+                <li><a href="#" class="py-2 d-block">요리</a></li>
+                <li><a href="#" class="py-2 d-block">게시판</a></li>
+                <li><a href="#" class="py-2 d-block">회원정보</a></li>
               </ul>
             </div>
           </div>
@@ -193,9 +193,9 @@
             	<h2 class="ftco-heading-2">Have a Questions?</h2>
             	<div class="block-23 mb-3">
 	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+	                <li><span class="icon icon-map-marker"></span><span class="text">인천광역시 연수구 동춘1동 건영아파트 126동 203호</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">010 2916 3239</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">qpp666@gmail.com</span></a></li>
 	              </ul>
 	            </div>
             </div>
