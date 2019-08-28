@@ -26,7 +26,14 @@ public class MemberVO {
 	private int age;
 	private int admin;	// 0: 일반유저, 1: 관리자, 2: 셰프
 	private int pay;
+	private String msg;	// NOID OK NOPWD
 	
+	public String getMsg() {
+		return msg;
+	}
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
 	public String getId() {
 		return id;
 	}

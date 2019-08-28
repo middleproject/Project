@@ -73,11 +73,16 @@
 					    <div class="col-md pr-1 d-flex topper align-items-left text-left">
 						    
 					    </div>
+					    	<c:if test="${sessionScope.id==null }">
 						    <a href="../member/signIn.do"><span class="text" style="color:white;">로그인</span></a>
-						  
+						  	
 						        <span class="text" style="color:white;">　　　</span>
 					    
 						    <a href="../member/signUp.do"><span class="text" style="color:white;">회원 가입</span></a>		
+						    </c:if>
+						    <c:if test="${sessionScope.id!=null }">
+						    <a href=""><span class="text" style="color:white;">로그아웃</span></a>
+						    </c:if>
 				    </div>
 			    </div>
 		    </div>

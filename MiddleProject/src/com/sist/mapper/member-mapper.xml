@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.member-mapper">
+   <!-- login -->
+   <!-- 1. id 존재여부  -->
+   <select id="memberIdCount" resultType="int" parameterType="String">
+     SELECT COUNT(*)
+     FROM member
+     WHERE id=#{id}
+   </select>
+   <!-- 2. 비밀번호 확인 -->
+   <select id="memberGetPwd" resultType="MemberVO" parameterType="String">
+     SELECT pwd,admin,name
+     FROM member
+     WHERE id=#{id}
+   </select>
+   
+   
+   <!-- 3. 회원가입 -->
+   <insert id="memberSignUp" parameterType="MemberVO">
+   	INSERT INTO member(id,pwd,name,email,tel,phone,addr1,addr2,sex,age,admin,pay) VALUES(
+   		#{id},
+   		#{pwd},
+   		#{name},
+   		#{email},
+   		#{tel},
+   		#{phone},
+   		#{addr1},
+   		#{addr2},
+   		#{sex},
+   		#{age},
+   		#{admin},
+   		#{pay}
+   	)
+   </insert>
+   <!-- 4. 회원탈퇴 -->
+   <delete id="member" parameterType="String">
+   	DELETE FROM member
+   	WHERE id=#{id}
+   </delete>
+</mapper>

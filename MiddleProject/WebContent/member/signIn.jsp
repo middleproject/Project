@@ -35,7 +35,25 @@
 <link rel="stylesheet" type="text/css" href="css/util.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
-
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function() {
+	$('#logBtn').click(function() {
+		var id = $('#id').val();
+		var pwd = $('#id').val();
+		if (id.trim() == "") {
+			$('#id').focus();
+			return;
+		}
+		if (pwd.trim() == "") {
+			$('#pwd').focus();
+			return;
+		}
+		$('form').submit();
+<%-- 일반 태그는 아무것도 안 붙여도 됨 --%>
+	});
+});
+</script>
 
 
 
@@ -47,25 +65,24 @@
 	<div class="container-login100"
 		style="background-image: url('images/bg-01.jpg');">
 		<div class="wrap-login100 p-l-55 p-r-55 p-t-40 p-b-70">
-			<form class="login100-form validate-form">
+			<form class="login100-form validate-form" method="post" action="../member/signIn_ok.do">
 
 				<a href="../main/main.do" class="login100-form-title p-b-40"> <img
 					src="Resize.png">
 				</a>
 
 				<div class="wrap-input100 validate-input m-b-26">
-					<input class="input100" type="text" id = "id"
-						placeholder="아이디를 입력하세요"> 
-						<span class="focus-input100" id=id2   ></span>
+					<input class="input100" type="text" name ="id" placeholder="아이디를 입력하세요"> 
+						<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input m-b-45">
-					<input class="input100" type="password" id="pwd"
+					<input class="input100" type="password" name="pwd"
 						placeholder="비밀번호를 입력하세요"> <span class="focus-input100"></span>
 				</div>
 
 				<div class="container-login100-form-btn validate-input m-b-20">
-					<button class="login100-form-btn" id="logBtn">로그인</button>
+					<button class="login100-form-btn" name="logBtn">로그인</button>
 				</div>
 				<br>
 
