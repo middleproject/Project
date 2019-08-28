@@ -84,7 +84,7 @@ public class RecipeModel {
 		String no = model.getRequest().getParameter("no");
 		RecipeVO vo = RecipeDAO.recipeDetailData(Integer.parseInt(no));
 		String in = new String();
-		String[] info = new String[3];
+		String complete = new String();
 		String tag = vo.getTag();
 		
 		Map map = new HashMap();
@@ -92,9 +92,24 @@ public class RecipeModel {
 		List<String> sList = new ArrayList<String>();
 		String[] step_poster = new String[10];
 		try {
+			if(vo.getInfo()!=null){
 			in = vo.getInfo().substring(4, vo.getInfo().length()-2);
-			info = in.split("##");
+			}
+			String[] info = in.split("##");
+			if(info.length<3){
+				for(int i=0;i<info.length;i++){
+					info[i]="";
+				}
+			}
+			
+			if(vo.getComplete()!=null){
+				complete = vo.getComplete().substring(0,vo.getComplete().indexOf(","));
+				model.addAttribute("complete", complete);
+			}
+			if(vo.getIngre()!=null){
 			String ingre[] = vo.getIngre().split(",");
+			model.addAttribute("ingre", ingre);
+			}
 			String[] tagStr = tag.split(",");
 			String[] step = vo.getStep().split("##");
 			if(vo.getSTEP_POSTER()!=null){
@@ -106,10 +121,22 @@ public class RecipeModel {
 			}
 			map.put("tagStr", tagStr);
 			List<RecipeVO> list = RecipeDAO.relateRecipe(map);
+			for(RecipeVO rvo:list){
+				if(rvo.getSummary_in()==null){
+					continue;
+				}else{
+					int len=rvo.getSummary_in().length();
+					
+					if(len>14)
+					{
+						rvo.setSummary_in(rvo.getSummary_in().substring(0, 14)+"...");
+					}
+				}
+			}
 			model.addAttribute("tagStr", tagStr);
 			model.addAttribute("list", list);
 			model.addAttribute("info", info);
-			model.addAttribute("ingre", ingre);
+			
 			model.addAttribute("step", step);
 			model.addAttribute("step_poster", step_poster);
 		} catch (Exception e) {

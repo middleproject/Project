@@ -59,30 +59,18 @@
     font-size: 1rem;
     line-height: 1.5rem;
 }
-.main-img {
-    height: 400px;
-    overflow: hidden;
-    background: url(http://css3.zerois.net/images/pic1.jpg) top center no-repeat;
-    background-size: cover;
-}
-.text-center {
-    text-align: center;
-}
-.container {
-    max-width: 1400px;
-}
-.divclass{
-	width:2000px;	
-}
+
+
 </style>
+
 <meta charset="UTF-8">
 </head>
 <body>
 
 	<section class="ftco-section ftco-degree-bg">
-		<div class="container divclass">
+		<div class="container">
 			<div class="row">
-				<div class="col-lg-8 ftco-animate">
+				<div class="col-lg-9 ftco-animate">
 					<table class="table">
 						<div class="chat-bubble">
 							${vo.summary }
@@ -94,41 +82,48 @@
 						</p>
 				            <h2>${vo.summary_in }</h2>
 				            
-				    <table class="table">
+				    
 				    	<tr>
 				    		<td><img src="../recipe/multiple-users-silhouette.png"><br>${info[0] }</td>
 				    		<td><img src="../recipe/alarm-clock.png"><br>${info[1] }</td>
 						    <td><img src="../recipe/star.png"><br>${info[2] }</td> 
 					    <tr>
-					</table>
+					
 						</table>
 					<!-- 재료 테이블 -->
-					<table class="table">
+					
 						<h2 class="text-left">재 료! <font size="4pt;" color="gray"><EM>Ingredients</EM></font></h2>
-							
-							<div class="col-lg-8 ftco-animate">
-								<c:forEach var="ingredetail" items="${ingre }" varStatus="s">
-									<th>${ingredetail }</th>
-								</c:forEach>
-							</div>
 						
-					</table>
+							<div class="col-lg-9 ftco-animate">
+							<table class="table">
+									<c:forEach var="ingredetail" items="${ingre }" varStatus="s">
+										<th>${ingredetail }</th>
+									</c:forEach>
+								</table>
+							</div>
+					
+					
+					
 					<!-- 조리 순서 테이블 -->
 					<table class="table">
 						<h2 class="text-left">조리 순서! <font size="4pt;" color="gray"><EM>step</EM></font></h2>
 						<div class="row">
 							<div class="col-lg-8 ftco-animate">
-								<c:forEach var="step" items="${step }" varStatus="s">
+								<c:forEach var="poster" items="${step_poster }" varStatus="s">
 									<tr>
-										<td><h4 class="text-left">${step}</h4></td>
-										<c:if test="${step_poster[s.index]!=null }">
-										<td><img src="${step_poster[s.index] }" style="height:350px;width:350px;"></td>
-										</c:if>
+										<td><h4 class="text-left">${step[s.index]}</h4></td>
+											<td><img src="${poster }" style="height:350px;width:350px;"></td>
 									</tr>
 								</c:forEach>
 							</div>
 						</div>
 					</table>
+					<c:if test="${complete!=null }">
+						 <div class="text-center">
+						 <h2 class="text-center">완료! <font size="4pt;" color="gray"><EM>complete!</EM></font></h2>
+							<img src="${complete }" style="width:720px;height=400px;">
+						 </div>
+					</c:if>
  					
  					<!-- 태그부터 만든이 Tip-->
 					<div class="tag-widget post-tag-container mb-5 mt-5">
@@ -153,7 +148,7 @@
 					
 					
 				</div>
-				    <div class="col-lg-4 sidebar ftco-animate">
+				    <div class="col-lg-3 sidebar ftco-animate">
             <div class="sidebar-box">
               <form action="#" class="search-form">
                 <div class="form-group">

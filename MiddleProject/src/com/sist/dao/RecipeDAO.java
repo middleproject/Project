@@ -24,6 +24,7 @@ public class RecipeDAO {
 		session.close();
 		return list;
 	}
+	
 	public static List<RecipeVO> recipeListData(Map map){
 		List<RecipeVO> list = new ArrayList<RecipeVO>();
 		SqlSession session = ssf.openSession();
@@ -72,5 +73,5 @@ public class RecipeDAO {
 		   session.close();
 		   return list;
 	   }
-	  
+
 }
