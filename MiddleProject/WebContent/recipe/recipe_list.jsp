@@ -5,14 +5,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#search').click(function(){
+		var key = $('#key').val();
+		location.href="../recipe/recipe_list.do?key="+key;
+	});
+});
+</script>
 <meta charset="UTF-8">
 </head>
 <body>
 	 <section class="ftco-section ftco-degree-bg">
       <div class="container">
+     	<div>
+			<c:if test="${key!=null && key.trim()!='' }">
+					<h2 class="text-center">'${key }' 검색 결과 입니다</h2><br>
+				</c:if>
+				</div>
         <div class="row">
           <div class="col-lg-8 ftco-animate">
 			<div class="row">
+				
 				<c:forEach var="vo" items="${list }">
 					<div class="col-md-12 d-flex ftco-animate">
 			            <div class="blog-entry align-self-stretch d-md-flex">
@@ -38,8 +53,8 @@
             <div class="sidebar-box">
               <form action="#" class="search-form">
                 <div class="form-group">
-                  <span class="icon ion-ios-search"></span>
-                  <input type="text" class="form-control" placeholder="Search...">
+                  <span class="icon ion-ios-search" id="search"></span>
+                  <input type="text" class="form-control" placeholder="Search..." id="key">
                 </div>
               </form>
             </div>
@@ -73,18 +88,18 @@
             <div class="sidebar-box ftco-animate">
               <h3 class="heading">Tag Cloud</h3>
               <div class="tagcloud">
-                <a href="#" class="tag-cloud-link">고기</a>
-                <a href="#" class="tag-cloud-link">곡류</a>
-                <a href="#" class="tag-cloud-link">과일</a>
-                <a href="#" class="tag-cloud-link">가공식품</a>
-                <a href="#" class="tag-cloud-link">채소</a>
-                <a href="#" class="tag-cloud-link">해산물</a>
-                <a href="#" class="tag-cloud-link">1인분</a>
+                <a href="../recipe/recipe_list.do?&tag=고기" class="tag-cloud-link">고기</a>
+                <a href="../recipe/recipe_list.do?&tag=혼밥" class="tag-cloud-link">혼밥</a>
+                <a href="../recipe/recipe_list.do?&tag=간단" class="tag-cloud-link">간단</a>
+                <a href="../recipe/recipe_list.do?&tag=라면" class="tag-cloud-link">라면</a>
+                <a href="../recipe/recipe_list.do?&tag=안주" class="tag-cloud-link">안주</a>
+                <a href="../recipe/recipe_list.do?&tag=마라" class="tag-cloud-link">마라</a>
+                <a href="../recipe/recipe_list.do?&tag=에어프라이" class="tag-cloud-link">에어프라이</a>
               </div>
             </div>
 
             <div class="sidebar-box ftco-animate">
-              <h3 class="heading">Paragraph</h3>
+              <h3 class="heading">최근 인기 쉐프?</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
             </div>
           </div>
@@ -103,9 +118,9 @@
                 </c:if>
                 
                 <c:forEach var="i" begin="${startpage}" end="${endpage }" step="1">
-	                	<li class=${i==curpage?"active":"" }><a href="../recipe/recipe_list.do?page=${i}">${i }</a></li>       
+	                	<li class=${i==curpage?"active":"" }><a href="../recipe/recipe_list.do?page=${i}&key=${key}&${tag}&${ingre}">${i }</a></li>       
                 </c:forEach>
- 
+			<%--  &key=${key}&${tag}&${ingre} --%>
                 <c:if test="${endpage<allpage }">
                 	<li><a href="../recipe/recipe_list.do?page=${endpage+1 }">&gt;</a></li>
                 </c:if>

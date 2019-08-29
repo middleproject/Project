@@ -42,25 +42,8 @@
 	<select id="detailData" parameterType="int" resultType="RecipeVO">
 		select * from recipe where no=#{no}
 	</select>	
-	<!-- hot Recipe 
-		private int no;
-		private String poster;
-		private String summary_in;
-		private String info;
-		private String step;
-		private String STEP_POSTER;
-		private String summary;
-		private String complete;
-		private String regdate;
-		private String tag;
-		private String tip;
-		private int hit;
-		private String ingre;
-		private String made;
-		private String image;
-	-->
 	<select id="HotRecipe" parameterType="int" resultType="RecipeVO">
-		select no,poster,summary_in,info,step,STEP_POSTER,summary,complete,regdate,tag,tip,hit,ingre,made,image,num
+		select no,poster,summary_in,info,step,STEP_POSTER,summary,complete,TO_CHAR(regdate,'YYYY-MM-DD')as regdate,tag,tip,hit,ingre,made,image,num
 		from (select no,poster,summary_in,info,step,STEP_POSTER,summary,complete,regdate,tag,tip,hit,ingre,made,image,rownum as num
 		from (select no,poster,summary_in,info,step,STEP_POSTER,summary,complete,regdate,tag,tip,hit,ingre,made,image
 		from recipe order by hit desc))
@@ -80,4 +63,36 @@
 		</where>)
 		where num &lt;4
 	</select>
+	<update id="hitUpdate" parameterType="int">
+		update recipe set hit = hit+1 where no = #{no} 
+	</update>
+	
+  	 <select id="selectIngreDetail" resultType="IngredetailVO" parameterType="String">
+		select no,mno,ingredetailname,unit,price,rownum 
+		from (select no,mno,ingredetailname,unit,price 
+		from ingredetail where ingredetailname LIKE '%'||#{ingre}||'%' 
+		order by ingredetailname desc)
+		where rownum &lt;4
+	</select>   
+	<select id="recipeSearch" resultType="RecipeVO" parameterType="java.util.Map">
+		select no,poster,summary_in,info,step,STEP_POSTER,summary,complete,TO_CHAR(regdate,'YYYY-MM-DD')as regdate,tag,tip,hit,ingre,made,image,num
+		from (select no,poster,summary_in,info,step,STEP_POSTER,summary,complete,regdate,tag,tip,hit,ingre,made,image,rownum as num
+		from (select no,poster,summary_in,info,step,STEP_POSTER,summary,complete,regdate,tag,tip,hit,ingre,made,image
+		from recipe 
+		<where>
+			<if test="key!=null and key!=''">
+				and summary LIKE '%'||#{key}||'%'
+				or summary_in LIKE '%'||#{key}||'%'
+			</if>
+			<if test="tag!=null and tag!=''">
+				and tag LIKE '%'||#{tag}||'%'
+			</if>
+			<if test="ingre!=null and ingre!=''">
+				and ingre LIKE '%'||#{ingre}||'%'
+			</if>
+		</where>
+		order by regdate desc))
+		where num between #{start} and #{end}
+	</select>
+	
 </mapper>

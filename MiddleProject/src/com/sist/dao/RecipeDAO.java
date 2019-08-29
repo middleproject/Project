@@ -3,6 +3,7 @@ import java.util.*;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.sist.vo.IngredetailVO;
 import com.sist.vo.RecipeVO;
 
 public class RecipeDAO {
@@ -55,7 +56,9 @@ public class RecipeDAO {
 	   //Detail
 	   public static RecipeVO recipeDetailData(int no){
 		   RecipeVO vo = new RecipeVO();
-		   SqlSession session = ssf.openSession();
+		   SqlSession session = ssf.openSession(true);
+		   session.update("hitUpdate",no);
+		   
 		   vo = session.selectOne("detailData",no);
 		   session.close();
 		   return vo;
@@ -67,10 +70,42 @@ public class RecipeDAO {
 		   session.close();
 		   return list;
 	   }
+	   //연관된 레시피
 	   public static List<RecipeVO> relateRecipe(Map map){
 		   SqlSession session = ssf.openSession();
 		   List<RecipeVO> list = session.selectList("tagselect",map);
 		   session.close();
+		   return list;
+	   }
+	   
+	   //마트 가격
+	   public static List<IngredetailVO> IngrePrice(String ingre){
+		   List<IngredetailVO> list = new ArrayList<IngredetailVO>();
+		   SqlSession session = null;
+		   try {
+			   session= ssf.openSession();
+				    list = session.selectList("selectIngreDetail",ingre.trim());
+			   System.out.println("검색재료:"+ingre);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally{
+				if(session!=null) session.close();
+			}
+		   return list;
+	   }
+	   //검색 어 서칭
+	   public static List<RecipeVO> recipeSearch(Map map){
+		   List<RecipeVO> list = new ArrayList<RecipeVO>();
+		   SqlSession session = null;
+		   try {
+			   session = ssf.openSession();
+			   list = session.selectList("recipeSearch",map);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally{
+				if(session!=null) session.close();
+			}
+		   
 		   return list;
 	   }
 

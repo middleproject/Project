@@ -4,6 +4,25 @@
 <!DOCTYPE html">
 <html>
 <head>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+var i=0;
+$(function(){
+	$('#value').click(function(){
+		if(i==0)
+		{
+			$('#popup').show();
+			i=1;
+		}
+		else
+		{
+			$('#popup').hide();
+			i=0;
+		}
+		
+	})
+})
+</script>
 <style type="text/css">
 .table {
     FONT-WEIGHT: 500;
@@ -59,13 +78,30 @@
     font-size: 1rem;
     line-height: 1.5rem;
 }
-
+.box {
+  width: 40%;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.2);
+  padding: 35px;
+  border: 2px solid #fff;
+  border-radius: 20px/50px;
+  background-clip: padding-box;
+  text-align: center;
+}
+.table tbody tr td {
+    text-align: center !important;
+    vertical-align: middle;
+    padding: 10px 10px;
+    border: 1px solid transparent !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
 
 </style>
 
 <meta charset="UTF-8">
 </head>
 <body>
+
 
 	<section class="ftco-section ftco-degree-bg">
 		<div class="container">
@@ -90,18 +126,96 @@
 					    <tr>
 					
 						</table>
-					<!-- 재료 테이블 -->
-					
-						<h2 class="text-left">재 료! <font size="4pt;" color="gray"><EM>Ingredients</EM></font></h2>
 						
-							<div class="col-lg-9 ftco-animate">
-							<table class="table">
-									<c:forEach var="ingredetail" items="${ingre }" varStatus="s">
-										<th>${ingredetail }</th>
-									</c:forEach>
+					<!-- 재료 테이블 -->
+							<!-- <div class="col-lg-9 ftco-animate">	 -->
+							<input type="button" id="value" value=가격비교 >
+					<div style=display:none id=popup>
+						<div class="col-lg-9 ftco-animate">	
+						<div class="container">
+							<div class="row">
+								<table class="table">
+									<tr>
+										 <td>
+									           <table class="table">
+									            <tr>
+									             <td class="text-center info">HomePlus</td>
+									           </tr>
+									           </table>
+									           <table class="table table-hover">
+									             
+									             <c:forEach var="ivo" items="${homelist }">
+									             	
+									             	<tr>
+									                <td >${ivo.ingredetailname } : ${ivo.price }원(${ivo.unit })</td>
+									               </tr>
+									               
+									             </c:forEach>
+									             
+									           </table>
+									         </td>
+									         <td>
+									           <table class="table">
+									            <tr>
+									             <td class="text-center info">E-Mart</td>
+									            </tr>
+									           </table>
+									           <table class="table table-hover">
+									             
+									             <c:forEach var="lvo" items="${lottelist }">
+									             	
+									             	<tr>
+									                <td >${lvo.ingredetailname } : ${lvo.price }원(${lvo.unit })</td>
+									               </tr>
+									               
+									             </c:forEach>
+									             
+									           </table>
+									         </td>
+									         <td>
+									           <table class="table">
+									            <tr>
+									             <td class="text-center info">Lotte-Mart</td>
+									            </tr>
+									           </table>
+									           <table class="table table-hover">
+									             
+									             <c:forEach var="evo" items="${emartlist }">
+									         
+									             	<tr>
+									                <td >${evo.ingredetailname } : ${evo.price }원(${evo.unit })</td>
+									               </tr>
+									               
+									             </c:forEach>
+									             
+									           </table>
+									         </td>
+									</tr>
 								</table>
 							</div>
-					
+						</div>
+					</div>
+					<!-- </div> -->
+						
+						<h2 class="text-left">재 료! <font size="4pt;" color="gray"><EM>Ingredients</EM></font></h2>
+							<table class="table">
+										  <tr>
+										  <c:forEach var="ingredetail" items="${ilist }" varStatus="s">
+										    <c:if test="${count/2<=s.index}">
+										    <th>${ingredetail }</th>
+										    </c:if>
+										    </c:forEach>
+										  </tr>	 
+										<tr>
+										  <c:forEach var="ingredetail" items="${ilist }" varStatus="s">
+										    <c:if test="${count/2>s.index }">
+										    <th>${ingredetail }</th>
+										    </c:if>
+										    </c:forEach>
+										  </tr>
+								</table>
+							</div>
+				
 					
 					
 					<!-- 조리 순서 테이블 -->
@@ -143,7 +257,6 @@
 							<h3>${vo.made }</h3>
 							<p>${vo.tip }</p>
 						</div>
-						
 					</div>
 					
 					
@@ -191,7 +304,7 @@
               <h3 class="heading">Tag Cloud</h3>
               <div class="tagcloud">
               <c:forEach var="tag" items="${tagStr }">
-                <a href="#" class="tag-cloud-link">${tag }</a>
+                <a href="../recipe/recipe_list.do?tag=${tag }" class="tag-cloud-link">${tag }</a>
                 </c:forEach>
               </div>
             </div>
