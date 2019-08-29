@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html">
 <html>
 <head>
@@ -106,7 +107,7 @@ $(function(){
 	<section class="ftco-section ftco-degree-bg">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-9 ftco-animate">
+				<div class="col-lg-8 ftco-animate">
 					<table class="table">
 						<div class="chat-bubble">
 							${vo.summary }
@@ -131,12 +132,12 @@ $(function(){
 							<!-- <div class="col-lg-9 ftco-animate">	 -->
 							<input type="button" id="value" value=가격비교 >
 					<div style=display:none id=popup>
-						<div class="col-lg-9 ftco-animate">	
-						<div class="container">
-							<div class="row">
+						<div class="col-lg-8 ftco-animate">	
+						
+							
 								<table class="table">
 									<tr>
-										 <td>
+										 <td class="text-left">
 									           <table class="table">
 									            <tr>
 									             <td class="text-center info">HomePlus</td>
@@ -194,8 +195,8 @@ $(function(){
 								</table>
 							</div>
 						</div>
-					</div>
-				</div> 
+					
+				
 						
 						<h2 class="text-left">재 료! <font size="4pt;" color="gray"><EM>Ingredients</EM></font></h2>
 							<table class="table">
@@ -239,12 +240,12 @@ $(function(){
 						 </div>
 					</c:if>
  					
- 					<!-- 태그부터 만든이 Tip-->
+ 				
 					<div class="tag-widget post-tag-container mb-5 mt-5">
 						<div class="tagcloud">
-							<c:forEach var="tag" items="${tagStr }">
-							<a href="#" class="tag-cloud-link">${tag }</a> 
-							</c:forEach>
+						<c:forEach var="tag" items="${tagStr }">
+			                <a href="../recipe/recipe_list.do?tag=${fn:substring(tag,1,fn:length(tag)) }" class="tag-cloud-link">${tag }</a>
+			                </c:forEach>
 						</div>
 					</div>
 
@@ -261,7 +262,7 @@ $(function(){
 					
 					
 				</div>
-				    <div class="col-lg-3 sidebar ftco-animate">
+				    <div class="col-lg-4 sidebar ftco-animate">
             <div class="sidebar-box">
               <form action="#" class="search-form">
                 <div class="form-group">
@@ -303,9 +304,13 @@ $(function(){
             <div class="sidebar-box ftco-animate">
               <h3 class="heading">Tag Cloud</h3>
               <div class="tagcloud">
-              <c:forEach var="tag" items="${tagStr }">
-                <a href="../recipe/recipe_list.do?tag=${tag }" class="tag-cloud-link">${tag }</a>
-                </c:forEach>
+              		<a href="../recipe/recipe_list.do?&tag=고기" class="tag-cloud-link">고기</a>
+	                <a href="../recipe/recipe_list.do?&tag=혼밥" class="tag-cloud-link">혼밥</a>
+	                <a href="../recipe/recipe_list.do?&tag=간단" class="tag-cloud-link">간단</a>
+	                <a href="../recipe/recipe_list.do?&tag=라면" class="tag-cloud-link">라면</a>
+	                <a href="../recipe/recipe_list.do?&tag=안주" class="tag-cloud-link">안주</a>
+	                <a href="../recipe/recipe_list.do?&tag=마라" class="tag-cloud-link">마라</a>
+	                <a href="../recipe/recipe_list.do?&tag=에어프라이" class="tag-cloud-link">에어프라이</a>
               </div>
             </div>
 

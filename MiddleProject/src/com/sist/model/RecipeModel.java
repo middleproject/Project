@@ -178,11 +178,12 @@ public class RecipeModel {
 				if(rvo.getSummary_in()==null){
 					continue;
 				}else{
-					int len=rvo.getSummary_in().length();
+					int len=rvo.getSummary().length();
 					
-					if(len>14)
+					if(len>10)
 					{
-						rvo.setSummary_in(rvo.getSummary_in().substring(0, 14)+"...");
+						rvo.setSummary_in(rvo.getSummary().substring(0, 10)+"...");
+						list.add(rvo);
 					}
 				}
 			}

@@ -114,15 +114,15 @@ $(function(){
             <div class="block-27">
               <ul>
               	<c:if test="${curpage>BLOCK}">
-                	<li><a href="../recipe/recipe_list.do?page=${startpage-1 }">&lt;</a></li>
+                	<li><a href="../recipe/recipe_list.do?page=${startpage-1 }&key=${key}&tag=${tag}&ingre=${ingre}">&lt;</a></li>
                 </c:if>
                 
                 <c:forEach var="i" begin="${startpage}" end="${endpage }" step="1">
-	                	<li class=${i==curpage?"active":"" }><a href="../recipe/recipe_list.do?page=${i}&key=${key}&${tag}&${ingre}">${i }</a></li>       
+	                	<li class=${i==curpage?"active":"" }><a href="../recipe/recipe_list.do?page=${i}&key=${key}&tag=${tag}&ingre=${ingre}">${i }</a></li>       
                 </c:forEach>
 			<%--  &key=${key}&${tag}&${ingre} --%>
                 <c:if test="${endpage<allpage }">
-                	<li><a href="../recipe/recipe_list.do?page=${endpage+1 }">&gt;</a></li>
+                	<li><a href="../recipe/recipe_list.do?page=${endpage+1 }&key=${key}&tag=${tag}&ingre=${ingre}">&gt;</a></li>
                 </c:if>
               </ul>
             </div>
