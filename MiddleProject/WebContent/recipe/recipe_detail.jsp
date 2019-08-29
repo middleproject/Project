@@ -22,6 +22,37 @@ $(function(){
 		}
 		
 	})
+	$('#following').click(function(){
+		var id = $('#following').attr("data-id");
+		var follow = $('div.desc > h3').text();
+		if(id==null){
+			alter("로그인 후 이용해 주세요");
+			return;
+		}
+		$.ajax({
+			type:'post',
+			url:'../recipe/follow_ok.do',
+			data:{id:id,follow:follow},
+			success:function(res)
+			{
+				alert("구독 되었습니다");
+			}
+		});
+	});
+	$('#follow').click(function(){
+		var id = $('#following').attr("data-id");
+		var follow = $('div.desc > h3').text();
+		$.ajax({
+			type:'post',
+			url:'../recipe/unfollow.do',
+			data:{id:id,follow:follow},
+			success:function(res)
+			{
+				alert("구독이 취소 되었습니다.");
+			}
+		});
+	});
+	
 })
 </script>
 <style type="text/css">
@@ -214,11 +245,7 @@ $(function(){
 										    </c:if>
 										    </c:forEach>
 										  </tr>
-								</table>
-							
-				
-					
-					
+								</table>		
 					<!-- 조리 순서 테이블 -->
 					<table class="table">
 						<h2 class="text-left">조리 순서! <font size="4pt;" color="gray"><EM>step</EM></font></h2>
@@ -248,14 +275,23 @@ $(function(){
 			                </c:forEach>
 						</div>
 					</div>
-
+					<!-- 팔로우 처리 -->
+					<c:if test="${folloCount==0 }">
+					<a href="#"><img alt="" src="following.png" id="following" data-id=${sessionScope.id } data-follow="${vo.made }"></a>
+					</c:if>
+					<c:if test="${folloCount!=0 }" >
+					<a href="#"><img alt="" src="follow.png" id="follow" data-id=${sessionScope.id } data-follow=${vo.made }></a>
+					</c:if>
+					
+					<a href="#"><img alt="" src="nojjim.png" class="text-right"></a>
+					
 					<div class="about-author d-flex p-4 bg-light">
 						<div class="bio align-self-md-center mr-4">
 							<img src="${vo.image }" style="height:200px;width:200px;" alt="Image placeholder"
 								class="img-fluid mb-4">
 						</div>
 						<div class="desc align-self-md-center">
-							<h3>${vo.made }</h3>
+							<h3>${vo.made}</h3>
 							<p>${vo.tip }</p>
 						</div>
 					</div>

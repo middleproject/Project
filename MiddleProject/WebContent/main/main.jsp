@@ -132,6 +132,7 @@
 		              	<a class="dropdown-item jua" href="#">마이페이지</a>
 		              	<a class="dropdown-item jua" href="#">회원수정</a>
 		              	<a class="dropdown-item jua" href="#">회원삭제</a>
+		              	<a class="dropdown-item jua" href="../recipe/follow.do">팔로우 레시피</a>
 		              </div>
 	            </li>
 	            </c:if>

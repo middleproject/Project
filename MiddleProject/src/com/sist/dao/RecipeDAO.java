@@ -3,6 +3,7 @@ import java.util.*;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.sist.vo.FollowVO;
 import com.sist.vo.IngredetailVO;
 import com.sist.vo.RecipeVO;
 
@@ -39,6 +40,16 @@ public class RecipeDAO {
 		   int total=0;
 		   SqlSession session=ssf.openSession();
 		   total=session.selectOne("RecipeTotalPage");
+		   // id=> 대소문자 구분 
+		   session.close();
+		   return total;
+	   }
+	
+	public static int RecipeSearchPage(Map map)
+	   {
+		   int total=0;
+		   SqlSession session=ssf.openSession();
+		   total=session.selectOne("recipeSearchTotal",map);
 		   // id=> 대소문자 구분 
 		   session.close();
 		   return total;
@@ -106,6 +117,73 @@ public class RecipeDAO {
 				if(session!=null) session.close();
 			}
 		   
+		   return list;
+	   }
+	   //팔로우 확인
+	   public static int followCount(FollowVO fvo){
+		   int total=0;
+		   SqlSession session =null;
+		   try {
+			   session=ssf.openSession();
+			   total = session.selectOne("followCount",fvo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally{
+				if(session!=null) session.close();
+			}
+		   return total;
+	   }
+	   //팔로우 추가
+	   public static void followInsert(FollowVO vo){
+		   FollowVO fvo = new FollowVO();
+		   SqlSession session =null;
+		   try {
+			   session=ssf.openSession(true);
+			   session.insert("followInsert",vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(session!=null) session.close();
+		}
+	   }
+	   // 팔로우 삭제
+	   public static void followDelete(FollowVO vo){
+		   FollowVO fvo = new FollowVO();
+		   SqlSession session =null;
+		   try {
+			   session=ssf.openSession(true);
+			   session.delete("followDelete",vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(session!=null) session.close();
+		}
+	   }
+	   //팔로우 찾기 
+	   public static List<String> followSearch(String id){
+		   List<String> list = new ArrayList<String>();
+		   SqlSession session = null;
+		   try {
+			   session=ssf.openSession();
+			   list = session.selectList("whofollow",id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(session!=null) session.close();
+		}
+		   return list;
+	   }
+	   public static List<RecipeVO> followSearchRecipe(Map map){
+		   List<RecipeVO> list = new ArrayList<RecipeVO>();
+		   SqlSession session = null;
+		   try {
+			   session=ssf.openSession();
+			   list = session.selectList("madeSearchRecipe",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(session!=null) session.close();
+		}
 		   return list;
 	   }
 

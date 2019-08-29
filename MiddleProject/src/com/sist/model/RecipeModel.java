@@ -8,10 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import javax.servlet.http.HttpSession;
+
 import com.sist.controller.Controller;
 import com.sist.controller.Model;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
+import com.sist.vo.FollowVO;
 import com.sist.vo.IngredetailVO;
 import com.sist.vo.RecipeVO;
 @Controller("recipeModel")
@@ -22,42 +25,51 @@ public class RecipeModel {
 		try {
 			model.getRequest().setCharacterEncoding("UTF-8");
 		} catch (Exception e) {}
+		
 		Map keymap = new HashMap();
 		String key = model.getRequest().getParameter("key");
 		String ingre = model.getRequest().getParameter("ingre");
 		String tag = model.getRequest().getParameter("tag");
-		if(key!=null) {
+		int ifcount = 0;
+		int total =0;
+		if(key!=null && key!="") {
 			keymap.put("key", key);
 		}else{
 			key="";
 			keymap.put("key", key);
+			ifcount++;
 		}
-		if(ingre!=null) {
+		if(ingre!=null && ingre!="") {
 			keymap.put("ingre", ingre);
 		}else{
 			ingre="";
 			keymap.put("ingre", ingre);
+			ifcount++;
 		}
-		if(tag!=null) {
+		if(tag!=null && tag!="") {
 			keymap.put("tag", tag);
 		}else{
 			tag="";
 			keymap.put("tag", tag);
+			ifcount++;
 		}
 		String page=model.getRequest().getParameter("page");
 		if(page==null){
 			page="1";
 		}
 		int curpage=Integer.parseInt(page);
-
+		
 		int rowSize=6;
 		int start=(curpage*rowSize)-(rowSize-1);
 		int end=curpage*rowSize;
 		
 		keymap.put("end", end);
 		keymap.put("start", start);
-		  
-		int total = RecipeDAO.RecipeTotalPage();
+		if(ifcount==3){
+			total=RecipeDAO.RecipeTotalPage();
+		}else{
+			total=RecipeDAO.RecipeSearchPage(keymap);
+		}
 		int count = RecipeDAO.RecipeCount();
 		count=count-((curpage*rowSize)-rowSize); 
 		
@@ -89,7 +101,6 @@ public class RecipeModel {
 				}
 			}
 		}
-		
 		model.addAttribute("key", key);
 		model.addAttribute("tag", tag);
 		model.addAttribute("ingre", ingre);
@@ -98,10 +109,8 @@ public class RecipeModel {
 		model.addAttribute("curpage", curpage);
 		model.addAttribute("allpage", allpage);
 		model.addAttribute("BLOCK", BLOCK);
-		
 		model.addAttribute("total", total);
 		model.addAttribute("count", count);
-		
 		model.addAttribute("hlist", hlist);
 		model.addAttribute("main_jsp", "../recipe/recipe_list.jsp");
 		return "../main/main.jsp";
@@ -117,6 +126,11 @@ public class RecipeModel {
 		List<IngredetailVO> emartList = new ArrayList<IngredetailVO>();
 		List<String> ilist = new ArrayList<String>(); // 인그리 디테일 넘길 값
 		List<RecipeVO> list = new ArrayList<RecipeVO>();
+		// 로그인 세션
+		int folloCount = 0;
+		HttpSession session = model.getRequest().getSession();
+		String id = (String)session.getAttribute("id");
+		System.out.println(id);
 		Map map = new HashMap();
 		String in = new String();
 		String complete = new String();
@@ -187,6 +201,15 @@ public class RecipeModel {
 					}
 				}
 			}
+			// 팔로우 확인
+			if(id!=null){
+				FollowVO fvo = new FollowVO();
+				fvo.setId(id);
+				fvo.setFollow(vo.getMade());
+				folloCount = RecipeDAO.followCount(fvo);
+				System.out.println(folloCount);
+			}
+			model.addAttribute("folloCount", folloCount);
 			model.addAttribute("count", ilist.size());
 			model.addAttribute("homelist", homeList);
 			model.addAttribute("lottelist", lotteList);
@@ -204,6 +227,52 @@ public class RecipeModel {
 		}
 		model.addAttribute("vo", vo);
 		model.addAttribute("main_jsp", "../recipe/recipe_detail.jsp");
+		return "../main/main.jsp";
+	}
+	@RequestMapping("recipe/follow_ok.do")
+	public String recipe_follow_ok(Model model){
+		try {
+			model.getRequest().setCharacterEncoding("UTF-8");
+		} catch (Exception e) {}
+		String id = model.getRequest().getParameter("id");
+		String follow = model.getRequest().getParameter("follow");
+		FollowVO vo = new FollowVO();
+		vo.setFollow(follow);
+		vo.setId(id);
+		RecipeDAO.followInsert(vo);
+		return "../recipe/follow_ok.jsp";
+	}
+	@RequestMapping("recipe/unfollow.do")
+	public String recipe_unfollow(Model model){
+		try {
+			model.getRequest().setCharacterEncoding("UTF-8");
+		} catch (Exception e) {}
+		String id = model.getRequest().getParameter("id");
+		String follow = model.getRequest().getParameter("follow");
+		FollowVO vo = new FollowVO();
+		vo.setFollow(follow);
+		vo.setId(id);
+		RecipeDAO.followDelete(vo);
+		return "../recipe/follow_ok.jsp";
+	}
+	@RequestMapping("recipe/follow.do")
+	public String recipe_follow(Model model){
+		try {
+			model.getRequest().setCharacterEncoding("UTF-8");
+		} catch (Exception e) {}
+		HttpSession session = model.getRequest().getSession();
+		String id =(String)session.getAttribute("id");
+		List<String> madeList =new ArrayList<String>();
+		List<RecipeVO> list = new ArrayList<RecipeVO>();
+		Map map =new HashMap();
+		//팔로워 찾기
+		madeList = RecipeDAO.followSearch(id);
+		for(String made:madeList){
+			map.put("made", made);
+		}
+		list = RecipeDAO.followSearchRecipe(map);
+		model.addAttribute("list", list);
+		model.addAttribute("main_jsp", "../recipe/follow.jsp");
 		return "../main/main.jsp";
 	}
 }

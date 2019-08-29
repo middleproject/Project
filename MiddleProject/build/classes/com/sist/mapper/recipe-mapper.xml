@@ -95,5 +95,51 @@
 		order by regdate desc))
 		where num between #{start} and #{end}
 	</select>
-	
+	<select id="recipeSearchTotal" resultType="int" parameterType="java.util.Map">
+		select CEIL(COUNT(*)/6.0)
+		from recipe
+		<where>
+			<if test="key!=null and key!=''">
+				and summary LIKE '%'||#{key}||'%'
+				or summary_in LIKE '%'||#{key}||'%'
+			</if>
+			<if test="tag!=null and tag!=''">
+				and tag LIKE '%'||#{tag}||'%'
+			</if>
+			<if test="ingre!=null and ingre!=''">
+				and ingre LIKE '%'||#{ingre}||'%'
+			</if>
+		</where>
+	</select>
+	<!-- 팔로우 확인 -->
+	<select id="followCount" resultType="int" parameterType="FollowVO">
+		select count(*) 
+		from following
+		where id=#{id} and follow = #{follow}
+	</select>
+	<!-- 팔로우 입력 -->
+	<insert id="followInsert" parameterType="FollowVO">
+		insert into following values(
+		 (select NVL(max(no)+1,1) from following),
+		 #{id},
+		 #{follow}
+		)
+	</insert>
+	<delete id="followDelete" parameterType="FollowVO">
+		delete from following where id=#{id} and follow=#{follow}
+	</delete>
+	<select id="whofollow" parameterType="String" resultType="String">
+		select follow from following where id=#{id}
+	</select>
+	<!-- 만든 사람으로 검색 -->
+	<select id="madeSearchRecipe" resultType="RecipeVO" parameterType="java.util.Map">
+		select no,poster,summary,hit,TO_CHAR(regdate,'YYYY-MM-DD') as regdate,num,made 
+		from (select no,poster,summary,summary_in,hit,regdate,rownum as num,made 
+		from recipe <where>
+			<foreach collection="made" item="made" separator="or">
+				made LIKE '%'||#{made}||'%'
+			</foreach>
+		</where>
+		order by regdate desc)
+	</select>
 </mapper>
