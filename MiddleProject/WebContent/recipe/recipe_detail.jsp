@@ -195,7 +195,7 @@ $(function(){
 							</div>
 						</div>
 					</div>
-					<!-- </div> -->
+				</div> 
 						
 						<h2 class="text-left">재 료! <font size="4pt;" color="gray"><EM>Ingredients</EM></font></h2>
 							<table class="table">
@@ -214,7 +214,7 @@ $(function(){
 										    </c:forEach>
 										  </tr>
 								</table>
-							</div>
+							
 				
 					
 					
