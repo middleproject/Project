@@ -28,7 +28,7 @@ $(function(){
 		var no=$('#no').val();
 		$.ajax({
 			type:'post',
-			url:'board_delete_ok.do',
+			url:'qboard_delete_ok.do',
 			data:{no:no,pwd:pwd},
 			success:function(response)
 			{
@@ -41,7 +41,7 @@ $(function(){
 				}
 				else
 				{
-					location.href="../board/board_list.do";
+					location.href="../bQnA/qboard_list.do";
 				}
 			}
 		});

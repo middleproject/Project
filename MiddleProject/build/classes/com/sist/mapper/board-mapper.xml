@@ -2,16 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.board-mapper">
 
-<!-- ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ -->
+<!-- ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	parameterType이 BoardModel의 키값이어야함 	 -->
 	<select id="boardListData" resultType="BoardVO" parameterType="java.util.Map">
 <!-- 	SELECT boardno,subject,memberid,dbday,hit,num
 		FROM (SELECT boardno,subject,memberid,TO_CHAR(day,'YYYY-MM-DD') as dbday,hit,rownum as num
 		FROM(SELECT boardno,subject,memberid,day,hit
 		FROM board ORDER BY boardno DESC))
 		WHERE num BETWEEN #{start} AND #{end} -->
-		SELECT boardno,subject,memberid,dbday,hit,num
-		FROM (SELECT boardno,subject,memberid,TO_CHAR(day,'YYYY-MM-DD') as dbday,hit,rownum as num
-		FROM(SELECT boardno,subject,memberid,day,hit
+		SELECT boardno,subject,memberid,content,dbday,hit,num
+		FROM (SELECT boardno,subject,memberid,content,TO_CHAR(day,'YYYY-MM-DD') as dbday,hit,rownum as num
+		FROM(SELECT boardno,subject,memberid,content,day,hit
 		FROM board 
 		WHERE categoryno=#{categoryno}
 		ORDER BY boardno ASC))	
@@ -64,14 +65,16 @@
 	 	memberid=#{memberid}, subject=#{subject}, content=#{content}
 	 	WHERE boardno=#{boardno}
 	 </update>
-	<!-- 검색 -->
+	<!-- 검색-->
     <select id="boardListDataTEST" resultType="BoardVO" parameterType="java.util.Map">
-		SELECT boardno,subject,memberid,dbday,hit,num ,content
-		FROM (SELECT boardno,subject,memberid,TO_CHAR(day,'YYYY-MM-DD') as dbday,hit,content,rownum as num
-		FROM(SELECT boardno,subject,memberid,day,hit ,content
+		SELECT boardno,subject,memberid,dbday,hit,num ,content,categoryno
+		FROM (SELECT boardno,subject,memberid,TO_CHAR(day,'YYYY-MM-DD') as dbday,hit,content,categoryno,rownum as num
+		FROM(SELECT boardno,subject,memberid,day,hit ,content,categoryno
 		FROM board ORDER BY boardno DESC))
 		WHERE num BETWEEN #{start} AND #{end}
 		AND ${fs} LIKE '%'|| #{textsearch} ||'%'
+		AND categoryno = #{categoryno}
+		
 	</select>
     <!-- 댓글넣기 -->
       <insert id="replyInsert" parameterType="ReplyVO">
@@ -107,6 +110,7 @@
 		SELECT group_id, group_step, group_tab
 		FROM Reply
 		WHERE replyno=#{replyno}
+		
 	</select>
 	<!-- step증가 -->
 	 <update id="replyStepIncrement" parameterType="ReplyVO">
@@ -134,6 +138,11 @@
     	depth=depth+1
     	WHERE replyno=#{replyno} <!-- 답변이 올라가기 시작함 틀리면 replyno나 boardno로 고치기-->
     </update> <!-- depth(밑에달린 댓글수) 수정 -->
+    
+    
+    
+    
+    
     <update id="replyUpdate" parameterType="ReplyVO">
     	UPDATE Reply SET
     	msg=#{msg}
@@ -171,4 +180,69 @@
     	DELETE FROM Reply
     	WHERE boardno=#{boardno} 
     </delete>
+    
+    <!-- QnA게시판 -->
+
+    <select id="bQnAListData" resultType="BoardVO" parameterType="java.util.Map">
+		SELECT boardno,subject,memberid,content,dbday,hit,num,grouptab
+		FROM (SELECT boardno,subject,memberid,content,TO_CHAR(day,'YYYY-MM-DD') as dbday,hit,grouptab,rownum as num
+		FROM(SELECT boardno,subject,memberid,content,day,hit,grouptab
+		FROM board 
+		WHERE categoryno=#{categoryno}
+		ORDER BY groupid DESC, groupstep ASC))
+		WHERE num BETWEEN #{start} AND #{end}	
+	</select>
+	<update id="bQnAhit" parameterType="int">
+	 	UPDATE board SET
+	 	hit = hit+1
+	 	WHERE boardno=#{boardno}
+	 </update>
+    
+    <insert id="bQnAInsert" parameterType="BoardVO">
+			INSERT INTO board(boardno,categoryno,subject,memberid,content,pwd,groupid) VALUES(
+	    		board_no_seq.nextval,
+	    		#{categoryno},
+	    		#{subject}, 
+	    		#{memberid}, <!--#안에 값이 vo.getName() -->
+	    		#{content},
+	    		#{pwd},
+	    		(SELECT NVL(MAX(groupid)+1,1) FROM Board) 
+	    	)
+		</insert>
+		<!-- 답글읽기 -->
+		<select id="bQnARead" resultType="BoardVO"  parameterType="int">
+			SELECT groupid,groupstep,grouptab
+			FROM board
+			WHERE boardno=#{boardno}
+			
+		</select>
+   		<!-- step증가 -->
+	 <update id="bQnAPlus" parameterType="BoardVO">
+    	UPDATE Board SET
+    	groupstep=groupstep+1 
+    	WHERE groupid=#{groupid} AND groupstep>#{groupstep} 
+    	</update>
+		
+		<insert id="bQnATrueInsert"  parameterType="BoardVO">
+		INSERT INTO board(boardno,categoryno,memberid,subject,content,pwd,groupid,
+               groupstep,grouptab,root)
+               VALUES(
+               (SELECT NVL(MAX(boardno)+1,1) FROM board),
+               #{categoryno},
+               #{memberid},
+               #{subject},
+               #{content},
+               #{pwd},
+               #{groupid},
+               #{groupstep},
+               #{grouptab},
+               #{root}
+               
+   			)
+		</insert>
+    		<update id="bQnADepthplus" parameterType="int">
+		  	  UPDATE board SET
+		    	depth=depth+1
+		    	WHERE boardno=#{boardno} 
+   			 </update>
 </mapper>

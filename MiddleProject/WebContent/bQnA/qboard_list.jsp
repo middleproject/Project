@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 <style type="text/css">
 	.row {
 		margin: 0px auto;
@@ -14,23 +15,27 @@
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+var i=0;
 $(function(){
-	$('#findBtn').click(function(){
-		var textsearch=$('#textsearch').val();
-		if(textsearch.trim()=="")
-		{
-			$('#textsearch').focus();
-			return;
-		}
-		$('#frm').submit();
-	});
+			$('.dedede').click(function(){
+				var no=$(this).attr("value");
+				if(i==0)
+					{
+					  $('#u'+no).show();
+					  i=1;
+					} else {
+					 $('#u'+no).hide();
+					 i=0;
+					}
+				
+	         });
 });
 </script>
 </head>
 <body>
-	 <section class="ftco-section ftco-degree-bg">
+	<section class="ftco-section ftco-degree-bg">
 	<div class="container">
-		<h1 class="text-center">자유게시판</h1>
+		<h1 class="text-center">문의게시판</h1>
 		<div class="row">
 			<table class="table">
 				<tr>
@@ -38,7 +43,7 @@ $(function(){
 						${curpage } page / ${totalpage } pages
 					</td>
 					<td class="text-right">
-						<a href="../board/board_insert.do?boardDis=6" class="btn btn-primary">글쓰기</a><!-- ♥ -->
+						<a href="../bQnA/qboard_insert.do?boardDis=1" class="btn btn-primary">글쓰기</a>
 					</td>
 				</tr>
 			</table>
@@ -51,10 +56,22 @@ $(function(){
 					<th width="10%" class="text-center">조회수</th>
 				</tr>
 					<c:set var="count" value="${count }"/>
-						<c:forEach var="vo" items="${list }" varStatus="s">
-							<tr class="${s.index%2==0?'':'success' }">
-								<th width="10%" class="text-center">${vo.num }</th> 
-								<th width="45%" class="text-left"><a href="../board/board_detail.do?no=${vo.boardno }">${vo.subject }</a>
+						<c:forEach var="vo" items="${list }" varStatus="s">					
+							<tr>
+								<th width="10%" class="text-center">${count }</th> 
+								<th width="45%" class="text-left" >		
+									<c:if test="${vo.grouptab>0 }" >
+										<c:forEach begin="0" end="${vo.grouptab }">
+											&nbsp;&nbsp;
+										</c:forEach>
+										<img src="re.gif" >
+									</c:if>	
+									<c:if test="">
+									
+									</c:if>
+										<a href="#" class="dedede" value="${vo.boardno }">
+											${vo.subject }
+										</a>		
 									<c:if test="${today==vo.dbday }">
 										<sup><font color="red">new</font></sup>
 									</c:if>
@@ -63,27 +80,29 @@ $(function(){
 								<th width="20%" class="text-center">${vo.dbday }</th>
 								<th width="10%" class="text-center">${vo.hit }</th>
 							</tr>
-								<c:set var="count" value="${count-1 }"/>
+					
+								<input type="hidden" name="no" value="${vo.boardno }">
+								<!-- content창 보여줬다 사라짐 -->
+								<tr id="u${vo.boardno }" style="display:none">
+									<th><img src="re.png" width="20" height="20"></th>
+									<th class="text-left" colspan="3">		
+										${vo.content }
+									</th>
+									<th calspan="3">
+										<a href="../bQnA/qboard_update.do?no=${vo.boardno }" class="btn btn-sm btn-primary">수정</a>
+										<a href="../bQnA/qboard_delete.do?no=${vo.boardno }" class="btn btn-sm btn-danger">삭제</a>
+										<a href="../bQnA/qboard_reply.do?no=${vo.boardno }&boardDis=1" class="btn btn-sm btn-warning replyBtn" value="${vo.boardno }">답글달기</a>
+									</th>						
+								</tr>
+							<c:set var="count" value="${count-1 }"/>
 						</c:forEach>
 			</table>
 			
+	
 			<table class="table">
 				<tr>
-					<td class="text-left">
-					
-						<form action="../board/find.do" id="frm">
-						Search : 
-						<select name="fs" class="input-sm">
-							<option value="memberId">이름</option>
-							<option value="subject">제목</option>
-							<option value="content">내용</option>
-						</select>
-						<input type="text" name="textsearch" class="input-sm" size="15" id="textsearch">
-						<input type="button"  value="검색" class="btn btn-outline-warning"  id="findBtn">
-						</form>
-					
-					</td>
 					<!-- 페이지 넘어가는 부분 -->
+									
 				<td class="text-center">
 						<ul class="pagination">
 							<li><a href="../board/board_list.do?page=1">◁</a></li>
@@ -95,12 +114,9 @@ $(function(){
 							<li><a href="../board/board_list.do?page=${totalpage }">▷</a></li>
 						</ul>
 					</td>
-						</ul>
-				
 				</tr>
 			</table>
 		</div>
 	</div>
-	</section>
 </body>
 </html>

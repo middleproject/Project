@@ -40,7 +40,7 @@ $(function() {
 		
 		$.ajax({
 			type:'POST',
-			url:'../board/board_update_ok.do',
+			url:'../bQnA/qboard_update_ok.do',
 			data:{
 				boardno:no,
 				memberid:name,
@@ -56,7 +56,7 @@ $(function() {
 					$('#pwd').val("");
 					$('#pwd').focus();
 				} else {
-					location.href="../board/board_detail.do?no="+i;
+					location.href="../bQnA/qboard_list.do?no="+i;
 				}
 			}
 		});
@@ -69,7 +69,7 @@ $(function() {
 <div class="container">
 		<h2 class="text-center">수정하기</h2>
 		<div class="row">
-		<form method="post" action="board_update_ok.do"> 
+		<form method="post" action="qboard_update_ok.do"> 
 			<table class="table">
 				<tr>
 					<th class="text-right warning" width="20%">이름</th>

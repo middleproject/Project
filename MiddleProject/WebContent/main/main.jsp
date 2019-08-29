@@ -112,8 +112,8 @@
               <div class="dropdown-menu jua" aria-labelledby="dropdown04">
               	<a class="dropdown-item jua" href="#">자랑 게시판</a>
               	<a class="dropdown-item jua" href="#">후기 게시판</a>
-                <a class="dropdown-item jua" href="#">문의 게시판</a>
-                <a class="dropdown-item jua" href="#">자유게시판</a>
+                <a class="dropdown-item jua" href="../bQnA/qboard_list.do">문의 게시판</a>
+                <a class="dropdown-item jua" href="../board/board_list.do">자유게시판</a>
                 <a class="dropdown-item jua" href="#">자료실</a>
               </div>
             </li>

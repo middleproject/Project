@@ -27,20 +27,7 @@ public class BoardDAO {
 					ex.printStackTrace();
 				}
 	   }
-			// ★
-			public static List<BoardVO> qboardListData(Map map) {
-				   List<BoardVO> list = new ArrayList<BoardVO>();
-				   
-				   // db연결
-				   SqlSession session = ssf.openSession();
-				   list = session.selectList("qboardListData",map);
-			
-				   // db해제
-				   session.close();
-				   return list;
-			   }	
-		
-		//--------------------------------------------------------------------
+		  
 	   // 게시판리스트
 	   public static List<BoardVO> boardListData(Map map) {
 		   List<BoardVO> list = new ArrayList<BoardVO>();
@@ -134,6 +121,8 @@ public class BoardDAO {
 		   session.close();
 		   return list;
 	   }
+	   
+	   
 	 //댓글올리기
 	   public static void replyInsert(ReplyVO vo) {
 		   SqlSession session = ssf.openSession(true);
@@ -223,4 +212,66 @@ public class BoardDAO {
 		   session.close(); //db닫기
 		   return result;
 	   }
+	   
+	   //-------------------------------------------------------------------------------------
+	   //QnA게시판
+	   // 게시판리스트
+	   public static List<BoardVO> bQnAListData(Map map) {
+		   List<BoardVO> list = new ArrayList<BoardVO>();
+		   
+		   // db연결
+		   SqlSession session = ssf.openSession();
+		   list = session.selectList("bQnAListData",map);
+	
+		   // db해제
+		   session.close();
+		   return list;
+	   }
+	   //답글올리기
+	   public static void bQnAInsert(BoardVO vo) {
+		   SqlSession session = ssf.openSession(true);
+		   session.insert("bQnAInsert",vo); // (sql아이디명칭,vo) mapper의 sql문 실행함
+		   								//== vo값받는곳이 Model이라 모델로감
+		   session.close();
+	   } 
+	    
+	 //답글가지고오기
+	   public static List<BoardDAO> bQnARead(int cno) {
+		   SqlSession session = ssf.openSession(true);
+		   List<BoardDAO> list = session.selectList("bQnARead",cno); //목록받을때 selectList
+		   System.out.println("list는 뭡니까"+list);
+		   session.close();
+		   return list;
+	   }
+	
+	   public static void bQnATrueInsert(int root, BoardVO vo) { //root = 아까 받았던 pno다 
+		   SqlSession session = ssf.openSession(true); 
+		   
+		   // 4개 호출하기
+		   // 1 정보
+		   BoardVO pvo = session.selectOne("bQnARead",root); //mapper 106
+		   System.out.println(pvo.getGroupid());
+		   // 2 step증가
+		   session.update("bQnAPlus",pvo); //mapper 112
+		   // 3 insert 값채우기
+		   vo.setGroupid(pvo.getGroupid()); //pvo = 상위권
+		   vo.setGroupstep(pvo.getGroupstep()+1); 
+		   vo.setGrouptab(pvo.getGrouptab()+1);
+		   vo.setRoot(root);
+		   session.insert("bQnATrueInsert",vo); //mapper 118
+		   // 4 depth 증가
+		   session.update("bQnADepthplus",root); //mapper 131
+		   
+
+		   System.out.println(pvo);
+		   System.out.println(vo);
+		   System.out.println(root);
+		   
+		   //트랜잭션 : 일괄처리!!! 
+		   session.commit(); 
+		   session.close();
+	   
+	   }
+	   
+
 }
