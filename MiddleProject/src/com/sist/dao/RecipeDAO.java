@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import com.sist.vo.FollowVO;
 import com.sist.vo.IngredetailVO;
 import com.sist.vo.RecipeVO;
+import com.sist.vo.WishVO;
 
 public class RecipeDAO {
 	private static SqlSessionFactory ssf;
@@ -185,6 +186,40 @@ public class RecipeDAO {
 			if(session!=null) session.close();
 		}
 		   return list;
+	   }
+	   // 레시피 wish 확인
+	   public static int wishCount(int no){
+		   int total=0;
+		   SqlSession session = null;
+		   try {
+			   session=ssf.openSession();
+			   total = session.selectOne("wishCount",no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			if(session!=null) session.close();
+		}
+		   return total;
+	   }
+	   // wish 추가
+	   public static void wishInsert(WishVO vo){
+		   SqlSession session = null;
+		   try {
+			   session=ssf.openSession(true);
+			   session.selectOne("wishInsert",vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	   }
+	   // wish 삭제
+	   public static void wishDelete(WishVO vo){
+		   SqlSession session = null;
+		   try {
+			   session=ssf.openSession(true);
+			   session.selectOne("wishDelete",vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	   }
 
 }

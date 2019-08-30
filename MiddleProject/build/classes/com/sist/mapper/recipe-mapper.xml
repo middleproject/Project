@@ -142,4 +142,20 @@
 		</where>
 		order by regdate desc)
 	</select>
+	<!-- 레시피 wish 확인 -->
+	<select id="wishCount" parameterType="int" resultType="int">
+		select count(*) from wish where recipeno = #{no}
+	</select>
+	<!-- wish 목록 추가 -->
+	<insert id="wishInsert" parameterType="WishVO">
+		insert into wish values(
+		(select NVL(max(no)+1,1) from wish),
+		#{recipeno},
+		#{id}
+		)
+	</insert>
+	<!-- 찜 딜리트 -->
+	<delete id="wishDelete" parameterType="WishVO">
+		delete from wish where recipeno = #{recipeno} and id=#{id}
+	</delete>
 </mapper>

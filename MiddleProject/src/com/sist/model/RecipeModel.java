@@ -17,6 +17,7 @@ import com.sist.dao.*;
 import com.sist.vo.FollowVO;
 import com.sist.vo.IngredetailVO;
 import com.sist.vo.RecipeVO;
+import com.sist.vo.WishVO;
 @Controller("recipeModel")
 public class RecipeModel {
 
@@ -121,6 +122,9 @@ public class RecipeModel {
 	public static String recipe_detail(Model model){
 		String no = model.getRequest().getParameter("no");
 		RecipeVO vo = RecipeDAO.recipeDetailData(Integer.parseInt(no));
+		//wish 확인
+		int wishCount = RecipeDAO.wishCount(Integer.parseInt(no));
+		
 		List<IngredetailVO> homeList = new ArrayList<IngredetailVO>(); // 인그리 디테일 받을 값
 		List<IngredetailVO> lotteList = new ArrayList<IngredetailVO>();
 		List<IngredetailVO> emartList = new ArrayList<IngredetailVO>();
@@ -209,6 +213,7 @@ public class RecipeModel {
 				folloCount = RecipeDAO.followCount(fvo);
 				System.out.println(folloCount);
 			}
+			model.addAttribute("wishCount", wishCount);
 			model.addAttribute("folloCount", folloCount);
 			model.addAttribute("count", ilist.size());
 			model.addAttribute("homelist", homeList);
@@ -239,6 +244,8 @@ public class RecipeModel {
 		FollowVO vo = new FollowVO();
 		vo.setFollow(follow);
 		vo.setId(id);
+		System.out.println("팔로우ID:"+id);
+		System.out.println("팔로우된:"+follow);
 		RecipeDAO.followInsert(vo);
 		return "../recipe/follow_ok.jsp";
 	}
@@ -248,12 +255,14 @@ public class RecipeModel {
 			model.getRequest().setCharacterEncoding("UTF-8");
 		} catch (Exception e) {}
 		String id = model.getRequest().getParameter("id");
+		System.out.println("아이디취소"+id);
 		String follow = model.getRequest().getParameter("follow");
+		System.out.println("팔로우취소"+follow);
 		FollowVO vo = new FollowVO();
 		vo.setFollow(follow);
 		vo.setId(id);
 		RecipeDAO.followDelete(vo);
-		return "../recipe/follow_ok.jsp";
+		return "../recipe/unfollow_ok.jsp";
 	}
 	@RequestMapping("recipe/follow.do")
 	public String recipe_follow(Model model){
@@ -274,5 +283,26 @@ public class RecipeModel {
 		model.addAttribute("list", list);
 		model.addAttribute("main_jsp", "../recipe/follow.jsp");
 		return "../main/main.jsp";
+	}
+
+	@RequestMapping("recipe/wish.do")
+	public String recipe_wish(Model model){
+		String recipeno = model.getRequest().getParameter("recipeno");
+		String id = model.getRequest().getParameter("id");
+		WishVO vo =new WishVO();
+		vo.setId(id);
+		vo.setRecipeno(Integer.parseInt(recipeno));
+		RecipeDAO.wishInsert(vo);
+		return "../recipe/jjim_ok.jsp";
+	}
+	@RequestMapping("recipe/unwish.do")
+	public String recipe_unwish(Model model){
+		String recipeno = model.getRequest().getParameter("recipeno");
+		String id = model.getRequest().getParameter("id");
+		WishVO vo =new WishVO();
+		vo.setId(id);
+		vo.setRecipeno(Integer.parseInt(recipeno));
+		RecipeDAO.wishDelete(vo);
+		return "../recipe/jjim_ok.jsp";
 	}
 }

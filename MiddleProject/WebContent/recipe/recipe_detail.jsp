@@ -20,13 +20,12 @@ $(function(){
 			$('#popup').hide();
 			i=0;
 		}
-		
 	})
 	$('#following').click(function(){
 		var id = $('#following').attr("data-id");
 		var follow = $('div.desc > h3').text();
 		if(id==null){
-			alter("로그인 후 이용해 주세요");
+			alert("로그인 후 이용해주세요");
 			return;
 		}
 		$.ajax({
@@ -35,25 +34,62 @@ $(function(){
 			data:{id:id,follow:follow},
 			success:function(res)
 			{
-				alert("구독 되었습니다");
+				window.location.reload()
+				alert(follow+"님을 팔로우하였습니다.");
 			}
 		});
 	});
 	$('#follow').click(function(){
-		var id = $('#following').attr("data-id");
+		var id = $('#follow').attr("data-unid");
 		var follow = $('div.desc > h3').text();
+		if(id==null){
+			alert("로그인 후 이용해주세요");
+			return;
+		}
 		$.ajax({
 			type:'post',
 			url:'../recipe/unfollow.do',
 			data:{id:id,follow:follow},
 			success:function(res)
 			{
-				alert("구독이 취소 되었습니다.");
+				window.location.reload()
+				alert("팔로우가 취소 되었습니다.");
 			}
 		});
 	});
-	
-})
+	$('#nojjim').click(function(){
+		var id = $('#nojjim').attr("data-nojjim");
+		var recipeno = $('#number').attr("data-no");
+		if(id==null){
+			alert("로그인 후 이용해주세요");
+			return;
+		}
+		$.ajax({
+			type:'post',
+			url:'../recipe/wish.do',
+			data:{id:id,recipeno:recipeno},
+			success:function(res)
+			{
+				window.location.reload()
+				alert("찜 목록에 추가되었습니다.");
+			}
+		});
+	});
+	$('#jjim').click(function(){
+		var id = $('#jjim').attr("data-jjim");
+		var recipeno = $('#number').attr("data-no");
+		$.ajax({
+			type:'post',
+			url:'../recipe/unwish.do',
+			data:{id:id,recipeno:recipeno},
+			success:function(res)
+			{
+				window.location.reload()
+				alert("찜 목록에서 삭제되었습니다.");
+			}
+		});
+	});
+});
 </script>
 <style type="text/css">
 .table {
@@ -162,70 +198,7 @@ $(function(){
 					<!-- 재료 테이블 -->
 							<!-- <div class="col-lg-9 ftco-animate">	 -->
 							<input type="button" id="value" value=가격비교 >
-					<div style=display:none id=popup>
-						<div class="col-lg-8 ftco-animate">	
-						
-							
-								<table class="table">
-									<tr>
-										 <td class="text-left">
-									           <table class="table">
-									            <tr>
-									             <td class="text-center info">HomePlus</td>
-									           </tr>
-									           </table>
-									           <table class="table table-hover">
-									             
-									             <c:forEach var="ivo" items="${homelist }">
-									             	
-									             	<tr>
-									                <td >${ivo.ingredetailname } : ${ivo.price }원(${ivo.unit })</td>
-									               </tr>
-									               
-									             </c:forEach>
-									             
-									           </table>
-									         </td>
-									         <td>
-									           <table class="table">
-									            <tr>
-									             <td class="text-center info">E-Mart</td>
-									            </tr>
-									           </table>
-									           <table class="table table-hover">
-									             
-									             <c:forEach var="lvo" items="${lottelist }">
-									             	
-									             	<tr>
-									                <td >${lvo.ingredetailname } : ${lvo.price }원(${lvo.unit })</td>
-									               </tr>
-									               
-									             </c:forEach>
-									             
-									           </table>
-									         </td>
-									         <td>
-									           <table class="table">
-									            <tr>
-									             <td class="text-center info">Lotte-Mart</td>
-									            </tr>
-									           </table>
-									           <table class="table table-hover">
-									             
-									             <c:forEach var="evo" items="${emartlist }">
-									         
-									             	<tr>
-									                <td >${evo.ingredetailname } : ${evo.price }원(${evo.unit })</td>
-									               </tr>
-									               
-									             </c:forEach>
-									             
-									           </table>
-									         </td>
-									</tr>
-								</table>
-							</div>
-						</div>
+					
 					
 				
 						
@@ -277,13 +250,19 @@ $(function(){
 					</div>
 					<!-- 팔로우 처리 -->
 					<c:if test="${folloCount==0 }">
-					<a href="#"><img alt="" src="following.png" id="following" data-id=${sessionScope.id } data-follow="${vo.made }"></a>
+						<a href="#"><img alt="" src="following.png" id="following" data-id=${sessionScope.id }></a>
 					</c:if>
 					<c:if test="${folloCount!=0 }" >
-					<a href="#"><img alt="" src="follow.png" id="follow" data-id=${sessionScope.id } data-follow=${vo.made }></a>
+						<a href="#"><img alt="" src="follow.png" id="follow" data-unid=${sessionScope.id }></a>
 					</c:if>
-					
-					<a href="#"><img alt="" src="nojjim.png" class="text-right"></a>
+					<!-- wish 처리 -->
+					<c:if test="${wishCount==0 }">
+						<a href="#"><img alt="" src="nojjim.png" id="nojjim" data-nojjim=${sessionScope.id }></a>
+					</c:if>
+					<c:if test="${wishCount!=0 }">
+						<a href="#"><img alt="" src="jjim.png" id="jjim" data-jjim=${sessionScope.id }></a>
+					</c:if>
+					<input type="hidden" id="number" data-no=${vo.no }>
 					
 					<div class="about-author d-flex p-4 bg-light">
 						<div class="bio align-self-md-center mr-4">
@@ -358,5 +337,69 @@ $(function(){
 			
 		</div>
 	</section>
+	<div style=display:none id=popup>
+						<div class="col-lg-8 ftco-animate">	
+						
+							
+								<table class="table">
+									<tr>
+										 <td class="text-left">
+									           <table class="table">
+									            <tr>
+									             <td class="text-center info">HomePlus</td>
+									           </tr>
+									           </table>
+									           <table class="table table-hover">
+									             
+									             <c:forEach var="ivo" items="${homelist }">
+									             	
+									             	<tr>
+									                <td >${ivo.ingredetailname } : ${ivo.price }원(${ivo.unit })</td>
+									               </tr>
+									               
+									             </c:forEach>
+									             
+									           </table>
+									         </td>
+									         <td>
+									           <table class="table">
+									            <tr>
+									             <td class="text-center info">E-Mart</td>
+									            </tr>
+									           </table>
+									           <table class="table table-hover">
+									             
+									             <c:forEach var="lvo" items="${lottelist }">
+									             	
+									             	<tr>
+									                <td >${lvo.ingredetailname } : ${lvo.price }원(${lvo.unit })</td>
+									               </tr>
+									               
+									             </c:forEach>
+									             
+									           </table>
+									         </td>
+									         <td>
+									           <table class="table">
+									            <tr>
+									             <td class="text-center info">Lotte-Mart</td>
+									            </tr>
+									           </table>
+									           <table class="table table-hover">
+									             
+									             <c:forEach var="evo" items="${emartlist }">
+									         
+									             	<tr>
+									                <td >${evo.ingredetailname } : ${evo.price }원(${evo.unit })</td>
+									               </tr>
+									               
+									             </c:forEach>
+									             
+									           </table>
+									         </td>
+									</tr>
+								</table>
+							</div>
+						</div>
 </body>
 </html>

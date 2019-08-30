@@ -38,6 +38,21 @@ public class MemberDAO {
 			return vo;
 
 		}
+	   // 장바구니 갯수
+	   public static int MywishCount(String id){
+		   int total =0;
+		   SqlSession session =null;
+		   try {
+			   session = ssf.openSession();
+			   total = session.selectOne("MywishCount",id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			if (session != null)session.close();
+		}
+		   return total;
+	   }
+	   
 	   
 	   
 }
