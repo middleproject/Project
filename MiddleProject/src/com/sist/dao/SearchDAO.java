@@ -3,6 +3,7 @@ package com.sist.dao;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -11,6 +12,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.sist.vo.IngreVO;
 import com.sist.vo.IngredetailVO;
+import com.sist.vo.RecipeVO;
+
 
 
 public class SearchDAO {
@@ -78,5 +81,25 @@ public class SearchDAO {
 			}
 			return list;
 		}
+	   public static List<RecipeVO> searchIngreData(Map map)
+	   {
+		  
+		   List<RecipeVO> list=new ArrayList<RecipeVO>();
+		   SqlSession session=null;
+		   try
+		   {
+			   session=ssf.openSession();
+			   list=session.selectList("searchIngreData",map);
+		   }catch(Exception ex)
+		   {
+			   ex.printStackTrace();
+		   }
+		   finally
+		   {
+			   if(session!=null)
+				   session.close();
+		   }
+		   return list;
+	   }
 }
 

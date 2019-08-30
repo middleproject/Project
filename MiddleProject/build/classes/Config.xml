@@ -5,7 +5,7 @@
 	<properties resource="db.properties"/>
 	<typeAliases>
 		<typeAlias type="com.sist.vo.RecipeVO" alias="RecipeVO"/>
-		<typeAlias type="com.sist.vo.MemberVO" alias="MemberVO"/>
+		
 		<!-- board -->
 		<typeAlias type="com.sist.vo.BoardCategoryVO" alias="BoardCategoryVO"/>
 		<typeAlias type="com.sist.vo.BoardVO" alias="BoardVO"/>

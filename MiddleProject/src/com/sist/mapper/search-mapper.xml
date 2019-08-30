@@ -17,4 +17,9 @@
     FROM ingredetail
     WHERE ino=#{ino} and mno=1
   </select> 
+  <select id="searchIngreData" resultType="RecipeVO" parameterType="hashmap">
+    SELECT summary,made,poster
+    FROM recipe
+    WHERE ingre like '%'||#{ingre}||'%' AND <![CDATA[rownum<=12]]>
+  </select>
 </mapper>

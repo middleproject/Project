@@ -1,6 +1,10 @@
 package com.sist.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 import com.sist.controller.Controller;
 import com.sist.controller.Model;
@@ -9,6 +13,8 @@ import com.sist.controller.RequestMapping;
 import com.sist.dao.SearchDAO;
 import com.sist.vo.IngreVO;
 import com.sist.vo.IngredetailVO;
+import com.sist.vo.RecipeVO;
+
 
 
 @Controller("searchModel")
@@ -30,13 +36,26 @@ public class SearchModel {
 	   {
 		   String ino=model.getRequest().getParameter("ino");
 		   List<String> list=SearchDAO.IngredetailData(Integer.parseInt(ino));
-		   for(String s:list)
-		   {
-			   System.out.println(s);
-		   }
-		   
 		   model.addAttribute("list", list);
 		   return "searchlist.jsp";
+	   }
+	 @RequestMapping("search/searchingre.do")
+	   public String search_recipelist(Model model)
+	   {
+		 try{
+			 model.getRequest().setCharacterEncoding("UTF-8");
+		 }catch(Exception ex){}
+		 String ingre=model.getRequest().getParameter("ingre");
+		   Map map=new HashMap();
+		   map.put("ingre", ingre);
+		   
+		   List<RecipeVO> list=SearchDAO.searchIngreData(map);
+		   for(RecipeVO vo:list)
+		   {
+			   System.out.println(vo.getSummary());
+		   }
+		   model.addAttribute("list", list);
+		   return "searchingre.jsp";
 	   }
 
 }
