@@ -82,7 +82,7 @@
 						    </c:if>
 						    <c:if test="${sessionScope.id!=null }">
 						    <a href=""><span class="text" style="color:white;">로그아웃</span></a>
-					    
+					    	<span class="text" style="color:white;">　　　</span>
 						    <a href="../mypage/mypageMain.do"><span class="text" style="color:white;">마이페이지</span></a>
 						    
 						    </c:if>

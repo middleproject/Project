@@ -42,4 +42,18 @@
    	<select id="MywishCount" parameterType="String" resultType="int">
    		select count(*) from wish where id = #{id}
    	</select>
+   	
+   	<!-- 아이디 찾기 -->
+   <select id="memIdFind" parameterType="MemberVO" resultType="String">
+   	SELECT id
+   	FROM member
+   	WHERE email=#{email}
+   </select>
+   
+   <!-- 비밀번호 찾기 -->
+   <select id="memPwdFind" parameterType="MemberVO" resultType="String">
+   	SELECT pwd
+   	FROM member
+   	WHERE id=#{id} AND pwd=#{pwd}
+   </select>
 </mapper>

@@ -1,4 +1,6 @@
 package com.sist.vo;
+
+import java.util.*;
 /*
  * "ID" VARCHAR2(500 BYTE), 
 	"PWD" VARCHAR2(20 BYTE) CONSTRAINT "MEMBER_PWD_NN" NOT NULL ENABLE, 
@@ -9,10 +11,10 @@ package com.sist.vo;
 	"ADDR1" VARCHAR2(100 BYTE) CONSTRAINT "MEMBER_ADDR1_NN" NOT NULL ENABLE, 
 	"ADDR2" VARCHAR2(100 BYTE), 
 	"SEX" VARCHAR2(10 BYTE), 
-	"AGE" NUMBER CONSTRAINT "MEMBER_AGE_NN" NOT NULL ENABLE, 
 	"ADMIN" NUMBER DEFAULT 0, 
 	"PAY" NUMBER DEFAULT 0, 
  */
+
 public class MemberVO {
 	private String id;
 	private String pwd;
@@ -23,11 +25,17 @@ public class MemberVO {
 	private String addr1;	// zipcode
 	private String addr2;	// 상세주소
 	private String sex;	// 남자, 여자
-	private int age;
 	private int admin;	// 0: 일반유저, 1: 관리자, 2: 셰프
 	private int pay;
 	private String msg;	// NOID OK NOPWD
+	private Date birthday;
 	
+	public Date getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
 	public String getMsg() {
 		return msg;
 	}
@@ -87,12 +95,6 @@ public class MemberVO {
 	}
 	public void setSex(String sex) {
 		this.sex = sex;
-	}
-	public int getAge() {
-		return age;
-	}
-	public void setAge(int age) {
-		this.age = age;
 	}
 	public int getAdmin() {
 		return admin;

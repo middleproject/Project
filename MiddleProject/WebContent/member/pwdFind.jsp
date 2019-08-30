@@ -64,14 +64,14 @@
 				<br>
 
 				<div class="text-center">
-					<a href="signUp.jsp" class="txt2 hov1 validate-input m-b-10" > 회원가입 </a>
+					<a href="signUp.do" class="txt2 hov1 validate-input m-b-10" > 회원가입 </a>
 				</div>
 
 
 
 <!-- 아이디하고 이메일로 찾음 -->
 				<div class="text-center">
-					<a href="idFind.jsp" class="txt2 hov1 validate-input m-b-10"> 아이디 찾기 </a>
+					<a href="idFind.do" class="txt2 hov1 validate-input m-b-10"> 아이디 찾기 </a>
 				</div>
 			</form>
 

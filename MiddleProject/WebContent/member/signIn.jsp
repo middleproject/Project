@@ -35,33 +35,9 @@
 <link rel="stylesheet" type="text/css" href="css/util.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript">
-$(function() {
-	$('#logBtn').click(function() {
-		var id = $('#id').val();
-		var pwd = $('#id').val();
-		if (id.trim() == "") {
-			$('#id').focus();
-			return;
-		}
-		if (pwd.trim() == "") {
-			$('#pwd').focus();
-			return;
-		}
-		$('form').submit();
-<%-- 일반 태그는 아무것도 안 붙여도 됨 --%>
-	});
-});
-</script>
-
-
-
 
 </head>
 <body>
-
-
 	<div class="container-login100"
 		style="background-image: url('images/bg-01.jpg');">
 		<div class="wrap-login100 p-l-55 p-r-55 p-t-40 p-b-70">
@@ -87,21 +63,19 @@ $(function() {
 				<br>
 
 				<div class="text-center">
-					<a href="signUp.jsp" class="txt2 hov1 validate-input m-b-10" > 회원가입 </a>
+					<a href="signUp.do" class="txt2 hov1 validate-input m-b-10" > 회원가입 </a>
 				</div>
 
 <!-- 이메일로 찾음 -->
 				<div class="text-center">
-					<a href="idFind.jsp" class="txt2 hov1 validate-input m-b-10"> 아이디찾기 </a>
+					<a href="idFind.do" class="txt2 hov1 validate-input m-b-10"> 아이디찾기 </a>
 				</div>
 
 <!-- 아이디하고 이메일로 찾음 -->
 				<div class="text-center">
-					<a href="pwdFind.jsp" class="txt2 hov1 validate-input m-b-10"> 비밀번호찾기 </a>
+					<a href="pwdFind.do" class="txt2 hov1 validate-input m-b-10"> 비밀번호찾기 </a>
 				</div>
 			</form>
-
-
 		</div>
 	</div>
 
@@ -125,12 +99,25 @@ $(function() {
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
-
-
-
-
-
-
+	<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('#logBtn').click(function() {
+				var id = $('#id').val();
+				var pwd = $('#id').val();
+				if (id.trim() == "") {
+					$('#id').focus();
+					return;
+				}
+				if (pwd.trim() == "") {
+					$('#pwd').focus();
+					return;
+				}
+				$('form').submit();
+		<%-- 일반 태그는 아무것도 안 붙여도 됨 --%>
+			});
+		});
+	</script>
 
 </body>
 </html>

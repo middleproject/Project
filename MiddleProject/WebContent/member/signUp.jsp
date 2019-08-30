@@ -4,64 +4,9 @@
 
 <html lang="ko">
 
-<head>
-<!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원 가입</title>
-
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
-
-<!-- <link
-	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
-	rel="stylesheet">
-
-<link rel="stylesheet" href="../main/css/open-iconic-bootstrap.min.css">
-<link rel="stylesheet" href="../main/css/animate.css">
-
-<link rel="stylesheet" href="../main/css/owl.carousel.min.css">
-<link rel="stylesheet" href="../main/css/owl.theme.default.min.css">
-<link rel="stylesheet" href="../main/css/magnific-popup.css">
-
-<link rel="stylesheet" href="../main/css/aos.css">
-
-<link rel="stylesheet" href="../main/css/ionicons.min.css">
-
-<link rel="stylesheet" href="../main/css/bootstrap-datepicker.css">
-<link rel="stylesheet" href="../main/css/jquery.timepicker.css">
-
-
-<link rel="stylesheet" href="../main/css/flaticon.css">
-<link rel="stylesheet" href="../main/css/icomoon.css">
-<link rel="stylesheet" href="../main/css/style.css">
-
-
-
-<link rel="stylesheet" href="../shadow/css/shadowbox.css"> -->
-
-</head>
-
-
 <body>
 	<div class="hero-wrap hero-bread"
-		style="background-image: url('../main/images/bg_1.jpg');">
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">Home</a></span> <span>Checkout</span>
-					</p>
-					<h1 class="mb-0 bread">Checkout</h1>
-				</div>
-			</div>
-		</div>
-	</div>
+		style="background-image: url('../main/images/bg_1.jpg');"></div>
 
 	<section class="ftco-section">
 		<div class="container">
@@ -74,7 +19,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>*아이디</label> <input type="text" class="form-control"
-										placeholder="" id="id" name="id" readonly="readonly" required>
+										placeholder="영문,숫자 조합가능" id="id" name="id" required>
 								</div>
 							</div>
 
@@ -117,40 +62,21 @@
 									<label>*성별</label>
 									<div class="w-100"></div>
 									<input type="radio" style="width: 40px; height: 20px;"
-										name="sex" value="남자"> <label
-										style="font-size: 20px;">남자</label> <input type="radio"
-										style="width: 40px; height: 20px;" name="sex" value="여자">
-									<label style="font-size: 20px;">여자</label>
+										name="sex" value="남자"> <label style="font-size: 20px;">남자</label>
+									<input type="radio" style="width: 40px; height: 20px;"
+										name="sex" value="여자"> <label style="font-size: 20px;">여자</label>
 								</div>
 							</div>
 
 							<div class="w-100"></div>
-							<div class="col-md-3">
+							<div class="col-md-9">
 								<div class="form-group">
-									<label>*생년월일</label> <input type="text" class="form-control"
-										id="birthday_year" name="bitrhday_year" placeholder="년"
+									<label>*생년월일</label> <input type="date" class="form-control"
+										id="birthday" name="bitrhday" placeholder="생년월일을 입력해주세요"
 										required>
 
 								</div>
 							</div>
-
-
-							<div class="col-md-3">
-								<div class="form-group">
-									<input type="text" class="form-control" id="birthday_month"
-										name="birthday_month" placeholder="월" required>
-
-								</div>
-							</div>
-
-							<div class="col-md-3">
-								<div class="form-group">
-									<input type="text" class="form-control" id="birthday_day"
-										name="birthday_day" placeholder="일" required>
-
-								</div>
-							</div>
-
 
 							<div class="w-100"></div>
 							<div class="col-md-4">
@@ -179,7 +105,6 @@
 										<option>naver.com</option>
 										<option>daum.net</option>
 										<option>goole.com</option>
-
 									</select>
 								</div>
 							</div>
@@ -191,12 +116,12 @@
 								<div class="form-group">
 									<label>집 전화</label>
 									<div class="w-100"></div>
-									<select style="width: 80px; height: 33px;" name="call">
+									<select style="width: 80px; height: 33px;" name="tel1">
 										<option>02</option>
 										<option>031</option>
 										<option>041</option>
-									</select> - <input type="text" size="5px" name="call2"> - <input
-										type="text" size="5px" name="call3">
+									</select> - <input type="text" size="5px" name="tel2"> - <input
+										type="text" size="5px" name="tel3">
 								</div>
 							</div>
 
@@ -205,7 +130,7 @@
 								<div class="form-group">
 									<label>*휴대 전화</label>
 									<div class="w-100"></div>
-									<select style="width: 80px; height: 33px;" name="phone">
+									<select style="width: 80px; height: 33px;" name="phone1">
 										<option>010</option>
 										<option>011</option>
 										<option>016</option>
@@ -218,26 +143,11 @@
 								<div class="form-group">
 									<label>*우편번호</label>
 									<div class="w-100"></div>
-									<input type="text" readonly="readonly" name="adress" required>
+									<input type="text" readonly="readonly" name="addr1" required>
 
 								</div>
 
 							</div>
-
-							<!-- 		<div class="col-md-0">
-								<div class="form-group">
-									<label>-</label>
-								</div>
-							</div>
-
-
-							<div class="col-md-4">
-								<div class="form-group">
-
-									<input type="text" readonly="readonly">
-
-								</div>
-							</div> -->
 
 							<div class="col-md-2">
 								<div class="form-group">
@@ -253,7 +163,7 @@
 							<div class="col-md-10">
 								<div class="form-group">
 									<input type="text" class="form-control" placeholder="상세주소"
-										name="adress2">
+										name="addr2">
 								</div>
 							</div>
 
@@ -271,7 +181,7 @@
 
 							<div class="col-md-2">
 								<div class="form-group">
-									<input type="submit" class=" btn-warning btn-lg" value="가입완료">
+									<input type="submit" class=" btn-success btn-lg" value="가입완료">
 								</div>
 							</div>
 							<div class="col-md-2"></div>
@@ -279,7 +189,8 @@
 
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="reset" class="btn-warning btn-lg" value="가입취소">
+									<input type="submit" class="btn-warning btn-lg" value="가입취소"
+										onclick="javascript:history.back()">
 								</div>
 							</div>
 
@@ -292,148 +203,48 @@
 			</div>
 		</div>
 	</section>
-	
+
 	<!-- .section -->
 
-	
-	
+
+
 </body>
 
 
+<script type="text/javascript">
+	$(function() {
 
-
-	<!-- 	<script src="../main/js/jquery.min.js"></script>
-	<script src="../main/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="../main/js/popper.min.js"></script>
-	<script src="../main/js/bootstrap.min.js"></script>
-	<script src="../main/js/jquery.easing.1.3.js"></script>
-	<script src="../main/js/jquery.waypoints.min.js"></script>
-	<script src="../main/js/jquery.stellar.min.js"></script>
-	<script src="../main/js/owl.carousel.min.js"></script>
-	<script src="../main/js/jquery.magnific-popup.min.js"></script>
-	<script src="../main/js/aos.js"></script>
-	<script src="../main/js/jquery.animateNumber.min.js"></script>
-	<script src="../main/js/bootstrap-datepicker.js"></script>
-	<script src="../main/js/scrollax.min.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="../main/js/google-map.js"></script>
-	<script src="../main/js/main.js"></script> -->
-<!-- 
-	<script>
+		//비밀번호 확인
+		$('#pwd2')
+				.keyup(
+						function() {
+							if ($('#pwd').val() != $('#pwd2').val()) {
+								if ($('#pwd2').val() != '') {
+									document.getElementById('lable').style.color = "red";
+									document.getElementById('lable').innerHTML = "비밀번호가 일치하지않습니다.";
+								}
+							} else {
+								document.getElementById('lable').style.color = "blue";
+								document.getElementById('lable').innerHTML = "비밀번호가 일치합니다.";
+							}
+						})
+	});
+</script>
+<script type="text/javascript">
+	$(function() {
 		$(document).ready(function() {
-
-			var quantitiy = 0;
-			$('.quantity-right-plus').click(function(e) {
-
-				// Stop acting like a button
-				e.preventDefault();
-				// Get the field name
-				var quantity = parseInt($('#quantity').val());
-
-				// If is not undefined
-
-				$('#quantity').val(quantity + 1);
-
-				// Increment
-
-			});
-
-			$('.quantity-left-minus').click(function(e) {
-				// Stop acting like a button
-				e.preventDefault();
-				// Get the field name
-				var quantity = parseInt($('#quantity').val());
-
-				// If is not undefined
-
-				// Increment
-				if (quantity > 0) {
-					$('#quantity').val(quantity - 1);
+			$('select[name=emailSelection]').change(function() {
+				if ($(this).val() == "직접입력") {
+					$('#email2').val("");
+					$("#email2").attr("readonly", false);
+				} else {
+					$('#email2').val($(this).val());
+					$("#email2").attr("readonly", true);
 				}
 			});
-
 		});
-	</script>
- -->
-
-	<!-- <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>-->
-	<!-- <script type="text/javascript" src="../shadow/js/shadowbox.js"></script>  -->
-
-	<!-- <script type="text/javascript">
-		Shadowbox.init({
-			players : [ 'iframe' ]
-
-		})
-		$(function() {
-			$('#postBtn').click(function() {
-				Shadowbox.open({
-					content : '../member/postfind.jsp',
-					player : 'iframe',
-					title : '우편번호 검색',
-					width : 550,
-					height : 550
-				});
-			});
-			$('#checkBtn').click(function() {
-				Shadowbox.open({
-					content : '../member/idcheck.jsp',
-					player : 'iframe',
-					title : '아이디 중복체크',
-					width : 360,
-					height : 200
-				});
-			});
-		});
-	</script> -->
-
-	<script type="text/javascript">
-		$(function() {
-
-			//비밀번호 확인
-			$('#pwd2')
-					.keyup(
-							function() {
-								if ($('#pwd').val() != $('#pwd2').val()) {
-									if ($('#pwd2').val() != '') {
-										document.getElementById('lable').style.color = "red";
-										document.getElementById('lable').innerHTML = "비밀번호가 일치하지않습니다.";
-
-									}
-
-								} else {
-									document.getElementById('lable').style.color = "blue";
-									document.getElementById('lable').innerHTML = "비밀번호가 일치합니다.";
-								}
-							})
-		});
-	</script>
-	<script type="text/javascript">
-		$(function() {
-
-			$(document).ready(function() {
-
-				$('select[name=emailSelection]').change(function() {
-
-					if ($(this).val() == "직접입력") {
-
-						$('#email2').val("");
-						$("#email2").attr("readonly", false);
-
-					} else {
-
-						$('#email2').val($(this).val());
-
-						$("#email2").attr("readonly", true);
-
-					}
-
-				});
-
-			});
-
-		});
-	</script>
+	});
+</script>
 
 
 
