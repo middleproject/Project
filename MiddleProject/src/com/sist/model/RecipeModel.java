@@ -16,6 +16,7 @@ import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
 import com.sist.vo.FollowVO;
 import com.sist.vo.IngredetailVO;
+import com.sist.vo.ReadVO;
 import com.sist.vo.RecipeVO;
 import com.sist.vo.WishVO;
 @Controller("recipeModel")
@@ -124,7 +125,6 @@ public class RecipeModel {
 		RecipeVO vo = RecipeDAO.recipeDetailData(Integer.parseInt(no));
 		//wish 확인
 		int wishCount = RecipeDAO.wishCount(Integer.parseInt(no));
-		
 		List<IngredetailVO> homeList = new ArrayList<IngredetailVO>(); // 인그리 디테일 받을 값
 		List<IngredetailVO> lotteList = new ArrayList<IngredetailVO>();
 		List<IngredetailVO> emartList = new ArrayList<IngredetailVO>();
@@ -134,7 +134,16 @@ public class RecipeModel {
 		int folloCount = 0;
 		HttpSession session = model.getRequest().getSession();
 		String id = (String)session.getAttribute("id");
-		System.out.println(id);
+		//게시물 read
+		if(id!=null){
+			ReadVO rvo= new ReadVO();
+			rvo.setId(id);
+			rvo.setRno(Integer.parseInt(no));
+			int readCount = RecipeDAO.readCount(rvo);
+			if(readCount==0){
+				RecipeDAO.readInsert(rvo);
+			}
+		}
 		Map map = new HashMap();
 		String in = new String();
 		String complete = new String();
@@ -234,6 +243,7 @@ public class RecipeModel {
 		model.addAttribute("main_jsp", "../recipe/recipe_detail.jsp");
 		return "../main/main.jsp";
 	}
+	
 	@RequestMapping("recipe/follow_ok.do")
 	public String recipe_follow_ok(Model model){
 		try {
@@ -273,13 +283,17 @@ public class RecipeModel {
 		String id =(String)session.getAttribute("id");
 		List<String> madeList =new ArrayList<String>();
 		List<RecipeVO> list = new ArrayList<RecipeVO>();
+		List<ReadVO> rlist = new ArrayList<ReadVO>();
 		Map map =new HashMap();
 		//팔로워 찾기
 		madeList = RecipeDAO.followSearch(id);
-		for(String made:madeList){
-			map.put("made", made);
-		}
+		
+		map.put("made", madeList);
+	
+		// 읽은 값 구분
+		rlist = RecipeDAO.readAllData(id);
 		list = RecipeDAO.followSearchRecipe(map);
+		model.addAttribute("rlist", rlist);
 		model.addAttribute("list", list);
 		model.addAttribute("main_jsp", "../recipe/follow.jsp");
 		return "../main/main.jsp";
@@ -304,5 +318,20 @@ public class RecipeModel {
 		vo.setRecipeno(Integer.parseInt(recipeno));
 		RecipeDAO.wishDelete(vo);
 		return "../recipe/jjim_ok.jsp";
+	}
+	@RequestMapping("reicpe/wishRecipe.do")
+	public String recipe_wishRecipe(Model model){
+		HttpSession session = model.getRequest().getSession();
+		String id =(String)session.getAttribute("id");
+		List<Integer> iList = new  ArrayList<Integer>();
+		List<RecipeVO> list = new ArrayList<RecipeVO>();
+		iList = RecipeDAO.wishData(id);
+		for(int no:iList){
+			RecipeVO vo = RecipeDAO.wishAllData(no);
+			list.add(vo);
+		}
+		model.addAttribute("list", list);
+		model.addAttribute("main_jsp", "../recipe/wishRecipe.jsp");
+		return "../main/main.jsp";
 	}
 }

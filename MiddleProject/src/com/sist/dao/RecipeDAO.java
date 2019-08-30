@@ -5,8 +5,10 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.sist.vo.FollowVO;
 import com.sist.vo.IngredetailVO;
+import com.sist.vo.ReadVO;
 import com.sist.vo.RecipeVO;
 import com.sist.vo.WishVO;
+import com.sun.org.apache.xalan.internal.xsltc.util.IntegerArray;
 
 public class RecipeDAO {
 	private static SqlSessionFactory ssf;
@@ -220,6 +222,71 @@ public class RecipeDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	   }
+	   //read »Æ¿Œ
+	   public static int readCount(ReadVO vo){
+		   int total=0;
+		   SqlSession session =null;
+		   try {
+			session = ssf.openSession();
+			total =session.selectOne("readCount",vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			if(session!=null) session.close();
+		}
+		   return total;
+	   }
+	   public static void readInsert(ReadVO vo){
+		   SqlSession session = null;
+		   try {
+			   session = ssf.openSession(true);
+			   session.insert("readInsert",vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			if(session!=null) session.close();
+		}
+	   }
+	   public static List<ReadVO> readAllData(String id){
+		   SqlSession session = null;
+		   List<ReadVO> list = new ArrayList<ReadVO>();
+		   try {
+			session = ssf.openSession();
+			list = session.selectList("readAllData",id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(session!=null) session.close();
+		}
+		   return list;
+	   }
+	   // wishData wishAllData
+	   public static List<Integer> wishData(String id){
+		   List<Integer> list = new ArrayList<Integer>();
+		   SqlSession session = null;
+		   try {
+			   session =ssf.openSession();
+			   list = session.selectList("wishData",id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(session!=null) session.close();
+		}
+		   return list;
+	   }
+	   public static RecipeVO wishAllData(int no){
+		   RecipeVO vo = new RecipeVO();
+		   SqlSession session = null;
+		   try {
+			session = ssf.openSession();
+			vo = session.selectOne("wishAllData",no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			if(session!=null) session.close();
+		}
+		   return vo;
 	   }
 
 }

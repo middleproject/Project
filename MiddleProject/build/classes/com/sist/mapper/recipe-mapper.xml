@@ -136,13 +136,19 @@
 		select no,poster,summary,hit,TO_CHAR(regdate,'YYYY-MM-DD') as regdate,num,made 
 		from (select no,poster,summary,summary_in,hit,regdate,rownum as num,made 
 		from recipe <where>
-			<foreach collection="made" item="made" separator="or">
-				made LIKE '%'||#{made}||'%'
+			<foreach collection="made" item="chef" separator="or">
+				made LIKE '%'||#{chef}||'%'
 			</foreach>
 		</where>
 		order by regdate desc)
 	</select>
 	<!-- 레시피 wish 확인 -->
+	<select id="wishAllData" resultType="RecipeVO" parameterType="int">
+		select no,summary,made,poster from recipe where recipe.no = #{no}
+	</select>
+	<select id="wishData" parameterType="String" resultType="int">
+		select recipeno from wish where id = #{id}
+	</select>
 	<select id="wishCount" parameterType="int" resultType="int">
 		select count(*) from wish where recipeno = #{no}
 	</select>
@@ -158,4 +164,17 @@
 	<delete id="wishDelete" parameterType="WishVO">
 		delete from wish where recipeno = #{recipeno} and id=#{id}
 	</delete>
+	<!-- read 확인 -->
+	<select id="readCount" parameterType="ReadVO">
+		select count(*) from read where id=#{id} and rno=#{rno}
+	</select>
+	<insert id="readInsert" parameterType="ReadVO">
+		insert into read values(
+		#{id},
+		#{rno}
+		)
+	</insert>
+	<select id="readAllData" resultType="ReadVO" parameterType="String">
+		select * from read where id = #{id}
+	</select>
 </mapper>
