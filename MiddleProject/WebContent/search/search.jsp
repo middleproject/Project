@@ -104,10 +104,9 @@ $(function(){
     				
     			</div>
     		</div>
-    		<div class="row">
-    		<div class="col-md-6 col-lg-3 ftco-animate">
-    		<div id="searchingre"></div>
-    			
+    		
+    		<div class="row" id="searchingre">
+    		
     		</div>
     		</div>
     		<div class="row mt-5">
@@ -125,7 +124,7 @@ $(function(){
             </div>
           </div>
         </div>
-    	</div>
+    	
     </section>
     
 </body>
