@@ -105,8 +105,10 @@ $(function(){
     			</div>
     		</div>
     		<div class="row">
-    		     <div id="searchingre"></div>
+    		<div class="col-md-6 col-lg-3 ftco-animate">
+    		<div id="searchingre"></div>
     			
+    		</div>
     		</div>
     		<div class="row mt-5">
           <div class="col text-center">
