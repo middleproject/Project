@@ -27,8 +27,9 @@ $(function(){
 					 $('#u'+no).hide();
 					 i=0;
 					}
-				
+					
 	         });
+			
 });
 </script>
 </head>
@@ -50,15 +51,15 @@ $(function(){
 			<table class="table">
 				<tr class="warning">
 					<th width="10%" class="text-center">번호</th>
-					<th width="45%" class="text-center">제목</th>
+					<th width="50%" class="text-center">제목</th>
 					<th width="15%" class="text-center">이름</th>
-					<th width="20%" class="text-center">작성일</th>
-					<th width="10%" class="text-center">조회수</th>
+					<th width="25%" class="text-center">작성일</th>
+					
 				</tr>
 					<c:set var="count" value="${count }"/>
 						<c:forEach var="vo" items="${list }" varStatus="s">					
 							<tr>
-								<th width="10%" class="text-center">${count }</th> 
+								<th width="10%" class="text-center">${count }</th>
 								<th width="45%" class="text-left" >		
 									<c:if test="${vo.grouptab>0 }" >
 										<c:forEach begin="0" end="${vo.grouptab }">
@@ -76,23 +77,25 @@ $(function(){
 										<sup><font color="red">new</font></sup>
 									</c:if>
 								</th>
-								<th width="15%" class="text-center">${vo.memberid }</th>
+								<th width="15%" class="text-center">${vo.name }</th>
 								<th width="20%" class="text-center">${vo.dbday }</th>
-								<th width="10%" class="text-center">${vo.hit }</th>
+								
 							</tr>
 					
 								<input type="hidden" name="no" value="${vo.boardno }">
 								<!-- content창 보여줬다 사라짐 -->
 								<tr id="u${vo.boardno }" style="display:none">
 									<th><img src="re.png" width="20" height="20"></th>
-									<th class="text-left" colspan="3">		
+									<th class="text-left" colspan="2">		
 										${vo.content }
 									</th>
-									<th calspan="3">
+									<td colspan="2">
 										<a href="../bQnA/qboard_update.do?no=${vo.boardno }" class="btn btn-sm btn-primary">수정</a>
+									
 										<a href="../bQnA/qboard_delete.do?no=${vo.boardno }" class="btn btn-sm btn-danger">삭제</a>
-										<a href="../bQnA/qboard_reply.do?no=${vo.boardno }&boardDis=1" class="btn btn-sm btn-warning replyBtn" value="${vo.boardno }">답글달기</a>
-									</th>						
+								
+										<a href="../bQnA/qboard_reply.do?no=${vo.boardno }&boardDis=1" class="btn btn-sm btn-warning replyBtn" value="${vo.boardno }">답글</a>
+									</td>		
 								</tr>
 							<c:set var="count" value="${count-1 }"/>
 						</c:forEach>
@@ -101,17 +104,21 @@ $(function(){
 	
 			<table class="table">
 				<tr>
-					<!-- 페이지 넘어가는 부분 -->
-									
+				<!-- 페이지 넘어가는 부분 -->
 				<td class="text-center">
 						<ul class="pagination">
-							<li><a href="../board/board_list.do?page=1">◁</a></li>
-							<li><a href="#">&lt;</a></li>
+						
+							<c:if test="${curpage != 1 }">
+								<li><a href="../board/board_list.do?page=1">　◁</a></li>
+								<li><a href="../board/board_list.do?page=${curpage-1 }">　＜</a></li>
+							</c:if>
 								<c:forEach var="i" begin="1" end="${totalpage }">
-									<li class="${i==curpage?'active':''}"><a href="../board/board_list.do?page="${i }>${i }</a>
+									<li class="${i==curpage?'active':''}"><a href='../board/board_list.do?page=${i }'>　${i }　</a>
 								</c:forEach>
-							<li><a href="#">&gt;</a></li>
-							<li><a href="../board/board_list.do?page=${totalpage }">▷</a></li>
+							<c:if test="${curpage != totalpage }">
+								<li><a href="../board/board_list.do?page=${curpage+1 }">　＞</a></li>
+								<li><a href="../board/board_list.do?page=${totalpage }">　▷</a></li>
+							</c:if>
 						</ul>
 					</td>
 				</tr>

@@ -43,8 +43,12 @@ public class BoardDAO {
 	   //글쓰기
 	   public static void boardInsert(BoardVO vo) {
 		   SqlSession session = ssf.openSession(true);
-		   System.err.println("확인");
-		   System.out.println(vo.getSubject());
+		   System.err.println("글쓰기 확인 ok");
+		   System.out.println("아이디는?"+vo.getMemberid());
+		   System.out.println("이름은?"+vo.getName());
+		   System.out.println("제목은?"+vo.getSubject());
+		   System.out.println("내용은?"+vo.getContent());
+		   System.out.println("카테고리 번호는?"+vo.getCategoryno());
 		   session.insert("boardInsert",vo);
 		   session.close();
 	   }
@@ -57,14 +61,14 @@ public class BoardDAO {
 		   session.close();
 		   return total;
 	   }*/
-	   public static int boardTotalPage() {
+	   public static int boardTotalPage(Map map) {
 		   int total = 0;
 		   SqlSession session = null;
 		   try {
 			// 연결(getConnection)
 			   session = ssf.openSession();
 			// sql문장 전송
-			   total = session.selectOne("boardTotalPage");
+			   total = session.selectOne("boardTotalPage", map);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -75,10 +79,10 @@ public class BoardDAO {
 		   return total;
 	   }
 	   //게시물 전체갯수 읽기
-	   public static int boardRowCount() {
+	   public static int boardRowCount(Map map) {
 		   int count=0;
 		   SqlSession session = ssf.openSession();
-		   count=session.selectOne("boardRowCount");
+		   count=session.selectOne("boardRowCount",map);
 		   session.close();
 		   return count;
 	   }
@@ -227,12 +231,54 @@ public class BoardDAO {
 		   session.close();
 		   return list;
 	   }
+	   //★수정하기★
+	   public static int QnAUpdate(BoardVO vo) {
+		   int no=0;
+		   SqlSession session = ssf.openSession();
+		   //비번확인
+		   String pwd = session.selectOne("boardGetPwd", vo.getBoardno());
+		   if(pwd.equals(vo.getPwd())) {
+			   no = vo.getBoardno();
+			   session.update("boardUpdate", vo);
+			   session.commit();   
+		   } 
+		   session.close();
+		   return no;
+	   }
+	   public static int QnATotalPage(Map map) {
+		   int total = 0;
+		   SqlSession session = null;
+		   try {
+			// 연결(getConnection)
+			   session = ssf.openSession();
+			// sql문장 전송
+			   total = session.selectOne("QnATotalPage", map);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			// 반환(disConnection)
+			if(session!=null)
+			session.close();
+		}
+		   return total;
+	   }
+	   //게시물 전체갯수 읽기
+	   public static int QnARowCount(Map map) {
+		   int count=0;
+		   SqlSession session = ssf.openSession();
+		   count=session.selectOne("QnARowCount",map);
+		   session.close();
+		   return count;
+	   }
+	   
 	   //답글올리기
 	   public static void bQnAInsert(BoardVO vo) {
 		   SqlSession session = ssf.openSession(true);
 		   session.insert("bQnAInsert",vo); // (sql아이디명칭,vo) mapper의 sql문 실행함
 		   								//== vo값받는곳이 Model이라 모델로감
+		   System.out.println("BoardDAO의 session은?"+session);
 		   session.close();
+		   
 	   } 
 	    
 	 //답글가지고오기

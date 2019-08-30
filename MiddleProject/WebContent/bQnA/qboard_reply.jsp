@@ -14,16 +14,17 @@
 </head>
 <body>
 	<div class="container">
-	<h2 class="text-center">답글쓰기</h2>
+	<h2 class="text-center">QnA답글쓰기</h2>
 		<div class="row">				
 		<form method="post" action="../bQnA/qboard_reply_ok.do">
 			<input type="text" name="categoryno" id="categoryno"  value="${boardDis }" >
 			<input type="text" name="bno" value="${boardno }" >
+	
 			<table class="table">
 				<tr> 
 					<th class="text-right warning" width="20%">이름</th>
 					<th width="80%" class="text-left">
-						<input type="text" name="memberid" size="15">
+						<input type="text" name="name" size="15">
 					</th>
 				</tr>
 				<tr>

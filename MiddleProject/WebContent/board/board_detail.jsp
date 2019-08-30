@@ -60,7 +60,7 @@ var u= 0;
 				</tr>
 				<tr>
 					<th class="text-center warning" width="20%">이름</th>
-					<th class="text-center" width="30%">${vo.memberid }</th>
+					<th class="text-center" width="30%">${vo.name }</th>
 					<th class="text-center warning" width="20%">조회수</th>
 					<th class="text-center" width="30%">${vo.hit }</th> 
 				</tr>
@@ -111,7 +111,7 @@ var u= 0;
 										<a href="../board/reply_delete.do?no=${rvo.replyno }&bno=${vo.boardno } " class="btn btn-xs btn-danger">삭제</a>
 									</c:if>
 									<c:if test="${sessionScope.id!=null }"> <!-- 조건1개 /본인이 아니면 댓글만 사용가능 -->
-										<a href="# " class="btn btn-xs btn-warning replyBtn" value="${rvo.replyno }">댓글달긔</a>
+										<a href="# " class="btn btn-xs btn-warning replyBtn" value="${rvo.replyno }">댓글</a>
 									</c:if>
 								</th>
 							</tr>
@@ -157,13 +157,13 @@ var u= 0;
 			<c:if test="${sessionScope.id!=null }"> 
 			<table class="table">
 				<tr>
-					<td class="text-left">
+					<th class="text-left">
 						<form name="frm" method="post" action="../board/reply_insert.do">
 							<textarea rows="3" cols="100" name="msg" style="float:left"></textarea>
 							<input type="hidden" name="bno" value="${vo.boardno }" >
 							<input type="submit" value="댓글쓰기" class="btn btn-sm btn-success" style="height:70px">
 						</form>
-					</td>
+					</th>
 				</tr>
 			</table>
 		</c:if>

@@ -22,7 +22,7 @@
 				<tr> <!-- warning 노란색-->
 					<th class="text-right warning" width="20%">이름</th>
 					<th width="80%" class="text-left">
-						<input type="text" name="memberid" size="15">
+						<input type="text" name="name" size="15">
 					</th>
 				</tr>
 				<tr>

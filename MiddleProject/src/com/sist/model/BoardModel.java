@@ -40,8 +40,9 @@ public class BoardModel {
 				//목록전송
 				model.addAttribute("list", list);
 				
-				int totalpage = BoardDAO.boardTotalPage();
-				int count = BoardDAO.boardRowCount();
+				int totalpage = BoardDAO.boardTotalPage(map);
+				int count = BoardDAO.boardRowCount(map);
+				
 				count = count-((curpage*rowSize)-rowSize);
 				String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 				//jsp로 값 전송~
@@ -49,6 +50,7 @@ public class BoardModel {
 				model.addAttribute("curpage", curpage);
 				model.addAttribute("totalpage", totalpage);
 				model.addAttribute("count", count);
+				model.addAttribute("categoryno","6");
 				
 				model.addAttribute("main_jsp", "../board/board_list.jsp");
 				return "../main/main.jsp";
@@ -72,14 +74,21 @@ public class BoardModel {
 																			//new DefaultFileRenamePolicy() 같은 파일이 들어오면 자동으로 이름+1 변환
 */			
 		} catch (Exception ex) { }
-		String memberid = model.getRequest().getParameter("memberid");
+		String name = model.getRequest().getParameter("name");
 		String subject = model.getRequest().getParameter("subject");
 		String content = model.getRequest().getParameter("content");
 		String pwd = model.getRequest().getParameter("pwd");
 		String categoryno = model.getRequest().getParameter("categoryno");
+		
+		System.out.println("이 아래로는 Model에 값 확인↓↓↓↓↓↓↓↓↓");
+		System.out.println("name은?"+name);
+		System.out.println("subject은?"+subject);
+		System.out.println("content은?"+content);
+		System.out.println("pwd은?"+pwd);
+		System.out.println("categoryno은?"+categoryno);
 	
 		BoardVO vo = new BoardVO();
-		vo.setMemberid("hong");
+		vo.setName(name);
 		vo.setSubject(subject);
 		vo.setContent(content);
 		vo.setPwd(pwd);
@@ -109,11 +118,6 @@ public class BoardModel {
 	//상세보기
 	@RequestMapping("board/board_detail.do")
 	public static String board_detail(Model model) {
-		
-		HttpSession session = model.getRequest().getSession();
-		session.setAttribute("id", "hong");
-		session.setAttribute("name", "홍길동");
-		
 		String no = model.getRequest().getParameter("no");
 		
 		BoardVO vo = BoardDAO.boardDetailData(Integer.parseInt(no), "detail");
@@ -147,14 +151,14 @@ public class BoardModel {
 			model.getRequest().setCharacterEncoding("UTF-8");
 		} catch (Exception ex) {		
 		}
-		String name=model.getRequest().getParameter("memberid");
+		String name=model.getRequest().getParameter("name");
 		String subject=model.getRequest().getParameter("subject");
 		String content=model.getRequest().getParameter("content");
 		String pwd=model.getRequest().getParameter("pwd");
 		String no=model.getRequest().getParameter("boardno");
 		
 		BoardVO vo = new BoardVO();
-		vo.setMemberid(name);
+		vo.setName(name);
 		vo.setSubject(subject);
 		vo.setContent(content);
 		vo.setPwd(pwd);
@@ -192,8 +196,8 @@ public class BoardModel {
 			//목록전송
 			model.addAttribute("list", list);
 			
-			int totalpage = BoardDAO.boardTotalPage();
-			int count = BoardDAO.boardRowCount();
+			int totalpage = BoardDAO.boardTotalPage(map);
+			int count = BoardDAO.boardRowCount(map);
 			
 			// count가 글의 총갯수
 			count = count-((curpage*rowSize)-rowSize);
@@ -218,38 +222,19 @@ public class BoardModel {
 			// 요청값을 받는다
 			try {
 				model.getRequest().setCharacterEncoding("UTF-8");
-			} catch (Exception ex) {
-			}
-			HttpSession session = model.getRequest().getSession();
-			session.setAttribute("id", "hong");
-			session.setAttribute("name", "홍길동");
+			} catch (Exception ex) {}
 			
-			// freeboard-mapper의 id와 pwd는 어떻게 넘길까 생각
 			String bno = model.getRequest().getParameter("bno"); //bno = boardno
 			String msg = model.getRequest().getParameter("msg");
 			
-			
+			HttpSession session = model.getRequest().getSession();
 			String id = (String) session.getAttribute("id");
 			String name = (String)session.getAttribute("name");
-			//String name = model.getRequest().getParameter("name");
-			System.out.println("bno는???"+bno);
-			System.out.println("msg는???"+msg);
-			System.out.println("id는???"+id);
-			System.out.println("name는???"+name);
-
-			/*HttpSession session = model.getRequest().getSession(); // 세션에 저장한 id와
-																	// pwd 얻어오기
-			String id = (String) session.getAttribute("hong");
-			String name = (String) session.getAttribute("홍길동");*/
 			
 			ReplyVO vo = new ReplyVO();
-			
-			System.out.println(" bno : " + bno);
-			System.out.println(" msg : " + msg);
-			System.out.println(" name : " + name);
-			
 			vo.setBoardno((Integer.parseInt(bno)));
 			vo.setMsg(msg);
+			vo.setId(id);
 			vo.setName(name);
 
 			
@@ -267,19 +252,15 @@ public class BoardModel {
 		 try {
 				model.getRequest().setCharacterEncoding("UTF-8");
 			} catch (Exception ex) { }
-		 
-		 HttpSession session = model.getRequest().getSession();
-			session.setAttribute("id", "hong");
-			session.setAttribute("name", "홍길동");
 
 			//msg
 			String msg = model.getRequest().getParameter("msg");
 			//no
 			String pno = model.getRequest().getParameter("no"); //상위 pno 값이 아직 확정이 안됌 그룹id,step찾아야함
-			System.out.println("pno="+pno);
 			//bno
 			String bno = model.getRequest().getParameter("bno");
-			//HttpSession session = model.getRequest().getSession();
+			
+			HttpSession session = model.getRequest().getSession();
 			String id = (String)session.getAttribute("id");
 			String name= (String)session.getAttribute("name");
 			
@@ -295,7 +276,7 @@ public class BoardModel {
 		 return "redirect:../board/board_detail.do?no="+bno; //다시 detail로 넘어감
 	 }
 	 
-	 //댓글수정 [미확인]
+	 //댓글수정
 	 @RequestMapping("board/reply_update.do")
 		public String reply_update(Model model) {
 			try {
@@ -308,17 +289,19 @@ public class BoardModel {
 			String no = model.getRequest().getParameter("no"); // 본인 no
 			//bno
 			String bno = model.getRequest().getParameter("bno");
-			
+			System.out.println("msg는?"+msg);
+			System.out.println("no는?"+no);
+			System.out.println("bno는?"+bno);
 			//DAO처리
 			ReplyVO vo = new ReplyVO();
 			vo.setMsg(msg);
-			vo.setBoardno(Integer.parseInt(no));
+			vo.setReplyno(Integer.parseInt(no));
 			
-			//BoardDAO.replyUpdate(vo);
+			BoardDAO.replyUpdate(vo);
 		
 			return "redirect:../board/board_detail.do?no="+bno; //다시 detail로 넘어감
 		}
-	 //삭제하기[미확인]
+	 //삭제하기
 	 @RequestMapping("board/reply_delete.do")
 		public String reply_delete(Model model) {
 			String no = model.getRequest().getParameter("no"); // 본인 no
@@ -334,7 +317,6 @@ public class BoardModel {
 		public String board_delete(Model model) {
 			String no=model.getRequest().getParameter("no");
 			model.addAttribute("boardno", no); //boardno 값으로 board_detail.jsp의 value="${boardno }"값
-			System.out.println("no는???ㅅㅄㅄㅂ"+no);
 			model.addAttribute("main_jsp", "../board/board_delete.jsp");
 			return "../main/main.jsp";
 		}
@@ -378,8 +360,8 @@ public class BoardModel {
 			//목록전송
 			model.addAttribute("list", list);
 			
-			int totalpage = BoardDAO.boardTotalPage();
-			int count = BoardDAO.boardRowCount();
+			int totalpage = BoardDAO.QnATotalPage(map);
+			int count = BoardDAO.QnARowCount(map);
 			count = count-((curpage*rowSize)-rowSize);
 			String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 			//jsp로 값 전송~
@@ -387,6 +369,7 @@ public class BoardModel {
 			model.addAttribute("curpage", curpage);
 			model.addAttribute("totalpage", totalpage);
 			model.addAttribute("count", count);
+			model.addAttribute("categoryno", "1");
 			
 			model.addAttribute("main_jsp", "../bQnA/qboard_list.jsp");
 			return "../main/main.jsp";
@@ -404,14 +387,14 @@ public class BoardModel {
 				try {
 					model.getRequest().setCharacterEncoding("UTF-8");	
 				} catch (Exception ex) { }
-				String memberid = model.getRequest().getParameter("memberid");
+				String name = model.getRequest().getParameter("name");
 				String subject = model.getRequest().getParameter("subject");
 				String content = model.getRequest().getParameter("content");
 				String pwd = model.getRequest().getParameter("pwd");
 				String categoryno = model.getRequest().getParameter("categoryno");
 			
 				BoardVO vo = new BoardVO();
-				vo.setMemberid("hong");
+				vo.setName(name);
 				vo.setSubject(subject);
 				vo.setContent(content);
 				vo.setPwd(pwd);
@@ -444,21 +427,21 @@ public class BoardModel {
 					model.getRequest().setCharacterEncoding("UTF-8");
 				} catch (Exception ex) {		
 				}
-				String name=model.getRequest().getParameter("memberid");
+				String name=model.getRequest().getParameter("name");
 				String subject=model.getRequest().getParameter("subject");
 				String content=model.getRequest().getParameter("content");
 				String pwd=model.getRequest().getParameter("pwd");
 				String no=model.getRequest().getParameter("boardno");
 				
 				BoardVO vo = new BoardVO();
-				vo.setMemberid(name);
+				vo.setName(name);
 				vo.setSubject(subject);
 				vo.setContent(content);
 				vo.setPwd(pwd);
 				vo.setBoardno(Integer.parseInt(no));
 				
 				//dao연결 => pwd가 맞을때와 틀릴때로 나뉨
-				int n = BoardDAO.boardUpdate(vo);
+				int n = BoardDAO.QnAUpdate(vo);
 				model.addAttribute("no", n);
 				
 				return "../bQnA/qboard_update_ok.jsp";
@@ -504,23 +487,26 @@ public class BoardModel {
 					model.getRequest().setCharacterEncoding("UTF-8");	
 				} catch (Exception ex) { }
 				String board = model.getRequest().getParameter("bno");
-				String memberid = model.getRequest().getParameter("memberid");
+				String name = model.getRequest().getParameter("name");
 				String subject = model.getRequest().getParameter("subject");
 				String content = model.getRequest().getParameter("content");
 				String pwd = model.getRequest().getParameter("pwd");
-				String categoryno = "1";
+				String categoryno = model.getRequest().getParameter("categoryno");
 				
-				System.out.println("답글 board는?? "+board);
-				System.out.println("답글 memberid는?? "+memberid);
+				System.out.println("답글 board는?? "+board);	
 				System.out.println("답글 컨텐트는?? "+content);
 				System.out.println("답글 categoryno?? "+categoryno);
 				
 				BoardVO vo = new BoardVO();
-				vo.setMemberid("hong");
+				vo.setName(name);
 				vo.setSubject(subject);
 				vo.setContent(content);
 				vo.setPwd(pwd);
 				vo.setCategoryno(Integer.parseInt(categoryno));
+				
+				System.out.println("이 아래로는 QnA의 값=========");
+				System.out.println("name는???"+name);
+				System.out.println("=========================");
 				
 				// dao 전송
 				BoardDAO.bQnATrueInsert(Integer.parseInt(board), vo);

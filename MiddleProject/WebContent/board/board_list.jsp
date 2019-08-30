@@ -16,6 +16,7 @@
 <script type="text/javascript">
 $(function(){
 	$('#findBtn').click(function(){
+		
 		var textsearch=$('#textsearch').val();
 		if(textsearch.trim()=="")
 		{
@@ -52,14 +53,14 @@ $(function(){
 				</tr>
 					<c:set var="count" value="${count }"/>
 						<c:forEach var="vo" items="${list }" varStatus="s">
-							<tr class="${s.index%2==0?'':'success' }">
-								<th width="10%" class="text-center">${vo.num }</th> 
+							<tr>
+								<th width="10%" class="text-center">${count }</th>
 								<th width="45%" class="text-left"><a href="../board/board_detail.do?no=${vo.boardno }">${vo.subject }</a>
 									<c:if test="${today==vo.dbday }">
 										<sup><font color="red">new</font></sup>
 									</c:if>
 								</th>
-								<th width="15%" class="text-center">${vo.memberid }</th>
+								<th width="15%" class="text-center">${vo.name }</th>
 								<th width="20%" class="text-center">${vo.dbday }</th>
 								<th width="10%" class="text-center">${vo.hit }</th>
 							</tr>
@@ -74,7 +75,7 @@ $(function(){
 						<form action="../board/find.do" id="frm">
 						Search : 
 						<select name="fs" class="input-sm">
-							<option value="memberId">이름</option>
+							<option value="name">이름</option>
 							<option value="subject">제목</option>
 							<option value="content">내용</option>
 						</select>
@@ -86,16 +87,21 @@ $(function(){
 					<!-- 페이지 넘어가는 부분 -->
 				<td class="text-center">
 						<ul class="pagination">
-							<li><a href="../board/board_list.do?page=1">◁</a></li>
-							<li><a href="#">&lt;</a></li>
+						
+							<c:if test="${curpage != 1 }">
+								<li><a href="../board/board_list.do?page=1">　◁</a></li>
+								<li><a href="../board/board_list.do?page=${curpage-1 }">　＜</a></li>
+							</c:if>
 								<c:forEach var="i" begin="1" end="${totalpage }">
-									<li class="${i==curpage?'active':''}"><a href="../board/board_list.do?page="${i }>${i }</a>
+									<li class="${i==curpage?'active':''}"><a href='../board/board_list.do?page=${i }'>　${i }　</a>
 								</c:forEach>
-							<li><a href="#">&gt;</a></li>
-							<li><a href="../board/board_list.do?page=${totalpage }">▷</a></li>
+							<c:if test="${curpage != totalpage }">
+								<li><a href="../board/board_list.do?page=${curpage+1 }">　＞</a></li>
+								<li><a href="../board/board_list.do?page=${totalpage }">　▷</a></li>
+							</c:if>
 						</ul>
 					</td>
-						</ul>
+					
 				
 				</tr>
 			</table>

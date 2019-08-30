@@ -10,30 +10,32 @@
 		FROM(SELECT boardno,subject,memberid,day,hit
 		FROM board ORDER BY boardno DESC))
 		WHERE num BETWEEN #{start} AND #{end} -->
-		SELECT boardno,subject,memberid,content,dbday,hit,num
-		FROM (SELECT boardno,subject,memberid,content,TO_CHAR(day,'YYYY-MM-DD') as dbday,hit,rownum as num
-		FROM(SELECT boardno,subject,memberid,content,day,hit
+		SELECT boardno,subject,name,content,dbday,hit,num
+		FROM (SELECT boardno,subject,name,content,TO_CHAR(day,'YYYY-MM-DD') as dbday,hit,rownum as num
+		FROM(SELECT boardno,subject,name,content,day,hit
 		FROM board 
 		WHERE categoryno=#{categoryno}
-		ORDER BY boardno ASC))	
+		ORDER BY boardno DESC))	
 		WHERE num BETWEEN #{start} AND #{end}
-		ORDER BY NUM DESC 
+		
 	</select>
 	<!-- 
 	총페이지] CEIL쓴 이유 : 올림함수라서→ 11/10.0 => 1.1 CEIL(1.1) => 2!!! 
 	-->
-	<select id="boardTotalPage" resultType="int">
+	<select id="boardTotalPage" resultType="int" parameterType="java.util.Map">
 		SELECT CEIL(COUNT(*)/5.0) FROM board
+		WHERE categoryno = #{categoryno}
 	</select>
-	<select id="boardRowCount" resultType="int">
+	<select id="boardRowCount" resultType="int" parameterType="java.util.Map">
 		SELECT COUNT(*) FROM board
+		WHERE categoryno = #{categoryno}
 	</select>
 	<insert id="boardInsert" parameterType="BoardVO">
-		INSERT INTO board(boardno,categoryno,subject,memberid,content,pwd) VALUES(
-    		board_no_seq.nextval,
+		INSERT INTO board(boardno,categoryno,subject,name,content,pwd) VALUES(
+    		(SELECT NVL(MAX(boardno)+1,1) FROM board),
     		#{categoryno},
     		#{subject}, 
-    		#{memberid}, <!--#안에 값이 이렇게 vo.getName() -->
+    		#{name}, <!--#안에 값이 이렇게 vo.getName() -->
     		#{content},
     		#{pwd}
     	)
@@ -46,7 +48,7 @@
 	 -->
 	 <!-- 상세보기 -->
 	 <select id="boardDetailData" resultType="BoardVO" parameterType="int">
-	 	SELECT boardno,memberid,subject,content,TO_CHAR(day,'YYYY-MM-DD') as dbday, hit
+	 	SELECT boardno,name,subject,content,TO_CHAR(day,'YYYY-MM-DD') as dbday, hit
 	 	FROM board
 	 	WHERE boardno=#{boardno}
 	 </select>
@@ -62,14 +64,14 @@
 	 </select>
 	 <update id="boardUpdate" parameterType="BoardVO">
 	 	UPDATE board SET
-	 	memberid=#{memberid}, subject=#{subject}, content=#{content}
+	 	name=#{name}, subject=#{subject}, content=#{content}
 	 	WHERE boardno=#{boardno}
 	 </update>
 	<!-- 검색-->
     <select id="boardListDataTEST" resultType="BoardVO" parameterType="java.util.Map">
-		SELECT boardno,subject,memberid,dbday,hit,num ,content,categoryno
-		FROM (SELECT boardno,subject,memberid,TO_CHAR(day,'YYYY-MM-DD') as dbday,hit,content,categoryno,rownum as num
-		FROM(SELECT boardno,subject,memberid,day,hit ,content,categoryno
+		SELECT boardno,subject,name,dbday,hit,num ,content,categoryno
+		FROM (SELECT boardno,subject,name,TO_CHAR(day,'YYYY-MM-DD') as dbday,hit,content,categoryno,rownum as num
+		FROM(SELECT boardno,subject,name,day,hit ,content,categoryno
 		FROM board ORDER BY boardno DESC))
 		WHERE num BETWEEN #{start} AND #{end}
 		AND ${fs} LIKE '%'|| #{textsearch} ||'%'
@@ -91,6 +93,8 @@
     	SELECT 
     	replyno
     	,boardno
+    	,id
+    	,name
     	,msg
     	,TO_CHAR(regdate,'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') as dbday
     	,group_tab
@@ -146,7 +150,7 @@
     <update id="replyUpdate" parameterType="ReplyVO">
     	UPDATE Reply SET
     	msg=#{msg}
-    	WHERE boardno=#{boardno}
+    	WHERE replyno=#{replyno}
     </update>
     
     <!-- DELETE -->
@@ -184,9 +188,9 @@
     <!-- QnA게시판 -->
 
     <select id="bQnAListData" resultType="BoardVO" parameterType="java.util.Map">
-		SELECT boardno,subject,memberid,content,dbday,hit,num,grouptab
-		FROM (SELECT boardno,subject,memberid,content,TO_CHAR(day,'YYYY-MM-DD') as dbday,hit,grouptab,rownum as num
-		FROM(SELECT boardno,subject,memberid,content,day,hit,grouptab
+		SELECT boardno,subject,name,content,dbday,hit,num,grouptab
+		FROM (SELECT boardno,subject,name,content,TO_CHAR(day,'YYYY-MM-DD') as dbday,hit,grouptab,rownum as num
+		FROM(SELECT boardno,subject,name,content,day,hit,grouptab
 		FROM board 
 		WHERE categoryno=#{categoryno}
 		ORDER BY groupid DESC, groupstep ASC))
@@ -198,17 +202,31 @@
 	 	WHERE boardno=#{boardno}
 	 </update>
     
+    <!-- 
+    board_no_seq.nextval, 이건안되고
+    (SELECT NVL(MAX(boardno)+1,1) FROM board), 이건됌...??? 왜 ???
+    
+     -->
     <insert id="bQnAInsert" parameterType="BoardVO">
-			INSERT INTO board(boardno,categoryno,subject,memberid,content,pwd,groupid) VALUES(
-	    		board_no_seq.nextval,
+			INSERT INTO board(boardno,categoryno,subject,name,content,pwd,groupid) VALUES(
+	    		(SELECT NVL(MAX(boardno)+1,1) FROM board),
 	    		#{categoryno},
 	    		#{subject}, 
-	    		#{memberid}, <!--#안에 값이 vo.getName() -->
+	    		#{name}, <!--#안에 값이 vo.getName() -->
 	    		#{content},
 	    		#{pwd},
 	    		(SELECT NVL(MAX(groupid)+1,1) FROM Board) 
 	    	)
 		</insert>
+		<select id="QnATotalPage" resultType="int" parameterType="java.util.Map">
+			SELECT CEIL(COUNT(*)/5.0) FROM board
+			WHERE categoryno = #{categoryno}
+		</select>
+		<select id="QnARowCount" resultType="int" parameterType="java.util.Map">
+			SELECT COUNT(*) FROM board
+			WHERE categoryno = #{categoryno}
+		</select>
+			
 		<!-- 답글읽기 -->
 		<select id="bQnARead" resultType="BoardVO"  parameterType="int">
 			SELECT groupid,groupstep,grouptab
@@ -224,12 +242,12 @@
     	</update>
 		
 		<insert id="bQnATrueInsert"  parameterType="BoardVO">
-		INSERT INTO board(boardno,categoryno,memberid,subject,content,pwd,groupid,
+		INSERT INTO board(boardno,categoryno,name,subject,content,pwd,groupid,
                groupstep,grouptab,root)
                VALUES(
                (SELECT NVL(MAX(boardno)+1,1) FROM board),
                #{categoryno},
-               #{memberid},
+               #{name},
                #{subject},
                #{content},
                #{pwd},

@@ -43,7 +43,7 @@ $(function() {
 			url:'../board/board_update_ok.do',
 			data:{
 				boardno:no,
-				memberid:name,
+				name:name,
 				subject:subject,
 				content:content,
 				pwd:pwd}, /* {변수명,키:값}  항시!! 데이터가 json으로 돼있음 그리고 키랑 BoardModel에서의 값과 같아야함*/
@@ -74,7 +74,7 @@ $(function() {
 				<tr>
 					<th class="text-right warning" width="20%">이름</th>
 					<th width="80%" class="text-left">
-						<input type="text" name="name" size="15" class="input-sm" value="${vo.memberid }" id="name">
+						<input type="text" name="name" size="15" class="input-sm" value="${vo.name }" id="name">
 						
 						<!-- 수정이나 삭제는 꼭 hidden 들어가야 함!!! -->
 						<input type="hidden" name="no" value="${vo.boardno }" id="no">
