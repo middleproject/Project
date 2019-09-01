@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.reserve-mapper">
+<select id="recipeSelectReserve" parameterType="int" resultType="RecipeVO">
+	SELECT no,summary FROM recipe WHERE no=#{no}
+</select>
+<select id="recipeSearchReserve" resultType="int" parameterType="java.util.Map">
+		select CEIL(COUNT(*)/2.0)
+		from member
+		WHERE admin=2
+		and addr2 LIKE '%'||#{area}||'%'	
+</select>
+<select id="chiefList" parameterType="java.util.Map" resultType="MemberVO">
+	SELECT id,poster,name,addr2,reserveCount,num 
+	FROM (SELECT id,poster,name,addr2,reserveCount,rownum as num 
+	FROM (SELECT id,poster,name,addr2,reserveCount 
+	FROM member 
+	WHERE addr2 like '%'||#{area}||'%' 
+	ORDER BY 5 DESC))
+	WHERE num between #{start} and #{end}
+</select>
+<select id="chiefSelect" parameterType="String" resultType="MemberVO">
+	SELECT id,name FROM member WHERE id=#{id}
+</select>
+<select id="selectdate" parameterType="String" resultType="ReserveVO">
+	SELECT DISTINCT rdate FROM reserve WHERE cheifid=#{id}
+</select>
+<select id="selectdatecount" parameterType="String" resultType="int">
+	SELECT count(rdate) FROM reserve WHERE cheifid=#{id}
+</select>
+<select id="selectTime" parameterType="ReserveVO" resultType="int">
+	select rtime FROM reserve WHERE cheifid=#{cheifid} AND rdate=#{rdate} ORDER BY rtime asc
+</select>
+</mapper>
