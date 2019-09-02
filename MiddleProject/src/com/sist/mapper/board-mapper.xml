@@ -71,11 +71,11 @@
     <select id="boardListDataTEST" resultType="BoardVO" parameterType="java.util.Map">
 		SELECT boardno,subject,name,dbday,hit,num ,content,categoryno
 		FROM (SELECT boardno,subject,name,TO_CHAR(day,'YYYY-MM-DD') as dbday,hit,content,categoryno,rownum as num
-		FROM(SELECT boardno,subject,name,day,hit ,content,categoryno
+		FROM(SELECT boardno,subject,name,day,hit,content,categoryno
 		FROM board ORDER BY boardno DESC))
 		WHERE num BETWEEN #{start} AND #{end}
 		AND ${fs} LIKE '%'|| #{textsearch} ||'%'
-		AND categoryno = #{categoryno}
+		AND categoryno=#{categoryno}
 		
 	</select>
     <!-- 댓글넣기 -->
@@ -263,4 +263,46 @@
 		    	depth=depth+1
 		    	WHERE boardno=#{boardno} 
    			 </update>
+   			 
+   			 <!-- 첨부파일게시판 -->
+	<select id="databoardListData" parameterType="java.util.Map" resultType="DataBoardVO">
+		SELECT no,subject,name,dbday,hit,num
+		FROM (SELECT no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD')as dbday,hit,rownum as num
+		FROM(SELECT no,subject,name,regdate,hit
+		FROM databoard ORDER BY no DESC))
+		WHERE num BETWEEN #{start} AND #{end} 	
+	</select>
+	<insert id="dataInsert" parameterType="DataBoardVO">
+		INSERT INTO databoard(no,name,subject,content,pwd,filename,filesize) 
+		VALUES((SELECT NVL(MAX(no)+1,1) 
+		FROM databoard),#{name},#{subject},#{content },#{pwd},#{filename},#{filesize}) 
+	</insert>
+	<select  id="dataTotalPage" parameterType="java.util.Map" resultType="int">	
+		SELECT CEIL(COUNT(*)/5.0) FROM board 
+	</select>
+	<select id="dataRowCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM board 
+	</select>
+	
+	<!-- 상세보기 -->
+	<select id="dataDetailData" parameterType="int" resultType="DataBoardVO">
+		SELECT no,name,subject,content,TO_CHAR(regdate,'YYYY-MM-DD') as dbday, hit , filesize , filename
+		FROM databoard
+		WHERE no=#{no} 
+	</select>
+	<update id="datahit" parameterType="int">
+		UPDATE databoard SET
+		hit = hit+1
+		WHERE no=#{no} 
+	</update>
+	
+	<!-- 수정하기 -->
+	<select id="dataGetPwd" parameterType="int" resultType="String">
+		SELECT pwd FROM databoardWHERE no=#{no} 
+	</select>
+	<update id="dataUpdate" parameterType="DataBoardVO" >
+		UPDATE databoard SET
+		name=#{name}, subject=#{subject}, content=#{content}
+		WHERE no=#{no} 
+	</update>
 </mapper>

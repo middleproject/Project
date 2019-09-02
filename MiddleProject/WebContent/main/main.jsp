@@ -129,7 +129,7 @@
               	<a class="dropdown-item jua" href="#">후기 게시판</a>
                 <a class="dropdown-item jua" href="../bQnA/qboard_list.do">문의 게시판</a>
                 <a class="dropdown-item jua" href="../board/board_list.do">자유게시판</a>
-                <a class="dropdown-item jua" href="#">자료실</a>
+                <a class="dropdown-item jua" href="../databoard/databoard_list.do">자료실</a>
               </div>
             </li>
             

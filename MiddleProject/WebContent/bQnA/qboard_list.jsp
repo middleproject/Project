@@ -43,9 +43,12 @@ $(function(){
 					<td class="text-left">
 						${curpage } page / ${totalpage } pages
 					</td>
-					<td class="text-right">
-						<a href="../bQnA/qboard_insert.do?boardDis=1" class="btn btn-primary">글쓰기</a>
-					</td>
+					<!-- sessionScope 로그인이 된 상태 에서만 글쓰기 허용 -->
+					<c:if test="${sessionScope.id!=null }"> 
+						<td class="text-right">
+							<a href="../bQnA/qboard_insert.do?boardDis=1" class="btn btn-primary">글쓰기</a>
+						</td>
+					</c:if>
 				</tr>
 			</table>
 			<table class="table">
@@ -89,14 +92,24 @@ $(function(){
 									<th class="text-left" colspan="2">		
 										${vo.content }
 									</th>
+										
+							<!-- sessionScope 로그인이 된 상태 에서만 글쓰기 허용 -->
+							멤버아이디는??? ${vo.memberid } <br>
+							세션스코프 아이디는??? ${sessionScope.id }<br>
+							<c:if test="${sessionScope.id!=null }"> 
 									<td colspan="2">
 										<a href="../bQnA/qboard_update.do?no=${vo.boardno }" class="btn btn-sm btn-primary">수정</a>
 									
 										<a href="../bQnA/qboard_delete.do?no=${vo.boardno }" class="btn btn-sm btn-danger">삭제</a>
-								
+									<!-- sessionScope 관리자인 상태 에서만 답글쓰기 허용 -->
+									<c:if test='${sessionScope.id=="shim" || sessionScope.id==vo.memberid}'> 
+									<!-- admin==1 or "1" -->
 										<a href="../bQnA/qboard_reply.do?no=${vo.boardno }&boardDis=1" class="btn btn-sm btn-warning replyBtn" value="${vo.boardno }">답글</a>
-									</td>		
+									</c:if>	
+									</td>	
+							</c:if>
 								</tr>
+								
 							<c:set var="count" value="${count-1 }"/>
 						</c:forEach>
 			</table>
@@ -109,15 +122,15 @@ $(function(){
 						<ul class="pagination">
 						
 							<c:if test="${curpage != 1 }">
-								<li><a href="../board/board_list.do?page=1">　◁</a></li>
-								<li><a href="../board/board_list.do?page=${curpage-1 }">　＜</a></li>
+								<li><a href="../bQnA/qboard_list.do?page=1">　◁</a></li>
+								<li><a href="../bQnA/qboard_list.do?page=${curpage-1 }">　＜</a></li>
 							</c:if>
 								<c:forEach var="i" begin="1" end="${totalpage }">
-									<li class="${i==curpage?'active':''}"><a href='../board/board_list.do?page=${i }'>　${i }　</a>
+									<li class="${i==curpage?'active':''}"><a href='../bQnA/qboard_list.do?page=${i }'>　${i }　</a>
 								</c:forEach>
 							<c:if test="${curpage != totalpage }">
-								<li><a href="../board/board_list.do?page=${curpage+1 }">　＞</a></li>
-								<li><a href="../board/board_list.do?page=${totalpage }">　▷</a></li>
+								<li><a href="../bQnA/qboard_list.do?page=${curpage+1 }">　＞</a></li>
+								<li><a href="../bQnA/qboard_list.do?page=${totalpage }">　▷</a></li>
 							</c:if>
 						</ul>
 					</td>

@@ -13,40 +13,44 @@
 </style>
 </head>
 <body>
-	<div class="container">
-	<h2 class="text-center">문의글쓰기</h2>
+<div class="container">
+		<h2 class="text-center">첨부파일글쓰기</h2>
 		<div class="row">
-		<form method="post" action="../bQnA/qboard_insert_ok.do">
-			<input type="hidden" name="categoryno" id="categoryno"  value="${boardDis }" > <!-- ♥ -->
-			<input type="text" name="memberid" id="memberid" value="${sessionScope.id }">
+		<form method="post" action="../databoard/databoard_insert_ok.do" enctype="multipart/form-data"> <!-- ★파일업로드 시키고싶으면 enctype 필수추가 -->
 			<table class="table">
-				<tr> 
-					<th class="text-right warning" width="20%">이름</th>
-					<th width="80%" class="text-left">
-						<input type="text" name="name" size="15">
+				<tr>
+					<th class="text-right info" width="15%">이름</th>
+					<th width="85%"  align="left">
+						<input type="text" name="name" size="15"> 
 					</th>
 				</tr>
 				<tr>
-					<th class="text-right warning" width="20%">제목</th>
-					<th width="80%" class="text-left">
+					<th class="text-right info" width="15%">제목</th>
+					<th width="85%">
 						<input type="text" name="subject" size="45">
 					</th>
 				</tr>
 				<tr>
-					<th class="text-right warning" width="20%">내용</th>
-					<th width="80%" class="text-left">
+					<th class="text-right info" width="15%">내용</th>
+					<th width="85%">
 						<textarea rows="10" cols="55" name="content"></textarea>
 					</th>
 				</tr>
 				<tr>
-					<th class="text-right warning" width="20%">비밀번호</th>
-					<th width="80%" class="text-left">
+					<th class="text-right info" width="15%">첨부파일</th>
+					<th width="85%">
+						<input type="file" name="upload" size="20">
+					</th>
+				</tr>
+				<tr>
+					<th class="text-right info" width="15%">비밀번호</th>
+					<th width="85%">
 						<input type="password" name="pwd" size="10">
 					</th>
 				</tr>
 				<tr>
 					<th colspan="2" class="text-center">
-						<input type="submit" value="글쓰기" class="btn btn-sm btn-primary" > 
+						<input type="submit" value="글쓰기" class="btn btn-sm btn-success" >  
 						<input type="button" value="취소" class="btn btn-sm btn-danger" onclick="javascript:history.back()"> 
 					</th>
 				</tr>

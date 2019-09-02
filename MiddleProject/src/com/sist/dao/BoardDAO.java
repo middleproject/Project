@@ -113,14 +113,14 @@ public class BoardDAO {
 		   return no;
 	   }
 	   
-	   // 검색하기
+	   // 검색하기★★★★★★★★★★
 	   public static List<BoardVO> boardListDataTEST(Map map) {
 		   List<BoardVO> list = new ArrayList<BoardVO>();
 		   
 		   // db연결
 		   SqlSession session = ssf.openSession();
 		   list = session.selectList("boardListDataTEST",map);
-	
+		   
 		   // db해제
 		   session.close();
 		   return list;
@@ -207,12 +207,45 @@ public class BoardDAO {
 		   SqlSession session = ssf.openSession(); //db열기
 		   String db_pwd=session.selectOne("boardGetPwd",no); //비번얻어오기
 		   System.out.println("db의 비번은 뭘까용?"+db_pwd);
+		 
+		   if(db_pwd.equals(pwd)) {
+			   
+			   BoardVO pvo = session.selectOne("bQnARead",no); //mapper 106
+			   BoardVO vo = new BoardVO();
+			   System.out.println(" getDepth : " + pvo.getDepth());
+			   if(pvo.getDepth() == 0 ){
+
+				   result=1;
+				   session.delete("boardReplyDelete",no);
+				   session.delete("boardDelete",no);
+				   System.out.println(" getDepth : " + pvo.getRoot());
+				   
+				   session.update("bQnADepthDecrement",pvo.getRoot());
+				   session.commit();
+				   
+			   } else {
+				  result=1;
+				  vo.setName("");
+				  vo.setContent("<font color=grey>[！]관리자가 삭제한 게시글 입니다</font>");
+				  vo.setPwd(pwd);
+				  vo.setSubject("<font color=grey>[！]관리자가 삭제한 게시글 입니다</font>");
+				  vo.setBoardno(no);
+				  
+				  session.update("boardUpdate", vo);
+				  session.commit();   
+				   
+			   }
+			   
+		   }
+		   
+		   /*
 		   if(db_pwd.equals(pwd)) {
 			   result=1;
 			   session.delete("boardReplyDelete",no);
 			   session.delete("boardDelete",no);
 			   session.commit();
 		   }
+		   */
 		   session.close(); //db닫기
 		   return result;
 	   }
@@ -319,5 +352,82 @@ public class BoardDAO {
 	   
 	   }
 	   
+	   //첨부파일게시판
+	   public static List<DataBoardVO> databoardListData(Map map) {
+		   List<DataBoardVO> list = new ArrayList<DataBoardVO>();
+		   
+		   // db연결
+		   SqlSession session = ssf.openSession();
+		   list = session.selectList("databoardListData",map);
+	
+		   // db해제
+		   session.close();
+		   return list;
+	   }
 
+	   //글쓰기
+	   public static void dataInsert(DataBoardVO vo) {
+		   SqlSession session = ssf.openSession(true);
+		   System.out.println("dataInsert 1");
+		   session.insert("dataInsert",vo);
+		   
+		   
+		   
+		   System.out.println("dataInsert 2");
+		  
+		   session.close();
+	   }
+	   
+	   public static int dataTotalPage(Map map) {
+		   int total = 0;
+		   SqlSession session = null;
+		   try {
+			// 연결(getConnection)
+			   session = ssf.openSession();
+			// sql문장 전송
+			   total = session.selectOne("dataTotalPage", map);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			// 반환(disConnection)
+			if(session!=null)
+			session.close();
+		}
+		   return total;
+	   }
+	   //게시물 전체갯수 읽기
+	   public static int dataRowCount(Map map) {
+		   int count=0;
+		   SqlSession session = ssf.openSession();
+		   count=session.selectOne("dataRowCount",map);
+		   session.close();
+		   return count;
+	   }
+	   //상세보기
+	   public static DataBoardVO dataDetailData(int no, String type) {
+		   DataBoardVO vo = new DataBoardVO();
+		   SqlSession session = ssf.openSession();
+		   if(type.equals("detail")) {
+			   session.update("datahit",no);
+			   session.commit();
+		   }
+		   vo = session.selectOne("dataDetailData",no);
+		   System.out.println("이름은?"+vo.getName());
+		   session.close();
+		   return vo;
+	   }
+	   //수정하기
+	   public static int dataUpdate(DataBoardVO vo) {
+		   int no=0;
+		   SqlSession session = ssf.openSession();
+		   //비번확인
+		   String pwd = session.selectOne("dataGetPwd", vo.getNo());
+		   if(pwd.equals(vo.getPwd())) {
+			   no = vo.getNo();
+			   session.update("dataUpdate", vo);
+			   session.commit();   
+		   } 
+		   session.close();
+		   return no;
+	   }
 }

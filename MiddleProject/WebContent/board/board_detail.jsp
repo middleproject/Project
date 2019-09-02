@@ -104,8 +104,11 @@ var u= 0;
 									</c:if>
 									<font color="grey">♥</font><font color="grey"><b>${rvo.name }</b></font>&nbsp;${rvo.dbday }
 								</th>
+								111 : ${rvo.id }
 								
+								22 : ${sessionScope.id } 
 								<th class="text-right">
+								 
 									<c:if test="${sessionScope.id!=null && sessionScope.id==rvo.id }"> <!-- 조건2개 / 본인이면 모두 사용가능 -->
 										<a href="# " class="btn btn-xs btn-warning updateBtn" value="${rvo.replyno }">수정</a>
 										<a href="../board/reply_delete.do?no=${rvo.replyno }&bno=${vo.boardno } " class="btn btn-xs btn-danger">삭제</a>

@@ -12,6 +12,8 @@
 		<typeAlias type="com.sist.vo.BoardCategoryVO" alias="BoardCategoryVO"/>
 		<typeAlias type="com.sist.vo.BoardVO" alias="BoardVO"/>
 		<typeAlias type="com.sist.vo.ReplyVO" alias="ReplyVO"/>
+		<typeAlias type="com.sist.vo.DataBoardVO" alias="DataBoardVO"/>
+		<typeAlias type="com.sist.vo.DataBoardReplyVO" alias="DataBoardReplyVO"/>
 		<!-- search -->
 		<typeAlias type="com.sist.vo.IngreVO" alias="IngreVO"/>
 		<typeAlias type="com.sist.vo.IngredetailVO" alias="IngredetailVO"/>
