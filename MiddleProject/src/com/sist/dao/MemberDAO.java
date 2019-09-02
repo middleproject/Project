@@ -39,20 +39,20 @@ public class MemberDAO {
 	}
 
 	// 장바구니 갯수
-	public static int MywishCount(String id) {
-		int total = 0;
-		SqlSession session = null;
-		try {
-			session = ssf.openSession();
-			total = session.selectOne("MywishCount", id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (session != null)
-				session.close();
+		public static int wishCount(String id) {
+			int total = 0;
+			SqlSession session = null;
+			try {
+				session = ssf.openSession();
+				total = session.selectOne("wishCount", id);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (session != null)
+					session.close();
+			}
+			return total;
 		}
-		return total;
-	}
 
 	// 회원가입
 	public static void memberSignUp(MemberVO vo) {

@@ -149,8 +149,8 @@
 	<select id="wishData" parameterType="String" resultType="int">
 		select recipeno from wish where id = #{id}
 	</select>
-	<select id="wishCount" parameterType="int" resultType="int">
-		select count(*) from wish where recipeno = #{no}
+	<select id="wishCount" parameterType="String" resultType="int">
+		select count(*) from wish where id = #{id}
 	</select>
 	<!-- wish 목록 추가 -->
 	<insert id="wishInsert" parameterType="WishVO">
@@ -174,7 +174,31 @@
 		#{rno}
 		)
 	</insert>
+	
 	<select id="readAllData" resultType="ReadVO" parameterType="String">
 		select * from read where id = #{id}
 	</select>
+	
+	<!-- MSG 보낸 메세지-->
+	  <select id="msgSendData" resultType="MsgVO" parameterType="String">
+		select content,sub,id,TO_CHAR(day,'YYYY-MM-DD') as day from msg where memberid = #{id}
+	</select>
+	
+	<select id="msgReserveData" resultType="MsgVO" parameterType="String">
+		select content,sub,memberid,TO_CHAR(day,'YYYY-MM-DD') as day from msg where id = #{id}
+	</select>
+	<select id="msgCount" parameterType="String" resultType="int">
+		select count(*) from msg where read = 0 and id=#{id}
+	</select> 
+	<!-- 메세지 보내기 -->
+	<insert id="msgInsert" parameterType="MsgVO">
+		insert into msg(msgno,content,sub,memberid,id) values(
+		(select NVL(max(msgno)+1,1) from msg),
+		#{content},
+		#{sub},
+		#{memberid},
+		#{id}
+		)
+	</insert>
+	
 </mapper>

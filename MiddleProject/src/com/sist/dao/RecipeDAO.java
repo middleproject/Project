@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.sist.vo.FollowVO;
 import com.sist.vo.IngredetailVO;
+import com.sist.vo.MsgVO;
 import com.sist.vo.ReadVO;
 import com.sist.vo.RecipeVO;
 import com.sist.vo.WishVO;
@@ -288,5 +289,58 @@ public class RecipeDAO {
 		}
 		   return vo;
 	   }
+	   //보낸 메세지,  받은 메세지 출력
+	   public static List<MsgVO> msgSend(String id){
+		   List<MsgVO> list = new ArrayList<MsgVO>();
+		   SqlSession session = null;
+		   try {
+			session=ssf.openSession();
+			list = session.selectList("msgSendData",id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session!=null) session.close();
+		}
+		   return list;
+	   }
+	   public static List<MsgVO> msgReseve(String id){
+		   List<MsgVO> list = new ArrayList<MsgVO>();
+		   SqlSession session = null;
+		   try {
+			session=ssf.openSession();
+			list = session.selectList("msgReserveData",id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session!=null) session.close();
+		}
+		   return list;
+	   }
+	   public static int msgCount(String id) {
+		   int count = 0;
+		   SqlSession session = null;
+		   try {
+			session=ssf.openSession();
+			count = session.selectOne("msgCount",id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session!=null) session.close();
+		}
+		   return count;
+	   }
+	   // 메세지 보내기
+	   public static void msgInsert(MsgVO vo) {
+		   SqlSession session = null;
+		   try {
+			session=ssf.openSession(true);
+			session.selectOne("msgInsert",vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(session!=null) session.close();
+		}
+	   }
+	   
 
 }

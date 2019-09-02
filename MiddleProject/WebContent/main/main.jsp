@@ -94,6 +94,9 @@
 								<a href="../mypage/adminpageMain.do"><span class="text"
 									style="color: white;margin-left: 10px;">관리자페이지</span></a>
 							</c:if>
+							 <!-- 2019-9.1 지우-->
+						    <a href="../recipe/msg.do"><span class="text" style="color:white;">쪽지(${msgCount })<c:if test="${msgCount>0 }"><sup><font color=red>NEW</font></sup></c:if>&nbsp;&nbsp;</span></a>
+						    <a href="../recipe/follow.do"><span class="text" style="color:white;">새글&nbsp;&nbsp;</span></a>
 						</c:if>
 				    </div>
 			    </div>
