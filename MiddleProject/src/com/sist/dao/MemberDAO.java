@@ -68,5 +68,22 @@ public class MemberDAO {
 			}
 		}
 	}
+	//회원정보 가져오기
+	 public static MemberVO memberAllData(String id){
+		   SqlSession session =null;
+		   MemberVO vo = new MemberVO();
+		   session =ssf.openSession();
+		   try {
+			 vo=   session.selectOne("selecId",id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if (session != null)session.close();
+		}
+		   return vo;
+	   }
+	
+	
+	
 
 }
