@@ -88,7 +88,7 @@
 							<span class="text" style="color: white;"> </span>
 							<c:if test="${sessionScope.admin==0 || sessionScope.admin==2 }">
 								<a href="../mypage/mypageMain.do"><span class="text"
-									style="color: white;margin-left: 10px;">마이페이지</span></a>
+									style="color: white;margin-left: 10px;">마이페이지&nbsp;&nbsp;</span></a>
 							</c:if>
 							<c:if test="${sessionScope.admin==1 }">
 								<a href="../mypage/adminpageMain.do"><span class="text"
