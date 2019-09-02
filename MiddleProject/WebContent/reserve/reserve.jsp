@@ -81,10 +81,34 @@ $(function(){
 		});
 	});
 	$('.final').click(function(){
+		var poster=$('#select1_hi').attr("title");
+		var no=$('#select1_').attr("title");
+		var title=$('#select1_').text();
+		
+		var id=$('#select3_').attr("title");
+		var name=$('#select3_').text();
+		
+		var time=$('#select4_').attr("title");
+		var date=$('#select4_').text();
+		
+		var price=$('#select5_').attr("title");
+		
+		var msg=$('#select6_').attr("title");
+		alert(poster);
+		alert(no);
+		alert(title);
+		alert(id);
+		alert(name);
+		alert(time);
+		alert(price);
+		
+		/* $('#poster').attr("src",poster);
+		$('#title').text(title); */
 		
 		$.ajax({
 			type:'post',
 			url:'../reserve/final.do',
+			data:{poster:poster,},
 			success:function(response){
 				$('#print').html(response);
 			}
