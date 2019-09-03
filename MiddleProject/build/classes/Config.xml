@@ -17,6 +17,7 @@
 		<!-- search -->
 		<typeAlias type="com.sist.vo.IngreVO" alias="IngreVO"/>
 		<typeAlias type="com.sist.vo.IngredetailVO" alias="IngredetailVO"/>
+		<typeAlias type="com.sist.vo.DifficultyVO" alias="DifficultyVO"/>
 		<!-- member -->
 		<typeAlias type="com.sist.vo.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.sist.vo.FollowVO" alias="FollowVO"/>

@@ -9,6 +9,12 @@
      #{ingreinfo}
    )
   </insert>
+ <insert id="DifficultyInsert" parameterType="DifficultyVO">
+   INSERT INTO difficulty VALUES(
+     #{difficultyNo},
+     #{difficultystep}
+   )
+  </insert>
   <select id="IngreListData" resultType="IngreVO">
     SELECT * FROM Ingre
   </select>
@@ -22,4 +28,15 @@
     FROM recipe
     WHERE ingre like '%'||#{ingre}||'%' AND <![CDATA[rownum<=12]]>
   </select>
+ 
+  <select id="DifficultyListData" resultType="DifficultyVO">
+    SELECT * FROM difficulty
+  </select>
+  
+  <select id="searchDifficultyData" resultType="RecipeVO" parameterType="hashmap">
+    SELECT summary,made,poster
+    FROM recipe
+    WHERE info like '%'||#{info}||'%' AND <![CDATA[rownum<=12]]>
+  </select>
+  
 </mapper>

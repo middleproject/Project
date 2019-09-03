@@ -74,12 +74,39 @@ $(function(){
 		});
 	});
 });
-<%--$('.searchButton').on('click',function(){
-	  alert('You clicked search button');
-	});--%>
+$(function difficulty(){
+	$('.difficulty').click(function difficulty(){
+		var difficultystep=$(this).attr("data-difficultystep");
+		
+		
+		$('#difficultystep').text(difficultystep);
+		
+		$.ajax({
+			type:'post',
+			url:'../search/difficultylist.do',
+			data:{info:difficultystep},
+			success:function(response)
+			{
+				
+				$('#difficultylist').html(response);
+			}
+		});
+	});
+});
+
 </script>
 </head>
 <body>
+<div class="hero-wrap hero-bread" style="background-image: url('../main/images/bg_1.jpg');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span></p>
+            <h1 class="mb-0 bread">Search</h1>
+          </div>
+        </div>
+      </div>
+    </div>
 <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
       <div class="container py-4">
         <div class="row d-flex justify-content-center py-5">
@@ -96,16 +123,24 @@ $(function(){
     		<div class="row justify-content-center">
     			<div class="col-md-10 mb-5 text-center">
     				<ul class="product-category">
-    				<c:forEach var="vo" items="${list }">
-    					<li class="ingrelist" data-name="${vo.ingrename }" data-no="${vo.ingreno }"><a href="#" class="active">${vo.ingrename }</a></li>
-    					</c:forEach>
+    				 <c:forEach var="vo" items="${list }">
+    					  <li class="ingrelist" data-name="${vo.ingrename }" data-no="${vo.ingreno }"><a href="#" class="active">${vo.ingrename }</a></li>
+    					</c:forEach> 
+    					<br><br>
     					<div id="searchlist"></div>
+    					<br><br>
+    					<c:forEach var="dvo" items="${dlist }">
+    					<li class="difficulty" data-difficultystep="${dvo.difficultystep }"><a href="#" class="active">${dvo.difficultystep }</a></li>
+    					</c:forEach>
+    					
+    					
     				</ul>
     				
     			</div>
     		</div>
     		
     		<div class="row" id="searchingre">
+    		<div class="row" id="difficultylist">
     		
     		</div>
     		</div>

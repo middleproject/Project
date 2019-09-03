@@ -26,14 +26,18 @@ $(function(){
 		});
 	});
 });
+
 </script>
 
 </head>
 <body>
+
      <ul class="product-category">
+     <div class="tagcloud">
        <c:forEach var="ingredetailname" items="${list }">
     	<li class="searchlist" data-detailname="${ingredetailname }"><a href=#>${ingredetailname }</a></li>			
        </c:forEach>
+       </div>
      </ul>
     
 </body>
