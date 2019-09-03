@@ -16,7 +16,6 @@ import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
 import com.sist.vo.FollowVO;
 import com.sist.vo.IngredetailVO;
-import com.sist.vo.MsgVO;
 import com.sist.vo.ReadVO;
 import com.sist.vo.RecipeVO;
 import com.sist.vo.WishVO;
@@ -335,62 +334,19 @@ public class RecipeModel {
 		model.addAttribute("main_jsp", "../recipe/wishRecipe.jsp");
 		return "../main/main.jsp";
 	}
-	@RequestMapping("recipe/msg.do")
-	public String recipe_msg(Model model) {
-		try {
-			model.getRequest().setCharacterEncoding("UTF-8");
-		} catch (Exception e) {}
-		HttpSession session = model.getRequest().getSession();
-		String id = (String)session.getAttribute("id");	
-		List<MsgVO> list = RecipeDAO.msgSend(id);
-		
-		model.addAttribute("list", list);
-		model.addAttribute("main_jsp", "../recipe/msg.jsp");
-		return "../main/main.jsp";
-	}
-	@RequestMapping("recipe/rmsg.do")
-	public String recipe_reseveMsg(Model model) {
-		HttpSession session = model.getRequest().getSession();
-		String id = (String)session.getAttribute("id");
-		List<MsgVO> rlist = RecipeDAO.msgReseve(id);
-		
-		model.addAttribute("rlist", rlist);
-		
-		return "rmsg.jsp";
-	}
-	@RequestMapping("recipe/sendmsg.do")
-	public String recipe_sendMsg(Model model) {
-		
-		
-		return "sendmsg.jsp";
-	}
 	
-	@RequestMapping("recipe/send.do")
-	public String recipe_send(Model model) {
-		try {
-			model.getRequest().setCharacterEncoding("UTF-8");
-		} catch (Exception e) {
-		}
+	@RequestMapping("recipe/recipeRegister.do")
+	public String recipe_Register(Model model){
 		HttpSession session = model.getRequest().getSession();
-		String memberid = (String)session.getAttribute("id");	
-		String id = model.getRequest().getParameter("id");
-		String sub = model.getRequest().getParameter("sub");
-		String content = model.getRequest().getParameter("content");
-		MsgVO vo = new MsgVO();
-		if(sub!=null) {
-			if(content==null) content="";
-			vo.setMemberid(memberid);
-			vo.setId(id);
-			vo.setContent(content);
-			vo.setSub(sub);
-			RecipeDAO.msgInsert(vo);
-			System.out.println("성공");
-		}else {
-			System.out.println("실패");
-		}
-		System.out.println("id:"+id);
-		System.out.println("보낸:"+memberid+"제목"+sub+"내용:"+content);
-		
-		return "redirect:../recipe/sendmsg.do";
+		String id =(String)session.getAttribute("id");
+		List<Integer> iList = new  ArrayList<Integer>();
+		List<RecipeVO> list = new ArrayList<RecipeVO>();
+
+		model.addAttribute("list", list);
+		model.addAttribute("main_jsp", "../recipe/recipeRegister.jsp");
+		return "../main/main.jsp";
+	
+	
+	
 	}
 }
