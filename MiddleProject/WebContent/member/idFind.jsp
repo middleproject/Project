@@ -42,14 +42,14 @@
 	<div class="container-login100"
 		style="background-image: url('images/bg-01.jpg');">
 		<div class="wrap-login100 p-l-55 p-r-55 p-t-40 p-b-70">
-			<form class="login100-form validate-form">
+			<form class="login100-form validate-form" method="post" action="../member/idFind_ok.do"> 
 
 				<a href="../main/main.do" class="login100-form-title p-b-40"> <img
 					src="Resize.png">
 				</a>
 
 				<div class="wrap-input100 validate-input m-b-26">
-					<input class="input100" type="text" id="id"
+					<input class="input100" type="text" id="email" name="email"
 						placeholder="이메일을 입력하세요"> <span class="focus-input100"></span>
 				</div>
 

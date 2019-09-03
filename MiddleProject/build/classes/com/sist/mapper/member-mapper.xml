@@ -18,7 +18,7 @@
    
    <!-- 3. 회원가입 -->
    <insert id="memberSignUp" parameterType="MemberVO">
-   	INSERT INTO member(id,pwd,name,email,tel,phone,addr1,addr2,sex,age,admin,pay) VALUES(
+   	INSERT INTO member(id,pwd,name,email,tel,phone,addr1,addr2,sex,admin,pay,birthday) VALUES(
    		#{id},
    		#{pwd},
    		#{name},
@@ -28,13 +28,13 @@
    		#{addr1},
    		#{addr2},
    		#{sex},
-   		#{age},
    		#{admin},
-   		#{pay}
+   		#{pay},
+   		#{birthday}
    	)
-   </insert>
+   	</insert>
    <!-- 4. 회원탈퇴 -->
-   <delete id="member" parameterType="String">
+    <delete id="memberDelete" parameterType="String">
    	DELETE FROM member
    	WHERE id=#{id}
    </delete>
@@ -43,18 +43,25 @@
    		select count(*) from wish where id = #{id}
    	</select>
    	
+   	<!-- email 존재여부  -->
+   <select id="memberEmailCount" resultType="int" parameterType="String">
+     SELECT COUNT(*)
+     FROM member
+     WHERE email=#{email}
+   </select>
+   	
    	<!-- 아이디 찾기 -->
-   <select id="memIdFind" parameterType="MemberVO" resultType="String">
+   <select id="memIdFind" parameterType="String" resultType="String">
    	SELECT id
    	FROM member
    	WHERE email=#{email}
    </select>
    
    <!-- 비밀번호 찾기 -->
-   <select id="memPwdFind" parameterType="MemberVO" resultType="String">
+   <select id="memPwdFind" parameterType="String" resultType="String">
    	SELECT pwd
    	FROM member
-   	WHERE id=#{id} AND pwd=#{pwd}
+   	WHERE email=#{email} 
    </select>
    <!-- 마이페이지  회원정보-->
    	<select id="selecId" parameterType="String" resultType="MemberVO">

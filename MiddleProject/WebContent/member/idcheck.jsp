@@ -27,7 +27,7 @@ $(function(){
 		}
 		$.ajax({
 			type:'post',
-			url:'idcheck_result.jsp',
+			url:'idcheck_result.do',
 			data:{id:id},
 			success:function(res){
 				var no=res.trim();

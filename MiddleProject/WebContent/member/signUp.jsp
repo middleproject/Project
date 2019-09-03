@@ -12,7 +12,7 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
-					<form id="join_frm" method="post" action="signUp_ok.jsp"
+					<form id="join_frm" name="userInfo" method="post" action="signUp_ok.do"
 						class="signUp" onsubmit="return validate();">
 						<h3 class="mb-4 billing-heading">회원 가입</h3>
 						<div class="row align-items-end">
@@ -27,7 +27,8 @@
 								<div class="form-group">
 
 									<input type="button" style="width: 120px; height: 57px;"
-										class="btn-warning btn-lg" value="중복체크" id="checkBtn">
+										class="btn-warning btn-lg" value="중복확인" onclick="openIdChk()">
+									<input type="hidden" name="idDuplication" value="idUncheck">
 								</div>
 							</div>
 							<div class="w-100"></div>
@@ -100,7 +101,7 @@
 							<div class="col-md-0">
 								<div class="form-group">
 									<select id="emailSelection" name="emailSelection"
-										name="emailSelection" style="width: 120px; height: 33px;">
+										style="width: 120px; height: 33px;">
 										<option>직접입력</option>
 										<option>naver.com</option>
 										<option>daum.net</option>
@@ -211,12 +212,11 @@
 </body>
 
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(function() {
 
 		//비밀번호 확인
-		$('#pwd2')
-				.keyup(
+		$('#pwd2').keyup(
 						function() {
 							if ($('#pwd').val() != $('#pwd2').val()) {
 								if ($('#pwd2').val() != '') {
@@ -227,10 +227,18 @@
 								document.getElementById('lable').style.color = "blue";
 								document.getElementById('lable').innerHTML = "비밀번호가 일치합니다.";
 							}
-						})
+						});
 	});
-</script>
+</script> -->
+<!-- <script type="text/javascript" src="../shadow/js/shadowbox.js"></script> -->
+
 <script type="text/javascript">
+/* 
+	Shadowbox.init({
+		players:['iframe']
+		
+	})
+ */
 	$(function() {
 		$(document).ready(function() {
 			$('select[name=emailSelection]').change(function() {
@@ -243,7 +251,36 @@
 				}
 			});
 		});
-	});
+/* 		
+		$('#postBtn').click(function(){
+			Shadowbox.open({
+				content:'../member/postfind.do',
+				player:'iframe',
+				title:'우편번호 검색',
+				width:550,
+				height:550
+			});
+		});
+		$('#checkBtn').click(function(){
+			Shadowbox.open({
+				content:'../member/idcheck.do',
+				player:'iframe',
+				title:'아이디 중복체크',
+				width:360,
+				height:200
+			});
+		});
+	}); */
+	
+	function openIdChk(){
+		window.name="parentForm";
+		window.open=("idcheckForm.jsp", "chkForm",
+				"width=500, height=300, resizable=no, scrollbars=no");	
+	};
+	
+	function inputIdChk(){
+		document.userInfo.idDuplication.value="idUncheck";
+	};
 </script>
 
 
