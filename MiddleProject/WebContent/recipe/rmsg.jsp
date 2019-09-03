@@ -7,18 +7,13 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
-	$('#detail').click(function(){
+	$('.detail').click(function(){
 		var no=$(this).attr("value");
-		$.ajax({
-			type:'post',
-			url:'recipe/msgdetail.do',
-			data:{no:no},
-			success:function(res){
-				$('#print').html(res);
-			}
+		window.open("msgdetail.do?no="+no, "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes");
+
 		});
 	});
-});
+
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -37,12 +32,26 @@ $(function(){
 			</tr>
 		</thead>
 		<c:forEach var="rvo" items="${rlist }">
-			<tr class="text-center" height="100">
-				<td class="text-center"><a href="#" value="${rvo.msgno }" id="detail">${rvo.sub }</a></td>
-				<td class="text-center" colspan=3><p>${rvo.content }</p></td>
-				<td class="text-center">${rvo.memberid }</td>
-				<td class="text-center">${rvo.day }</td>
-			</tr>
+			
+				<c:if test="${rvo.read==1 }">
+				<tr class="text-center" height="100">
+					<td class="text-center"><a href="" class="detail" value="${rvo.msgno }" id="detail${rvo.msgno }"><font color="gray">${rvo.sub }</font></a></td>
+					<td class="text-center" colspan=3><p><font color="gray">${rvo.content }</font></p></td>
+					<td class="text-center"><font color="gray">${rvo.memberid }</font></td>
+					<td class="text-center"><font color="gray">${rvo.day }</font></td>
+				</tr>
+				</c:if>
+				
+				<c:if test="${rvo.read==0 }">
+				<tr class="text-center" height="100">
+				
+					<td class="text-center"><a href="" class="detail" value="${rvo.msgno }" id="detail${rvo.msgno }"><font color="black"><b>${rvo.sub }</b></font></a></td>
+					<td class="text-center" colspan=3><p><font color="black"><b>${rvo.content }</b></font></p></td>
+					<td class="text-center"><font color="black"><b>${rvo.memberid }</b></font></td>
+					<td class="text-center"><font color="black"><b>${rvo.day }</b></font></td>
+				</tr>
+				</c:if>
+			
 			<!-- END TR-->
 		</c:forEach>
 	</table>

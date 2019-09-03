@@ -164,8 +164,8 @@ public class RecipeDAO {
 		}
 	   }
 	   //팔로우 찾기 
-	   public static List<String> followSearch(String id){
-		   List<String> list = new ArrayList<String>();
+	   public static List<FollowVO> followSearch(String id){
+		   List<FollowVO> list = new ArrayList<FollowVO>();
 		   SqlSession session = null;
 		   try {
 			   session=ssf.openSession();
@@ -177,12 +177,12 @@ public class RecipeDAO {
 		}
 		   return list;
 	   }
-	   public static List<RecipeVO> followSearchRecipe(Map map){
+	   public static List<RecipeVO> followSearchRecipe(FollowVO vo){
 		   List<RecipeVO> list = new ArrayList<RecipeVO>();
 		   SqlSession session = null;
 		   try {
 			   session=ssf.openSession();
-			   list = session.selectList("madeSearchRecipe",map);
+			   list = session.selectList("madeSearchRecipe",vo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
@@ -341,6 +341,30 @@ public class RecipeDAO {
 			if(session!=null) session.close();
 		}
 	   }
-	   
+	   //메세지 확인
+	   public static void msgUpdate(int msgno){
+		   SqlSession session = null;
+		   try {
+			session=ssf.openSession(true);
+			session.update("msgUpdate",msgno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			if(session!=null) session.close();
+		}
+	   }
+	   public static MsgVO msgDetail(int msgno){
+		   SqlSession session = null;
+		   MsgVO vo = new MsgVO();
+		   try {
+			session=ssf.openSession();
+			vo = session.selectOne("msgDetail",msgno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			if(session!=null) session.close();
+		}
+		   return vo;
+	   }
 
 }

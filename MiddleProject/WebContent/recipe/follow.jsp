@@ -17,11 +17,11 @@
 						    <thead class="thead-primary">
 						      <tr class="text-center">
 						        <th>&nbsp;</th>
-						        <th>Product List</th>
+						        <th>사진 </th>
 						        <th>&nbsp;</th>
-						        <th>Price</th>
-						        <th>Quantity</th>
-						        <th>Total</th>
+						        <th>조회 수</th>
+						        <th>만든사람</th>
+						        <th>날짜</th>
 						      </tr>
 						    </thead>
 						    <tbody>
@@ -36,16 +36,11 @@
 						        	<h3>${vo.summary }</h3>
 						        	<p>${vo.summary_in }</p>
 						        </td>
-						        
-						        <td class="price">$4.90</td>
-						        
+						        <td class="price">${vo.hit }</td>
 						        <td class="quantity">
-						        	<div class="input-group mb-3">
-					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-					          	</div>
+						        	${vo.made }
 					          </td>
-						        
-						        <td class="total">$4.90</td>
+						        <td class="total">${vo.regdate }</td>
 						      </tr><!-- END TR-->
 						      </c:forEach>
 						    </tbody>
@@ -54,6 +49,25 @@
     			</div>
     		</div>
 			</div>
+			<%-- <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul>
+              	<c:if test="${curpage>BLOCK}">
+                	<li><a href="../recipe/recipe_list.do?page=${startpage-1 }&key=${key}&tag=${tag}&ingre=${ingre}">&lt;</a></li>
+                </c:if>
+                
+                <c:forEach var="i" begin="${startpage}" end="${endpage }" step="1">
+	                	<li class=${i==curpage?"active":"" }><a href="../recipe/recipe_list.do?page=${i}&key=${key}&tag=${tag}&ingre=${ingre}">${i }</a></li>       
+                </c:forEach>
+			 &key=${key}&${tag}&${ingre}
+                <c:if test="${endpage<allpage }">
+                	<li><a href="../recipe/recipe_list.do?page=${endpage+1 }&key=${key}&tag=${tag}&ingre=${ingre}">&gt;</a></li>
+                </c:if>
+              </ul>
+            </div>
+          </div>
+        </div> --%>
 		</section>
 </body>
 </html>

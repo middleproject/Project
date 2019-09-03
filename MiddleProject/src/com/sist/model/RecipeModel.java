@@ -283,54 +283,27 @@ public class RecipeModel {
 		HttpSession session = model.getRequest().getSession();
 		
 		String id =(String)session.getAttribute("id");
-		List<String> madeList =new ArrayList<String>();
+		List<FollowVO> madeList =new ArrayList<FollowVO>();
+		List<RecipeVO> list2 = new ArrayList<RecipeVO>();
 		List<RecipeVO> list = new ArrayList<RecipeVO>();
 		List<ReadVO> rlist = new ArrayList<ReadVO>();
-		//페이지 나누기
-		int total=0;
-		Map keymap = new HashMap();
-		String page =model.getRequest().getParameter("page");
-		int curpage=Integer.parseInt(page);
-		
-		int rowSize=6;
-		int start=(curpage*rowSize)-(rowSize-1);
-		int end=curpage*rowSize;
-		
-		keymap.put("end", end);
-		keymap.put("start", start);
-		int count = RecipeDAO.RecipeCount();
-		count=count-((curpage*rowSize)-rowSize); 
-		
-		int BLOCK=5;
-		   
-		int startpage=((curpage-1)/BLOCK*BLOCK)+1;
-	   
-		int endpage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
-	  
-		int allpage=total;
-	   
-		if(endpage>allpage)
-		{
-			   endpage=allpage;
+		for(FollowVO vo:madeList){
+			System.out.println("팔로우 아이디 날짜:"+vo.getDay()+vo.getFollow());
 		}
-		model.addAttribute("startpage", startpage);
-		model.addAttribute("endpage", endpage);
-		model.addAttribute("curpage", curpage);
-		model.addAttribute("allpage", allpage);
-		model.addAttribute("BLOCK", BLOCK);
-		model.addAttribute("total", total);
-		model.addAttribute("count", count);
-		
-		
+		//페이지 나누기
 		Map map =new HashMap();
 		//팔로워 찾기
 		madeList = RecipeDAO.followSearch(id);
 		
-		map.put("made", madeList);
-	
+		for(FollowVO vo:madeList){
+			list2=(RecipeDAO.followSearchRecipe(vo));
+			for(RecipeVO rvo:list2){
+				list.add(rvo);
+			}
+		}
 		// 읽은 값 구분
 		rlist = RecipeDAO.readAllData(id);
-		list = RecipeDAO.followSearchRecipe(map);
+		
 		model.addAttribute("rlist", rlist);
 		model.addAttribute("list", list);
 		model.addAttribute("main_jsp", "../recipe/follow.jsp");
@@ -430,21 +403,14 @@ public class RecipeModel {
 		
 		return "redirect:../recipe/sendmsg.do";
 	}
-	
-	@RequestMapping("recipe/recipeRegister.do")
-	public String recipe_rigister(Model model) {
-		try {
-			model.getRequest().setCharacterEncoding("UTF-8");
-		} catch (Exception e) {}
-		HttpSession session = model.getRequest().getSession();
-		String id = (String)session.getAttribute("id");	
-		List<MsgVO> list = RecipeDAO.msgSend(id);
-		
-		model.addAttribute("list", list);
-		model.addAttribute("main_jsp", "../recipe/recipeRegister.jsp");
-		return "../main/main.jsp";
+	@RequestMapping("recipe/msgdetail.do")
+	public String msgDetail(Model model){
+		String msgno =model.getRequest().getParameter("no");
+		RecipeDAO.msgUpdate(Integer.parseInt(msgno));
+		MsgVO vo = new MsgVO();
+		vo = RecipeDAO.msgDetail(Integer.parseInt(msgno));
+		System.out.println("메세지 값:"+vo.getMemberid()+vo.getContent()+vo.getSub());
+		model.addAttribute("vo", vo);
+		return "msgdetail.jsp";
 	}
-	
-	
-	
 }

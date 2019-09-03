@@ -4,6 +4,14 @@ public class FollowVO {
 	private int no;
 	private String id;
 	private String follow;
+	private String day;
+	
+	public String getDay() {
+		return day;
+	}
+	public void setDay(String day) {
+		this.day = day;
+	}
 	public int getNo() {
 		return no;
 	}

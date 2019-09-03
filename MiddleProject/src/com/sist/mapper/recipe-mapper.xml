@@ -128,20 +128,28 @@
 	<delete id="followDelete" parameterType="FollowVO">
 		delete from following where id=#{id} and follow=#{follow}
 	</delete>
-	<select id="whofollow" parameterType="String" resultType="String">
-		select follow from following where id=#{id}
+	<select id="whofollow" parameterType="String" resultType="com.sist.vo.FollowVO">
+		select follow,TO_CHAR(day ,'YYYY-MM-DD')as day from following where id=#{id}
 	</select>
 	<!-- 만든 사람으로 검색 -->
-	<select id="madeSearchRecipe" resultType="RecipeVO" parameterType="java.util.Map">
+	<!-- <select id="madeSearchRecipe" resultType="RecipeVO" parameterType="java.util.Map">
 		select no,poster,summary,hit,TO_CHAR(regdate,'YYYY-MM-DD') as regdate,num,made 
 		from (select no,poster,summary,summary_in,hit,regdate,rownum as num,made 
 		from recipe <where>
-			<foreach collection="made" item="chef" separator="or">
-				made LIKE '%'||#{chef}||'%'
+			<foreach collection="made" item="vo" separator="or">
+				made LIKE '%'||#{vo.chef}||'%' and TO_CHAR(regdate,'YYYY-MM-DD') =&gt; #{vo.day}
 			</foreach>
 		</where>
 		order by regdate desc)
+	</select> -->
+	<select id="madeSearchRecipe" resultType="RecipeVO" parameterType="FollowVO">
+		select no,poster,summary,hit,TO_CHAR(regdate,'YYYY-MM-DD') as regdate,num,made 
+		from (select no,poster,summary,summary_in,hit,regdate,rownum as num,made 
+		from recipe where
+				made LIKE '%'||#{follow}||'%' and #{day} &lt;= TO_CHAR(regdate,'YYYY-MM-DD') 
+		order by regdate desc)
 	</select>
+	
 	<!-- 레시피 wish 확인 -->
 	<select id="wishAllData" resultType="RecipeVO" parameterType="int">
 		select no,summary,made,poster from recipe where recipe.no = #{no}
@@ -160,6 +168,7 @@
 		#{id}
 		)
 	</insert>
+	
 	<!-- 찜 딜리트 -->
 	<delete id="wishDelete" parameterType="WishVO">
 		delete from wish where recipeno = #{recipeno} and id=#{id}
@@ -181,11 +190,11 @@
 	
 	<!-- MSG 보낸 메세지-->
 	  <select id="msgSendData" resultType="MsgVO" parameterType="String">
-		select content,sub,id,TO_CHAR(day,'YYYY-MM-DD') as day from msg where memberid = #{id}
+		select read,msgno,content,sub,id,TO_CHAR(day,'YYYY-MM-DD') as day from msg where memberid = #{id}
 	</select>
 	
 	<select id="msgReserveData" resultType="MsgVO" parameterType="String">
-		select content,sub,memberid,TO_CHAR(day,'YYYY-MM-DD') as day from msg where id = #{id}
+		select msgno,read,content,sub,memberid,TO_CHAR(day,'YYYY-MM-DD') as day from msg where id = #{id}
 	</select>
 	<select id="msgCount" parameterType="String" resultType="int">
 		select count(*) from msg where read = 0 and id=#{id}
@@ -200,5 +209,12 @@
 		#{id}
 		)
 	</insert>
-	
+	<!-- 메세지  읽음 -->
+	<update id="msgUpdate" parameterType="int">
+		update msg set read = 1 where msgno=#{msgno}
+	</update>
+	<!-- 메세지 정보주기 -->
+	<select id="msgDetail" parameterType="int" resultType="MsgVO">
+		select read,content,sub,memberid,TO_CHAR(day,'YYYY-MM-DD') as day,id from msg where msgno = #{msgno} 
+	</select>
 </mapper>
