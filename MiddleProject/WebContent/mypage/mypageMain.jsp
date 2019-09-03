@@ -81,7 +81,7 @@ border: 1px solid black;
 							<div class="w-100"></div>
 							<img src="images/msg.jpg" alt="My Image" width="100px" height="100px">
 							<p> 새로운 쪽지 ?개<p>
-							<a href="../main/main.do" type="button" class="btn">쪽지확인</a>
+							<a href="../recipe/msg.do" type="button" class="btn">쪽지확인</a>
 							</div>
 							
 							<div class="float-unit"  ><p class="font" >내 식단보기<p>

@@ -32,7 +32,7 @@ hr {
 			<div class="col-xl-9 ftco-animate">
 				<form id="join_frm" method="post" action="" class="signUp"
 					onsubmit="return validate();" enctype="multipart/form-data">
-					<h3 class="mb-4 billing-heading category">레시피 등록</h3>
+					<h3 class="mb-4 billing-heading">레시피 등록</h3>
 					<hr>
 					<div class="row align-items-end">
 
@@ -111,8 +111,7 @@ hr {
 					
 					<label>요리 과정</label>
 					
-					 <input	type='file' id="imgInput2"  style="margin-left: 130px;"/> <img id="image_section2" 
-				/>
+					 <input	type='file' id="imgInput2"  style="margin-left: 130px;"/> <img id="image_section2"/>
 					<hr>
 
 					<label>요리 팁</label>

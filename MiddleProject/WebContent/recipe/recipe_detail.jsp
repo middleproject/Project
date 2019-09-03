@@ -346,6 +346,7 @@ $(function(){
 										 <td class="text-left">
 									           <table class="table">
 									            <tr>
+									            <img src="homePlus.png" style="width:100px; height: 100px;">
 									             <td class="text-center info">HomePlus</td>
 									           </tr>
 									           </table>
@@ -364,6 +365,7 @@ $(function(){
 									         <td>
 									           <table class="table">
 									            <tr>
+									            <img src="emart.png" style="width:100px; height: 100px;">
 									             <td class="text-center info">E-Mart</td>
 									            </tr>
 									           </table>
@@ -382,6 +384,7 @@ $(function(){
 									         <td>
 									           <table class="table">
 									            <tr>
+									            <img src="LotteMart.png" style="width:100px; height: 100px;">
 									             <td class="text-center info">Lotte-Mart</td>
 									            </tr>
 									           </table>
