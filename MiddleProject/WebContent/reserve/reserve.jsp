@@ -248,9 +248,9 @@ $(function(){
            						<div id="inwon"></div>
            					</td>
      					</tr>
-     					<tr class="final">
+     					<tr>
      						<td>
-     							<div class="btn btn-info" id="myBtn">예약 확인</div>	
+     							<div class="btn btn-info final" id="myBtn">예약 확인</div>	
      							
      						</td>
      					</tr>
