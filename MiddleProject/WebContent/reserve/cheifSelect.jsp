@@ -21,6 +21,6 @@ $(function(){
 </script>
 </head>
 <body>
-<h6 id="select3_" title="${vo.id}" style="font: 8px; color: green;">요리사 이름 : ${vo.name}</h6>
+<h6 id="select3_" title="${vo.id}" style="font: 8px; color: green;">${vo.name}</h6>
 </body>
 </html>

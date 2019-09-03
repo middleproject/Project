@@ -21,6 +21,6 @@ $(function(){
 </script>
 </head>
 <body>
-<h6 id="select5_" title="${pricesug}" style="font: 8px; color: green;">제시한 가격 : ${pricesug}원</h6>
+<h6 id="select5_" title="${pricesug}" style="font: 8px; color: green;">${pricesug}원</h6>
 </body>
 </html>

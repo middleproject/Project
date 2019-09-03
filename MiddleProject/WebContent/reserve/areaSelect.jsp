@@ -21,6 +21,6 @@ $(function(){
 </script>
 </head>
 <body>
-<h6 id="select2_" title="${areaName}" style="font: 8px; color: green;">위치 : ${areaT}</h6>
+<h6 id="select2_" title="${areaName}" style="font: 8px; color: green;">${areaT}</h6>
 </body>
 </html>

@@ -1,18 +1,7 @@
 package com.sist.vo;
 
 
-/*
- * 	no NUMBER,
-	cheifid VARCHAR2(500),
-	name VARCHAR2(4000),
-	rno number,
-	summary clob,
-	rdate date default SYSDATE,
-	rtime number,
-	price number,
-	msg clob,
-	checheif number,
- */
+
 public class ReserveVO {
 	private int no;
 	private String cheifid;
@@ -24,6 +13,14 @@ public class ReserveVO {
 	private int price;
 	private String msg;
 	private int checheif;
+	private String userid;
+	
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 	public int getNo() {
 		return no;
 	}
@@ -84,6 +81,7 @@ public class ReserveVO {
 	public void setChecheif(int checheif) {
 		this.checheif = checheif;
 	}
+	
 	
 	
 }

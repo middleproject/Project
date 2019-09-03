@@ -5,10 +5,72 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */                          
+        }
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+</style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
-	
+	 // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];                                          
+
+    // When the user clicks on the button, open the modal 
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    
 	$.ajax({
 		type:'post',
 		url:'../reserve/blank.do',
@@ -19,7 +81,6 @@ $(function(){
 	});
 	
 	$('.recipe').click(function(){
-				
 		$.ajax({
 			type:'post',
 			url:'../reserve/search.do',
@@ -80,7 +141,9 @@ $(function(){
 			}
 		});
 	});
+
 	$('.final').click(function(){
+		
 		var poster=$('#select1_hi').attr("title");
 		var no=$('#select1_').attr("title");
 		var title=$('#select1_').text();
@@ -94,54 +157,37 @@ $(function(){
 		var price=$('#select5_').attr("title");
 		
 		var msg=$('#select6_').attr("title");
-		alert(poster);
-		alert(no);
-		alert(title);
-		alert(id);
-		alert(name);
-		alert(time);
-		alert(price);
 		
-		/* $('#poster').attr("src",poster);
-		$('#title').text(title); */
+		/* $('#fimg').attr('src',poster);
+		$('#frecipeno').text(no);	
+		$('#frecipetitle').text(title);	
+		$('#fcheif').text(name);	
+		$('#fcheif').attr('title',id);	
+		$('#fdate').text(date+'('+time+')');
+		$('#fprice').text(price);	
+		$('#fcommand').text(msg);
+		
+		$('#hrecipeno').attr('value',no);
+		$('#hrecipetitle').attr('value',title);
+		$('#hcheif').attr('value',id);
+		$('#hdate').attr('value',date);
+		$('#htime').attr('value',time);
+		$('#hprice').attr('value',price);
+		$('#hcommand').attr('value',msg); */
 		
 		$.ajax({
 			type:'post',
 			url:'../reserve/final.do',
-			data:{poster:poster,},
+			data:{poster:poster,no:no,title:title,id:id,name:name,time:time,date:date,price:price,msg:msg},
 			success:function(response){
-				$('#print').html(response);
+				$('.modal-content').html(response);
 			}
 		});
+
+
 	});
 	
 });
-function reserve() {
-	var title=$('#reserve_title').text();
-	var tname=$('#reserve_theater').text();
-	var rdate=$('#reserve_day').text();
-	var rtime=$('#reserve_time').text();
-	var inwon=$('#reserve_inwon').text();
-	var price=$('#reserve_price').text();
-	
-	$.ajax({
-		type:'post',
-		url:'../movie/insert.do',
-		data:{
-			title:title,
-			tname:tname,
-			rdate:rdate,
-			rtime:rtime,
-			inwon:inwon,
-			price:price
-		},
-		success:function(response) {
-			alert("예매 신청이 완료됐습니다.");
-			location.href="../movie/mypage.do"
-		}
-	});
-}
-
 </script>
 </head>
 <body>
@@ -204,13 +250,15 @@ function reserve() {
      					</tr>
      					<tr class="final">
      						<td>
-     							<div class="btn btn-info">예약 확인</div>	
+     							<div class="btn btn-info" id="myBtn">예약 확인</div>	
+     							
      						</td>
      					</tr>
     				</table> 
     				
      			</td>
      		
+
 
 <!--  -->
 		
@@ -232,5 +280,62 @@ function reserve() {
 </table>
 	</div>
 </div>
+    <div id="myModal" class="modal">
+ 
+      <!-- Modal content -->
+    <div class="modal-content">
+    <span class="close">&times;</span>                                                               
+    
+    <!-- <form action="../reserve/final.do" method="post">
+	<table class="table" style="width: 550px;" >
+		
+		
+		<tr>
+			<td colspan="2"><img id="fimg" src="" width=500px height="500px"></td>
+		</tr> 
+		<tr>
+			<td class="text-left">레시피 번호 :</td>
+			<td class="text-left" id="frecipeno">
+			<input type="hidden" id="hrecipeno" name="no" value="">
+			</td>
+			
+		</tr>
+		<tr>
+			<td class="text-left">레시피 제목 :</td>
+			<td class="text-left" id="frecipetitle">
+			<input type="hidden" id="hrecipetitle" name="title" value="">
+			</td>
+		</tr>
+		<tr>
+			<td class="text-left">요리사(id) :</td>
+			<td class="text-left" id="fcheif" title="">
+			<input type="hidden" id="hcheif" name=id value="">
+			</td>
+		</tr>
+		<tr>
+			<td class="text-left">날짜(시간대) :</td>
+			<td class="text-left" id="fdate" title="">
+			<input type="hidden" id="hdate" name="date" value="">
+			<input type="hidden" id="htime" name="time" value="">
+			</td>
+		</tr>
+		<tr>
+			<td class="text-left">제시된 가격 :</td>
+			<td class="text-left" id="fprice">
+			<input type="hidden" id="hprice" name="price" value="">
+			</td>
+		</tr>
+		<tr>
+			<td class="text-left">요청사항 :</td>
+			<td class="text-left" id="fcommand">
+			<input type="hidden" id="hcommand" name="command" value="">
+			</td>
+		</tr>
+	</table>
+	<center><input type="submit" class="btn btn-info"></center>
+	</form> -->
+      </div>
+ 
+    </div>
 </body>
 </html>

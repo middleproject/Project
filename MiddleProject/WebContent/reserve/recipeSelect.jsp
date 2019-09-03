@@ -21,6 +21,8 @@ $(function(){
 </script>
 </head>
 <body>
-<h6 id="select1_" title="${vo.no}" style="font: 8px; color: green;">예약 요리 : ${vo.summary}</h6>
+<center id="select1_hi" title="${vo.poster }">
+<h6 id="select1_" title="${vo.no}" style="font: 8px; color: green;">${vo.summary}&nbsp;</h6>
+</center>
 </body>
 </html>

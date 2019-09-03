@@ -1,6 +1,7 @@
 package com.sist.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -86,12 +87,13 @@ public class ReserveDAO {
 		}
 		return list;
 	}
-	public static int selectdatecount(String id) {
+	public static int selectdatecount(Map map) {
 		int count=0;
 		SqlSession session = null;
 		try {
 			session = ssf.openSession();
-			count = session.selectOne("selectdatecount", id);
+			
+			count = session.selectOne("selectdatecount", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -113,5 +115,30 @@ public class ReserveDAO {
 				session.close();
 		}
 		return list;
+	}
+	
+	public static void reserveInsert(ReserveVO vo){
+		SqlSession session = null;
+		Map map=new HashMap();
+		
+		try{
+			session = ssf.openSession();
+			int count=session.selectOne("ResCountcheck",vo.getCheifid());
+			map.put("id", vo.getCheifid());
+			map.put("count", count+1);
+			map.put("check",0);
+			
+			session.update("memberResCount",map);
+			session.insert("addreserve",vo);
+			session.update("cheifcheck",map);
+			
+			session.commit();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if (session != null)
+				session.close();
+		}
 	}
 }

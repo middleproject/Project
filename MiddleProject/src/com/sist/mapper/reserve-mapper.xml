@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.reserve-mapper">
 <select id="recipeSelectReserve" parameterType="int" resultType="RecipeVO">
-	SELECT no,summary FROM recipe WHERE no=#{no}
+	SELECT no,summary,poster FROM recipe WHERE no=#{no}
 </select>
 <select id="recipeSearchReserve" resultType="int" parameterType="java.util.Map">
 		select CEIL(COUNT(*)/2.0)
@@ -25,10 +25,40 @@
 <select id="selectdate" parameterType="String" resultType="ReserveVO">
 	SELECT DISTINCT rdate FROM reserve WHERE cheifid=#{id}
 </select>
-<select id="selectdatecount" parameterType="String" resultType="int">
-	SELECT count(rdate) FROM reserve WHERE cheifid=#{id}
+<select id="selectdatecount" parameterType="java.util.Map" resultType="int">
+	SELECT count(rdate) FROM reserve WHERE cheifid=#{id} AND rdate=#{date}
 </select>
 <select id="selectTime" parameterType="ReserveVO" resultType="int">
 	select rtime FROM reserve WHERE cheifid=#{cheifid} AND rdate=#{rdate} ORDER BY rtime asc
 </select>
+
+
+<!-- 트랜젝션 처리 필요 -->
+<select id="ResCountcheck" parameterType="String" resultType="int">
+	SELECT reservecount FROM member WHERE id=#{id}
+</select>
+<update id="memberResCount" parameterType="java.util.Map">
+	UPDATE member
+	SET reservecount = #{count}
+	WHERE id=#{id}
+</update>
+<insert id="addreserve" parameterType="ReserveVO">
+	INSERT INTO reserve(no,cheifid,rno,name,summary,rdate,rtime,price,msg,userid) VALUES(
+	(SELECT NVL(MAX(no)+1,1) FROM reserve),
+	#{cheifid},
+	#{rno},
+	#{name},
+	#{summary},
+	#{rdate},
+	#{rtime},
+	#{price},
+	#{msg},
+	#{userid}
+	)
+</insert>
+<update id="cheifcheck" parameterType="java.util.Map">
+	UPDATE reserve
+	SET checheif = #{check}
+	WHERE cheifid=#{id}
+</update>
 </mapper>

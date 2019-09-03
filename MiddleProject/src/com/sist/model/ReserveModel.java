@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import javax.servlet.http.HttpSession;
+
+
+
 import com.sist.controller.*;
 import com.sist.dao.RecipeDAO;
 import com.sist.dao.ReserveDAO;
@@ -167,13 +171,13 @@ public class ReserveModel {
 		String area=model.getRequest().getParameter("area");	
 		map.put("area", area);
 		
-		System.out.println("@@@@@area"+area);
+		
 		//∆‰¿Ã¡ˆ
 		String page=model.getRequest().getParameter("page");
 		if(page==null){
 			page="1";
 		}
-		System.out.println("@@@@@page"+page);
+		
 		int curpage=Integer.parseInt(page);
 		
 		int rowSize=2;
@@ -182,10 +186,9 @@ public class ReserveModel {
 		
 		map.put("end", end);
 		map.put("start", start);
-		System.out.println("@@@@@start"+start);
-		System.out.println("@@@@@end"+end);
+		
 		int total=ReserveDAO.recipeSearchReserve(map);
-		System.out.println("@@@@@total"+total);
+		
 	
 		
 		int BLOCK=5;
@@ -289,21 +292,30 @@ public class ReserveModel {
 				model.addAttribute("lastday", lastday);
 				
 				String id=model.getRequest().getParameter("id");
-				System.out.println("@@@id"+id);
+				
 				List<ReserveVO> list=ReserveDAO.selectdate(id);
-				int count=ReserveDAO.selectdatecount(id);
+				
 				int[] reday=new int[31];
 				int today=day;
 				for(int i=0;i<list.size();i++){
-					System.out.println("@@@list"+list.get(i).getRdate());
+					
 					String alldate=list.get(i).getRdate().substring(0, list.get(i).getRdate().indexOf(" "));
 					StringTokenizer st1=new StringTokenizer(alldate,"-");
 					if(strMonth.length()==1){
 						strMonth="0"+strMonth;
 					}
-					
+					System.out.println(strYear);
+					System.out.println(strMonth);
+					System.out.println("alldate"+alldate);
+					java.sql.Date lidate = java.sql.Date.valueOf(alldate);
 					if(st1.nextToken().equals(strYear) && st1.nextToken().equals(strMonth)){
+						Map map=new HashMap();
+						map.put("id", id);
+						map.put("date", lidate);
+						int count=ReserveDAO.selectdatecount(map);
+						System.out.println(count);
 						if(count==3){
+							System.out.println(count);
 							int k=Integer.parseInt(st1.nextToken());
 							reday[k-1]=k;
 						}
@@ -313,9 +325,7 @@ public class ReserveModel {
 						today=0;
 					}
 				}
-				System.out.println("Integer.parseInt(strMonth):"+(Integer.parseInt(strMonth)<Integer.parseInt(sm)));
-				System.out.println("today:"+today);
-				//System.out.println("Integer.parseInt(sm):"+);
+				
 				List<Integer> rList=new ArrayList<Integer>();
 				int u=1;
 				for(int k:reday) {
@@ -328,7 +338,6 @@ public class ReserveModel {
 						rList.add(k);
 					}
 					
-					System.out.println("u:"+u);
 					if(u<today || Integer.parseInt(strMonth)<Integer.parseInt(sm)) u++;
 					
 				}
@@ -429,9 +438,92 @@ public class ReserveModel {
 	public String reserve_commandSelect(Model model){
 		String commandText=model.getRequest().getParameter("commandText");
 		
-		System.out.println(commandText);
+		
 		model.addAttribute("commandText", commandText);
 		return "../reserve/commandSelect.jsp";
 	}
+		@RequestMapping("reserve/final.do")
+		public String reserve_final(Model model){
+			
+			try {
+				model.getRequest().setCharacterEncoding("UTF-8");
+			} catch (Exception e) {}
+			String poster=model.getRequest().getParameter("poster");
+			String no=model.getRequest().getParameter("no");
+			String title=model.getRequest().getParameter("title");		//2.
+			String id=model.getRequest().getParameter("id");			//()4.
+			String name=model.getRequest().getParameter("name");		//3.
+			String time=model.getRequest().getParameter("time");		//()6.
+			String date=model.getRequest().getParameter("date");		//5.
+			String price=model.getRequest().getParameter("price");		//6.
+			String msg=model.getRequest().getParameter("msg");			//7.
+			
+			
+			
+			model.addAttribute("poster", poster);
+			model.addAttribute("no", no);
+			model.addAttribute("title", title);
+			model.addAttribute("id", id);
+			model.addAttribute("name", name);
+			model.addAttribute("time", time);
+			model.addAttribute("date", date);
+			model.addAttribute("price", price);
+			model.addAttribute("msg", msg);
+			return "../reserve/final.jsp";
+		}
 	
+		@RequestMapping("reserve/endReserve.do")
+		public String reserve_end(Model model){
+			
+			try {
+				model.getRequest().setCharacterEncoding("UTF-8");
+			} catch (Exception e) {}
+			
+			HttpSession session = model.getRequest().getSession();
+			String poster=model.getRequest().getParameter("poster");
+			String no=model.getRequest().getParameter("no");
+			String name=model.getRequest().getParameter("name");
+			String title=model.getRequest().getParameter("title");		
+			String id=model.getRequest().getParameter("id");			
+			String time=model.getRequest().getParameter("time");		
+			String date=model.getRequest().getParameter("date");		
+			date=date.substring(date.indexOf(":")+2,date.indexOf("("));
+			
+			String price=model.getRequest().getParameter("price");		
+			String msg=model.getRequest().getParameter("msg");	
+			String userid=(String)session.getAttribute("id");
+			
+			try{
+				ReserveVO vo=new ReserveVO();
+				vo.setCheifid(id);	//
+				vo.setName(name);	//
+				vo.setRno(Integer.parseInt(no));
+				vo.setSummary(title);
+				vo.setRdate(date);
+				vo.setRtime(Integer.parseInt(time));
+				vo.setPrice(Integer.parseInt(price));
+				vo.setMsg(msg);
+				vo.setUserid(userid);	//
+				
+				System.out.println(id);
+				System.out.println(name);
+				System.out.println(title);
+				System.out.println(date);
+				System.out.println(time);
+				System.out.println(price);
+				System.out.println(msg);
+				System.out.println(userid);
+				
+				ReserveDAO.reserveInsert(vo);
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+			
+			
+			model.addAttribute("main_jsp", "../reserve/endReserve.jsp");
+			return "../main/main.jsp";
+		}
 }
