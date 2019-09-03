@@ -71,6 +71,7 @@ $(function(){
 							</thead>
 							<c:forEach var="vo" items="${list }">
 								<tr class="text-center">
+								
 									<td class="text-center"><a href="#">${vo.sub }</a></td>
 									<td class="text-center" colspan=3><p>${vo.content }</p></td>
 									<td class="text-center">${vo.id }</td>

@@ -401,7 +401,7 @@ public class RecipeModel {
 		System.out.println("id:"+id);
 		System.out.println("보낸:"+memberid+"제목"+sub+"내용:"+content);
 		
-		return "redirect:../recipe/sendmsg.do";
+		return "redirect:../recipe/msg.do";
 	}
 	@RequestMapping("recipe/msgdetail.do")
 	public String msgDetail(Model model){
