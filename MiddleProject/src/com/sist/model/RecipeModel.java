@@ -16,6 +16,7 @@ import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
 import com.sist.vo.FollowVO;
 import com.sist.vo.IngredetailVO;
+import com.sist.vo.MsgVO;
 import com.sist.vo.ReadVO;
 import com.sist.vo.RecipeVO;
 import com.sist.vo.WishVO;
@@ -280,10 +281,47 @@ public class RecipeModel {
 			model.getRequest().setCharacterEncoding("UTF-8");
 		} catch (Exception e) {}
 		HttpSession session = model.getRequest().getSession();
+		
 		String id =(String)session.getAttribute("id");
 		List<String> madeList =new ArrayList<String>();
 		List<RecipeVO> list = new ArrayList<RecipeVO>();
 		List<ReadVO> rlist = new ArrayList<ReadVO>();
+		//페이지 나누기
+		int total=0;
+		Map keymap = new HashMap();
+		String page =model.getRequest().getParameter("page");
+		int curpage=Integer.parseInt(page);
+		
+		int rowSize=6;
+		int start=(curpage*rowSize)-(rowSize-1);
+		int end=curpage*rowSize;
+		
+		keymap.put("end", end);
+		keymap.put("start", start);
+		int count = RecipeDAO.RecipeCount();
+		count=count-((curpage*rowSize)-rowSize); 
+		
+		int BLOCK=5;
+		   
+		int startpage=((curpage-1)/BLOCK*BLOCK)+1;
+	   
+		int endpage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+	  
+		int allpage=total;
+	   
+		if(endpage>allpage)
+		{
+			   endpage=allpage;
+		}
+		model.addAttribute("startpage", startpage);
+		model.addAttribute("endpage", endpage);
+		model.addAttribute("curpage", curpage);
+		model.addAttribute("allpage", allpage);
+		model.addAttribute("BLOCK", BLOCK);
+		model.addAttribute("total", total);
+		model.addAttribute("count", count);
+		
+		
 		Map map =new HashMap();
 		//팔로워 찾기
 		madeList = RecipeDAO.followSearch(id);
@@ -334,19 +372,62 @@ public class RecipeModel {
 		model.addAttribute("main_jsp", "../recipe/wishRecipe.jsp");
 		return "../main/main.jsp";
 	}
-	
-	@RequestMapping("recipe/recipeRegister.do")
-	public String recipe_Register(Model model){
+	@RequestMapping("recipe/msg.do")
+	public String recipe_msg(Model model) {
+		try {
+			model.getRequest().setCharacterEncoding("UTF-8");
+		} catch (Exception e) {}
 		HttpSession session = model.getRequest().getSession();
-		String id =(String)session.getAttribute("id");
-		List<Integer> iList = new  ArrayList<Integer>();
-		List<RecipeVO> list = new ArrayList<RecipeVO>();
-
+		String id = (String)session.getAttribute("id");	
+		List<MsgVO> list = RecipeDAO.msgSend(id);
+		
 		model.addAttribute("list", list);
-		model.addAttribute("main_jsp", "../recipe/recipeRegister.jsp");
+		model.addAttribute("main_jsp", "../recipe/msg.jsp");
 		return "../main/main.jsp";
+	}
+	@RequestMapping("recipe/rmsg.do")
+	public String recipe_reseveMsg(Model model) {
+		HttpSession session = model.getRequest().getSession();
+		String id = (String)session.getAttribute("id");
+		List<MsgVO> rlist = RecipeDAO.msgReseve(id);
+		
+		model.addAttribute("rlist", rlist);
+		
+		return "rmsg.jsp";
+	}
+	@RequestMapping("recipe/sendmsg.do")
+	public String recipe_sendMsg(Model model) {
+		
+		
+		return "sendmsg.jsp";
+	}
 	
-	
-	
+	@RequestMapping("recipe/send.do")
+	public String recipe_send(Model model) {
+		try {
+			model.getRequest().setCharacterEncoding("UTF-8");
+		} catch (Exception e) {
+		}
+		HttpSession session = model.getRequest().getSession();
+		String memberid = (String)session.getAttribute("id");	
+		String id = model.getRequest().getParameter("id");
+		String sub = model.getRequest().getParameter("sub");
+		String content = model.getRequest().getParameter("content");
+		MsgVO vo = new MsgVO();
+		if(sub!=null) {
+			if(content==null) content="";
+			vo.setMemberid(memberid);
+			vo.setId(id);
+			vo.setContent(content);
+			vo.setSub(sub);
+			RecipeDAO.msgInsert(vo);
+			System.out.println("성공");
+		}else {
+			System.out.println("실패");
+		}
+		System.out.println("id:"+id);
+		System.out.println("보낸:"+memberid+"제목"+sub+"내용:"+content);
+		
+		return "redirect:../recipe/sendmsg.do";
 	}
 }

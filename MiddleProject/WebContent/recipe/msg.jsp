@@ -78,14 +78,6 @@ $(function(){
 								</tr>
 								<!-- END TR-->
 								</c:forEach>
-								<div id="dialog" title="로그인" style="display:none">
-								      <table class="table">
-								       <tr>
-								         <td class="text-right" width=20%>${vo.sub }</td>
-								         <td class="text-left" width=80>${vo.content }</td>
-								       </tr>
-								      </table>
-								    </div>
 						</table>
 						</div>
 					</div>
