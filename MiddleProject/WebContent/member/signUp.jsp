@@ -35,7 +35,7 @@ $(function(){
 			content:'../member/postfind.jsp',
 			player:'iframe',
 			title:'우편번호 검색',
-			width:550,
+			width:400,
 			height:550
 		});
 	});

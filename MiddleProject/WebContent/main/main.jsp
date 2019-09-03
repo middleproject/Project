@@ -84,7 +84,7 @@
 						</c:if>
 
 						<c:if test="${sessionScope.id!=null }">
-							<a href=""><span class="text" style="color: white;">로그아웃</span></a>
+							<a href="../member/logout.do"><span class="text" style="color: white;">로그아웃</span></a>
 							<span class="text" style="color: white;"> </span>
 							<c:if test="${sessionScope.admin==0 || sessionScope.admin==2 }">
 								<a href="../mypage/mypageMain.do"><span class="text"

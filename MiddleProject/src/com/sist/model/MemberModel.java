@@ -87,29 +87,27 @@ public class MemberModel {
 			String addr2 = model.getRequest().getParameter("addr2"); // 상세 주소
 			String birthday = model.getRequest().getParameter("birthday"); // 생년월일
 
-			System.out.println(birthday);
 			// ============== 변환 =============
 			String email = email1 + "@" + email2;		// aaa@aaa.com
 			String tel = tel1 + tel2 + tel3;			// 02-222-111
 			String phone = phone1 + phone2 + phone3;	// 010-2020-1818
-			// =============== 날짜포맷변환 String->util.date->sql.date ===============
-			SimpleDateFormat beforeForm = new SimpleDateFormat("yyyymmdd");
-			SimpleDateFormat afterForm = new SimpleDateFormat("yyyy-mm-dd");
-
-			java.util.Date tempDate = null;
-
-			try {
-				// yyyymmdd
-				tempDate = beforeForm.parse(birthday);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			// yyyymmdd-> yyyy-mm-dd
-			String transDate = afterForm.format(tempDate);
-
-			Date date = Date.valueOf(transDate);
+			Date date = Date.valueOf(birthday);
+			
 			// ========================
-
+			System.out.println("id:"+id);
+			System.out.println("pwd:"+pwd);
+			System.out.println("name:"+name);
+			System.out.println("email:"+email);
+			System.out.println("tel:"+tel);
+			System.out.println("phone:"+phone);
+			System.out.println("addr1:"+addr1);
+			System.out.println("addr2:"+addr2);
+			System.out.println("sex:"+sex);
+			System.out.println("date:"+ date);
+			
+			
+			
+			
 			MemberVO vo = new MemberVO();
 
 			vo.setId(id);
@@ -118,8 +116,8 @@ public class MemberModel {
 			vo.setEmail(email);
 			vo.setTel(tel);
 			vo.setPhone(phone);
-			vo.setAddr1(addr1);
-			vo.setAddr2(addr2);
+			vo.setAddr1("111-111");
+			vo.setAddr2("임시위치");
 			vo.setSex(sex);
 			vo.setBirthday(date);
 			

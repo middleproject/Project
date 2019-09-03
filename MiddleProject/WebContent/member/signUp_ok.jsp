@@ -5,7 +5,6 @@
 <c:if test="${result=='OK' }">
 	<script>
 		alert("회원가입을 축하합니다!");
+		location.href="../main/main.do";
 	</script>
-
-	<c:redirect url="../main/main.do" />
 </c:if>
