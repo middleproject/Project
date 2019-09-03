@@ -217,4 +217,17 @@
 	<select id="msgDetail" parameterType="int" resultType="MsgVO">
 		select read,content,sub,memberid,TO_CHAR(day,'YYYY-MM-DD') as day,id from msg where msgno = #{msgno} 
 	</select>
+	<!-- 메세지 삭제 -->
+	<delete id="msgDelete" parameterType="int">
+		delete from msg where msgno = #{msgno}
+	</delete>
+	<update id="msgSendDel" parameterType="int">
+		update msg set sendDel = 1 where msgno=#{msgno}
+	</update>
+	<update id="msgResDel" parameterType="int">
+		update msg set del = 1 where msgno=#{msgno}
+	</update>
+	<select id="msgDelData" parameterType="int" resultType="com.sist.vo.MsgVO">
+		select del,senddel from msg where msgno=#{msgno}
+	</select>
 </mapper>

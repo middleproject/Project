@@ -8,7 +8,21 @@ public class MsgVO {
 	private String id;
 	private int read;
 	private String day;
+	private int del;
+	private int sendDel;
 	
+	public int getDel() {
+		return del;
+	}
+	public void setDel(int del) {
+		this.del = del;
+	}
+	public int getSendDel() {
+		return sendDel;
+	}
+	public void setSendDel(int sendDel) {
+		this.sendDel = sendDel;
+	}
 	public String getDay() {
 		return day;
 	}

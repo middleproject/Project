@@ -366,5 +366,50 @@ public class RecipeDAO {
 		}
 		   return vo;
 	   }
+	   public static void msgDelete(int no){
+		   SqlSession session = null;
+		   try {
+			session = ssf.openSession(true);
+			session.delete("msgDelete",no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			if(session!=null) session.close();
+		}
+	   }
+	   
+	   public static void msgSendDelete(int no){
+		   SqlSession session = null;
+		   try {
+				session = ssf.openSession(true);
+				session.delete("msgSendDel",no);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally{
+				if(session!=null) session.close();
+			}
+	   }
+	   public static void msgReDelete(int no){
+		   SqlSession session = null;
+		   try {
+				session = ssf.openSession(true);
+				session.delete("msgResDel",no);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally{
+				if(session!=null) session.close();
+			}
+	   }
+	   public static MsgVO msgDelData(int no){
+		   SqlSession session = null;
+		   MsgVO vo = new MsgVO();
+		   try {
+			session = ssf.openSession();
+			vo = session.selectOne("",no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		   return vo;
+	   }
 
 }

@@ -6,6 +6,21 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
+	$('.msgremove').click(function(){
+		var msgno = $(this).attr("value");
+		alert(msgno);
+		$.ajax({
+			type:'post',
+			url:'../recipe/msgDelete.do',
+			data:{msgno:msgno},
+			success:function(res)
+			{
+				window.location.reload()
+				alert(follow+"님을 팔로우하였습니다.");
+			}
+		});
+	});
+	
 	$('#select').click(function(){
 		var data=$("#list option:selected").attr("value");
 		var id =$("#hidden").attr("value");
@@ -61,6 +76,7 @@ $(function(){
 						<table class="table" id="table">
 							<thead class="thead-primary">
 								<tr class="text-center">
+									<th></th>
 									<th>제목</th>
 									<th></th>
 									<th class="text-center">내용</th>
@@ -71,7 +87,7 @@ $(function(){
 							</thead>
 							<c:forEach var="vo" items="${list }">
 								<tr class="text-center">
-								
+									<td class="product-remove msgremove" value="${vo.msgno }"><a href="#"><span class="ion-ios-close"></span></a></td>
 									<td class="text-center"><a href="#">${vo.sub }</a></td>
 									<td class="text-center" colspan=3><p>${vo.content }</p></td>
 									<td class="text-center">${vo.id }</td>
