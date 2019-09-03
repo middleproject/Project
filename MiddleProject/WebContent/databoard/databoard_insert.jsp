@@ -13,11 +13,23 @@
 </style>
 </head>
 <body>
+<section class="ftco-section ftco-degree-bg">
 <div class="container">
-		<h2 class="text-center">첨부파일글쓰기</h2>
+		<h2 class="text-center">첨부파일 글쓰기</h2>
 		<div class="row">
 		<form method="post" action="../databoard/databoard_insert_ok.do" enctype="multipart/form-data"> <!-- ★파일업로드 시키고싶으면 enctype 필수추가 -->
 			<table class="table">
+				<tr>
+					<th class="text-right" width="15%">유형선택</th>
+					<th width="85%" align="left">
+						
+							<select name="notice" class="input-sm">
+								<option value="nomaltext">일반글</option>
+								<option value="noticetext">공지글</option>
+							</select>
+						
+					</th>
+				</tr>
 				<tr>
 					<th class="text-right info" width="15%">이름</th>
 					<th width="85%"  align="left">

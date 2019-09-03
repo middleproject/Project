@@ -34,6 +34,8 @@ $(function(){
 </script>
 </head>
 <body>
+	<div class="hero-wrap hero-bread"
+		style="background-image: url('../main/images/bg_2.jpg');"></div>
 	<section class="ftco-section ftco-degree-bg">
 	<div class="container">
 		<h1 class="text-center">문의게시판</h1>
@@ -93,9 +95,9 @@ $(function(){
 										${vo.content }
 									</th>
 										
-							<!-- sessionScope 로그인이 된 상태 에서만 글쓰기 허용 -->
-							멤버아이디는??? ${vo.memberid } <br>
-							세션스코프 아이디는??? ${sessionScope.id }<br>
+							<!-- sessionScope 로그인이 된 상태 에서만 글쓰기 허용 멤버아이디는??? ${vo.memberid } <br>
+							세션스코프 아이디는??? ${sessionScope.id }<br> -->
+							
 							<c:if test="${sessionScope.id!=null }"> 
 									<td colspan="2">
 										<a href="../bQnA/qboard_update.do?no=${vo.boardno }" class="btn btn-sm btn-primary">수정</a>

@@ -11,9 +11,12 @@
 		margin: 0px auto;
 		width: 1200px;
 	}
+
 </style>
 </head>
 <body>
+	<div class="hero-wrap hero-bread"
+		style="background-image: url('../main/images/bg_1.jpg');"></div>
 <section class="ftco-section ftco-degree-bg">
 	<div class="container">
 		<h1 class="text-center">자료실</h1>
@@ -23,9 +26,11 @@
 					<td class="text-left">
 						${curpage } page / ${totalpage } pages
 					</td>	
+					<c:if test='${sessionScope.id=="shim"}'>
 					<td class="text-right">
 						<a href="../databoard/databoard_insert.do" class="btn btn-primary">글쓰기</a>
 					</td>	
+					</c:if>
 				</tr>
 			</table>
 			<table class="table">
@@ -37,13 +42,16 @@
 					<th width="10%" class="text-center">조회수</th>
 				</tr>
 				<c:forEach var="vo" items="${list }" varStatus="s">
-					<tr> 
-						<th width="10%" class="text-center">${vo.no }</th>
-						<th width="45%" class="text-left"><a href="../databoard/databoard_detail.do?no=${vo.no }&page=${curpage}">${vo.subject }</a></th>
-						<th width="15%" class="text-center">${vo.name }</th>
-						<th width="20%" class="text-center">${vo.dbday }</th>
-						<th width="10%" class="text-center">${vo.hit }</th>
-					</tr>
+				
+					
+						<tr bgcolor="${vo.notice==1?'#E6FFE6':'' }" > 
+							<th width="10%" class="text-center">${vo.no }</th>
+							<th width="45%" class="text-left"><a href="../databoard/databoard_detail.do?no=${vo.no }&page=${curpage}">${vo.subject }</a></th>
+							<th width="15%" class="text-center">${vo.name }</th>
+							<th width="20%" class="text-center">${vo.dbday }</th>
+							<th width="10%" class="text-center">${vo.hit }</th>
+						</tr>
+					
 				</c:forEach>	
 			</table>
 			
@@ -53,15 +61,15 @@
 						<ul class="pagination">
 						
 							<c:if test="${curpage != 1 }">
-								<li><a href="../board/board_list.do?page=1">　◁</a></li>
-								<li><a href="../board/board_list.do?page=${curpage-1 }">　＜</a></li>
+								<li><a href="../databoard/databoard_list.do?page=1">　◁</a></li>
+								<li><a href="../databoard/databoard_list.do?page=${curpage-1 }">　＜</a></li>
 							</c:if>
 								<c:forEach var="i" begin="1" end="${totalpage }">
-									<li class="${i==curpage?'active':''}"><a href='../board/board_list.do?page=${i }'>　${i }　</a>
+									<li class="${i==curpage?'active':''}"><a href='../databoard/databoard_list.do?page=${i }'>　${i }　</a>
 								</c:forEach>
 							<c:if test="${curpage != totalpage }">
-								<li><a href="../board/board_list.do?page=${curpage+1 }">　＞</a></li>
-								<li><a href="../board/board_list.do?page=${totalpage }">　▷</a></li>
+								<li><a href="../databoard/databoard_list.do?page=${curpage+1 }">　＞</a></li>
+								<li><a href="../databoard/databoard_list.do?page=${totalpage }">　▷</a></li>
 							</c:if>
 						</ul>
 					</td>

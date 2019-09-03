@@ -367,14 +367,8 @@ public class BoardDAO {
 
 	   //글쓰기
 	   public static void dataInsert(DataBoardVO vo) {
-		   SqlSession session = ssf.openSession(true);
-		   System.out.println("dataInsert 1");
+		   SqlSession session = ssf.openSession(true); 
 		   session.insert("dataInsert",vo);
-		   
-		   
-		   
-		   System.out.println("dataInsert 2");
-		  
 		   session.close();
 	   }
 	   
@@ -422,6 +416,7 @@ public class BoardDAO {
 		   SqlSession session = ssf.openSession();
 		   //비번확인
 		   String pwd = session.selectOne("dataGetPwd", vo.getNo());
+		   System.out.println("DB의 입력 비밀번호값은 뭘까요?"+pwd);
 		   if(pwd.equals(vo.getPwd())) {
 			   no = vo.getNo();
 			   session.update("dataUpdate", vo);
@@ -429,5 +424,94 @@ public class BoardDAO {
 		   } 
 		   session.close();
 		   return no;
+	   }
+	   
+	   //댓글올리기
+	   public static void datareplyInsert(DataBoardReplyVO vo) {
+		   SqlSession session = ssf.openSession(true);
+		   session.insert("datareplyInsert",vo); // (sql아이디명칭,vo) mapper의 sql문 실행함
+		   								//== vo값받는곳이 Model이라 모델로감
+		   session.close();
+	   }
+	   
+
+	   //댓글가지고오기
+	   public static List<BoardDAO> datareplyListData(int bno) {
+		   SqlSession session = ssf.openSession(true);
+		   List<BoardDAO> list = session.selectList("datareplyListData",bno); //목록받을때 selectList
+		   session.close();
+		   return list;
+	   }
+	   
+	   //댓글갯수가져오기
+	   public static int datareplyListCount(int bno) {
+		   SqlSession session = ssf.openSession(true);
+		   int count = session.selectOne("datareplyListCount",bno); 
+		   session.close();
+		   return count;
+	   }
+	   public static void datareplyReInsert(int root, DataBoardReplyVO vo) { 
+		   SqlSession session = ssf.openSession(true); 
+		   
+		   // 4개 호출하기
+		   // 1 정보
+		   DataBoardReplyVO pvo = session.selectOne("datareplyParentInfo",root); 
+		   // 2 step증가
+		   session.update("datareplyStepIncrement",pvo); 
+		   // 3 insert 값채우기
+		   vo.setGroup_id(pvo.getGroup_id()); 
+		   vo.setGroup_step(pvo.getGroup_step()+1); 
+		   vo.setGroup_tab(pvo.getGroup_tab()+1);
+		   vo.setRoot(root);
+		   session.insert("datareplyReInsert",vo); 
+		   // 4 depth 증가
+		   session.update("datareplyDepthIncrement",root); //mapper 131
+		   
+
+		   System.out.println(pvo);
+		   System.out.println(vo);
+		   System.out.println(root);
+		   
+		   //트랜잭션 : 일괄처리!!! 
+		   session.commit(); 
+		   session.close();
+	   }
+	   
+	   public static void datareplyUpdate(DataBoardReplyVO vo) {
+		   SqlSession session = ssf.openSession(true);
+		   session.update("datareplyUpdate",vo); // (sql아이디명칭,vo) mapper의 sql문 실행함
+		   								//== vo값받는곳이 Model이라 모델로감
+		   session.close();
+	   }
+	   //삭제하기----------------------------------------------------------------------------
+	   public static void datareplyDelete(int no) {
+		   SqlSession session = ssf.openSession();
+		   ReplyVO vo = session.selectOne("datareplyGetDepth",no);
+		   if(vo.getDepth()==0) {
+			   session.delete("datareplyDelete",no);
+		   } else {
+			   DataBoardReplyVO fvo = new DataBoardReplyVO();
+			   fvo.setMsg("<font color=grey>[！]관리자가 삭제한 게시글 입니다</font>");
+			   fvo.setNo(no);
+			   session.update("datareplyDataUpdate",fvo);
+		   }
+		   session.update("datareplyDepthDecrement",vo.getRoot());
+		   session.commit(); //커밋을 맨마지막에 일괄처리 : 트랜잭션
+		   session.close();
+	   }
+	   public static int databoardDelete(int no, String pwd) {
+		   int result=0;
+		   SqlSession session = ssf.openSession(); //db열기
+		   String db_pwd=session.selectOne("dataGetPwd",no); //비번얻어오기
+		   System.out.println("db의 비번은 뭘까용?"+db_pwd);
+		   
+		   if(db_pwd.equals(pwd)) {
+			   result = 1;
+			   session.delete("databoardReplyDelete",no);
+			   session.delete("databoardDelete",no);
+			   session.commit();
+		   }
+		   session.close();
+		   return result;
 	   }
 }

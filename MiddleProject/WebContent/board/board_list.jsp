@@ -29,6 +29,8 @@ $(function(){
 </script>
 </head>
 <body>
+	<div class="hero-wrap hero-bread"
+		style="background-image: url('../main/images/bg_3.jpg');"></div>
 	 <section class="ftco-section ftco-degree-bg">
 	<div class="container">
 		<h1 class="text-center">자유게시판</h1>

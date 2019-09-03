@@ -565,7 +565,6 @@ public class BoardModel {
 		//글쓰기
 		@RequestMapping("databoard/databoard_insert.do")
 		public String dataInsert(Model model) {
-	
 			model.addAttribute("main_jsp", "../databoard/databoard_insert.jsp");
 			return "../main/main.jsp";
 		}
@@ -579,14 +578,19 @@ public class BoardModel {
 				int size=100*1024*1024; //최대한으로 들어갈수있는 파일 크기가 100메가(1024KB, 1024*1024KB=MB)
 				
 				MultipartRequest mr = new MultipartRequest(model.getRequest(), path, size, enctype, new DefaultFileRenamePolicy()); //파일업로드시에 (리퀘스트,저장폴더)
-																				//new DefaultFileRenamePolicy() 같은 파일이 들어오면 자동으로 이름+1 변환
+				
+				String notice = mr.getParameter("notice");
 				String name = mr.getParameter("name");
 				String subject = mr.getParameter("subject");
 				String content = mr.getParameter("content");
 				String pwd = mr.getParameter("pwd");
-				
+	
 				DataBoardVO vo = new DataBoardVO();
 				
+				if(notice.equals("noticetext")) {
+					vo.setNotice(1);
+				} 
+
 				vo.setName(name);
 				vo.setSubject(subject);
 				vo.setContent(content);
@@ -618,9 +622,10 @@ public class BoardModel {
 			model.addAttribute("vo", vo);
 			
 			// list로(댓글목록보내주기)
-		
-			int count = BoardDAO.replyListCount(Integer.parseInt(no));
+			List<BoardDAO> list = BoardDAO.datareplyListData(Integer.parseInt(no));
+			int count = BoardDAO.datareplyListCount(Integer.parseInt(no));
 			System.out.println("ddddcount"+count);
+			model.addAttribute("list", list);
 			model.addAttribute("count", count);
 			
 			model.addAttribute("main_jsp", "../databoard/databoard_detail.jsp");
@@ -648,6 +653,12 @@ public class BoardModel {
 			String pwd=model.getRequest().getParameter("pwd");
 			String no=model.getRequest().getParameter("no");
 			
+			System.out.println("========이 아래로는 databoard의 수정하기 입니다");
+			System.out.println("data의 이름값은?"+name);
+			System.out.println("data의 제목값은?"+subject);
+			System.out.println("data의 내용값은?"+content);
+			System.out.println("data의 비밀번호값은?"+pwd);
+			
 			DataBoardVO vo = new DataBoardVO();
 			vo.setName(name);
 			vo.setSubject(subject);
@@ -661,4 +672,119 @@ public class BoardModel {
 			
 			return "../databoard/databoard_update_ok.jsp";
 		}
+		//댓글달기
+		 @RequestMapping("databoard/datareply_insert.do")
+			public String datareply_insert(Model model) {
+
+				// 요청값을 받는다
+				try {
+					model.getRequest().setCharacterEncoding("UTF-8");
+				} catch (Exception ex) {}
+				
+				String bno = model.getRequest().getParameter("bno"); //bno = boardno
+				String msg = model.getRequest().getParameter("msg");
+				
+				HttpSession session = model.getRequest().getSession();
+				String id = (String) session.getAttribute("id");
+				String name = (String)session.getAttribute("name");
+
+				DataBoardReplyVO vo = new DataBoardReplyVO();
+				vo.setBno((Integer.parseInt(bno)));
+				vo.setMsg(msg);
+				vo.setId(id);
+				vo.setName(name);
+				
+				// DAO에 연결하여 데이터추가
+				BoardDAO.datareplyInsert(vo);
+				
+				// 결과값(X) redirect 날렸기 때문에 댓글을 가져오는 위치는 96번째줄 String board_detail 메소드이다
+				return "redirect:../databoard/databoard_detail.do?no=" + bno; // 댓글달면 detail로
+																		// 넘어가야하니까
+
+			}
+		 //대댓글달기
+		 @RequestMapping("databoard/datareply_reinsert.do")
+		 public String datareply_reinsert(Model model) {
+			 try {
+					model.getRequest().setCharacterEncoding("UTF-8");
+				} catch (Exception ex) { }
+
+				//msg
+				String msg = model.getRequest().getParameter("msg");
+				//no
+				String pno = model.getRequest().getParameter("no"); //상위 pno 값이 아직 확정이 안됌 그룹id,step찾아야함
+				//bno
+				String bno = model.getRequest().getParameter("bno");
+				
+				HttpSession session = model.getRequest().getSession();
+				String id = (String)session.getAttribute("id");
+				String name= (String)session.getAttribute("name");
+				
+				DataBoardReplyVO vo = new DataBoardReplyVO();
+				vo.setBno(Integer.parseInt(bno));
+				vo.setMsg(msg);
+				vo.setId(id);
+				vo.setName(name);
+				
+				BoardDAO.datareplyReInsert(Integer.parseInt(pno), vo);
+				// group_id, group_step, group_tab 을 가져오기
+				
+			 return "redirect:../databoard/databoard_detail.do?no="+bno; //다시 detail로 넘어감
+		 }
+		 
+		 //댓글수정
+		 @RequestMapping("databoard/datareply_update.do")
+			public String datareply_update(Model model) {
+				try {
+					model.getRequest().setCharacterEncoding("UTF-8");
+				} catch (Exception ex) { }
+				
+				//msg
+				String msg = model.getRequest().getParameter("msg");
+				//no
+				String no = model.getRequest().getParameter("no"); // 본인 no
+				//bno
+				String bno = model.getRequest().getParameter("bno");
+			
+				//DAO처리
+				DataBoardReplyVO vo = new DataBoardReplyVO();
+				vo.setMsg(msg);
+				vo.setNo(Integer.parseInt(no));
+				
+				BoardDAO.datareplyUpdate(vo);
+			
+				return "redirect:../databoard/databoard_detail.do?no="+bno; //다시 detail로 넘어감
+			}
+		//삭제하기
+		 @RequestMapping("databoard/datareply_delete.do")
+			public String datareply_delete(Model model) {
+				String no = model.getRequest().getParameter("no"); // 본인 no
+				
+				String bno = model.getRequest().getParameter("bno");
+				
+				//DAO처리
+				BoardDAO.datareplyDelete(Integer.parseInt(no));
+				
+				return "redirect:../databoard/databoard_detail.do?no="+bno; //댓글은 무조건 상세로... 다시 detail로 넘어감
+			}
+			@RequestMapping("databoard/databoard_delete.do")
+			public String databoard_delete(Model model) {
+				String no=model.getRequest().getParameter("no");
+				System.out.println("-----------no는??"+no);
+				model.addAttribute("no", no); 
+			
+				model.addAttribute("main_jsp", "../databoard/databoard_delete.jsp");
+				return "../main/main.jsp";
+			}
+			@RequestMapping("databoard/databoard_delete_ok.do")
+			public String databoard_delete_ok(Model model) {
+				String no = model.getRequest().getParameter("no"); // 본인 no
+				String pwd = model.getRequest().getParameter("pwd");
+				
+				int res=BoardDAO.databoardDelete(Integer.parseInt(no), pwd);
+				model.addAttribute("res", res);
+				System.out.println("res값은??"+res);
+				return "../databoard/databoard_delete_ok.jsp";
+			}
+			
 }

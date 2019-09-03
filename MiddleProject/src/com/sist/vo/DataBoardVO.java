@@ -13,8 +13,17 @@ public class DataBoardVO {
 	private String filename;
 	private int filesize;
 	private String dbday;
+	private int notice;
 	
 	
+	
+	
+	public int getNotice() {
+		return notice;
+	}
+	public void setNotice(int notice) {
+		this.notice = notice;
+	}
 	public String getDbday() {
 		return dbday;
 	}

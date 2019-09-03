@@ -142,11 +142,7 @@
     	depth=depth+1
     	WHERE replyno=#{replyno} <!-- 답변이 올라가기 시작함 틀리면 replyno나 boardno로 고치기-->
     </update> <!-- depth(밑에달린 댓글수) 수정 -->
-    
-    
-    
-    
-    
+
     <update id="replyUpdate" parameterType="ReplyVO">
     	UPDATE Reply SET
     	msg=#{msg}
@@ -188,9 +184,9 @@
     <!-- QnA게시판 -->
 
     <select id="bQnAListData" resultType="BoardVO" parameterType="java.util.Map">
-		SELECT boardno,subject,name,content,dbday,hit,num,grouptab
-		FROM (SELECT boardno,subject,name,content,TO_CHAR(day,'YYYY-MM-DD') as dbday,hit,grouptab,rownum as num
-		FROM(SELECT boardno,subject,name,content,day,hit,grouptab
+		SELECT boardno,subject,memberid,name,content,dbday,hit,num,grouptab
+		FROM (SELECT boardno,subject,memberid,name,content,TO_CHAR(day,'YYYY-MM-DD') as dbday,hit,grouptab,rownum as num
+		FROM(SELECT boardno,subject,memberid,name,content,day,hit,grouptab
 		FROM board 
 		WHERE categoryno=#{categoryno}
 		ORDER BY groupid DESC, groupstep ASC))
@@ -208,10 +204,11 @@
     
      -->
     <insert id="bQnAInsert" parameterType="BoardVO">
-			INSERT INTO board(boardno,categoryno,subject,name,content,pwd,groupid) VALUES(
+			INSERT INTO board(boardno,categoryno,subject,memberid,name,content,pwd,groupid) VALUES(
 	    		(SELECT NVL(MAX(boardno)+1,1) FROM board),
 	    		#{categoryno},
 	    		#{subject}, 
+	    		#{memberid },
 	    		#{name}, <!--#안에 값이 vo.getName() -->
 	    		#{content},
 	    		#{pwd},
@@ -264,24 +261,41 @@
 		    	WHERE boardno=#{boardno} 
    			 </update>
    			 
-   			 <!-- 첨부파일게시판 -->
+   	<!-- 첨부파일게시판 -->
 	<select id="databoardListData" parameterType="java.util.Map" resultType="DataBoardVO">
-		SELECT no,subject,name,dbday,hit,num
-		FROM (SELECT no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD')as dbday,hit,rownum as num
-		FROM(SELECT no,subject,name,regdate,hit
+		SELECT notice,no,subject,name,dbday,hit,num
+		FROM (SELECT notice,no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD')as dbday,hit,rownum as num
+		FROM(SELECT notice,no,subject,name,regdate,hit
 		FROM databoard ORDER BY no DESC))
-		WHERE num BETWEEN #{start} AND #{end} 	
+		WHERE notice=1
+		UNION ALL
+		SELECT notice,no,subject,name,dbday,hit,num
+		FROM (SELECT notice,no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD')as dbday,hit,rownum as num
+		FROM(SELECT notice,no,subject,name,regdate,hit
+		FROM databoard ORDER BY no DESC))
+		WHERE num BETWEEN #{start} AND #{end} 
+		
+		
 	</select>
+
+	<!-- ★notice추가 했음!!! -->
 	<insert id="dataInsert" parameterType="DataBoardVO">
-		INSERT INTO databoard(no,name,subject,content,pwd,filename,filesize) 
-		VALUES((SELECT NVL(MAX(no)+1,1) 
-		FROM databoard),#{name},#{subject},#{content },#{pwd},#{filename},#{filesize}) 
+		INSERT INTO databoard(notice,no,name,subject,content,pwd,filename,filesize) VALUES(
+		#{notice},
+		(SELECT NVL(MAX(no)+1,1) FROM databoard),
+		#{name},
+		#{subject},
+		#{content },
+		#{pwd},
+		#{filename},
+		#{filesize}
+		) 
 	</insert>
 	<select  id="dataTotalPage" parameterType="java.util.Map" resultType="int">	
-		SELECT CEIL(COUNT(*)/5.0) FROM board 
+		SELECT CEIL(COUNT(*)/5.0) FROM databoard 
 	</select>
 	<select id="dataRowCount" parameterType="java.util.Map" resultType="int">
-		SELECT COUNT(*) FROM board 
+		SELECT COUNT(*) FROM databoard 
 	</select>
 	
 	<!-- 상세보기 -->
@@ -298,11 +312,109 @@
 	
 	<!-- 수정하기 -->
 	<select id="dataGetPwd" parameterType="int" resultType="String">
-		SELECT pwd FROM databoardWHERE no=#{no} 
+		SELECT pwd FROM databoard
+		WHERE no=#{no} 
 	</select>
 	<update id="dataUpdate" parameterType="DataBoardVO" >
 		UPDATE databoard SET
 		name=#{name}, subject=#{subject}, content=#{content}
 		WHERE no=#{no} 
 	</update>
+	
+	<!-- 첨부파일게시판 대댓글 -->
+	<!-- 댓글넣기 -->
+      <insert id="datareplyInsert" parameterType="DataBoardReplyVO">
+    	INSERT INTO databoardReply(no,bno,id,name,msg,group_id) VALUES(
+	    	(SELECT NVL(MAX(no)+1,1) FROM databoardReply),
+	    	#{bno},
+	    	#{name},
+	    	#{id},
+	    	#{msg},
+	    	(SELECT NVL(MAX(group_id)+1,1) FROM databoardReply) 
+    	)	
+    </insert>
+    <!-- 댓글읽기 group_tab 답댓글이모티콘 들어갈때 한칸띄움-->
+    <select id="datareplyListData" resultType="DataBoardReplyVO" parameterType="int">
+    	SELECT no,bno,id,name,msg,TO_CHAR(regdate,'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') as dbday,group_tab
+    	FROM databoardReply
+    	WHERE bno=#{bno}
+    	ORDER BY group_id DESC, group_step ASC
+    </select>
+    
+     <!-- 댓글이 총 몇갠지 확인 board_detail.jsp에 댓글(1) 여기들어감 -->
+    <select id="datareplyListCount" resultType="int" parameterType="int">
+    	SELECT COUNT(*)
+    	FROM databoardReply
+    	WHERE bno=#{bno}
+    </select>
+    <!-- 댓글정보 -->
+	<select id="datareplyParentInfo" resultType="DataBoardReplyVO" parameterType="int">
+		SELECT group_id, group_step, group_tab
+		FROM databoardReply
+		WHERE no=#{no}
+	</select>
+	<!-- step증가 -->
+	 <update id="datareplyStepIncrement" parameterType="DataBoardReplyVO">
+    	UPDATE databoardReply SET
+    	group_step=group_step+1 
+    	WHERE group_id=#{group_id} AND group_step>#{group_step} 
+    </update>
+    <!-- 대댓글insert -->
+    <insert id="datareplyReInsert" parameterType="DataBoardReplyVO">
+    	INSERT INTO databoardReply(no,bno,id,name,msg,group_id,group_step,group_tab,root) VALUES(
+	    	(SELECT NVL(MAX(no)+1,1) FROM databoardReply),
+	    	#{bno},
+	    	#{id},
+	    	#{name},
+	    	#{msg},
+	    	#{group_id},
+	    	#{group_step},
+	    	#{group_tab},
+	    	#{root}
+    	)	
+    </insert>
+    <!-- depth증가 -->
+    <update id="datareplyDepthIncrement" parameterType="int">
+  	  UPDATE databoardReply SET
+    	depth=depth+1
+    	WHERE no=#{no} <!-- 답변이 올라가기 시작함 틀리면 replyno나 boardno로 고치기-->
+    </update> 
+    <!-- depth(밑에달린 댓글수) 수정 -->    
+    <update id="datareplyUpdate" parameterType="DataBoardReplyVO">
+    	UPDATE databoardReply SET
+    	msg=#{msg}
+    	WHERE no=#{no}
+    </update>
+    
+     <!-- DELETE -->
+    <select id="datareplyGetDepth" resultType="ReplyVO" parameterType="int">
+    	SELECT depth,root FROM databoardReply
+    	WHERE no=#{no}
+    </select>
+    <!-- depth가 0이냐 [딜리트]-->
+    <delete id="datareplyDelete" parameterType="int">
+    	DELETE FROM databoardReply
+    	WHERE no=#{no}
+    </delete>
+    <!-- depth가 0이아니냐[업데이트] -->
+    <update id="datareplyDataUpdate" parameterType="ReplyVO">
+    	UPDATE databoardReply SET
+    	msg=#{msg}
+    	WHERE no=#{no}
+    </update>
+    <!-- depth 감소 -->
+    <update id="datareplyDepthDecrement" parameterType="int">
+    	UPDATE databoardReply SET
+    	depth=depth-1
+    	WHERE no=#{no}
+    </update>
+    <!-- 게시물삭제 -->
+    <delete id="databoardDelete" parameterType="int">
+    	DELETE FROM databoard
+    	WHERE no=#{no}
+    </delete>
+    <delete id="databoardReplyDelete" parameterType="int">
+    	DELETE FROM databoardReply
+    	WHERE bno=#{bno} 
+    </delete>
 </mapper>
