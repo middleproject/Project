@@ -81,8 +81,8 @@ hr {
 						
 						<div class="col-md-10">
 							<label style="margin-right: 95px;">사진 올리기</label> <input
-								type='file' id="imgInput" /> <img id="image_section"
-								style="position: relative;  top: 25px; margin-bottom: 30px;">
+								type='file' id="imgInput"/> <img id="image_section"
+								style="position: relative;  top: 25px; margin-bottom: 30px;" >
 						</div>
 					</div>
 					
@@ -107,7 +107,12 @@ hr {
 						style="position: relative; left: 500px; bottom: 165px;"
 						onclick="add();">
 					<div id="textdiv"></div>
+					<hr>
 					
+					<label>요리 과정</label>
+					
+					 <input	type='file' id="imgInput2"  style="margin-left: 130px;"/> <img id="image_section2" 
+				/>
 					<hr>
 
 					<label>요리 팁</label>
@@ -179,6 +184,27 @@ hr {
 			readURL(this);
 		});
 	</script>
+	
+	<!-- 요리과정 사진첨부 -->
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type="text/javascript">
+		function readURL2(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$('#image_section2').attr('src', e.target.result);
+				}
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+
+		$("#imgInput2").change(function() {
+			readURL2(this);
+		});
+	</script>
+	
 
 
 

@@ -430,4 +430,21 @@ public class RecipeModel {
 		
 		return "redirect:../recipe/sendmsg.do";
 	}
+	
+	@RequestMapping("recipe/recipeRegister.do")
+	public String recipe_rigister(Model model) {
+		try {
+			model.getRequest().setCharacterEncoding("UTF-8");
+		} catch (Exception e) {}
+		HttpSession session = model.getRequest().getSession();
+		String id = (String)session.getAttribute("id");	
+		List<MsgVO> list = RecipeDAO.msgSend(id);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("main_jsp", "../recipe/recipeRegister.jsp");
+		return "../main/main.jsp";
+	}
+	
+	
+	
 }
