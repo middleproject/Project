@@ -450,7 +450,7 @@ public class RecipeModel {
 		model.addAttribute("main_jsp", "../recipe/recipeRegister.jsp");
 		return "../main/main.jsp";
 	}
-	@RequestMapping("recipe/recipeUpdate.do")
+	@RequestMapping("reicpe/recipeUpdate.do")
 	public String recipe_update(Model model){
 		try {
 			model.getRequest().setCharacterEncoding("UTF-8");
@@ -505,6 +505,8 @@ public class RecipeModel {
 			vo.setTag(tag);
 			vo.setImage("");
 			vo.setHit(0);
+			vo.setSummary(summary);
+			vo.setSummary_in(summary_in);
 			RecipeDAO.cateDateInsert(vo);
 			System.out.println("레시피 인서트 완료");
 		} catch (Exception e) {}

@@ -84,7 +84,7 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
               
               <div class="media-body">
               	
-                <h3 class="heading">레시피 등록</h3>
+                <h3 class="heading"><a href="../recipe/recipeRegister.do">레시피 등록</a></h3>
                 <span>Recipe Registration</span>
               </div>
             </div>      
