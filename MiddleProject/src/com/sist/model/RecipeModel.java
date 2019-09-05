@@ -450,7 +450,7 @@ public class RecipeModel {
 		model.addAttribute("main_jsp", "../recipe/recipeRegister.jsp");
 		return "../main/main.jsp";
 	}
-	@RequestMapping("reicpe/recipeUpdate.do")
+	@RequestMapping("recipe/recipeUpload.do")
 	public String recipe_update(Model model){
 		try {
 			model.getRequest().setCharacterEncoding("UTF-8");
