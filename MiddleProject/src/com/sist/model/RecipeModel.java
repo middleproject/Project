@@ -339,7 +339,7 @@ public class RecipeModel {
 		
 		return "../recipe/jjim_ok.jsp";
 	}
-	@RequestMapping("reicpe/wishRecipe.do")
+	@RequestMapping("recipe/wishRecipe.do")
 	public String recipe_wishRecipe(Model model){
 		HttpSession session = model.getRequest().getSession();
 		String id =(String)session.getAttribute("id");

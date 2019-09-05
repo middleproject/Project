@@ -154,7 +154,7 @@
 	            <c:if test="${sessionScope.admin==1 }">
 	            	<li class="nav-item"><a href="#" class="jua">회원관리</a></li>
 	            </c:if>
-	          <li class="nav-item cta cta-colored"><a href="../reicpe/wishRecipe.do" class="jua"><span class="icon-shopping_cart"></span>[${Wishcount }]</a></li>
+	          <li class="nav-item cta cta-colored"><a href="../recipe/wishRecipe.do" class="jua"><span class="icon-shopping_cart"></span>[${Wishcount }]</a></li>
 
 	        </ul>
 	      </div>
