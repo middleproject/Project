@@ -430,15 +430,14 @@ public class RecipeModel {
 		String msgno = model.getRequest().getParameter("msgno");
 		String send = model.getRequest().getParameter("send");
 		String re = model.getRequest().getParameter("re");
-		RecipeDAO.msgDelete(Integer.parseInt(msgno));
+
 		MsgVO vo=new MsgVO();
-		vo = RecipeDAO.msgDelData(Integer.parseInt(msgno));
 		if(send!=null){
 			RecipeDAO.msgSendDelete(Integer.parseInt(msgno));
 		}else{
 			RecipeDAO.msgReDelete(Integer.parseInt(msgno));
 		}
-		if(vo.getDel()==0 && vo.getSendDel()==0){
+		if(vo.getDel()==1 && vo.getSendDel()==1){
 			RecipeDAO.msgDelete(Integer.parseInt(msgno));
 		}
 		

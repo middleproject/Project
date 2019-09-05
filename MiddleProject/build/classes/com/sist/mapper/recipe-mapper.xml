@@ -190,11 +190,11 @@
 	
 	<!-- MSG 보낸 메세지-->
 	  <select id="msgSendData" resultType="MsgVO" parameterType="String">
-		select read,msgno,content,sub,id,TO_CHAR(day,'YYYY-MM-DD') as day from msg where memberid = #{id}
+		select senddel,DEL,read,msgno,content,sub,id,TO_CHAR(day,'YYYY-MM-DD') as day from msg where memberid = #{id}
 	</select>
 	
 	<select id="msgReserveData" resultType="MsgVO" parameterType="String">
-		select msgno,read,content,sub,memberid,TO_CHAR(day,'YYYY-MM-DD') as day from msg where id = #{id}
+		select senddel,DEL,msgno,read,content,sub,memberid,TO_CHAR(day,'YYYY-MM-DD') as day from msg where id = #{id}
 	</select>
 	<select id="msgCount" parameterType="String" resultType="int">
 		select count(*) from msg where read = 0 and id=#{id}

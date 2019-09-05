@@ -47,7 +47,7 @@ $(function(){
 			</tr>
 		</thead>
 		<c:forEach var="rvo" items="${rlist }">
-			
+				<c:if test="${del!=1 }">
 				<c:if test="${rvo.read==1 }">
 				<tr class="text-center" height="100">
 					<td class="product-remove remove" value="${rvo.msgno }"><a href="#" ><span class="ion-ios-close"></span></a></td>
@@ -67,7 +67,7 @@ $(function(){
 					<td class="text-center"><font color="black"><b>${rvo.day }</b></font></td>
 				</tr>
 				</c:if>
-			
+			</c:if>
 			<!-- END TR-->
 		</c:forEach>
 	</table>

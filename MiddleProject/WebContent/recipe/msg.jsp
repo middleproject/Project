@@ -87,11 +87,13 @@ $(function(){
 							</thead>
 							<c:forEach var="vo" items="${list }">
 								<tr class="text-center">
+									<c:if test="${senddel!=1 }">
 									<td class="product-remove msgremove" value="${vo.msgno }"><a href="#"><span class="ion-ios-close"></span></a></td>
 									<td class="text-center"><a href="#">${vo.sub }</a></td>
 									<td class="text-center" colspan=3><p>${vo.content }</p></td>
 									<td class="text-center">${vo.id }</td>
 									<td class="text-center">${vo.day }</td>
+									</c:if>
 								</tr>
 								<!-- END TR-->
 								</c:forEach>

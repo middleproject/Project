@@ -382,7 +382,7 @@ public class RecipeDAO {
 		   SqlSession session = null;
 		   try {
 				session = ssf.openSession(true);
-				session.delete("msgSendDel",no);
+				session.update("msgSendDel",no);
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally{
@@ -393,7 +393,7 @@ public class RecipeDAO {
 		   SqlSession session = null;
 		   try {
 				session = ssf.openSession(true);
-				session.delete("msgResDel",no);
+				session.update("msgResDel",no);
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally{
