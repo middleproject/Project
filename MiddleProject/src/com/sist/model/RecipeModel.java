@@ -129,7 +129,10 @@ public class RecipeModel {
 		String no = model.getRequest().getParameter("no");
 		RecipeVO vo = RecipeDAO.recipeDetailData(Integer.parseInt(no));
 		//wish 확인
-		int wishCount = RecipeDAO.wishCount(id);
+		WishVO wvo = new WishVO();
+		wvo.setId(id);
+		wvo.setRecipeno(Integer.parseInt(no));
+		int wishCount = RecipeDAO.wishCount(wvo);
 		List<IngredetailVO> homeList = new ArrayList<IngredetailVO>(); // 인그리 디테일 받을 값
 		List<IngredetailVO> lotteList = new ArrayList<IngredetailVO>();
 		List<IngredetailVO> emartList = new ArrayList<IngredetailVO>();
@@ -315,8 +318,9 @@ public class RecipeModel {
 
 	@RequestMapping("recipe/wish.do")
 	public String recipe_wish(Model model){
+		HttpSession session = model.getRequest().getSession();
 		String recipeno = model.getRequest().getParameter("recipeno");
-		String id = model.getRequest().getParameter("id");
+		String id =(String)session.getAttribute("id");
 		WishVO vo =new WishVO();
 		vo.setId(id);
 		vo.setRecipeno(Integer.parseInt(recipeno));
@@ -330,7 +334,9 @@ public class RecipeModel {
 		WishVO vo =new WishVO();
 		vo.setId(id);
 		vo.setRecipeno(Integer.parseInt(recipeno));
+		System.out.println(vo.getId()+vo.getRecipeno());
 		RecipeDAO.wishDelete(vo);
+		
 		return "../recipe/jjim_ok.jsp";
 	}
 	@RequestMapping("reicpe/wishRecipe.do")

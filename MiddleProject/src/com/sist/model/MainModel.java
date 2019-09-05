@@ -21,7 +21,7 @@ public class MainModel {
 		String id =(String)session.getAttribute("id");
 		
 		if(id!=null) { 
-			Wishcount = MemberDAO.wishCount(id);
+			Wishcount = MemberDAO.wishAllCount(id);
 			msgCount = RecipeDAO.msgCount(id);
 		}
 		System.out.println("메세지 카운트:"+msgCount);

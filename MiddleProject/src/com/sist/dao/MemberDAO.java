@@ -39,12 +39,12 @@ public class MemberDAO {
 	}
 
 	// 장바구니 갯수
-	public static int wishCount(String id) {
+	public static int wishAllCount(String id) {
 		int total = 0;
 		SqlSession session = null;
 		try {
 			session = ssf.openSession();
-			total = session.selectOne("wishCount", id);
+			total = session.selectOne("wishAllCount", id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

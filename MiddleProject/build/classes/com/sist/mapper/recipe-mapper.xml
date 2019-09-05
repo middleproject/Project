@@ -119,7 +119,7 @@
 	</select>
 	<!-- 팔로우 입력 -->
 	<insert id="followInsert" parameterType="FollowVO">
-		insert into following values(
+		insert into following(no,id,follow) values(
 		 (select NVL(max(no)+1,1) from following),
 		 #{id},
 		 #{follow}
@@ -157,8 +157,8 @@
 	<select id="wishData" parameterType="String" resultType="int">
 		select recipeno from wish where id = #{id}
 	</select>
-	<select id="wishCount" parameterType="String" resultType="int">
-		select count(*) from wish where id = #{id}
+	<select id="wishCount" parameterType="WishVO" resultType="int">
+		select count(*) from wish where id = #{id} and recipeno = #{recipeno}
 	</select>
 	<!-- wish 목록 추가 -->
 	<insert id="wishInsert" parameterType="WishVO">
