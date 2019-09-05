@@ -43,7 +43,7 @@ hr {
                   </div>
                   <div class="col-md-10">
                      <label style="margin-right: 95px;">사진 올리기</label> <input
-                        type='file' id="imgInput" /> <img id="image_section" width=300
+                        type='file' id="imgInput" name="poster[0]" /> <img id="image_section" width=300
                         height=300
                         style="position: relative; right: -195px; top: 25px; margin-bottom: 30px;">
                   </div>
@@ -60,21 +60,21 @@ hr {
 
                <div class="col-md-10">
                   <div class="form-group">
-                     <label style="margin-right: 115px;">요리정보</label> <select>
+                     <label style="margin-right: 115px;">요리정보</label> <select name=info1>
                         <option>인원</option>
-                        <option name=info1>1~2인분</option>
-                        <option name=info1>3~4인분</option>
-                        <option name=info1>5인분 이상</option>
-                     </select> <select>
+                        <option>1~2인분</option>
+                        <option>3~4인분</option>
+                        <option>5인분 이상</option>
+                     </select> <select name=info2>
                         <option>시간</option>
-                        <option name=info2>10~30분</option>
-                        <option name=info2>30~60분</option>
-                        <option name=info2>1시간</option>
-                     </select> <select>
+                        <option>10~30분</option>
+                        <option>30~60분</option>
+                        <option>1시간</option>
+                     </select> <select name=info3>
                         <option>난이도</option>
-                        <option name=info3>초급</option>
-                        <option name=info3>중급</option>
-                        <option name=info3>고급</option>
+                        <option>초급</option>
+                        <option>중급</option>
+                        <option>고급</option>
                      </select>
                   </div>
                </div>
@@ -86,7 +86,7 @@ hr {
                <input type="text" name="textbox1" placeholder="재료"
                   style="background-color: yellow; width: 150px;">
                <div class="col-md-8">
-                  <input type="text" class="ingre1" placeholder="예)돼지고기"
+                  <input type="text" name="ingre1" placeholder="예)돼지고기"
                      style="position: relative; left: 220px; top: -34px; margin-bottom: 10px;">
                </div>
                <div class="col-md-8">
@@ -108,8 +108,8 @@ hr {
 
             
 
-               <input type='file' id="imgInput2" style="position: relative; left: -50px; top: -50px;" /> <img
-                  name="step_poster" id="image_section2" width="300" height=300; style="position: relative; left: -350px; bottom: -150px; " >
+               <input type='file' id="imgInput2" style="position: relative; left: -50px; top: -50px;" name="poster[1]" /> <img
+                  " id="image_section2" width="300" height=300; style="position: relative; left: -350px; bottom: -150px; " >
                      
                      <textarea
                   style="position: relative; left: 0px; top:-20px; width: 400px; height: 150px; margin-top: 200px;"
@@ -129,8 +129,8 @@ hr {
                <hr>
                <label>요리완성 사진</label>
                <div class="col-md-8">
-                  <input type='file' id="imgInput3" style="position: relative; left: -20px; bottom:-10px; margin-bottom: 50px;" /> <img
-                  name="complete" id="image_section3" width="300" height=300 />
+                  <input type='file' id="imgInput3"  name="poster[2]" style="position: relative; left: -20px; bottom:-10px; margin-bottom: 50px;" /> <img
+                  id="image_section3" width="300" height=300 />
 
                </div>
 

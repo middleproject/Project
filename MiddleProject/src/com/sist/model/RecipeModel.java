@@ -1,8 +1,10 @@
 package com.sist.model;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -450,66 +452,86 @@ public class RecipeModel {
 		model.addAttribute("main_jsp", "../recipe/recipeRegister.jsp");
 		return "../main/main.jsp";
 	}
+	
 	@RequestMapping("recipe/recipeUpload.do")
 	public String recipe_update(Model model){
 		try {
 			model.getRequest().setCharacterEncoding("UTF-8");
-			HttpSession session = model.getRequest().getSession();
-			String id = (String)session.getAttribute("id");
-			String path="c:\\upload";
-			String enctype="UTF-8";
-			int size=100*1024*1024; 
-			MultipartRequest mr = new MultipartRequest(model.getRequest(), path, size, enctype, new DefaultFileRenamePolicy());
-			String summary = mr.getParameter("summary");
-			String summary_in = mr.getParameter("summary_in");
-			String ingre1 = mr.getParameter("ingre1");
-			String ingre2 = mr.getParameter("ingre2");
-			String ingre3 = mr.getParameter("ingre3");
-			String ingre= ingre1+"##"+ingre2+"##"+ingre3;
-			String ingre4 = mr.getParameter("ingre4");
-			if(ingre4!=null){
-				String ingre5 = mr.getParameter("ingre5");
-				ingre = ingre1+"##"+ingre2+"##"+ingre3+"##"+ingre4;
-				if(ingre5!=null){
-					String ingre6 = mr.getParameter("ingre6");
-					  ingre = ingre1+"##"+ingre2+"##"+ingre3+"##"+ingre4+"##"+ingre5;
-					if(ingre6!=null){
-						String ingre7 = mr.getParameter("ingre7");
-						 ingre = ingre1+"##"+ingre2+"##"+ingre3+"##"+ingre4+"##"+ingre5+"##"+ingre6;
-						if(ingre7!=null){
-							 ingre = ingre1+"##"+ingre2+"##"+ingre3+"##"+ingre4+"##"+ingre5+"##"+ingre6+"##"+ingre7;
-						}
+		} catch (Exception e) {}
+		HttpSession session = model.getRequest().getSession();
+		String id = (String)session.getAttribute("id");
+		String path="c:\\mvcDev\\mvcStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\MiddleProject\\main";
+		String enctype="UTF-8";
+		int size=100*1024*1024; 
+		MultipartRequest mr=null;
+		try {
+			mr = new MultipartRequest(model.getRequest(), path, size, enctype, new DefaultFileRenamePolicy());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String summary = mr.getParameter("summary");
+		String summary_in = mr.getParameter("summary_in");
+		String ingre1 = mr.getParameter("ingre1");
+		String ingre2 = mr.getParameter("ingre2");
+		String ingre3 = mr.getParameter("ingre3");
+		String ingre= ingre1+"##"+ingre2+"##"+ingre3;
+		String ingre4 = mr.getParameter("ingre4");
+		if(ingre4!=null){
+			String ingre5 = mr.getParameter("ingre5");
+			ingre = ingre1+"##"+ingre2+"##"+ingre3+"##"+ingre4;
+			if(ingre5!=null){
+				String ingre6 = mr.getParameter("ingre6");
+				  ingre = ingre1+"##"+ingre2+"##"+ingre3+"##"+ingre4+"##"+ingre5;
+				if(ingre6!=null){
+					String ingre7 = mr.getParameter("ingre7");
+					 ingre = ingre1+"##"+ingre2+"##"+ingre3+"##"+ingre4+"##"+ingre5+"##"+ingre6;
+					if(ingre7!=null){
+						 ingre = ingre1+"##"+ingre2+"##"+ingre3+"##"+ingre4+"##"+ingre5+"##"+ingre6+"##"+ingre7;
 					}
 				}
 			}
-			String info1 =mr.getParameter("info1");
-			String info2 =mr.getParameter("info2");
-			String info3 =mr.getParameter("info3");
-			String info = info1+"##"+info2+"##"+info3;
-			
-			String step =mr.getParameter("step");
-			String tip =mr.getParameter("step");
-			String tag =mr.getParameter("tag");
-			String step_poster =mr.getOriginalFileName("step_poster");
-			String complete=mr.getOriginalFileName("complete");
-			String poster = mr.getOriginalFileName("poster");
-			RecipeVO vo = new RecipeVO();
-			vo.setComplete(complete);
-			vo.setImage(poster);
-			vo.setInfo(info);
-			vo.setIngre(ingre);
-			vo.setMade(id);
-			vo.setStep(step);
-			vo.setSTEP_POSTER(step_poster);
-			vo.setTip(tip);
-			vo.setTag(tag);
-			vo.setImage("");
-			vo.setHit(0);
-			vo.setSummary(summary);
-			vo.setSummary_in(summary_in);
-			RecipeDAO.cateDateInsert(vo);
-			System.out.println("레시피 인서트 완료");
-		} catch (Exception e) {}
+		}
+		Enumeration formNames=mr.getFileNames();
+		String[] poster = new String[3];
+		int i=0;
+		while(formNames.hasMoreElements()) {
+		
+			String name = (String) formNames.nextElement();
+		
+			String sFileName= mr.getFilesystemName(name);
+			poster[i] = sFileName;
+			System.out.println(sFileName);
+			i++;
+		}
+		String info1 =mr.getParameter("info1");
+		String info2 =mr.getParameter("info2");
+		String info3 =mr.getParameter("info3");
+		String info = info1+"##"+info2+"##"+info3;
+		
+		String step =mr.getParameter("step");
+		String tip =mr.getParameter("step");
+		String tag =mr.getParameter("tag");
+		String step_poster =poster[1];
+		String complete=poster[2];
+		String poster1 = poster[0];
+		RecipeVO vo = new RecipeVO();
+		vo.setComplete("http://localhost:8080/MiddleProject/main/"+complete+",");
+		vo.setPoster("http://localhost:8080/MiddleProject/main/"+poster1);
+		vo.setInfo(info);
+		vo.setIngre(ingre);
+		vo.setMade(id);
+		vo.setStep(step);
+		vo.setSTEP_POSTER("http://localhost:8080/MiddleProject/main/"+step_poster);
+		vo.setTip(tip);
+		vo.setTag(tag);
+		vo.setImage("");
+		vo.setHit(0);
+		vo.setSummary(summary);
+		vo.setSummary_in(summary_in);
+		System.out.println(vo.getComplete()+vo.getSummary()+vo.getSummary_in()+vo.getInfo()+vo.getIngre()+vo.getStep()+
+				vo.getSTEP_POSTER()+vo.getTip()+vo.getPoster()+vo.getTag());
+		RecipeDAO.cateDateInsert(vo);
+		System.out.println("레시피 인서트 완료");
 		return "redirect:../recipe/recipe_list.do";
 	}
 }
