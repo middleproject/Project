@@ -5,10 +5,11 @@
 <html lang="ko">
 <head>
 
+
 <style type="text/css">
 .textbox{
 width: 250px;
-height: 40px;
+height: 35px;
 
 margin-left: 5px;
 
@@ -17,6 +18,20 @@ margin-left: 5px;
 color: black;
 
 }
+
+.btn2{
+width: 80px; 
+height: 30px; 
+color: black; 
+background-color: white;
+margin-left: -50px;
+}
+
+.textbox{
+border: 1px solid #6E6E6E;
+   border-radius: 4px;
+}
+
 
 </style>
 
@@ -35,7 +50,7 @@ $(function(){
 			content:'../member/postfind.jsp',
 			player:'iframe',
 			title:'우편번호 검색',
-			width:400,
+			width:550,
 			height:550
 		});
 	});
@@ -67,25 +82,27 @@ $(function(){
 						<div class="row align-items-end">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="font">*아이디</label> <input type="text" class="textbox"
+									<div style="color:red;">* <label class="font">아이디</label> <input type="text" class="textbox"
 										placeholder="영문,숫자 조합가능" id="id" name="id" required>
+								</div>
 								</div>
 							</div>
 
 							<div class="col-md-4">
 								<div class="form-group">
 
-									<input type="button" style="width: 100px; height: 30px;"
-										id="checkBtn"class="" value="중복확인" >
+									<input type="button"
+										id="checkBtn" class="btn2 textbox" value="중복확인" style="position:relative; top: -2px; left:-10px;">
 									<input type="hidden" name="idDuplication" value="idUncheck">
 								</div>
 							</div>
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="font">*비밀번호</label> <input type="password"
+									<div style="color:red;">*<label class="font">비밀번호</label> <input type="password"
 										class="textbox" placeholder="" id="pwd" name="pwd"
 										required>
+										</div>
 								</div>
 							</div>
 							<div class="w-100"></div>
@@ -95,63 +112,68 @@ $(function(){
 										class="textbox" placeholder="" id="pwd2" name="pwd2"
 										required>
 								</div>
-								<label id=lable></label>
+								<label id=lable style="position:relative; top: -45px; right: -270px;"></label>
 							</div>
 
 							<div class="w-100"></div>
 							<div class="col-md-4" style="margin-top: -20px;">
 								<div class="form-group">
-									<label class="font">*이름</label> <input type="text" class="textbox"
+									<div style="color:red;">*<label class="font">이름</label> <input type="text" class="textbox"
 										placeholder="" id="name" name="name" class="name" required>
+								</div>
 								</div>
 							</div>
 
 							<div class="w-100" ></div>
 							<div class="col-md-8">
 								<div class="form-group">
-									<label class="font">*성별</label>
+									<div style="color:red;">*<label class="font">성별</label>
 									<div class="w-100"></div>
-									<input type="radio" style="width: 40px; height: 20px;"
-										name="sex" value="남자"> <label style="font-size: 20px;">남자</label>
-									<input type="radio" style="width: 40px; height: 20px;"
-										name="sex" value="여자"> <label style="font-size: 20px;">여자</label>
+									</div>
+									<input type="radio" style="width: 15px; height: 15px;"
+										name="sex" value="남자"> <label style="font-size: 15px;">남자</label>
+									<input type="radio" style="width: 15px; height: 15px;"
+										name="sex" value="여자"> <label style="font-size: 15px;">여자</label>
 								</div>
+								
 							</div>
 
 							<div class="w-100"></div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label class="font">*생년월일</label> <input type="date" class="textbox"
+									<div style="color:red;">*<label class="font">생년월일</label> <input type="date" class="textbox"
 										id="birthday" name="bitrhday" placeholder="생년월일을 입력해주세요"
 										required>
-
+</div>
 								</div>
 							</div>
 
 							<div class="w-100"></div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label class="font">*이메일</label> <input type="text" id="email1"
-										 class="textbox" name="email1" style="width: 160px;" required>
+									<div style="color:red;">*<label class="font">이메일</label> <input type="text" id="email1"
+										 class="textbox" name="email1" style="width: 230px; mar " required>
+								</div>
 								</div>
 							</div>
 
 							<div class="col-md-0">
 								<div class="form-group">
-									<label style="margin-left: -30px;">@</label>
+									<label>@</label>
 								</div>
 							</div>
 
 							<div class="col-md-4">
 								<div class="form-group">
-									<input type="text" id="email2"class="textbox" name="email2"style="width: 160px; margin-left: -10px;"
-									>
+									<input type="text" id="email2"class="textbox" name="email2" style="width: 230px; position: relative; right: -10px;">
+									
 								</div>
 							</div>
 							<div class="col-md-0">
 								<div class="form-group">
 									<select id="emailSelection" name="emailSelection"
-										style="width: 120px; height: 33px;">
+										style="width: 120px; height: 33px; position: relative; right: -70px; border: 1px solid black;
+   border-radius: 4px;">
 										<option>직접입력</option>
 										<option>naver.com</option>
 										<option>daum.net</option>
@@ -167,11 +189,11 @@ $(function(){
 								<div class="form-group">
 									<label class="font">집 전화</label>
 									<div class="w-100"></div>
-									<select style="width: 80px; height: 33px;" name="tel1">
+									<select style="width: 80px; height: 33px;" name="tel1" class="textbox">
 										<option>02</option>
 										<option>031</option>
 										<option>041</option>
-									</select> - <input type="text" size="5px" name="tel2" class="textbox" style="width: 80px; height: 33px;"> 
+									</select> - <input type="text" size="5px" name="tel2" class="textbox" style="width: 80px; height: 33px; "> 
 									- <input
 										type="text" size="5px" name="tel3" class="textbox" style="width: 80px; height: 33px;">
 								</div>
@@ -180,9 +202,10 @@ $(function(){
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="font">*휴대 전화</label>
+									<div style="color:red;">*<label class="font">휴대 전화</label>
 									<div class="w-100"></div>
-									<select style="width: 80px; height: 33px;" name="phone1">
+									</div>
+									<select style="width: 80px; height: 33px;" name="phone1" class="textbox	">
 										<option>010</option>
 										<option>011</option>
 										<option>016</option>
@@ -193,10 +216,10 @@ $(function(){
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="font"	>*우편번호</label>
+									<div style="color:red;">*<label style="color: black">우편번호</label>
 									<div class="w-100"></div>
-									<input type="text" readonly="readonly" name="addr1" required>
-
+									<input type="text" readonly="readonly" name="addr1" class="textbox"required style="position: relative; right: 5px;">
+				</div>
 								</div>
 
 							</div>
@@ -205,7 +228,7 @@ $(function(){
 								<div class="form-group">
 									<input type="button"
 										style="width: 90px; height: 35px; font-size: 15px"
-										class="btn-warning btn-lg" value="검색" id="postBtn">
+										class="btn2 textbox" value="검색" id="postBtn">
 
 								</div>
 
@@ -229,8 +252,11 @@ $(function(){
 							</div>
 
 							<div class="w-100"></div>
+							
 							<div class="col-md-2">
+							<p style="border-bottom: solid; width: 650px; margin-top: -70px;">
 								<div class="form-group">
+								
 									<input type="submit" class=" btn-success btn-lg" value="가입완료">
 								</div>
 							</div>
@@ -247,6 +273,7 @@ $(function(){
 
 						</div>
 					</form>
+					
 					<!-- END -->
 				</div>
 

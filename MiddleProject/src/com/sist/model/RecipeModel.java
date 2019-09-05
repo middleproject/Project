@@ -433,4 +433,17 @@ public class RecipeModel {
 		
 		return "follow_ok.jsp";
 	}
+	
+	@RequestMapping("recipe/recipeRegister.do")
+	public String recipe_Register(Model model) {
+		HttpSession session = model.getRequest().getSession();
+		String id = (String)session.getAttribute("id");
+		List<MsgVO> rlist = RecipeDAO.msgReseve(id);
+		
+		model.addAttribute("main_jsp", "../recipe/recipeRegister.jsp");
+		
+		return "../main/main.jsp";
+	}
+	
+	
 }

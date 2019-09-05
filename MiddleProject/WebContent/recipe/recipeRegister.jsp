@@ -14,10 +14,9 @@ hr {
 	border-color: teal;
 	border-left: 5px;
 }
+
+ 
 </style>
-
-
-
 
 
 
@@ -109,8 +108,11 @@ hr {
 					<div id="textdiv"></div>
 					<hr>
 					
-					<label>요리 과정</label>
-					
+					<label style="position: relative; top: -100px;">요리 과정</label>
+					<textarea
+							style="position: relative; left: 170px; top: -20px; width: 400px; height: 150px;"
+							placeholder="예)라면을 끓일떄 물을 3분간 끓이고 스프넣고 후레이크넣고 면을 넣습니다."></textarea>
+
 					 <input	type='file' id="imgInput2"  style="margin-left: 130px;"/> <img id="image_section2"/>
 					<hr>
 
