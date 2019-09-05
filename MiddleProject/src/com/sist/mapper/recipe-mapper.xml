@@ -174,7 +174,7 @@
 		delete from wish where recipeno = #{recipeno} and id=#{id}
 	</delete>
 	<!-- read 확인 -->
-	<select id="readCount" parameterType="ReadVO">
+	<select id="readCount" parameterType="ReadVO" resultType="int">
 		select count(*) from read where id=#{id} and rno=#{rno}
 	</select>
 	<insert id="readInsert" parameterType="ReadVO">

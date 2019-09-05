@@ -191,12 +191,12 @@ public class RecipeDAO {
 		   return list;
 	   }
 	   // 레시피 wish 확인
-	   public static int wishCount(int no){
+	   public static int wishCount(String id){
 		   int total=0;
 		   SqlSession session = null;
 		   try {
 			   session=ssf.openSession();
-			   total = session.selectOne("wishCount",no);
+			   total = session.selectOne("wishCount",id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally{

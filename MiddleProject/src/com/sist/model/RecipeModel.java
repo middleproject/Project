@@ -10,6 +10,8 @@ import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.controller.Controller;
 import com.sist.controller.Model;
 import com.sist.controller.RequestMapping;
@@ -122,10 +124,12 @@ public class RecipeModel {
 	// 디테일 페이지
 	@RequestMapping("recipe/recipe_detail.do")
 	public static String recipe_detail(Model model){
+		HttpSession session = model.getRequest().getSession();
+		String id = (String)session.getAttribute("id");
 		String no = model.getRequest().getParameter("no");
 		RecipeVO vo = RecipeDAO.recipeDetailData(Integer.parseInt(no));
 		//wish 확인
-		int wishCount = RecipeDAO.wishCount(Integer.parseInt(no));
+		int wishCount = RecipeDAO.wishCount(id);
 		List<IngredetailVO> homeList = new ArrayList<IngredetailVO>(); // 인그리 디테일 받을 값
 		List<IngredetailVO> lotteList = new ArrayList<IngredetailVO>();
 		List<IngredetailVO> emartList = new ArrayList<IngredetailVO>();
@@ -133,8 +137,7 @@ public class RecipeModel {
 		List<RecipeVO> list = new ArrayList<RecipeVO>();
 		// 로그인 세션
 		int folloCount = 0;
-		HttpSession session = model.getRequest().getSession();
-		String id = (String)session.getAttribute("id");
+		
 		//게시물 read
 		if(id!=null){
 			ReadVO rvo= new ReadVO();
@@ -438,12 +441,67 @@ public class RecipeModel {
 	public String recipe_Register(Model model) {
 		HttpSession session = model.getRequest().getSession();
 		String id = (String)session.getAttribute("id");
-		List<MsgVO> rlist = RecipeDAO.msgReseve(id);
-		
 		model.addAttribute("main_jsp", "../recipe/recipeRegister.jsp");
-		
 		return "../main/main.jsp";
 	}
-	
-	
+	@RequestMapping("recipe/recipeUpdate.do")
+	public String recipe_update(Model model){
+		try {
+			model.getRequest().setCharacterEncoding("UTF-8");
+			HttpSession session = model.getRequest().getSession();
+			String id = (String)session.getAttribute("id");
+			String path="c:\\upload";
+			String enctype="UTF-8";
+			int size=100*1024*1024; 
+			MultipartRequest mr = new MultipartRequest(model.getRequest(), path, size, enctype, new DefaultFileRenamePolicy());
+			String summary = mr.getParameter("summary");
+			String summary_in = mr.getParameter("summary_in");
+			String ingre1 = mr.getParameter("ingre1");
+			String ingre2 = mr.getParameter("ingre2");
+			String ingre3 = mr.getParameter("ingre3");
+			String ingre= ingre1+"##"+ingre2+"##"+ingre3;
+			String ingre4 = mr.getParameter("ingre4");
+			if(ingre4!=null){
+				String ingre5 = mr.getParameter("ingre5");
+				ingre = ingre1+"##"+ingre2+"##"+ingre3+"##"+ingre4;
+				if(ingre5!=null){
+					String ingre6 = mr.getParameter("ingre6");
+					  ingre = ingre1+"##"+ingre2+"##"+ingre3+"##"+ingre4+"##"+ingre5;
+					if(ingre6!=null){
+						String ingre7 = mr.getParameter("ingre7");
+						 ingre = ingre1+"##"+ingre2+"##"+ingre3+"##"+ingre4+"##"+ingre5+"##"+ingre6;
+						if(ingre7!=null){
+							 ingre = ingre1+"##"+ingre2+"##"+ingre3+"##"+ingre4+"##"+ingre5+"##"+ingre6+"##"+ingre7;
+						}
+					}
+				}
+			}
+			String info1 =mr.getParameter("info1");
+			String info2 =mr.getParameter("info2");
+			String info3 =mr.getParameter("info3");
+			String info = info1+"##"+info2+"##"+info3;
+			
+			String step =mr.getParameter("step");
+			String tip =mr.getParameter("step");
+			String tag =mr.getParameter("tag");
+			String step_poster =mr.getOriginalFileName("step_poster");
+			String complete=mr.getOriginalFileName("complete");
+			String poster = mr.getOriginalFileName("poster");
+			RecipeVO vo = new RecipeVO();
+			vo.setComplete(complete);
+			vo.setImage(poster);
+			vo.setInfo(info);
+			vo.setIngre(ingre);
+			vo.setMade(id);
+			vo.setStep(step);
+			vo.setSTEP_POSTER(step_poster);
+			vo.setTip(tip);
+			vo.setTag(tag);
+			vo.setImage("");
+			vo.setHit(0);
+			RecipeDAO.cateDateInsert(vo);
+			System.out.println("레시피 인서트 완료");
+		} catch (Exception e) {}
+		return "redirect:../recipe/recipe_list.do";
+	}
 }
