@@ -18,6 +18,12 @@
 			#{made}
 		)
 	</insert>
+	<!-- 레시피 삭제 -->
+	<delete id="recipeDelete" parameterType="int">
+		delete from recipe where no = #{no}
+	</delete>
+	
+	
 	<!-- list data -->
 	<select id="recipeListData" parameterType="java.util.Map" resultType="RecipeVO" >
 		select no,hit,made,tag,TO_CHAR(regdate,'YYYY-MM-DD')as regdate,poster,info,summary,summary_in,num 
@@ -178,7 +184,7 @@
 		select count(*) from read where id=#{id} and rno=#{rno}
 	</select>
 	<insert id="readInsert" parameterType="ReadVO">
-		insert into read values(
+		insert into read(id,rno) values(
 		#{id},
 		#{rno}
 		)
@@ -230,4 +236,13 @@
 	<select id="msgDelData" parameterType="int" resultType="com.sist.vo.MsgVO">
 		select del,senddel from msg where msgno=#{msgno}
 	</select>
+	
+	<!-- 읽은 목록 -->
+	<insert id="readRecipe" parameterType="ReadVO">
+		insert into read(id,rno) values(
+		#{id},
+		#{rno}
+		)
+	</insert>
+	
 </mapper>

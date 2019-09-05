@@ -89,6 +89,19 @@ $(function(){
 			}
 		});
 	});
+	$('.remove').click(function(){
+		var msgno = $('#remove').attr("data-no");
+		alert(msgno);
+		$.ajax({
+			type:'post',
+			url:'../recipe/recipeDelete.do',
+			data:{msgno:msgno},
+			success:function(res)
+			{
+				window.location.reload();
+			}
+		});
+	});
 });
 </script>
 <style type="text/css">
@@ -261,6 +274,9 @@ $(function(){
 					</c:if>
 					<c:if test="${wishCount!=0 }">
 						<a href="#"><img alt="" src="jjim.png" id="jjim" data-jjim=${sessionScope.id }></a>
+					</c:if>
+					<c:if test="${sessionScope.id==vo.made }">
+						<a href="#" class="btn btn-sm btn-primary remove" data-no="${vo.no }">삭제</a>
 					</c:if>
 					<input type="hidden" id="number" data-no=${vo.no }>
 					

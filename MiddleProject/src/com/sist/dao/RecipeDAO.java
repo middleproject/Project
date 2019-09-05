@@ -30,6 +30,17 @@ public class RecipeDAO {
 		session.close();
 		return list;
 	}
+	public static void recipeDelete(int no){
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			session.delete("recipeDelete",no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			if(session!=null) session.close();
+		}
+	}
 	
 	public static List<RecipeVO> recipeListData(Map map){
 		List<RecipeVO> list = new ArrayList<RecipeVO>();
@@ -400,16 +411,15 @@ public class RecipeDAO {
 				if(session!=null) session.close();
 			}
 	   }
-	   public static MsgVO msgDelData(int no){
+	   //구독자 읽은 목록
+	   public static void readRecipe(ReadVO vo){
 		   SqlSession session = null;
-		   MsgVO vo = new MsgVO();
 		   try {
-			session = ssf.openSession();
-			vo = session.selectOne("",no);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		   return vo;
+				session = ssf.openSession();
+				session.insert("readRecipe",vo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			   
 	   }
-
 }

@@ -129,6 +129,13 @@ public class RecipeModel {
 		HttpSession session = model.getRequest().getSession();
 		String id = (String)session.getAttribute("id");
 		String no = model.getRequest().getParameter("no");
+		// 읽은 목록
+		if(id!=null){
+			ReadVO readvo = new ReadVO();
+			readvo.setId(id);
+			readvo.setRno(Integer.parseInt(no));
+			RecipeDAO.readRecipe(readvo);
+		}
 		RecipeVO vo = RecipeDAO.recipeDetailData(Integer.parseInt(no));
 		//wish 확인
 		WishVO wvo = new WishVO();
@@ -248,6 +255,7 @@ public class RecipeModel {
 		if(vo.getImage()==null){
 			vo.setImage("https://previews.123rf.com/images/julynx/julynx1408/julynx140800023/30746516-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%97%86%EA%B1%B0%EB%82%98-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%82%AC%EC%A7%84-%EC%97%86%EC%9D%8C.jpg");
 		}
+		model.addAttribute("id", id);
 		model.addAttribute("vo", vo);
 		model.addAttribute("main_jsp", "../recipe/recipe_detail.jsp");
 		return "../main/main.jsp";
@@ -298,8 +306,6 @@ public class RecipeModel {
 		for(FollowVO vo:madeList){
 			System.out.println("팔로우 아이디 날짜:"+vo.getDay()+vo.getFollow());
 		}
-		//페이지 나누기
-		Map map =new HashMap();
 		//팔로워 찾기
 		madeList = RecipeDAO.followSearch(id);
 		
@@ -309,8 +315,6 @@ public class RecipeModel {
 				list.add(rvo);
 			}
 		}
-		// 읽은 값 구분
-		rlist = RecipeDAO.readAllData(id);
 		
 		model.addAttribute("rlist", rlist);
 		model.addAttribute("list", list);
@@ -526,6 +530,13 @@ public class RecipeModel {
 				vo.getSTEP_POSTER()+vo.getTip()+vo.getPoster()+vo.getTag());
 		RecipeDAO.cateDateInsert(vo);
 		System.out.println("레시피 인서트 완료");
+		return "redirect:../recipe/recipe_list.do";
+	}
+	@RequestMapping("recipe/recipeDelete.do")
+	public String recipe_delete(Model model){
+		String no = model.getRequest().getParameter("msgno");
+		RecipeDAO.recipeDelete(Integer.parseInt(no));
+		
 		return "redirect:../recipe/recipe_list.do";
 	}
 }
