@@ -378,22 +378,22 @@ public class RecipeDAO {
 		}
 	   }
 	   
-	   public static void msgSendDelete(int no){
+	   public static void msgSendDelete(int msgno){
 		   SqlSession session = null;
 		   try {
 				session = ssf.openSession(true);
-				session.update("msgSendDel",no);
+				session.update("msgSendDel",msgno);
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally{
 				if(session!=null) session.close();
 			}
 	   }
-	   public static void msgReDelete(int no){
+	   public static void msgReDelete(int msgno){
 		   SqlSession session = null;
 		   try {
 				session = ssf.openSession(true);
-				session.update("msgResDel",no);
+				session.update("msgResDel",msgno);
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally{

@@ -18,12 +18,11 @@ $(function(){
 		alert(msgno);
 		$.ajax({
 			type:'post',
-			url:'../recipe/msgDelete.do',
+			url:'../recipe/msgReDelete.do',
 			data:{msgno:msgno},
 			success:function(res)
 			{
 				window.location.reload()
-				alert(follow+"님을 팔로우하였습니다.");
 			}
 		});
 	});
@@ -47,7 +46,7 @@ $(function(){
 			</tr>
 		</thead>
 		<c:forEach var="rvo" items="${rlist }">
-				<c:if test="${del!=1 }">
+				<c:if test="${rvo.del==0 }">
 				<c:if test="${rvo.read==1 }">
 				<tr class="text-center" height="100">
 					<td class="product-remove remove" value="${rvo.msgno }"><a href="#" ><span class="ion-ios-close"></span></a></td>

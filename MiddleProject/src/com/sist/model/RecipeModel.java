@@ -424,22 +424,17 @@ public class RecipeModel {
 		model.addAttribute("vo", vo);
 		return "msgdetail.jsp";
 	}
-	
-	@RequestMapping("recipe/msgDelete.do")
-	public String msgDelete(Model model){
+	//메세지 보낸 사람이 삭제
+	@RequestMapping("recipe/msgSendDelete.do")
+	public String msgSendDelete(Model model){
 		String msgno = model.getRequest().getParameter("msgno");
-		String send = model.getRequest().getParameter("send");
-		String re = model.getRequest().getParameter("re");
-
-		MsgVO vo=new MsgVO();
-		if(send!=null){
-			RecipeDAO.msgSendDelete(Integer.parseInt(msgno));
-		}else{
-			RecipeDAO.msgReDelete(Integer.parseInt(msgno));
-		}
-		if(vo.getDel()==1 && vo.getSendDel()==1){
-			RecipeDAO.msgDelete(Integer.parseInt(msgno));
-		}
+		RecipeDAO.msgSendDelete(Integer.parseInt(msgno));
+		return "follow_ok.jsp";
+	}
+	@RequestMapping("recipe/msgReDelete.do")
+	public String msgReDelete(Model model){
+		String msgno = model.getRequest().getParameter("msgno");
+		RecipeDAO.msgReDelete(Integer.parseInt(msgno));
 		
 		return "follow_ok.jsp";
 	}

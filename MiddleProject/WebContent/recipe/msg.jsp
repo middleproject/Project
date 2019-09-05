@@ -11,12 +11,11 @@ $(function(){
 		alert(msgno);
 		$.ajax({
 			type:'post',
-			url:'../recipe/msgDelete.do',
+			url:'../recipe/msgSendDelete.do',
 			data:{msgno:msgno},
 			success:function(res)
 			{
 				window.location.reload()
-				alert(follow+"님을 팔로우하였습니다.");
 			}
 		});
 	});
@@ -87,7 +86,7 @@ $(function(){
 							</thead>
 							<c:forEach var="vo" items="${list }">
 								<tr class="text-center">
-									<c:if test="${senddel!=1 }">
+									<c:if test="${vo.sendDel==0 }">
 									<td class="product-remove msgremove" value="${vo.msgno }"><a href="#"><span class="ion-ios-close"></span></a></td>
 									<td class="text-center"><a href="#">${vo.sub }</a></td>
 									<td class="text-center" colspan=3><p>${vo.content }</p></td>
