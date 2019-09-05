@@ -474,19 +474,19 @@ public class RecipeModel {
 		String ingre1 = mr.getParameter("ingre1");
 		String ingre2 = mr.getParameter("ingre2");
 		String ingre3 = mr.getParameter("ingre3");
-		String ingre= ingre1+"##"+ingre2+"##"+ingre3;
+		String ingre= ingre1+","+ingre2+","+ingre3;
 		String ingre4 = mr.getParameter("ingre4");
 		if(ingre4!=null){
 			String ingre5 = mr.getParameter("ingre5");
-			ingre = ingre1+"##"+ingre2+"##"+ingre3+"##"+ingre4;
+			ingre = ingre1+","+ingre2+","+ingre3+","+ingre4;
 			if(ingre5!=null){
 				String ingre6 = mr.getParameter("ingre6");
-				  ingre = ingre1+"##"+ingre2+"##"+ingre3+"##"+ingre4+"##"+ingre5;
+				  ingre = ingre1+","+ingre2+","+ingre3+","+ingre4+","+ingre5;
 				if(ingre6!=null){
 					String ingre7 = mr.getParameter("ingre7");
-					 ingre = ingre1+"##"+ingre2+"##"+ingre3+"##"+ingre4+"##"+ingre5+"##"+ingre6;
+					 ingre = ingre1+","+ingre2+","+ingre3+","+ingre4+","+ingre5+"##"+ingre6;
 					if(ingre7!=null){
-						 ingre = ingre1+"##"+ingre2+"##"+ingre3+"##"+ingre4+"##"+ingre5+"##"+ingre6+"##"+ingre7;
+						 ingre = ingre1+","+ingre2+","+ingre3+","+ingre4+","+ingre5+","+ingre6+","+ingre7;
 					}
 				}
 			}
@@ -506,7 +506,7 @@ public class RecipeModel {
 		String info1 =mr.getParameter("info1");
 		String info2 =mr.getParameter("info2");
 		String info3 =mr.getParameter("info3");
-		String info = info1+"##"+info2+"##"+info3;
+		String info = "####"+info1+"##"+info2+"##"+info3+"##";
 		
 		String step =mr.getParameter("step");
 		String tip =mr.getParameter("step");
