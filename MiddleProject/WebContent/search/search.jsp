@@ -121,32 +121,32 @@ $(function difficulty(){
 <section class="ftco-section">
     	<div class="container">
     		<div class="row justify-content-center">
-    			<div class="col-md-10 mb-5 text-center">
-    				<ul class="product-category">
+    			<div class="col-md-10 mb-5 text-center ">
+    				<ul class="product-category" >
     				 <c:forEach var="vo" items="${list }">
     					  <li class="ingrelist" data-name="${vo.ingrename }" data-no="${vo.ingreno }"><a href="#" class="active">${vo.ingrename }</a></li>
     					</c:forEach> 
-    					<br><br>
+    					<br>
     					<div id="searchlist"></div>
-    					<br><br>
+    					<br>
     					<c:forEach var="dvo" items="${dlist }">
     					<li class="difficulty" data-difficultystep="${dvo.difficultystep }"><a href="#" class="active">${dvo.difficultystep }</a></li>
     					</c:forEach>
     					
     					
     				</ul>
-    				
+    				</div>
     			</div>
     		</div>
     		
-    		<div class="row" id="searchingre">
-    		<div class="row" id="difficultylist">
+    		<div class="row" id="searchingre" >
+    		<div class="row" id="difficultylist" >
     		
     		</div>
     		</div>
     		<div class="row mt-5">
           <div class="col text-center">
-            <div class="block-27">
+            <div class="block-27" >
               <ul>
                 <li><a href="#">&lt;</a></li>
                 <li class="active"><span>1</span></li>
