@@ -76,28 +76,28 @@
 					    </div>
 					    		<c:if test="${sessionScope.id==null }">
 							<a href="../member/signIn.do"><span class="text"
-								style="color: white;margin-left: 10px;">로그인</span></a>
+								style="color: white;margin-left: 10px;">로그인&nbsp;</span></a>
 
 							<span class="text" style="color: white;"> </span>
 
 							<a href="../member/signUp.do"><span class="text"
-								style="color: white;margin-left: 10px;">회원 가입</span></a>
+								style="color: white;margin-left: 10px;">회원 가입&nbsp;</span></a>
 						</c:if>
 
 						<c:if test="${sessionScope.id!=null }">
-							<a href="../member/logout.do"><span class="text" style="color: white;">로그아웃</span></a>
+							<a href="../member/logout.do"><span class="text" style="color: white;">로그아웃&nbsp;</span></a>
 							<span class="text" style="color: white;"> </span>
 							<c:if test="${sessionScope.admin==0 || sessionScope.admin==2 }">
 								<a href="../mypage/mypageMain.do"><span class="text"
-									style="color: white;margin-left: 10px;">마이페이지&nbsp;&nbsp;</span></a>
+									style="color: white;margin-left: 10px;">마이페이지&nbsp;</span></a>
 							</c:if>
 							<c:if test="${sessionScope.admin==1 }">
 								<a href="../mypage/adminpageMain.do"><span class="text"
-									style="color: white;margin-left: 10px;">관리자페이지</span></a>
+									style="color: white;margin-left: 10px;">관리자페이지&nbsp;</span></a>
 							</c:if>
 							 <!-- 2019-9.1 지우-->
-						    <a href="../recipe/msg.do"><span class="text" style="color:white;">쪽지(${msgCount })<c:if test="${msgCount>0 }"><sup><font color=red>NEW</font></sup></c:if>&nbsp;&nbsp;</span></a>
-						    <a href="../recipe/follow.do"><span class="text" style="color:white;">새글&nbsp;&nbsp;</span></a>
+						    <a href="../recipe/msg.do"><span class="text" style="color:white;">&nbsp;쪽지(${msgCount })<c:if test="${msgCount>0 }"><sup><font color=red>NEW</font></sup></c:if>&nbsp;&nbsp;</span></a>
+						    <a href="../recipe/follow.do"><span class="text" style="color:white;">&nbsp;Cash${sessionScope.pay }</span></a>
 						</c:if>
 				    </div>
 			    </div>

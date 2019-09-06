@@ -34,9 +34,9 @@
 </style>
 
 
-<link rel="stylesheet" href="shadow/css/shadowbox.css">
+<link rel="stylesheet" href="../member/shadow/css/shadowbox.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript" src="shadow/js/shadowbox.js"></script>
+<script type="text/javascript" src="../member/shadow/js/shadowbox.js"></script>
 <script type="text/javascript">
 	Shadowbox.init({
 		players : [ 'iframe' ]
@@ -69,11 +69,10 @@
 						<h3 class="mb-4 billing-heading">회원정보 수정</h3>
 						<p style="border-bottom: solid">
 						<div class="row align-items-end">
-							<div class="col-md-6">
+							<div class="col-md-10">
 								<div class="form-group">
 									<label class="font">아이디</label>
-									<p placeholder="영문,숫자 조합가능" id="id" class="font2" name="id">${vo.id }</p>
-
+									<p  id="id" class="font2" name="id" style="position: relative;top: -35px;right: -100px; margin-bottom:-20px;">${vo.id }</p>
 								</div>
 							</div>
 
@@ -99,16 +98,10 @@
 
 							<div class="w-100"></div>
 							<div class="col-md-4" style="margin-top: -20px;">
-								<div class="form-group">
-									이름 <label id="nameHide" class="font2"
+								<div class="form-group font">
+									이름 <label class="font2"
 										style="margin-left: 61px; margin-bottom: -50px;">${vo.name }</label>
-										<input
-										type="text" id="name" class="textbox"
-										style="display: none; margin-left: 60px; margin-right: -50px;"
-										value="${vo.name }">
-						
-										<input type="button" id="nameBtn" class="btn2" value="수정"
-											style="position: relative; right: -200px;">
+										
 									
 								</div>
 							</div>
@@ -118,7 +111,7 @@
 								<div class="form-group">
 									<label class="font">성별</label>
 									<div class="w-100"></div>
-									<p class="font2">${vo.sex }</p>
+									<p class="font2" style="position: relative;top: -35px;right: -100px; margin-bottom:-20px;">${vo.sex }</p>
 
 								</div>
 
@@ -127,9 +120,8 @@
 							<div class="w-100"></div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label class="font">생년월일</label> <input type="date"
-										class="textbox" id="birthday" name="bitrhday"
-										placeholder="생년월일을 입력해주세요" required>
+									<label class="font">생년월일</label>
+									<P style="position: relative;top: -35px;right: -100px; margin-bottom:20px;">${birthday }</P>
 
 								</div>
 							</div>
@@ -258,8 +250,8 @@
 
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="submit" class="btn-warning btn-lg" value="가입취소"
-										onclick="javascript:history.back()">
+								<a href="mypageMain.do">	<input type="button" class="btn-warning btn-lg" value="가입취소"
+										> </a>
 								</div>
 							</div>
 
@@ -281,26 +273,8 @@
 
 
 
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script>
-	jQuery('#phoneBtn').click(function() {
-		if ($("#phone").css("display") == "none") {
-			jQuery('#phone').show();
-			jQuery('#phoneHide').hide();
-			/* jQuery('#phone').val("${vo.phone }"); */
-			jQuery('#phone').val("010-3458-0228");
-			jQuery('#phoneBtn').val("취소");
 
-		} else {
-			jQuery('#phone').hide();
-			jQuery('#phoneHide').show();
-			jQuery('#phoneBtn').val("수정");
-
-		}
-	});
-</script>
-
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 	$(function() {
 
@@ -336,63 +310,7 @@
 	});
 </script>
 
-<!-- 수정버튼 -->
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script>
-	jQuery('#nameBtn').click(function() {
-		if ($("#name").css("display") == "none") {
-			jQuery('#name').show();
-			jQuery('#nameHide').hide();
-			jQuery('#name').val("${vo.name }");
-			jQuery('#nameBtn').val("취소");
 
-		} else {
-			jQuery('#name').hide();
-			jQuery('#nameHide').show();
-			jQuery('#nameBtn').val("수정");
-		}
-	});
-</script>
-
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script>
-	jQuery('#emailBtn').click(function() {
-		if ($("#email").css("display") == "none") {
-			jQuery('#email').show();
-			jQuery('#emailHide').hide();
-			jQuery('#email').val("${vo.email }");
-			jQuery('#emailBtn').val("취소");
-
-		} else {
-			jQuery('#email').hide();
-			jQuery('#emailHide').show();
-			jQuery('#emailBtn').val("수정");
-
-		}
-	});
-</script>
-
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script>
-	jQuery('#telBtn').click(function() {
-		if ($("#tel").css("display") == "none") {
-			jQuery('#tel').show();
-			jQuery('#telHide').hide();
-			/* jQuery('#tel').val("${vo.tel }"); */
-			jQuery('#tel').val("02-123-1234");
-			jQuery('#telBtn').val("취소");
-
-		} else {
-			jQuery('#tel').hide();
-			jQuery('#telHide').show();
-			jQuery('#telBtn').val("수정");
-
-		}
-	});
-</script>
 
 
 

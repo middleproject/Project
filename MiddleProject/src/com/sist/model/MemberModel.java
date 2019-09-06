@@ -179,4 +179,13 @@ public class MemberModel {
 			return "../main/main.jsp";
 
 		}
+		
+		//캐시충전
+		@RequestMapping("member/cashPage.do")
+		public String member_cash(Model model) {
+			model.addAttribute("main_jsp", "../member/cashPage.jsp");
+			return "../main/main.jsp";
+		}
+		
+		
 }

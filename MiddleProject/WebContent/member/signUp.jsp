@@ -237,7 +237,15 @@ $(function(){
 							<div class="w-100"></div>
 							<div class="col-md-10">
 								<div class="form-group">
-									<input type="text" class="textbox" placeholder="상세주소" style="width: 500px; margin-left: 0px;"
+									<input type="text" class="textbox" placeholder="주소" style="width: 500px; margin-left: 0px;"
+										name="addr2" >
+								</div>
+							</div>
+							<div class="col-md-10">
+								<div class="form-group">
+									<input type="text" class="textbox" placeholder="상세주소" style="width: 250px; margin-left: 0px;"
+										name="addr2" >
+										<input type="text" class="textbox" placeholder="참고항목" style="width: 250px; margin-left: 270px; position: relative;top: -35px; "
 										name="addr2" >
 								</div>
 							</div>
