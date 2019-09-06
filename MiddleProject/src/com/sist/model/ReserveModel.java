@@ -504,15 +504,7 @@ public class ReserveModel {
 				vo.setPrice(Integer.parseInt(price));
 				vo.setMsg(msg);
 				vo.setUserid(userid);	//
-				
-				System.out.println(id);
-				System.out.println(name);
-				System.out.println(title);
-				System.out.println(date);
-				System.out.println(time);
-				System.out.println(price);
-				System.out.println(msg);
-				System.out.println(userid);
+
 				
 				ReserveDAO.reserveInsert(vo);
 				
@@ -525,5 +517,249 @@ public class ReserveModel {
 			
 			model.addAttribute("main_jsp", "../reserve/endReserve.jsp");
 			return "../main/main.jsp";
+		}
+		@RequestMapping("reserve/myreserveList.do")
+		public String reserve_myreserveList(Model model){
+			String data=model.getRequest().getParameter("data");
+			HttpSession session = model.getRequest().getSession();
+			String id=(String)session.getAttribute("id");
+			int admin=(int)session.getAttribute("admin");
+			Map map=new HashMap();
+			
+			map.put("id", id);
+			if(data==null){
+				if(admin==2){	
+					data="1";
+				}else if(admin==0){
+					data="3";
+				}
+			}
+			map.put("data", data);
+			System.out.println("data: "+data);
+			
+			String page=model.getRequest().getParameter("page");
+			if(page==null){
+				page="1";
+			}
+			
+			int curpage=Integer.parseInt(page);
+			
+			int rowSize=5;
+			int start=(curpage*rowSize)-(rowSize-1);
+			int end=curpage*rowSize;
+			
+			map.put("end", end);
+			map.put("start", start);
+			
+			int total=ReserveDAO.reservepage(map);
+			
+		
+			
+			int BLOCK=5;
+			
+			int startpage=((curpage-1)/BLOCK*BLOCK)+1;
+			
+			int endpage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+			
+			int allpage=total;
+			
+			if(endpage>allpage)
+			{
+				endpage=allpage;
+			}
+			
+			
+			
+			
+			List<ReserveVO> list=ReserveDAO.reserveList(map);
+			for(ReserveVO vo:list){
+				
+					int len=vo.getSummary().length();
+					if(len>25)
+					{
+						vo.setSummary(vo.getSummary().substring(0, 25)+"...");
+					}
+					vo.setRdate(vo.getRdate().substring(0, vo.getRdate().indexOf(" ")));
+//					vo.setid();
+					System.out.println("@@no : "+vo.getNo());
+			}
+			
+			
+			model.addAttribute("list", list);
+			model.addAttribute("data", data);
+			model.addAttribute("startpage", startpage);
+			model.addAttribute("endpage", endpage);
+			model.addAttribute("curpage", curpage);
+			model.addAttribute("allpage", allpage);
+			model.addAttribute("BLOCK", BLOCK);
+			model.addAttribute("total", total);
+			model.addAttribute("main_jsp", "../reserve/myreserveList.jsp");
+			return "../main/main.jsp";
+		}
+		
+		
+	/*	
+		@RequestMapping("reserve/checkdate.do")
+		public String reserve_checkdate(Model model){
+			// 사용자 요청값 받기
+					String strYear = model.getRequest().getParameter("strYear");
+					String strMonth = model.getRequest().getParameter("strMonth");
+
+					// 현재 날짜 읽기
+					Date date = new Date();
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");// 07 08 MM=>1~9
+																			// => 01,09
+					// 자바는 숫자표현식 => 10,8(0),16(0x)
+					StringTokenizer st = new StringTokenizer(sdf.format(date), "-");
+
+					 String sy=st.nextToken();
+					 String sm=st.nextToken();
+					 String day1=st.nextToken();
+					   
+					 if(strYear==null)
+					 {
+						 strYear=sy;
+					 }
+					 if(strMonth==null)
+					 {
+						 strMonth=sm;
+					 }
+					   
+					 int year=Integer.parseInt(strYear);
+					 int month=Integer.parseInt(strMonth);
+					 int day=Integer.parseInt(day1);
+					   
+					 model.addAttribute("year", year);
+					 model.addAttribute("month", month);
+					 model.addAttribute("day", day);
+					   
+					 String[] strWeek={"일","월","화","수","목","금","토"};
+					 model.addAttribute("strWeek", strWeek);
+					   
+
+					
+					 int[] lastday={31,28,31,30,31,30,
+							        31,31,30,31,30,31};
+					 // 1년 1월 1일 ~ 2018년 12월 31의 총합 
+					 int total=(year-1)*365
+							  +(year-1)/4
+							  -(year-1)/100
+							  +(year-1)/400;
+					 //2019년 1월 ~ 7월의 총합 
+					 if((year%4==0 && year%100!=0)||(year%400==0))
+						 lastday[1]=29;
+					 else
+						 lastday[1]=28;
+					   
+					 for(int i=0;i<month-1;i++)
+					 {
+						 total+=lastday[i];
+					 }
+					   
+					 total++;
+					   
+					 // 요일구하기 
+					int week=total%7;	   
+
+					System.out.println(lastday);
+					model.addAttribute("week", week);
+					model.addAttribute("lastday", lastday);
+					
+					String id=model.getRequest().getParameter("id");
+					
+					List<ReserveVO> list=ReserveDAO.selectdate(id);
+					
+					int[] reday=new int[31];
+					int today=day;
+					for(int i=0;i<list.size();i++){
+						
+						String alldate=list.get(i).getRdate().substring(0, list.get(i).getRdate().indexOf(" "));
+						StringTokenizer st1=new StringTokenizer(alldate,"-");
+						if(strMonth.length()==1){
+							strMonth="0"+strMonth;
+						}
+						System.out.println(strYear);
+						System.out.println(strMonth);
+						System.out.println("alldate"+alldate);
+						java.sql.Date lidate = java.sql.Date.valueOf(alldate);
+						if(st1.nextToken().equals(strYear) && st1.nextToken().equals(strMonth)){
+							Map map=new HashMap();
+							map.put("id", id);
+							map.put("date", lidate);
+							int count=ReserveDAO.selectdatecount(map);
+							System.out.println(count);
+							if(count==3){
+								System.out.println(count);
+								int k=Integer.parseInt(st1.nextToken());
+								reday[k-1]=k;
+							}
+							
+							
+						}else{
+							today=0;
+						}
+					}
+					
+					List<Integer> rList=new ArrayList<Integer>();
+					int u=1;
+					for(int k:reday) {
+						
+						if(k<today || Integer.parseInt(strMonth)<Integer.parseInt(sm)){
+							k=u;
+							rList.add(k);
+							k=0;
+						}else{
+							rList.add(k);
+						}
+						
+						if(u<today || Integer.parseInt(strMonth)<Integer.parseInt(sm)) u++;
+						
+					}
+					model.addAttribute("today", today);
+					model.addAttribute("rList", rList);
+					strYear
+					strMonth
+					String dno = model.getRequest().getParameter("dno"); // date no => 난수로 저장됨, 1~31중 몇개
+					int[] reday=new int[31];
+					StringTokenizer st1=new StringTokenizer(dno,", "); // 난수를 ", "로 잘라냄
+					// 1 => reday[0]=1 => reday[25]=26
+					while(st1.hasMoreTokens()) {
+						int k=Integer.parseInt(st1.nextToken());
+						reday[k-1]=k; // 첨자 하나가 작아야됨
+					}
+					List<Integer> rList=new ArrayList<Integer>();
+					for(int k:reday) {
+						if(k<day) // 오늘 이후것만 출력
+							k=0;
+						rList.add(k);
+					}
+					model.addAttribute("rList", rList);
+			return "../reserve/checkdate.jsp";
+		}*/
+		@RequestMapping("reserve/myreserveList_ok.do")
+		public String reserve_myreserveList_ok(Model model){
+			try {
+				model.getRequest().setCharacterEncoding("UTF-8");
+			} catch (Exception e) {}
+			
+			String no=model.getRequest().getParameter("no");
+			String comp=model.getRequest().getParameter("comp");
+			System.out.println("no"+no);
+			System.out.println("comp"+comp);
+			
+			Map map=new HashMap();
+			map.put("no", no);
+			if(comp.equals("확인")){
+				map.put("cancel", "dont");
+				System.out.println("cancel"+map.get("cancel"));
+				ReserveDAO.reserveUpdate(map);
+				System.out.println("cancel"+map.get("cancel"));
+			}else if(comp.equals("취소")){
+				System.out.println("취소 들어감.");
+				map.put("cancel", "cando");
+				ReserveDAO.reserveUpdate(map);
+			}
+			
+			return "redirect:../reserve/myreserveList.do";
 		}
 }

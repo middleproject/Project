@@ -22,10 +22,12 @@ $(function(){
 		});
 		$('.btn').click(function(){
 			var page=$(this).attr('name');
+			var key=$('.pageBtn').attr('title');
+			
 			$.ajax({
 				type:'post',
 				url:'../reserve/search2.do',
-				data:{page:page},
+				data:{page:page,key:key},
 				success:function(response){ // 정상수행 시 수행할 내용 => response가 실행된 내용을 가져옴
 					$('#result').html(response);
 				}
@@ -50,7 +52,7 @@ $(function(){
 </head>
 <body>
 <div class="row">
-          <div class="">
+         
 			<div class="row">
 				<c:forEach var="vo" items="${list }">
 					<div class="">
@@ -79,15 +81,16 @@ $(function(){
             <!--  -->
             
            
-          </div>
-        </div>
+         
         
          <div class="row mt-5">
           <div class="col text-center">
-            <div class="block-27 pageBtn">
+            <div class="block-27 pageBtn" title="${key }">
               <ul>
               	<c:if test="${curpage>BLOCK}">
-                	<li><a id="start" class=btn name="${startpage-1 }">&lt;</a></li>
+                	<li>
+                		<a id="start" class=btn name="${startpage-1 }">&lt;</a>
+                	</li>
                 </c:if>
                 
                 <c:forEach var="i" begin="${startpage}" end="${endpage }" step="1">

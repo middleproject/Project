@@ -102,7 +102,7 @@ border: 1px solid black;
 							<div class="w-100"></div>
 							<img src="images/reserved.png" alt="My Image" width="100px" height="100px">
 							<p> 예약한내역 ?개<p>
-							<a href="../main/main.do" type="button" class="btn">예약확인</a>
+							<a href="../reserve/myreserveList.do" type="button" class="btn">예약확인</a>
 							</div>
 							
 							

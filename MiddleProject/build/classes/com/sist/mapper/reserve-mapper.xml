@@ -56,9 +56,58 @@
 	#{userid}
 	)
 </insert>
-<update id="cheifcheck" parameterType="java.util.Map">
+<!-- <update id="cheifcheck" parameterType="java.util.Map">
 	UPDATE reserve
 	SET checheif = #{check}
 	WHERE cheifid=#{id}
+</update> -->
+
+<!-- 예약 출력 -->
+<select id="reservepage" parameterType="java.util.Map" resultType="int">
+	select CEIL(COUNT(*)/5.0)
+	from reserve
+	<if test="data==1">
+		WHERE checheif!=3 AND checheif!=10 AND cheifid=#{id}
+	</if>
+	<if test="data==2">
+		WHERE checheif=3 OR checheif=10 AND cheifid=#{id}
+	</if>
+	<if test="data==3">
+		WHERE checheif!=3 AND checheif!=10 AND userid=#{id}
+	</if>
+	<if test="data==4">
+		WHERE checheif=3 OR checheif=10 AND userid=#{id}
+	</if>
+</select>
+<select id="reserveList" parameterType="java.util.Map" resultType="ReserveVO">
+	SELECT no,name,summary,rdate,rtime,price,msg,checheif,userid,cheifid,num FROM 
+	(SELECT no,name,summary,rdate,rtime,price,msg,checheif,userid,cheifid,rownum num FROM 
+	(SELECT no,name,summary,rdate,rtime,price,msg,checheif,userid,cheifid
+	FROM reserve
+	<if test="data==1">
+		WHERE checheif!=2 AND checheif!=10 AND cheifid=#{id} AND rdate&gt;=sysdate
+	</if>
+	<if test="data==2">
+		WHERE checheif=2 OR checheif=10 AND cheifid=#{id} AND rdate&lt;sysdate
+	</if>
+	<if test="data==3">
+		WHERE checheif!=2 AND checheif!=10 AND userid=#{id} AND rdate&gt;=sysdate
+	</if>
+	<if test="data==4">
+		WHERE checheif=2 OR checheif=10 AND userid=#{id} AND rdate&lt;sysdate
+	</if>
+	ORDER BY rdate))
+
+	WHERE num between #{start} and #{end}
+</select>
+<update id="reserveUpdate" parameterType="java.util.Map">
+	UPDATE reserve SET 
+	<if test="cancel=='cando'">
+		checheif=10
+	</if>
+	<if test="cancel=='dont'">
+		checheif=checheif+1
+	</if>
+	WHERE no=#{no}
 </update>
 </mapper>

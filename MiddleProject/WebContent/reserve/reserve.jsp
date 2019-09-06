@@ -158,22 +158,6 @@ $(function(){
 		
 		var msg=$('#select6_').attr("title");
 		
-		/* $('#fimg').attr('src',poster);
-		$('#frecipeno').text(no);	
-		$('#frecipetitle').text(title);	
-		$('#fcheif').text(name);	
-		$('#fcheif').attr('title',id);	
-		$('#fdate').text(date+'('+time+')');
-		$('#fprice').text(price);	
-		$('#fcommand').text(msg);
-		
-		$('#hrecipeno').attr('value',no);
-		$('#hrecipetitle').attr('value',title);
-		$('#hcheif').attr('value',id);
-		$('#hdate').attr('value',date);
-		$('#htime').attr('value',time);
-		$('#hprice').attr('value',price);
-		$('#hcommand').attr('value',msg); */
 		
 		$.ajax({
 			type:'post',
@@ -248,9 +232,9 @@ $(function(){
            						<div id="inwon"></div>
            					</td>
      					</tr>
-     					<tr>
+     					<tr class="final">
      						<td>
-     							<div class="btn btn-info final" id="myBtn">예약 확인</div>	
+     							<div class="btn btn-info" id="myBtn">예약 확인</div>	
      							
      						</td>
      					</tr>

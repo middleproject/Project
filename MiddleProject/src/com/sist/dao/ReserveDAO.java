@@ -130,13 +130,54 @@ public class ReserveDAO {
 			
 			session.update("memberResCount",map);
 			session.insert("addreserve",vo);
-			session.update("cheifcheck",map);
+			/*session.update("cheifcheck",map);*/
 			
 			session.commit();
 			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
+			if (session != null)
+				session.close();
+		}
+	}
+	public static List<ReserveVO> reserveList(Map map){
+		List<ReserveVO> list=new ArrayList<ReserveVO>();
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			list = session.selectList("reserveList", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+		return list;
+	}
+	
+	public static int reservepage(Map map){
+		int total=0;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			total = session.selectOne("reservepage", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+		return total;
+	}
+	public static void reserveUpdate(Map map){
+		SqlSession session = null;
+		try {
+			session = ssf.openSession(true);
+			session.update("reserveUpdate", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			if (session != null)
 				session.close();
 		}
