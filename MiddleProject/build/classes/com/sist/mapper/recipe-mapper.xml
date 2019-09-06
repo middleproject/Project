@@ -254,4 +254,30 @@
 	<select id="readIntRecipe" parameterType="String" resultType="int">
 		select rno from read where id = #{id}
 	</select>
+	<!-- 오늘 조회수 순 레시피 등록 있는지 확인 -->
+	<select id="todayHitCount" parameterType="int">
+		select count(*) from todayhit where recipeno=#{no}
+	</select>
+	<!-- 당일 insert -->
+	<insert id="todayHitInsert" parameterType="TodayHit">
+		insert into TodayHit(no,recipeno) values(
+			(select NVL(max(no)+1,1) from TodayHit),
+			#{recipeno}
+		)
+	</insert>
+	<!-- 히트 업데이트 -->
+	<update id="todayHitUpdate" parameterType="int">
+		update todayHitUpdate set hit = hit+1 where recipeno = #{recipeno}
+	</update>
+	<select id="todayHitList" resultType="com.sist.vo.TodayHitVO">
+		select no,recipeno,hit,num
+		from (select no,recipeno,hit,rownum as num 
+		from (select no,recipeno,hit 
+		from todayHit order by hit desc))
+		where num &lt; 9
+	</select>
+	<!-- 하루 지난 히트 컬럼 찾기 -->
+	<select id="todayDeleteList" resultType="int">
+		select recipeno from todayHit where (TO_CHAR(sysdate,'DD-HH24')-TO_CHAR(regdate,'DD-HH24')) &lt;0
+	</select>
 </mapper>

@@ -146,6 +146,14 @@ public class RecipeModel {
 			readvo.setRno(Integer.parseInt(no));
 			RecipeDAO.readRecipe(readvo);
 		}
+		//오늘 히트수 저장
+		int todayHit = RecipeDAO.todayHitCount(Integer.parseInt(no));
+		if(todayHit==0){
+			RecipeDAO.todayHitInsert(Integer.parseInt(no));
+		}else{
+			RecipeDAO.todayHitUpdate(Integer.parseInt(no));
+		}
+		//히트수
 		RecipeVO vo = RecipeDAO.recipeDetailData(Integer.parseInt(no));
 		//wish 확인
 		WishVO wvo = new WishVO();

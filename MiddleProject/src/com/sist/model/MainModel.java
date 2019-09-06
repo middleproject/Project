@@ -46,6 +46,15 @@ public class MainModel {
 				list.add(zvo);
 			}			
 		}
+		// 당일 리스트 삭제 관련
+		List<Integer> dList = new ArrayList<Integer>();
+		
+		// 당일 최다 조회수 레시피 관련
+		List<TodayHitVO> tList = new ArrayList<TodayHitVO>();
+		tList = RecipeDAO.todayHitList();
+		
+		
+		session.setAttribute("tlist", tList);
 		session.setAttribute("followCount", followCount);
 		session.setAttribute("msgCount", msgCount);
 		session.setAttribute("Wishcount", Wishcount);

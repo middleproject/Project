@@ -8,6 +8,7 @@ import com.sist.vo.IngredetailVO;
 import com.sist.vo.MsgVO;
 import com.sist.vo.ReadVO;
 import com.sist.vo.RecipeVO;
+import com.sist.vo.TodayHitVO;
 import com.sist.vo.WishVO;
 import com.sun.org.apache.xalan.internal.xsltc.util.IntegerArray;
 
@@ -419,7 +420,9 @@ public class RecipeDAO {
 				session.insert("readRecipe",vo);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}	   
+			}finally{
+				if(session!=null) session.close();
+			}   
 	   }
 	   public static List<Integer> readIntRecipe(String id){
 		   SqlSession session = null;
@@ -429,7 +432,59 @@ public class RecipeDAO {
 				list = session.selectList("readIntRecipe",id);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}	   
+			} finally{
+				if(session!=null) session.close();
+			}
+		   return list;
+	   }
+	   //레시피 카운터
+	   public static int todayHitCount(int no){
+		   SqlSession session = null;
+		   int count =0;
+		   try {
+				session = ssf.openSession();
+				count = session.selectOne("todayHitCount",no);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally{
+				if(session!=null) session.close();
+			} 
+		   return count;
+	   }
+	   //레시피 인서트
+	   public static void todayHitInsert(int recipeno){
+		   SqlSession session = null;
+		   try {
+				session = ssf.openSession();
+				session.insert("todayHitInsert",recipeno);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally{
+				if(session!=null) session.close();
+			} 
+	   }
+	   public static void todayHitUpdate(int recipeno){
+		   SqlSession session = null;
+		   try {
+				session = ssf.openSession();
+				session.insert("todayHitUpdate",recipeno);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally{
+				if(session!=null) session.close();
+			} 
+	   }
+	   public static List<TodayHitVO> todayHitList(){
+		   SqlSession session = null;
+		   List<TodayHitVO> list = new ArrayList<TodayHitVO>();
+		   try {
+				session = ssf.openSession();
+				list = session.selectList("todayHitList");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally{
+				if(session!=null) session.close();
+			} 
 		   return list;
 	   }
 }

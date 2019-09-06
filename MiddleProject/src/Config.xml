@@ -8,6 +8,7 @@
 		<typeAlias type="com.sist.vo.WishVO" alias="WishVO"/>
 		<typeAlias type="com.sist.vo.ReadVO" alias="ReadVO"/>
 		<typeAlias type="com.sist.vo.MsgVO" alias="MsgVO"/>
+		<typeAlias type="com.sist.vo.TodayHit" alias="TodayHit"/>
 		<!-- board -->
 		<typeAlias type="com.sist.vo.BoardCategoryVO" alias="BoardCategoryVO"/>
 		<typeAlias type="com.sist.vo.BoardVO" alias="BoardVO"/>
