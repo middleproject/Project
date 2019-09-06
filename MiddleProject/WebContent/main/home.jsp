@@ -143,24 +143,24 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
 							<div class="col-md-6">
 								<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url(https://t1.daumcdn.net/cfile/tistory/220E5B35572F53E113);">
 									<div class="text px-3 py-1">
-										<h2 class="mb-0"><a href="#">Meat</a></h2>
+										<h2 class="mb-0"><a href="../recipe/recipe_list.do?key=고기">Meat</a></h2>
 									</div>
 								</div>
 								<div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url(http://www.bapsangnews.com/img/r/j/1524017758_rjpf7gy37zdgtmf4kr0s.jpg);">
 									<div class="text px-3 py-1">
-										<h2 class="mb-0"><a href="#">Vegetables</a></h2>
+										<h2 class="mb-0"><a href="../recipe/recipe_list.do?key=채소">Vegetables</a></h2>
 									</div>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url(http://haemul.365food.com/resource/upload/mini/haemul/special[1].gif);">
 									<div class="text px-3 py-1">
-										<h2 class="mb-0"><a href="#">SeaFoods</a></h2>
+										<h2 class="mb-0"><a href="../recipe/recipe_list.do?key=해산물">SeaFoods</a></h2>
 									</div>
 								</div>
 								<div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url(http://www.farminsight.net/news/photo/201904/2077_2907_856.jpg);">
 									<div class="text px-3 py-1">
-										<h2 class="mb-0"><a href="#">Processed Foods</a></h2>
+										<h2 class="mb-0"><a href="../recipe/recipe_list.do?key=즉석">Processed Foods</a></h2>
 									</div>
 								</div>
 							</div>
@@ -170,12 +170,12 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
 					<div class="col-md-4">
 						<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url(http://www.postech.ac.kr/wp-content/uploads/2018/07/159-23-1.jpg);">
 							<div class="text px-3 py-1">
-								<h2 class="mb-0"><a href="#">Fruits</a></h2>
+								<h2 class="mb-0"><a href="../recipe/recipe_list.do?key=과일">Fruits</a></h2>
 							</div>		
 						</div>
 						<div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url(http://cfile236.uf.daum.net/image/1679334B50F3CBB920183E);">
 							<div class="text px-3 py-1">
-								<h2 class="mb-0"><a href="#">Cereals</a></h2>
+								<h2 class="mb-0"><a href="../recipe/recipe_list.do?key=쌀">Cereals</a></h2>
 							</div>
 						</div>
 					</div>
