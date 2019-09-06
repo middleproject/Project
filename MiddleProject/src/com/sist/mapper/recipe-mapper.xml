@@ -259,7 +259,7 @@
 		select count(*) from todayhit where recipeno=#{no}
 	</select>
 	<!-- 당일 insert -->
-	<insert id="todayHitInsert" parameterType="TodayHit">
+	<insert id="todayHitInsert" parameterType="TodayHitVO">
 		insert into TodayHit(no,recipeno) values(
 			(select NVL(max(no)+1,1) from TodayHit),
 			#{recipeno}
@@ -269,7 +269,7 @@
 	<update id="todayHitUpdate" parameterType="int">
 		update todayHitUpdate set hit = hit+1 where recipeno = #{recipeno}
 	</update>
-	<select id="todayHitList" resultType="com.sist.vo.TodayHitVO">
+	<select id="todayHitList" resultType="TodayHitVO">
 		select no,recipeno,hit,num
 		from (select no,recipeno,hit,rownum as num 
 		from (select no,recipeno,hit 
