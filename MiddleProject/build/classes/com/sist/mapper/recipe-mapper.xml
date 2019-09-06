@@ -158,7 +158,7 @@
 	
 	<!-- 레시피 wish 확인 -->
 	<select id="wishAllData" resultType="RecipeVO" parameterType="int">
-		select no,summary,made,poster from recipe where recipe.no = #{no}
+		select no,summary,made,poster,TO_CHAR(regdate,'YYYY-MM-DD')as regdate from recipe where recipe.no = #{no}
 	</select>
 	<select id="wishData" parameterType="String" resultType="int">
 		select recipeno from wish where id = #{id}
