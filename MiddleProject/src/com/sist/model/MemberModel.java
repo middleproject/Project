@@ -30,7 +30,6 @@ public class MemberModel {
 			session.setAttribute("id", id);
 			session.setAttribute("name", vo.getName());
 			session.setAttribute("admin", vo.getAdmin());
-			session.setAttribute("pay", vo.getPay());
 		}
 		/*System.out.println("아이디:" + id);
 		System.out.println("이름:" + vo.getName());
@@ -64,80 +63,70 @@ public class MemberModel {
 		}
 
 		// 회원가입
-				@RequestMapping("member/signUp_ok.do")
-				public String member_signUp_ok(Model model) {
-					try {
-						model.getRequest().setCharacterEncoding("UTF-8");
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-
-					String id = model.getRequest().getParameter("id"); // 아이디
-					String pwd = model.getRequest().getParameter("pwd"); // 비밀번호
-					String name = model.getRequest().getParameter("name"); // 이름
-					String sex = model.getRequest().getParameter("sex"); // 성별
-					String email1 = model.getRequest().getParameter("email1");
-					String email2 = model.getRequest().getParameter("email2");
-					String tel1 = model.getRequest().getParameter("tel1"); // 집전화
-					String tel2 = model.getRequest().getParameter("tel2");
-					String tel3 = model.getRequest().getParameter("tel3");
-					String phone1 = model.getRequest().getParameter("phone1"); // 휴대폰 전화
-					String phone2 = model.getRequest().getParameter("phone2");
-					String phone3 = model.getRequest().getParameter("phone3");
-
-					String zipcode = model.getRequest().getParameter("addr1"); // 우편번호
-					String addr2 = model.getRequest().getParameter("addr2"); // 주소
-					String addr3 = model.getRequest().getParameter("addr3"); // 상세주소
-					String exAddr = model.getRequest().getParameter("exAddr");	// 참고항목
-					String birthday = model.getRequest().getParameter("birthday"); // 생년월일
-
-					System.out.println("변환 전 birthday: " + birthday);
-					
-					// ============== 변환 =============
-					String email = email1 + "@" + email2;		// aaa@aaa.com
-					String tel = tel1 + tel2 + tel3;			// 02-222-111
-					String phone = phone1 + phone2 + phone3;	// 010-2020-1818
-					Date date = Date.valueOf(birthday);
-					String addr = addr2 + " " + addr3 + " " + exAddr; 
-					// ========================
-					System.out.println("id:"+id);
-					System.out.println("pwd:"+pwd);
-					System.out.println("name:"+name);
-					System.out.println("email:"+email);
-					System.out.println("tel:"+tel);
-					System.out.println("phone:"+phone);
-					System.out.println("addr1:"+ zipcode);
-					System.out.println("addr2:"+ addr);
-					System.out.println("sex:"+sex);
-					System.out.println("date:"+ date);
-					
-					
-					
-					
-					MemberVO vo = new MemberVO();
-					try {
-						vo.setId(id);
-						vo.setPwd(pwd);
-						vo.setName(name);
-						vo.setEmail(email);
-						vo.setTel(tel);
-						vo.setPhone(phone);
-						vo.setAddr1(zipcode);
-						vo.setAddr2(addr);
-						vo.setSex(sex);
-						vo.setBirthday(date);
-					
-						MemberDAO.memberSignUp(vo);
-					} catch (Exception e) {
-						System.out.println("회원가입 폼 오류");
-						e.printStackTrace();
-					}
-					
-					model.addAttribute("result", "OK");
-
-					return "../member/signUp_ok.jsp";
+		@RequestMapping("member/signUp_ok.do")
+		public String member_signUp_ok(Model model) {
+			try {
+				model.getRequest().setCharacterEncoding("UTF-8");
+			} catch (Exception e) {
 			}
 
+			String id = model.getRequest().getParameter("id"); // 아이디
+			String pwd = model.getRequest().getParameter("pwd"); // 비밀번호
+			String name = model.getRequest().getParameter("name"); // 이름
+			String sex = model.getRequest().getParameter("sex"); // 성별
+			String email1 = model.getRequest().getParameter("email1");
+			String email2 = model.getRequest().getParameter("email2");
+			String tel1 = model.getRequest().getParameter("tel1"); // 집전화
+			String tel2 = model.getRequest().getParameter("tel2");
+			String tel3 = model.getRequest().getParameter("tel3");
+			String phone1 = model.getRequest().getParameter("phone1"); // 휴대폰 전화
+			String phone2 = model.getRequest().getParameter("phone2");
+			String phone3 = model.getRequest().getParameter("phone3");
+
+			String addr1 = model.getRequest().getParameter("addr1"); // 우편번호
+			String addr2 = model.getRequest().getParameter("addr2"); // 상세 주소
+			String birthday = model.getRequest().getParameter("birthday"); // 생년월일
+
+			// ============== 변환 =============
+			String email = email1 + "@" + email2;		// aaa@aaa.com
+			String tel = tel1 + tel2 + tel3;			// 02-222-111
+			String phone = phone1 + phone2 + phone3;	// 010-2020-1818
+			Date date = Date.valueOf(birthday);
+			
+			// ========================
+			System.out.println("id:"+id);
+			System.out.println("pwd:"+pwd);
+			System.out.println("name:"+name);
+			System.out.println("email:"+email);
+			System.out.println("tel:"+tel);
+			System.out.println("phone:"+phone);
+			System.out.println("addr1:"+addr1);
+			System.out.println("addr2:"+addr2);
+			System.out.println("sex:"+sex);
+			System.out.println("date:"+ date);
+			
+			
+			
+			
+			MemberVO vo = new MemberVO();
+
+			vo.setId(id);
+			vo.setPwd(pwd);
+			vo.setName(name);
+			vo.setEmail(email);
+			vo.setTel(tel);
+			vo.setPhone(phone);
+			vo.setAddr1("111-111");
+			vo.setAddr2("임시위치");
+			vo.setSex(sex);
+			vo.setBirthday(date);
+			
+			MemberDAO.memberSignUp(vo);
+			
+			model.addAttribute("result", "OK");
+
+			return "../member/signUp_ok.jsp";
+	}
 
 		// 아이디 찾기
 		@RequestMapping("member/idFind.do")
@@ -190,37 +179,11 @@ public class MemberModel {
 			return "../main/main.jsp";
 
 		}
-		// 우편번호
-		@RequestMapping("member/postFind.do")
-		public String postFind(Model model){
-			
-			return "../member/postFind.jsp";
-		}
-		
-		
-		// 아이디 중복 확인
-		@RequestMapping("member/idcheck.do")
-		public String idcheck(Model model) {
-
-			return "../member/idcheck.jsp";
-		}
-		
-		@RequestMapping("member/idcheck_result.do")
-		public String idcheck_result(Model model) {
-			String id = model.getRequest().getParameter("id");
-			int count = MemberDAO.IdCheck(id);
-			System.out.println("======================");
-			System.out.println(id);
-			System.out.println(count);
-			model.addAttribute("result", count);
-			
-			return "../member/idcheck_result.jsp";
-		}
 		
 		//캐시충전
-		@RequestMapping("member/cashPage.do")
+		@RequestMapping("member/memberDelete.do")
 		public String member_cash(Model model) {
-			model.addAttribute("main_jsp", "../member/cashPage.jsp");
+			model.addAttribute("main_jsp", "../member/memberDelete.jsp");
 			return "../main/main.jsp";
 		}
 		
