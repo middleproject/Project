@@ -11,6 +11,21 @@ public class MemberDAO {
 		ssf = CreateSqlSessionFactory.getSsf();
 	}
 
+	public static int IdCheck(String id) {
+		int count = 0;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			count = session.selectOne("memberIdCount", id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+		return count;
+	}
+	
 	public static MemberVO isLogin(String id, String pwd) {
 		MemberVO vo = new MemberVO();
 		SqlSession session = null;
@@ -39,12 +54,12 @@ public class MemberDAO {
 	}
 
 	// 장바구니 갯수
-	public static int wishAllCount(String id) {
+	public static int wishCount(String id) {
 		int total = 0;
 		SqlSession session = null;
 		try {
 			session = ssf.openSession();
-			total = session.selectOne("wishAllCount", id);
+			total = session.selectOne("wishCount", id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -141,7 +156,7 @@ public class MemberDAO {
 		MemberVO vo = new MemberVO();
 		session = ssf.openSession();
 		try {
-			vo = session.selectOne("selecId", id);
+			vo = session.selectOne("selectId", id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

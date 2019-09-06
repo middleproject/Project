@@ -30,7 +30,9 @@ $(function(){
 			url:'idcheck_result.do',
 			data:{id:id},
 			success:function(res){
+				//console.log("하이하이");
 				var no=res.trim();
+				//console.log(no);
 				if(no==0){
 					$('#res').html('<font color=blue>'+id+'는(은) 사용 가능한 아이디입니다.</font>');
 					$('#ok').html('<input type=button value="확인" onclick=ok("'+id+'")>');
@@ -41,6 +43,8 @@ $(function(){
 		});
 	});
 });
+//$("#checkBtn").attr("readonly", false);
+// 부모 창(회원가입)의 id에 지금 입력한 값 대입
 function ok(id){
 	parent.join_frm.id.value=id;
 	parent.Shadowbox.close();
