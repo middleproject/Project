@@ -308,9 +308,10 @@ public class RecipeModel {
 		
 		String id =(String)session.getAttribute("id");
 		List<FollowVO> madeList =new ArrayList<FollowVO>();
-		List<RecipeVO> list2 = new ArrayList<RecipeVO>();
 		List<RecipeVO> list = new ArrayList<RecipeVO>();
-		List<ReadVO> rlist = new ArrayList<ReadVO>();
+		List<Integer> rList = new  ArrayList<Integer>(); // 읽은 레시피
+		List<Integer> iList = new  ArrayList<Integer>(); //구독자 레시피
+		RecipeVO zvo = new RecipeVO();
 		for(FollowVO vo:madeList){
 			System.out.println("팔로우 아이디 날짜:"+vo.getDay()+vo.getFollow());
 		}
@@ -318,13 +319,21 @@ public class RecipeModel {
 		madeList = RecipeDAO.followSearch(id);
 		
 		for(FollowVO vo:madeList){
-			list2=(RecipeDAO.followSearchRecipe(vo));
-			for(RecipeVO rvo:list2){
-				list.add(rvo);
-			}
+			iList=(RecipeDAO.followSearchRecipe(vo));
 		}
-		
-		model.addAttribute("rlist", rlist);
+		rList = RecipeDAO.readIntRecipe(id);
+		System.out.println("i사이즈:"+iList.size());
+		System.out.println("r사이즈:"+iList.size());
+		for(int i:iList){
+			for(int j:rList){
+				if(i==j){
+					zvo = RecipeDAO.wishAllData(i);
+					zvo.setRead(true);
+				}
+			}
+			list.add(zvo);
+		}
+		System.out.println(list.size());
 		model.addAttribute("list", list);
 		model.addAttribute("main_jsp", "../recipe/follow.jsp");
 		return "../main/main.jsp";
@@ -361,19 +370,10 @@ public class RecipeModel {
 		List<Integer> rList = new  ArrayList<Integer>(); // 읽은 레시피
 		List<RecipeVO> list = new ArrayList<RecipeVO>();
 		iList = RecipeDAO.wishData(id);
-		rList = RecipeDAO.readIntRecipe(id);
-		for(int i:iList){
-			for(int j:rList){
-				if(i==j){
-					RecipeVO vo = RecipeDAO.wishAllData(i);
-					vo.setRead(true);
-					list.add(vo);
-				}else{
-					RecipeVO vo = RecipeDAO.wishAllData(i);
-					vo.setRead(false);
-					list.add(vo);
-				}
-			}
+		
+		for(int no:iList){
+			RecipeVO vo = RecipeDAO.wishAllData(no);
+			list.add(vo);
 		}
 		model.addAttribute("list", list);
 		model.addAttribute("main_jsp", "../recipe/wishRecipe.jsp");

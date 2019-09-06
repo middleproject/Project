@@ -188,8 +188,8 @@ public class RecipeDAO {
 		}
 		   return list;
 	   }
-	   public static List<RecipeVO> followSearchRecipe(FollowVO vo){
-		   List<RecipeVO> list = new ArrayList<RecipeVO>();
+	   public static List<Integer> followSearchRecipe(FollowVO vo){
+		   List<Integer> list = new ArrayList<Integer>();
 		   SqlSession session = null;
 		   try {
 			   session=ssf.openSession();
