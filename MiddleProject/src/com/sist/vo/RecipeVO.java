@@ -18,7 +18,14 @@ public class RecipeVO {
 	private String ingre;
 	private String made;
 	private String image;
+	private boolean read;
 	
+	public boolean isRead() {
+		return read;
+	}
+	public void setRead(boolean read) {
+		this.read = read;
+	}
 	public String getImage() {
 		return image;
 	}

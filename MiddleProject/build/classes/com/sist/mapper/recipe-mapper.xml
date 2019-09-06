@@ -244,5 +244,8 @@
 		#{rno}
 		)
 	</insert>
-	
+	<!-- 읽은 레시피 가져오기 -->
+	<select id="readIntRecipe" parameterType="String" resultType="int">
+		select rno from read where id = #{id}
+	</select>
 </mapper>

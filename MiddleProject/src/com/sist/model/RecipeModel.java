@@ -357,12 +357,23 @@ public class RecipeModel {
 	public String recipe_wishRecipe(Model model){
 		HttpSession session = model.getRequest().getSession();
 		String id =(String)session.getAttribute("id");
-		List<Integer> iList = new  ArrayList<Integer>();
+		List<Integer> iList = new  ArrayList<Integer>(); //구독자 레시피
+		List<Integer> rList = new  ArrayList<Integer>(); // 읽은 레시피
 		List<RecipeVO> list = new ArrayList<RecipeVO>();
 		iList = RecipeDAO.wishData(id);
-		for(int no:iList){
-			RecipeVO vo = RecipeDAO.wishAllData(no);
-			list.add(vo);
+		rList = RecipeDAO.readIntRecipe(id);
+		for(int i:iList){
+			for(int j:rList){
+				if(i==j){
+					RecipeVO vo = RecipeDAO.wishAllData(i);
+					vo.setRead(true);
+					list.add(vo);
+				}else{
+					RecipeVO vo = RecipeDAO.wishAllData(i);
+					vo.setRead(false);
+					list.add(vo);
+				}
+			}
 		}
 		model.addAttribute("list", list);
 		model.addAttribute("main_jsp", "../recipe/wishRecipe.jsp");

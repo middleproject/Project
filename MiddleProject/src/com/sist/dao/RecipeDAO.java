@@ -419,7 +419,17 @@ public class RecipeDAO {
 				session.insert("readRecipe",vo);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
-			   
+			}	   
+	   }
+	   public static List<Integer> readIntRecipe(String id){
+		   SqlSession session = null;
+		   List<Integer> list = new ArrayList<Integer>();
+		   try {
+				session = ssf.openSession();
+				list = session.selectList("readIntRecipe",id);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	   
+		   return list;
 	   }
 }

@@ -44,7 +44,7 @@ $(function(){
 						    </thead>
 						    <tbody>
 						    <c:forEach var="vo" items="${list }">
-						    	<c:forEach var="rvo" items="${rlist }">
+						    	
 						    		
 								      <tr class="text-center">
 								      
@@ -53,11 +53,11 @@ $(function(){
 								        <td class="image-prod"><div class="img" style="background-image:url(${vo.poster});"></div></td>
 								        
 								        <td class="product-name">
-								        	<a href="../recipe/recipe_detail.do?no=${vo.no }"><c:if test="${vo.no==rvo.rno }">
+								        	<a href="../recipe/recipe_detail.do?no=${vo.no }"><c:if test="${vo.read==false }">
 								        	<h3><font color="black"><b>${vo.summary }</b></font></h3>
 								        	<p><font color="black"><b>${vo.summary_in }</b></font></p>
 								        	</c:if>
-								        	<c:if test="${vo.no!=rvo.rno }">
+								        	<c:if test="${vo.read==true }">
 								        	<h3>${vo.summary }</h3>
 								        	<p>${vo.summary_in }</p>
 								        	</c:if>
@@ -71,7 +71,6 @@ $(function(){
 								      </tr><!-- END TR-->
 								      
 						      	</c:forEach>
-						      </c:forEach>
 						    </tbody>
 						  </table>
 					  </div>
