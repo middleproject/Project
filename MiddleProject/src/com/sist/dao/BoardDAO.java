@@ -514,4 +514,36 @@ public class BoardDAO {
 		   session.close();
 		   return result;
 	   }
+	   //레시피댓글 0904
+	   public static void recipereplyInsert(DataBoardReplyVO vo) {
+		   SqlSession session = ssf.openSession(true);
+		   session.insert("recipereplyInsert",vo); 
+			System.out.println("============ 이 아래는 DAO입니다");
+		   System.out.println("DAO의 Bno의값은???"+vo.getBno());
+		   System.out.println("DAO의 Name의값은???"+vo.getName());
+		   System.out.println("DAO의 ID의값은???"+vo.getId());
+		   session.close();
+	   }
+	   //댓글가지고오기
+	   public static List<BoardDAO> recipereplyListData(int bno) {
+		   SqlSession session = ssf.openSession(true);
+		   List<BoardDAO> list = session.selectList("recipereplyListData",bno); //목록받을때 selectList
+		   session.close();
+		   return list;
+	   }
+	 //삭제하기
+	   public static void recipereplyDelete(int no) {
+		   SqlSession session = ssf.openSession();
+		   System.out.println(no);
+		   session.delete("recipereplyDelete",no);
+		   session.commit(); 
+		   session.close();
+	   }
+	//수정하기
+	   public static void recipereplyUpdate(DataBoardReplyVO vo) {
+		   SqlSession session = ssf.openSession(true);
+		   System.out.println("session의값은?"+session);
+		   session.update("datareplyUpdate",vo); 
+		   session.close();
+	   }
 }

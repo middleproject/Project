@@ -18,6 +18,7 @@ import com.sist.controller.Controller;
 import com.sist.controller.Model;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
+import com.sist.vo.DataBoardReplyVO;
 import com.sist.vo.FollowVO;
 import com.sist.vo.IngredetailVO;
 import com.sist.vo.MsgVO;
@@ -238,6 +239,13 @@ public class RecipeModel {
 				folloCount = RecipeDAO.followCount(fvo);
 				System.out.println(folloCount);
 			}
+			
+			//댓글
+			List<BoardDAO> replylist = BoardDAO.recipereplyListData(Integer.parseInt(no));
+			DataBoardReplyVO replyvo = new DataBoardReplyVO();
+			replyvo.setBno(Integer.parseInt(no));
+			model.addAttribute("replylist", replylist);
+			
 			model.addAttribute("wishCount", wishCount);
 			model.addAttribute("folloCount", folloCount);
 			model.addAttribute("count", ilist.size());
@@ -539,4 +547,64 @@ public class RecipeModel {
 		
 		return "redirect:../recipe/recipe_list.do";
 	}
+	//레시피댓글
+		@RequestMapping("recipe/reply_insert.do")
+		public String recipe_replyInsert(Model model) {
+			try {
+				model.getRequest().setCharacterEncoding("UTF-8");
+			} catch (Exception ex) { }
+			System.out.println("============ 이 아래는 모델입니다");
+			String bno = model.getRequest().getParameter("bno");
+			System.out.println("cno의값은?"+bno);
+			String msg = model.getRequest().getParameter("msg");
+			System.out.println("msg의값은?"+msg);
+			HttpSession session = model.getRequest().getSession();
+			String id = (String) session.getAttribute("id");
+			System.out.println("id의값은?"+id);
+			String name = (String)session.getAttribute("name");
+			System.out.println("name의값은?"+name);
+				
+			DataBoardReplyVO vo = new DataBoardReplyVO();
+			vo.setCno(Integer.parseInt(bno));
+			vo.setMsg(msg);
+			vo.setId(id);
+			vo.setName(name);
+			
+			BoardDAO.recipereplyInsert(vo);
+			
+			return "redirect:../recipe/recipe_detail.do?no="+bno;
+		}
+		//삭제
+		@RequestMapping("recipe/reply_delete.do")
+		public String recipe_replyDelete(Model model) {
+			String no = model.getRequest().getParameter("no");
+			System.out.println("삭제]no의값은"+no);
+			String bno = model.getRequest().getParameter("bno");
+			System.out.println("삭제]bno의값은"+bno);
+			BoardDAO.recipereplyDelete(Integer.parseInt(no));
+		return "redirect:../recipe/recipe_detail.do?no="+bno;
+		}
+		//수정하기
+		@RequestMapping("recipe/reply_update.do")
+		public String datareply_update(Model model) {
+			System.out.println("===================1");
+			try {
+				model.getRequest().setCharacterEncoding("UTF-8");
+			} catch (Exception ex) { }
+			System.out.println("===================1");
+			String msg = model.getRequest().getParameter("msg");
+			System.out.println("msg는 ㅠㅠ"+msg);
+			String no = model.getRequest().getParameter("no"); 
+			System.out.println("no는 ㅠㅠ"+msg);
+			String bno = model.getRequest().getParameter("bno");
+			System.out.println("bno는 ㅠㅠ"+msg);
+			//DAO처리
+			DataBoardReplyVO vo = new DataBoardReplyVO();
+			vo.setMsg(msg);
+			vo.setNo(Integer.parseInt(no));
+			
+			BoardDAO.recipereplyUpdate(vo);
+		
+			return "redirect:../recipe/recipe_detail.do?no="+bno;
+		}
 }

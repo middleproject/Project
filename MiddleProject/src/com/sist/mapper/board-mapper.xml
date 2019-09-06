@@ -417,4 +417,31 @@
     	DELETE FROM databoardReply
     	WHERE bno=#{bno} 
     </delete>
+    
+    <!-- 레시피댓글 0904-->
+	<insert parameterType="DataBoardReplyVO" id="recipereplyInsert">
+		INSERT INTO databoardReply(no,cno,name,id,msg,group_id) VALUES(
+		(SELECT NVL(MAX(no)+1,1) 
+		FROM databoardReply),#{cno},#{name},#{id},#{msg},
+		(SELECT NVL(MAX(group_id)+1,1) 
+		FROM databoardReply)) 
+	</insert>
+
+	<select parameterType="int" resultType="DataBoardReplyVO" id="recipereplyListData">
+		SELECT no,cno,name,id,msg,TO_CHAR(regdate,'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') as dbday,group_tab
+		FROM databoardReply
+		WHERE cno=#{cno}
+		ORDER BY group_id DESC, group_step ASC 
+	</select>
+	
+	<delete parameterType="int" id="recipereplyDelete">
+		DELETE FROM databoardReply
+		WHERE no=#{no} 
+	</delete>
+
+	<update parameterType="DataBoardReplyVO" id="recipereplyUpdate">
+		UPDATE databoardReply SET
+		msg=#{msg}
+		WHERE no=#{no} 
+	</update>
 </mapper>

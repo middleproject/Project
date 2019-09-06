@@ -15,8 +15,15 @@ public class DataBoardReplyVO {
 	private int root;
 	private int depth;
 	private String dbday;
+	private int cno;
 	
 	
+	public int getCno() {
+		return cno;
+	}
+	public void setCno(int cno) {
+		this.cno = cno;
+	}
 	public int getGroup_id() {
 		return group_id;
 	}

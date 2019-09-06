@@ -102,6 +102,19 @@ $(function(){
 			}
 		});
 	});
+	var u = 0;
+	   $('.updateBtn').click(function(){
+	      var no=$(this).attr("value");
+	      $('.update').hide();
+	      if(u==0) {
+	         $('#u'+no).show();
+	         u=1;
+	      } else {
+	         $('#u'+no).hide();
+	         u=0;
+	      }
+
+		});
 });
 </script>
 <style type="text/css">
@@ -353,6 +366,62 @@ $(function(){
 			
 		</div>
 	</section>
+	
+		<!-- 댓글Start -->
+	<div class="container">
+      <table class="table">
+            <tr>
+            <c:forEach var="rvo" items="${replylist }">
+               <table class="table">
+                  <!-- ♥홍길동 2019년 09월 01일 15시 50분 34초 -->
+                  <tr>
+                     <th class="text-left" >
+                        <font color="red">♥</font><font color="grey"><b>${rvo.name }</b></font>님<font color="red">♥</font>
+                        &nbsp;${rvo.dbday } 작성
+                     </th>
+                     <th class="text-right">               
+                           <c:if test="${sessionScope.id==rvo.id }"><!-- 본인일 경우만 수정과 삭제 가능 -->
+                              <a href="#" class="btn btn-xs btn-primary updateBtn" value="${rvo.no }">수정</a>         
+                              <a href="../recipe/reply_delete.do?no=${rvo.no }&bno=${vo.no}" class="btn btn-xs btn-danger">삭제</a>            
+                           </c:if>   
+                        </th>
+                  </tr>
+                  <tr>
+                     <th class="text-left"" colspan="2">${rvo.msg }</th>
+                  </tr>
+                  <tr style="display:none" id="u${rvo.no }" class="update">
+                     <th class="text-left" colspan="2">
+                        <form name="frm" method="post" action="../recipe/reply_update.do">
+                           <textarea rows="3" cols="90" name="msg" style="float:left">${rvo.msg }</textarea>
+                           <input type="hidden" name="bno" value="${vo.no }" >
+                           <input type="hidden" name="no" value="${rvo.no }">
+                           <input type="submit" value="수정하기" class="btn btn-sm btn-primary" style="height:65px">
+                        </form>
+                     </th>
+                  </tr>
+               </table>   
+            </c:forEach>
+            </tr>
+      </table>    
+	
+		<!-- 로그인한 사람만 댓글달기 허용 -->
+		 <c:if test="${sessionScope.id!=null }">
+		<table class="table">
+			<tr>
+				<th class="text-left">
+				<form name="frm" method="post" action="../recipe/reply_insert.do">
+					<textarea rows="3" cols="100" name="msg" style="float:left"></textarea>
+					<input type="hidden" name="bno" value="${vo.no }" ><!--  vo = 게시물번호 -->
+					<input type="hidden" name="id" id="id" value="${sessionScope.id }">
+					<input type="submit" value="댓글쓰기" class="btn btn-sm btn-primary" style="height:80px">
+				</form>
+				</th>
+			</tr>
+		</table>
+		 </c:if> 
+	</div>
+
+	<!-- 댓글End -->
 	<div style=display:none id=popup>
 						<div class="col-lg-8 ftco-animate">	
 						
