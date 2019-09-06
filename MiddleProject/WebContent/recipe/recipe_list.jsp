@@ -59,12 +59,12 @@ $(function(){
               </form>
             </div>
             <div class="sidebar-box ftco-animate">
-            	<h3 class="heading">Categories</h3>
+            	<h3 class="heading">난이도</h3>
               <ul class="categories">
-                <li><a href="#">Vegetables <span>(12)</span></a></li>
-                <li><a href="#">Fruits <span>(22)</span></a></li>
-                <li><a href="#">Juice <span>(37)</span></a></li>
-                <li><a href="#">Dries <span>(42)</span></a></li>
+                <li><a href="../recipe/recipe_list.do?&info=아무나">아무나 <span></span></a></li>
+                <li><a href="../recipe/recipe_list.do?&info=초급">초급 <span></span></a></li>
+                <li><a href="../recipe/recipe_list.do?&info=중급">중급 <span></span></a></li>
+                <li><a href="../recipe/recipe_list.do?&info=고급">고급 <span></span></a></li>
               </ul>
             </div>
 
@@ -114,15 +114,15 @@ $(function(){
             <div class="block-27">
               <ul>
               	<c:if test="${curpage>BLOCK}">
-                	<li><a href="../recipe/recipe_list.do?page=${startpage-1 }&key=${key}&tag=${tag}&ingre=${ingre}">&lt;</a></li>
+                	<li><a href="../recipe/recipe_list.do?page=${startpage-1 }&key=${key}&tag=${tag}&ingre=${ingre}&info=${info}">&lt;</a></li>
                 </c:if>
                 
                 <c:forEach var="i" begin="${startpage}" end="${endpage }" step="1">
-	                	<li class=${i==curpage?"active":"" }><a href="../recipe/recipe_list.do?page=${i}&key=${key}&tag=${tag}&ingre=${ingre}">${i }</a></li>       
+	                	<li class=${i==curpage?"active":"" }><a href="../recipe/recipe_list.do?page=${i}&key=${key}&tag=${tag}&ingre=${ingre}&info=${info}">${i }</a></li>       
                 </c:forEach>
 			<%--  &key=${key}&${tag}&${ingre} --%>
                 <c:if test="${endpage<allpage }">
-                	<li><a href="../recipe/recipe_list.do?page=${endpage+1 }&key=${key}&tag=${tag}&ingre=${ingre}">&gt;</a></li>
+                	<li><a href="../recipe/recipe_list.do?page=${endpage+1 }&key=${key}&tag=${tag}&ingre=${ingre}&info=${info}">&gt;</a></li>
                 </c:if>
               </ul>
             </div>

@@ -38,6 +38,7 @@ public class RecipeModel {
 		String key = model.getRequest().getParameter("key");
 		String ingre = model.getRequest().getParameter("ingre");
 		String tag = model.getRequest().getParameter("tag");
+		String info = model.getRequest().getParameter("info");
 		int ifcount = 0;
 		int total =0;
 		if(key!=null && key!="") {
@@ -61,6 +62,13 @@ public class RecipeModel {
 			keymap.put("tag", tag);
 			ifcount++;
 		}
+		if(info!=null && info!="") {
+			keymap.put("info", info);
+		}else{
+			info="";
+			keymap.put("info", info);
+			ifcount++;
+		}
 		String page=model.getRequest().getParameter("page");
 		if(page==null){
 			page="1";
@@ -73,7 +81,7 @@ public class RecipeModel {
 		
 		keymap.put("end", end);
 		keymap.put("start", start);
-		if(ifcount==3){
+		if(ifcount==4){
 			total=RecipeDAO.RecipeTotalPage();
 		}else{
 			total=RecipeDAO.RecipeSearchPage(keymap);
@@ -109,6 +117,7 @@ public class RecipeModel {
 				}
 			}
 		}
+		model.addAttribute("info", info);
 		model.addAttribute("key", key);
 		model.addAttribute("tag", tag);
 		model.addAttribute("ingre", ingre);
@@ -142,7 +151,9 @@ public class RecipeModel {
 		WishVO wvo = new WishVO();
 		wvo.setId(id);
 		wvo.setRecipeno(Integer.parseInt(no));
-		int wishCount = RecipeDAO.wishCount(wvo);
+		int wishCount = 0;
+		if(id!=null) wishCount = RecipeDAO.wishCount(wvo);
+		
 		List<IngredetailVO> homeList = new ArrayList<IngredetailVO>(); // 인그리 디테일 받을 값
 		List<IngredetailVO> lotteList = new ArrayList<IngredetailVO>();
 		List<IngredetailVO> emartList = new ArrayList<IngredetailVO>();
