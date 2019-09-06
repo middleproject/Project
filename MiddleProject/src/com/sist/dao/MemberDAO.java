@@ -59,7 +59,7 @@ public class MemberDAO {
 		SqlSession session = null;
 		try {
 			session = ssf.openSession();
-			total = session.selectOne("wishCount", id);
+			total = session.selectOne("MywishCount", id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

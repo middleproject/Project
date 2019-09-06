@@ -255,8 +255,8 @@
 		select rno from read where id = #{id}
 	</select>
 	<!-- 오늘 조회수 순 레시피 등록 있는지 확인 -->
-	<select id="todayHitCount" parameterType="int">
-		select count(*) from todayhit where recipeno=#{no}
+	<select id="todayHitCount" parameterType="int" resultType="int">
+		select count(*) from todayhit where recipeno = #{recipeno}
 	</select>
 	<!-- 당일 insert -->
 	<insert id="todayHitInsert" parameterType="TodayHitVO">

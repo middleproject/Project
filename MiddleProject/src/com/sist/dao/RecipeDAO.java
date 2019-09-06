@@ -438,12 +438,12 @@ public class RecipeDAO {
 		   return list;
 	   }
 	   //레시피 카운터
-	   public static int todayHitCount(int no){
+	   public static int todayHitCount(int recipeno){
 		   SqlSession session = null;
 		   int count =0;
 		   try {
 				session = ssf.openSession();
-				count = session.selectOne("todayHitCount",no);
+				count = session.selectOne("todayHitCount",recipeno);
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally{
@@ -455,7 +455,7 @@ public class RecipeDAO {
 	   public static void todayHitInsert(int recipeno){
 		   SqlSession session = null;
 		   try {
-				session = ssf.openSession();
+				session = ssf.openSession(true);
 				session.insert("todayHitInsert",recipeno);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -466,7 +466,7 @@ public class RecipeDAO {
 	   public static void todayHitUpdate(int recipeno){
 		   SqlSession session = null;
 		   try {
-				session = ssf.openSession();
+				session = ssf.openSession(true);
 				session.insert("todayHitUpdate",recipeno);
 			} catch (Exception e) {
 				e.printStackTrace();

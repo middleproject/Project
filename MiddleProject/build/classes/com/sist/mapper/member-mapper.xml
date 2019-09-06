@@ -39,9 +39,9 @@
    	WHERE id=#{id}
    </delete>
    <!-- 장바구니 개 수 출력 -->
-   	<select id="wishCount" parameterType="String" resultType="int">
+   	 <select id="MywishCount" parameterType="String" resultType="int">
    		select count(*) from wish where id = #{id}
-   	</select>
+   	</select> 
    	
    	<!-- email 존재여부  -->
    <select id="memberEmailCount" resultType="int" parameterType="String">
