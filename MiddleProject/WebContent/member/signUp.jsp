@@ -235,9 +235,11 @@ $(function(){
 										<option>02</option>
 										<option>031</option>
 										<option>041</option>
-									</select> - <input type="tel" size="5px" name="tel2" class="textbox" style="width: 80px; height: 33px; "> 
+									</select> - <input type="tel" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+									 size="5px" name="tel2" class="textbox" style="width: 80px; height: 33px; "> 
 									- <input
-										type="tel" size="5px" name="tel3" class="textbox" style="width: 80px; height: 33px;">
+										type="tel" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+										  size="5px" name="tel3" class="textbox" style="width: 80px; height: 33px;">
 								</div>
 							</div>
 
@@ -251,8 +253,10 @@ $(function(){
 										<option>010</option>
 										<option>011</option>
 										<option>016</option>
-									</select> - <input type="tel" size="5px" required name="phone2" class="textbox" style="width: 80px; height: 33px;">
-									- <input type="tel" size="5px" required name="phone3" class="textbox" style="width: 80px; height: 33px;">
+									</select> - <input type="tel" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+									  size="5px" required name="phone2" class="textbox" style="width: 80px; height: 33px;">
+									- <input type="tel"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+									 size="5px" required name="phone3" class="textbox" style="width: 80px; height: 33px;">
 								</div>
 							</div>
 							<div class="w-100"></div>
