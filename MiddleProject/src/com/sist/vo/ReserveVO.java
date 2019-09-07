@@ -14,7 +14,15 @@ public class ReserveVO {
 	private String msg;
 	private int checheif;
 	private String userid;
+	private int complete;
 	
+	
+	public int getComplete() {
+		return complete;
+	}
+	public void setComplete(int complete) {
+		this.complete = complete;
+	}
 	public String getUserid() {
 		return userid;
 	}

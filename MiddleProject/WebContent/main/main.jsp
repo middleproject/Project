@@ -138,9 +138,14 @@
             
             
             
-	         
+	         <c:if test="${sessionScope.id!=null }">
+	         	 <li class="nav-item"><a href="../reserve/reserve.do" class="jua">예약</a></li>
+	         </c:if>
+	         <c:if test="${sessionScope.id==null }">
+	         	 <li class="nav-item"><a onclick="javascript:alert('로그인을 하세요'); location.href='../member/signIn.do';" class="jua">예약</a></li>
+	         </c:if>
 	          
-	          <li class="nav-item"><a href="../reserve/reserve.do" class="jua">예약</a></li>
+	         
 	          <li class="nav-item"><a href="#" class="jua">실시간 상담</a></li>
 	          <c:if test="${sessionScope.admin==0 || sessionScope.admin==2 }">
 	            <li class="nav-item dropdown">

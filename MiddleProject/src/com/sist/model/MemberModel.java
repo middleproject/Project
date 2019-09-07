@@ -30,6 +30,7 @@ public class MemberModel {
 			session.setAttribute("id", id);
 			session.setAttribute("name", vo.getName());
 			session.setAttribute("admin", vo.getAdmin());
+			session.setAttribute("pay", vo.getPay());
 		}
 		/*System.out.println("아이디:" + id);
 		System.out.println("이름:" + vo.getName());

@@ -45,31 +45,33 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
-	 // Get the modal
-    var modal = document.getElementById('myModal');
+	
+			 // Get the modal
+		    var modal = document.getElementById('myModal');
+		
+		    // Get the button that opens the modal
+		    var btn = document.getElementById("myBtn");
+		
+		    // Get the <span> element that closes the modal
+		    var span = document.getElementsByClassName("close")[0];                                          
+		
+		    // When the user clicks on the button, open the modal 
+		    btn.onclick = function() {
+		        modal.style.display = "block";
+		    }
+		
+		    // When the user clicks on <span> (x), close the modal
+		    span.onclick = function() {
+		        modal.style.display = "none";
+		    }
+		
+		    // When the user clicks anywhere outside of the modal, close it
+		    window.onclick = function(event) {
+		        if (event.target == modal) {
+		            modal.style.display = "none";
+		        }
+		    }
 
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];                                          
-
-    // When the user clicks on the button, open the modal 
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
     
 	$.ajax({
 		type:'post',
@@ -91,84 +93,107 @@ $(function(){
 		});
 	});
 	$('.area').click(function(){
+		if($('#select1').text()==''){
+			alert("위에서부터 순서대로 지정해주세요");
+		}else{
+			$.ajax({
+				type:'post',
+				url:'../reserve/area.do',
 				
-		$.ajax({
-			type:'post',
-			url:'../reserve/area.do',
-			
-			success:function(response){
-				$('#print').html(response);
-			}
-		});
+				success:function(response){
+					$('#print').html(response);
+				}
+			});
+		}
 	});
 	$('.cheif').click(function(){
-		var area=$('#select2_').attr("title");
-		$.ajax({
-			type:'post',
-			url:'../reserve/cheif.do',
-			data:{area:area},
-			success:function(response){
-				$('#print').html(response);
-			}
-		});
+		if($('#select1').text()=='' || $('#select2').text()==''){
+			alert("위에서부터 순서대로 지정해주세요");
+		}else{
+			var area=$('#select2_').attr("title");
+			$.ajax({
+				type:'post',
+				url:'../reserve/cheif.do',
+				data:{area:area},
+				success:function(response){
+					$('#print').html(response);
+				}
+			});
+		}
 	});
 	$('.datetime').click(function(){
-		var id=$('#select3_').attr("title");
-		$.ajax({
-			type:'post',
-			url:'../reserve/date.do',
-			data:{id:id},
-			success:function(response){
-				$('#print').html(response);
-			}
-		});
+		if($('#select1').text()=='' || $('#select2').text()=='' || $('#select3').text()==''){
+			alert("위에서부터 순서대로 지정해주세요");
+		}else{
+		
+			var id=$('#select3_').attr("title");
+			$.ajax({
+				type:'post',
+				url:'../reserve/date.do',
+				data:{id:id},
+				success:function(response){
+					$('#print').html(response);
+				}
+			});
+		}
 	});
 	$('.costomprice').click(function(){
-		$.ajax({
-			type:'post',
-			url:'../reserve/price.do',
-			success:function(response){
-				$('#print').html(response);
-			}
-		});
+		if($('#select1').text()=='' || $('#select2').text()=='' || $('#select3').text()=='' || $('#select4').text()==''){
+			alert("위에서부터 순서대로 지정해주세요");
+		}else{
+			$.ajax({
+				type:'post',
+				url:'../reserve/price.do',
+				success:function(response){
+					$('#print').html(response);
+				}
+			});
+		}
 	});
 	$('.command').click(function(){
-		$.ajax({
-			type:'post',
-			url:'../reserve/command.do',
-			success:function(response){
-				$('#print').html(response);
-			}
-		});
+		if($('#select1').text()=='' || $('#select2').text()=='' || $('#select3').text()=='' || $('#select4').text()=='' || $('#select5').text()==''){
+			alert("위에서부터 순서대로 지정해주세요");
+		}else{
+		
+			$.ajax({
+				type:'post',
+				url:'../reserve/command.do',
+				success:function(response){
+					$('#print').html(response);
+				}
+			});
+		}
 	});
 
 	$('.final').click(function(){
-		
-		var poster=$('#select1_hi').attr("title");
-		var no=$('#select1_').attr("title");
-		var title=$('#select1_').text();
-		
-		var id=$('#select3_').attr("title");
-		var name=$('#select3_').text();
-		
-		var time=$('#select4_').attr("title");
-		var date=$('#select4_').text();
-		
-		var price=$('#select5_').attr("title");
-		
-		var msg=$('#select6_').attr("title");
-		
-		
-		$.ajax({
-			type:'post',
-			url:'../reserve/final.do',
-			data:{poster:poster,no:no,title:title,id:id,name:name,time:time,date:date,price:price,msg:msg},
-			success:function(response){
-				$('.modal-content').html(response);
-			}
-		});
+		if($('#select1').text()=='' || $('#select2').text()=='' || $('#select3').text()=='' || $('#select4').text()=='' || $('#select5').text()==''|| $('#select6').text()==''){
+			alert("위에서부터 순서대로 지정해주세요");
+		}else{
+			var poster=$('#select1_hi').attr("title");
+			var no=$('#select1_').attr("title");
+			var title=$('#select1_').text();
+			
+			var id=$('#select3_').attr("title");
+			var name=$('#select3_').text();
+			
+			var time=$('#select4_').attr("title");
+			var date=$('#select4_').text();
+			
+			var price=$('#select5_').attr("title");
+			
+			var msg=$('#select6_').attr("title");
+			
+			
+			$.ajax({
+				type:'post',
+				url:'../reserve/final.do',
+				data:{poster:poster,no:no,title:title,id:id,name:name,time:time,date:date,price:price,msg:msg},
+				success:function(response){
+					$('.modal-content').html(response);
+				}
+			});
 
-
+		}
 	});
 	
 });

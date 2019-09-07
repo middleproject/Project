@@ -207,7 +207,9 @@ public class ReserveModel {
 		
 	
 		List<MemberVO> list=ReserveDAO.chiefList(map);
-		
+		for(int i=0;i<list.size();i++){
+			System.out.println(list.get(i).getId()+" "+list.get(i).getAddr2() +" "+ list.get(i).getPay() +" "+list.get(i).getAdmin());
+		}
 		model.addAttribute("list", list);
 		model.addAttribute("startpage", startpage);
 		model.addAttribute("endpage", endpage);
@@ -492,6 +494,8 @@ public class ReserveModel {
 			String price=model.getRequest().getParameter("price");		
 			String msg=model.getRequest().getParameter("msg");	
 			String userid=(String)session.getAttribute("id");
+			/*Integer paym=(Integer)session.getAttribute("pay");
+			System.out.println("@pay:"+paym);*/
 			
 			try{
 				ReserveVO vo=new ReserveVO();
@@ -505,8 +509,10 @@ public class ReserveModel {
 				vo.setMsg(msg);
 				vo.setUserid(userid);	//
 
-				
-				ReserveDAO.reserveInsert(vo);
+				Map map=new HashMap();
+				map.put("id", userid);
+				map.put("price", price);
+				ReserveDAO.reserveInsert(vo,map);
 				
 			}catch (Exception e) {
 				e.printStackTrace();
@@ -525,7 +531,7 @@ public class ReserveModel {
 			String id=(String)session.getAttribute("id");
 			int admin=(int)session.getAttribute("admin");
 			Map map=new HashMap();
-			
+			System.out.println("@@id:"+id);
 			map.put("id", id);
 			if(data==null){
 				if(admin==2){	
@@ -580,8 +586,10 @@ public class ReserveModel {
 						vo.setSummary(vo.getSummary().substring(0, 25)+"...");
 					}
 					vo.setRdate(vo.getRdate().substring(0, vo.getRdate().indexOf(" ")));
-//					vo.setid();
-					System.out.println("@@no : "+vo.getNo());
+
+					System.out.println("@@@no : "+vo.getNo());
+					System.out.println("@@@userid : "+vo.getUserid());
+					System.out.println("@@@cheifid : "+vo.getCheifid());
 			}
 			
 			
@@ -751,15 +759,73 @@ public class ReserveModel {
 			map.put("no", no);
 			if(comp.equals("확인")){
 				map.put("cancel", "dont");
-				System.out.println("cancel"+map.get("cancel"));
 				ReserveDAO.reserveUpdate(map);
-				System.out.println("cancel"+map.get("cancel"));
 			}else if(comp.equals("취소")){
-				System.out.println("취소 들어감.");
 				map.put("cancel", "cando");
 				ReserveDAO.reserveUpdate(map);
 			}
 			
 			return "redirect:../reserve/myreserveList.do";
+		}
+
+		
+		
+		@RequestMapping("reserve/adminlist.do")
+		public String reserve_adminlist(Model model){
+			try {
+				model.getRequest().setCharacterEncoding("UTF-8");
+			} catch (Exception e) {}
+			
+			/*HttpSession session = model.getRequest().getSession();
+			int admin=(int)session.getAttribute("admin");*/
+			Map map=new HashMap();
+			
+			/*map.put("adminc", adminc);*/
+			
+			
+			String page=model.getRequest().getParameter("page");
+			if(page==null){
+				page="1";
+			}
+			
+			int curpage=Integer.parseInt(page);
+			
+			int rowSize=5;
+			int start=(curpage*rowSize)-(rowSize-1);
+			int end=curpage*rowSize;
+			
+			map.put("end", end);
+			map.put("start", start);
+			
+			int total=ReserveDAO.adminpage();//reservepage(map);
+			
+		
+			
+			int BLOCK=5;
+			
+			int startpage=((curpage-1)/BLOCK*BLOCK)+1;
+			
+			int endpage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+			
+			int allpage=total;
+			
+			if(endpage>allpage){
+				endpage=allpage;
+			}
+			
+			
+			
+			
+			List<ReserveVO> list=ReserveDAO.adminList(map);//reserveList(map);
+			for(ReserveVO vo:list){
+				
+					int len=vo.getSummary().length();
+					if(len>25){
+						vo.setSummary(vo.getSummary().substring(0, 25)+"...");
+					}
+					vo.setRdate(vo.getRdate().substring(0, vo.getRdate().indexOf(" ")));
+
+			}
+			return "../reserve/adminlist.do";
 		}
 }

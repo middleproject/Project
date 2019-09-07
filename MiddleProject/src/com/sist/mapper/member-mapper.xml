@@ -10,7 +10,7 @@
    </select>
    <!-- 2. 비밀번호 확인 -->
    <select id="memberGetPwd" resultType="MemberVO" parameterType="String">
-     SELECT pwd,admin,name
+     SELECT pwd,admin,name,pay
      FROM member
      WHERE id=#{id}
    </select>

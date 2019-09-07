@@ -65,7 +65,7 @@ $(function(){
 				<c:forEach var="vo" items="${list }">
 					
 			            <div class="blog-entry align-self-stretch d-md-flex">
-			              <a class="block-20" style="background-image: url(../main/images/chi.png);"><!-- poster -->
+			              <a class="block-20" style="background-image: url(${vo.poster});"><!-- poster -->
 			              </a>
 			              <div class="text d-block pl-md-4">
 			              	<div class="meta mb-3">

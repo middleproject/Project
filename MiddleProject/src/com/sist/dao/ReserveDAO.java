@@ -117,7 +117,7 @@ public class ReserveDAO {
 		return list;
 	}
 	
-	public static void reserveInsert(ReserveVO vo){
+	public static void reserveInsert(ReserveVO vo,Map map1){
 		SqlSession session = null;
 		Map map=new HashMap();
 		
@@ -130,6 +130,7 @@ public class ReserveDAO {
 			
 			session.update("memberResCount",map);
 			session.insert("addreserve",vo);
+			session.update("userpayminus", map1);
 			/*session.update("cheifcheck",map);*/
 			
 			session.commit();
@@ -182,4 +183,35 @@ public class ReserveDAO {
 				session.close();
 		}
 	}
+	
+	public static int adminpage(){
+		int total=0;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			total = session.selectOne("adminpage");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+		return total;
+	}
+	
+	public static List<ReserveVO> adminList(Map map){
+		List<ReserveVO> list=new ArrayList<ReserveVO>();
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			list = session.selectList("adminList", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+		return list;
+	}
+
 }

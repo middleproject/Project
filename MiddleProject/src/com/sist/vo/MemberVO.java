@@ -29,7 +29,23 @@ public class MemberVO {
 	private int pay;
 	private String msg;	// NOID OK NOPWD
 	private Date birthday;
+	private String poster;
+	private int reserveCount;
 	
+	
+	public String getPoster() {
+		return poster;
+	}
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+	
+	public int getReserveCount() {
+		return reserveCount;
+	}
+	public void setReserveCount(int reserveCount) {
+		this.reserveCount = reserveCount;
+	}
 	public Date getBirthday() {
 		return birthday;
 	}

@@ -13,9 +13,9 @@
 <select id="chiefList" parameterType="java.util.Map" resultType="MemberVO">
 	SELECT id,poster,name,addr2,reserveCount,num 
 	FROM (SELECT id,poster,name,addr2,reserveCount,rownum as num 
-	FROM (SELECT id,poster,name,addr2,reserveCount 
+	FROM (SELECT id,poster,name,addr2,reserveCount,admin 
 	FROM member 
-	WHERE addr2 like '%'||#{area}||'%' 
+	WHERE addr2 like '%'||#{area}||'%' AND admin=2
 	ORDER BY 5 DESC))
 	WHERE num between #{start} and #{end}
 </select>
@@ -61,22 +61,31 @@
 	SET checheif = #{check}
 	WHERE cheifid=#{id}
 </update> -->
+<update id="userpayminus" parameterType="java.util.Map">
+	UPDATE member SET pay=pay-#{price} WHERE id=#{id}
+</update>
+<update id="userpayplus" parameterType="java.util.Map">
+	UPDATE member SET pay=pay-#{price} WHERE id=#{id}
+</update>
+<update id="cheifpayplus" parameterType="java.util.Map">
+	UPDATE member SET pay=pay-#{price} WHERE id=#{id}
+</update>
 
 <!-- 예약 출력 -->
 <select id="reservepage" parameterType="java.util.Map" resultType="int">
 	select CEIL(COUNT(*)/5.0)
 	from reserve
 	<if test="data==1">
-		WHERE checheif!=3 AND checheif!=10 AND cheifid=#{id}
+		WHERE checheif!=2 AND checheif!=10 AND cheifid=#{id}
 	</if>
 	<if test="data==2">
-		WHERE checheif=3 OR checheif=10 AND cheifid=#{id}
+		WHERE checheif=2 OR checheif=10 AND cheifid=#{id}
 	</if>
 	<if test="data==3">
-		WHERE checheif!=3 AND checheif!=10 AND userid=#{id}
+		WHERE checheif!=2 AND checheif!=10 AND userid=#{id}
 	</if>
 	<if test="data==4">
-		WHERE checheif=3 OR checheif=10 AND userid=#{id}
+		WHERE checheif=2 OR checheif=10 AND userid=#{id}
 	</if>
 </select>
 <select id="reserveList" parameterType="java.util.Map" resultType="ReserveVO">
@@ -85,19 +94,19 @@
 	(SELECT no,name,summary,rdate,rtime,price,msg,checheif,userid,cheifid
 	FROM reserve
 	<if test="data==1">
-		WHERE checheif!=2 AND checheif!=10 AND cheifid=#{id} AND rdate&gt;=sysdate
+		WHERE checheif!=2 AND checheif!=10 AND cheifid=#{id}
 	</if>
 	<if test="data==2">
-		WHERE checheif=2 OR checheif=10 AND cheifid=#{id} AND rdate&lt;sysdate
+		WHERE (checheif=2 OR checheif=10) AND cheifid=#{id}
 	</if>
 	<if test="data==3">
-		WHERE checheif!=2 AND checheif!=10 AND userid=#{id} AND rdate&gt;=sysdate
+		WHERE checheif!=2 AND checheif!=10 AND userid=#{id} 
 	</if>
 	<if test="data==4">
-		WHERE checheif=2 OR checheif=10 AND userid=#{id} AND rdate&lt;sysdate
+		WHERE (checheif=2 OR checheif=10) AND userid=#{id}
 	</if>
+	AND complete=0
 	ORDER BY rdate))
-
 	WHERE num between #{start} and #{end}
 </select>
 <update id="reserveUpdate" parameterType="java.util.Map">
@@ -110,4 +119,20 @@
 	</if>
 	WHERE no=#{no}
 </update>
+<select id="adminpage" resultType="int">
+	select CEIL(COUNT(*)/5.0)
+	from reserve  
+	WHERE (checheif=2 OR checheif=10) 
+	AND complete=0;
+</select>
+
+<select id="adminList" parameterType="java.util.Map" resultType="ReserveVO">
+	SELECT no,name,summary,rdate,rtime,price,msg,checheif,userid,cheifid,num FROM 
+	(SELECT no,name,summary,rdate,rtime,price,msg,checheif,userid,cheifid,rownum num FROM 
+	(SELECT no,name,summary,rdate,rtime,price,msg,checheif,userid,cheifid
+	FROM reserve
+	where complete=0
+	ORDER BY no))
+	WHERE num between #{start} and #{end}
+</select>
 </mapper>
