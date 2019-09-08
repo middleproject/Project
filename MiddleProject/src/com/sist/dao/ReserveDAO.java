@@ -213,5 +213,29 @@ public class ReserveDAO {
 		}
 		return list;
 	}
+	public static void adminokBtn(int no,int price,String id,int check){
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			session.update("adminokBtn", no);
+			
+			Map map=new HashMap();
+			map.put("id", id);
+			map.put("price", price);
+			if(check==2){
+				session.update("cheifpayplus",map);
+			}else if(check==10){
+				session.update("userpayplus",map);
+			}
+			
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+		
+	}
 
 }

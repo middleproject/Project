@@ -3,19 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript">
-$(function(){
-	$('#select').click(function(){
-		var data=$("#list option:selected").attr("value");
-		
 
-
-	    location.href="../reserve/myreserveList.do?data="+data;
-			
-	});
-});
-</script>
 <head>
 <meta charset="UTF-8">
 </head>
@@ -50,16 +38,27 @@ $(function(){
 									<td>${vo.userid }</td>
 									<td class="text-center">${vo.summary }</td>
 									<td class="text-center">${vo.rdate }</td>
-									<td class="text-center">${vo.rtime }</td>
+									<c:if test="${vo.rtime==1 }">
+										<td class="text-center">아침</td>
+									</c:if>
+									<c:if test="${vo.rtime==2 }">
+										<td class="text-center">점심</td>
+									</c:if>
+									<c:if test="${vo.rtime==3 }">
+										<td class="text-center">저녁</td>
+									</c:if>
+									
 									<td class="text-center">${vo.price }</td>
 									<td class="text-center">${vo.msg }</td>
-									<c:if test="${vo.checheif==10 }">
+									<c:if test="${vo.checheif==2 }">
 										<c:if test="${vo.complete==0 }">
 											<td colspan="2">
-												<form action="../reserve/adminlist_ok.do?page=${page }&data=${data}" method="post">
+												<form action="../reserve/adminlist_ok.do?page=${page }" method="post">
 													
 													<input type="hidden" name="no" value="${vo.no }">
 													<input type="hidden" name="page" value="${page }">
+													<input type="hidden" name="pay" value="${vo.price }">
+													<input type="hidden" name="cheifid" value="${vo.cheifid }">
 													<input type="submit" name="comp" value="확인처리">
 												</form>
 											</td>											
@@ -70,13 +69,15 @@ $(function(){
 										
 										
 									</c:if>
-									<c:if test="${vo.checheif==2 }">
+									<c:if test="${vo.checheif==10}">
 										<c:if test="${vo.complete==0 }">
 											<td colspan="2">
-												<form action="../reserve/adminlist_ok.do?page=${page }&data=${data}" method="post">
+												<form action="../reserve/adminlist_ok.do?page=${page }" method="post">
 													
 													<input type="hidden" name="no" value="${vo.no }">
 													<input type="hidden" name="page" value="${page }">
+													<input type="hidden" name="pay" value="${vo.price }">
+													<input type="hidden" name="userid" value="${vo.userid}">
 													<input type="submit" name="comp" value="취소처리">
 												</form>
 											</td>
@@ -107,14 +108,14 @@ $(function(){
             <div class="block-27">
               <ul>
               	<c:if test="${curpage>BLOCK}">
-                	<li><a href="../reserve/adminlist.do?page=${startpage-1 }&data=${data}">&lt;</a></li>
+                	<li><a href="../reserve/adminlist.do?page=${startpage-1 }">&lt;</a></li>
                 </c:if>
                 
                 <c:forEach var="i" begin="${startpage}" end="${endpage }" step="1">
-	                	<li class=${i==curpage?"active":"" }><a href="../reserve/adminlist.do?page=${i}&data=${data}">${i }</a></li>       
+	                	<li class=${i==curpage?"active":"" }><a href="../reserve/adminlist.do?page=${i}">${i }</a></li>       
                 </c:forEach>
                 <c:if test="${endpage<allpage }">
-                	<li><a href="../reserve/adminlist.do?page=${endpage+1 }&data=${data}">&gt;</a></li>
+                	<li><a href="../reserve/adminlist.do?page=${endpage+1 }">&gt;</a></li>
                 </c:if>
               </ul>
             </div>

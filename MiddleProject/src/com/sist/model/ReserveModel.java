@@ -826,6 +826,39 @@ public class ReserveModel {
 					vo.setRdate(vo.getRdate().substring(0, vo.getRdate().indexOf(" ")));
 
 			}
-			return "../reserve/adminlist.do";
+			model.addAttribute("list", list);
+			model.addAttribute("startpage", startpage);
+			model.addAttribute("endpage", endpage);
+			model.addAttribute("curpage", curpage);
+			model.addAttribute("allpage", allpage);
+			model.addAttribute("BLOCK", BLOCK);
+			model.addAttribute("total", total);
+			model.addAttribute("main_jsp", "../reserve/adminlist.jsp");
+			return "../main/main.jsp";
 		}
+		@RequestMapping("reserve/adminlist_ok.do")
+		public String reserve_adminlist_ok(Model model){
+			try{
+				model.getRequest().setCharacterEncoding("UTF-8");
+			}catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			String no=model.getRequest().getParameter("no");
+			String page=model.getRequest().getParameter("page");
+			String pay=model.getRequest().getParameter("pay");
+			String comp=model.getRequest().getParameter("comp");
+			String userid=model.getRequest().getParameter("userid");
+			String cheifid=model.getRequest().getParameter("cheifid");
+			
+			if(comp.equals("犬牢贸府")){
+				ReserveDAO.adminokBtn(Integer.parseInt(no),Integer.parseInt(pay),cheifid,2);
+			}else if(comp.equals("秒家贸府")){
+				ReserveDAO.adminokBtn(Integer.parseInt(no),Integer.parseInt(pay),userid,10);
+			}
+			
+			
+			model.addAttribute("page", page);
+			return "redirect:../reserve/adminlist.do";
+		}
+		
 }

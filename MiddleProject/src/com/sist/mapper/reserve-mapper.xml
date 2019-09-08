@@ -65,10 +65,10 @@
 	UPDATE member SET pay=pay-#{price} WHERE id=#{id}
 </update>
 <update id="userpayplus" parameterType="java.util.Map">
-	UPDATE member SET pay=pay-#{price} WHERE id=#{id}
+	UPDATE member SET pay=pay+#{price} WHERE id=#{id}
 </update>
 <update id="cheifpayplus" parameterType="java.util.Map">
-	UPDATE member SET pay=pay-#{price} WHERE id=#{id}
+	UPDATE member SET pay=pay+#{price} WHERE id=#{id}
 </update>
 
 <!-- 예약 출력 -->
@@ -123,16 +123,19 @@
 	select CEIL(COUNT(*)/5.0)
 	from reserve  
 	WHERE (checheif=2 OR checheif=10) 
-	AND complete=0;
 </select>
 
 <select id="adminList" parameterType="java.util.Map" resultType="ReserveVO">
-	SELECT no,name,summary,rdate,rtime,price,msg,checheif,userid,cheifid,num FROM 
-	(SELECT no,name,summary,rdate,rtime,price,msg,checheif,userid,cheifid,rownum num FROM 
-	(SELECT no,name,summary,rdate,rtime,price,msg,checheif,userid,cheifid
+	    SELECT no,name,summary,rdate,rtime,price,msg,checheif,userid,cheifid,complete,num FROM 
+	(SELECT no,name,summary,rdate,rtime,price,msg,checheif,userid,cheifid,complete,rownum num FROM 
+	(SELECT no,name,summary,rdate,rtime,price,msg,checheif,userid,cheifid,complete
 	FROM reserve
-	where complete=0
+	WHERE (checheif=2 OR checheif=10)
 	ORDER BY no))
 	WHERE num between #{start} and #{end}
 </select>
+<update id="adminokBtn" parameterType="int">
+	UPDATE reserve SET complete=1 WHERE no=#{no}
+</update>
+
 </mapper>
