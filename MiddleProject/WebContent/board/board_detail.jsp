@@ -6,6 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	.row {
+		margin: 0px auto;
+		width: 1200px;
+	}
+</style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 
 
@@ -44,9 +50,19 @@ var u= 0;
 </script>
 </head>
 <body>
-		 <section class="ftco-section ftco-degree-bg">
+<div class="hero-wrap hero-bread"
+		style="background-image: url('../main/images/bg_3.jpg');">
+		<div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="../main/main.do">Home</a></span></p>
+            <h1 class="mb-0 bread" class="jua">상세보기</h1>
+          </div>
+        </div>
+      </div>
+	</div>
+<section class="ftco-section ftco-degree-bg">
 	<div class="container">
-		<h2 class="text-center">게시글 내용보기</h2>
 		<div class="row">
 			<table class="table">
 				<tr>
@@ -104,9 +120,6 @@ var u= 0;
 									</c:if>
 									<font color="grey">♥</font><font color="grey"><b>${rvo.name }</b></font>&nbsp;${rvo.dbday }
 								</th>
-								111 : ${rvo.id }
-								
-								22 : ${sessionScope.id } 
 								<th class="text-right">
 								 
 									<c:if test="${sessionScope.id!=null && sessionScope.id==rvo.id }"> <!-- 조건2개 / 본인이면 모두 사용가능 -->

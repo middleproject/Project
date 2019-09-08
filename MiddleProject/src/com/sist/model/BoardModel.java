@@ -148,6 +148,7 @@ public class BoardModel {
 			model.getRequest().setCharacterEncoding("UTF-8");
 		} catch (Exception ex) {		
 		}
+		// board_update_ok.do?name=""&
 		String name=model.getRequest().getParameter("name");
 		String subject=model.getRequest().getParameter("subject");
 		String content=model.getRequest().getParameter("content");
@@ -573,10 +574,14 @@ public class BoardModel {
 			
 			try {
 				model.getRequest().setCharacterEncoding("UTF-8");
+				
+				//C:\mvcDev\mvcStudy\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MiddleProject4\
+				//String path="c:\\upload";
+				//성공 String path="c:\\mvcDev\\mvcStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\MiddleProject4\\main";
 				String path="c:\\upload";
 				String enctype="UTF-8";
 				int size=100*1024*1024; //최대한으로 들어갈수있는 파일 크기가 100메가(1024KB, 1024*1024KB=MB)
-				
+				System.out.println(path);
 				MultipartRequest mr = new MultipartRequest(model.getRequest(), path, size, enctype, new DefaultFileRenamePolicy()); //파일업로드시에 (리퀘스트,저장폴더)
 				
 				String notice = mr.getParameter("notice");
@@ -585,12 +590,20 @@ public class BoardModel {
 				String content = mr.getParameter("content");
 				String pwd = mr.getParameter("pwd");
 	
+				
+				System.out.println("------------- notice " + notice);
+				System.out.println("------------- name " + name);
+				System.out.println("------------- subject " + subject);
+				System.out.println("------------- content " + content);
+				System.out.println("------------- pwd " + pwd);
+				
+				
 				DataBoardVO vo = new DataBoardVO();
 				
 				if(notice.equals("noticetext")) {
 					vo.setNotice(1);
 				} 
-
+				System.out.println("------------- 1 ");
 				vo.setName(name);
 				vo.setSubject(subject);
 				vo.setContent(content);
@@ -607,6 +620,7 @@ public class BoardModel {
 					vo.setFilesize((int)file.length());
 				}
 				// dao 전송
+				System.out.println("------------- 2 ");
 				BoardDAO.dataInsert(vo);
 			} catch (Exception ex) { }
 			return "redirect:../databoard/databoard_list.do"; //redirect라 do를 한다, DispatcherServlet if문 참조
@@ -617,6 +631,7 @@ public class BoardModel {
 		@RequestMapping("databoard/databoard_detail.do")
 		public static String dataDetailData(Model model) {
 			String no = model.getRequest().getParameter("no");
+			String page = model.getRequest().getParameter("page");
 			
 			DataBoardVO vo = BoardDAO.dataDetailData(Integer.parseInt(no), "detail");
 			model.addAttribute("vo", vo);
@@ -626,7 +641,8 @@ public class BoardModel {
 			int count = BoardDAO.datareplyListCount(Integer.parseInt(no));
 			System.out.println("ddddcount"+count);
 			model.addAttribute("list", list);
-			model.addAttribute("count", count);
+			model.addAttribute("count", count);	
+			model.addAttribute("curpage", page);
 			
 			model.addAttribute("main_jsp", "../databoard/databoard_detail.jsp");
 			return "../main/main.jsp";
@@ -635,8 +651,10 @@ public class BoardModel {
 		@RequestMapping("databoard/databoard_update.do")
 		public static String dataUpdate(Model model) {
 			String no = model.getRequest().getParameter("no");
+			String page = model.getRequest().getParameter("page");
 			DataBoardVO vo = BoardDAO.dataDetailData(Integer.parseInt(no), "update");
 			model.addAttribute("vo", vo);
+			model.addAttribute("page", page);
 			model.addAttribute("main_jsp", "../databoard/databoard_update.jsp"); 
 			return "../main/main.jsp";
 		}
@@ -786,5 +804,146 @@ public class BoardModel {
 				System.out.println("res값은??"+res);
 				return "../databoard/databoard_delete_ok.jsp";
 			}
+			//==============
+			//이미지게시판 리스트
+			@RequestMapping("bimage/img_list.do")
+			public String img_list(Model model) {
+				
+				String page = model.getRequest().getParameter("page");
+				if(page==null) 
+						page="1";
+				int curpage = Integer.parseInt(page);
+				
+				Map map = new HashMap();
+				int rowSize = 10;
+				int start = (curpage*rowSize)-(rowSize-1);
+				int end = curpage*rowSize;
+				
+				map.put("start", start);
+				map.put("end", end);
 			
+				List<ImgBoardVO> list = BoardDAO.imgListData(map);
+				
+				model.addAttribute("list", list);
+				
+				int totalpage = BoardDAO.imgTotalPage(map);
+				int count = BoardDAO.imgRowCount(map);
+				count = count-((curpage*rowSize)-rowSize);
+				String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
+				model.addAttribute("today", today);
+				model.addAttribute("curpage", curpage);
+				model.addAttribute("totalpage", totalpage);
+				model.addAttribute("count", count);
+				
+				model.addAttribute("main_jsp", "../bimage/img_list.jsp");
+				return "../main/main.jsp";
+			}
+			//imgInsert
+			@RequestMapping("bimage/img_insert.do")
+			public String imgInsert(Model model) {
+				System.out.println("=========1");
+				model.addAttribute("main_jsp", "../bimage/img_insert.jsp");
+				return "../main/main.jsp";
+			}
+			//bimage/img_insert_ok.do
+			@RequestMapping("bimage/img_insert_ok.do")
+
+			public String imgInsert_ok(Model model) {
+				System.out.println("=========2");
+				try {
+					model.getRequest().setCharacterEncoding("UTF-8");
+					
+					String path="c:\\mvcDev\\mvcStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\MiddleProject5\\main";
+					String enctype="UTF-8";
+					int size=100*1024*1024; //최대한으로 들어갈수있는 파일 크기가 100메가(1024KB, 1024*1024KB=MB)
+					
+					MultipartRequest mr = new MultipartRequest(model.getRequest(), path, size, enctype, new DefaultFileRenamePolicy()); //파일업로드시에 (리퀘스트,저장폴더)
+					System.out.println("=========3");
+					String name = mr.getParameter("name");
+					String content = mr.getParameter("content");
+					String pwd = mr.getParameter("pwd");
+
+					ImgBoardVO vo = new ImgBoardVO();
+
+					
+					vo.setName(name);
+					vo.setContent(content);
+					vo.setPwd(pwd);
+
+					String filename=mr.getOriginalFileName("upload");
+					
+					if(filename==null) { //파일이 없기 때문에 업로드를 안한 상태
+						vo.setFilename("");
+						vo.setFilesize(0);
+						
+					} else { //파일이 올라온 상태
+						File file = new File(path+"\\"+filename);
+						vo.setFilename(filename);
+						vo.setFilesize((int)file.length());
+					}
+					// dao 전송
+					BoardDAO.imgInsert(vo);
+
+				} catch (Exception ex) { 
+					
+				}
+				
+				return "redirect:../bimage/img_list.do";
+			}
+			
+			//imgDelete
+			@RequestMapping("bimage/img_delete.do")
+			public String img_delete(Model model) {
+				String no = model.getRequest().getParameter("no");
+				BoardDAO.imgDelete(Integer.parseInt(no));
+				return "redirect:../bimage/img_list.do";
+			}
+			
+			//imgUpdate
+			@RequestMapping("bimage/img_update.do")
+			public static String img_update(Model model) {
+				String no = model.getRequest().getParameter("no");
+				
+				
+				//BoardVO vo = BoardDAO.boardDetailData(Integer.parseInt(no), "detail");	
+				ImgBoardVO vo = BoardDAO.imgdata(Integer.parseInt(no), "update");
+				model.addAttribute("vo", vo);
+				
+				
+				model.addAttribute("main_jsp", "../bimage/img_update.jsp"); 
+				return "../main/main.jsp";
+			}
+			//수정하기ok
+			@RequestMapping("bimage/img_update_ok.do")
+			public String img_update_ok(Model model) {
+				try {
+					model.getRequest().setCharacterEncoding("UTF-8");
+				} catch (Exception ex) {		
+				}
+				
+				String name=model.getRequest().getParameter("name");
+				System.out.println("name"+name);
+/*				String filename=model.getRequest().getParameter("filename");
+				System.out.println("filename"+filename);*/
+				String content=model.getRequest().getParameter("content");
+				System.out.println("content"+content);
+				String pwd=model.getRequest().getParameter("pwd");
+				System.out.println("pwd"+pwd);
+				String no=model.getRequest().getParameter("no");
+				System.out.println("no"+no);
+				ImgBoardVO vo = new ImgBoardVO();
+				vo.setName(name);
+				/*vo.setFilename(filename);*/
+				vo.setContent(content);
+				vo.setPwd(pwd);
+				vo.setNo(Integer.parseInt(no));
+				
+				//dao연결 => pwd가 맞을때와 틀릴때로 나뉨
+				int n = BoardDAO.imgUpdate(vo);
+				model.addAttribute("no", n);
+				
+				return "../bimage/img_update_ok.jsp";
+			}
 }
+

@@ -206,11 +206,12 @@ public class BoardDAO {
 		   int result=0;
 		   SqlSession session = ssf.openSession(); //db열기
 		   String db_pwd=session.selectOne("boardGetPwd",no); //비번얻어오기
-		   System.out.println("db의 비번은 뭘까용?"+db_pwd);
+		   System.out.println("db의 비번이 왜갑자기 안돼?"+db_pwd);
 		 
 		   if(db_pwd.equals(pwd)) {
-			   
-			   BoardVO pvo = session.selectOne("bQnARead",no); //mapper 106
+			   System.out.println("dbno  안돼?"+no );
+				 
+			   BoardVO pvo = session.selectOne("bQnARead",no); 
 			   BoardVO vo = new BoardVO();
 			   System.out.println(" getDepth : " + pvo.getDepth());
 			   if(pvo.getDepth() == 0 ){
@@ -218,7 +219,7 @@ public class BoardDAO {
 				   result=1;
 				   session.delete("boardReplyDelete",no);
 				   session.delete("boardDelete",no);
-				   System.out.println(" getDepth : " + pvo.getRoot());
+				   System.out.println(" getDepth 왜갑자기 안돼: " + pvo.getRoot());
 				   
 				   session.update("bQnADepthDecrement",pvo.getRoot());
 				   session.commit();
@@ -368,6 +369,7 @@ public class BoardDAO {
 	   //글쓰기
 	   public static void dataInsert(DataBoardVO vo) {
 		   SqlSession session = ssf.openSession(true); 
+		   System.out.println("------------- 3 ");
 		   session.insert("dataInsert",vo);
 		   session.close();
 	   }
@@ -503,7 +505,7 @@ public class BoardDAO {
 		   int result=0;
 		   SqlSession session = ssf.openSession(); //db열기
 		   String db_pwd=session.selectOne("dataGetPwd",no); //비번얻어오기
-		   System.out.println("db의 비번은 뭘까용?"+db_pwd);
+		   System.out.println("db의 비번은 뭘까용?하....."+db_pwd);
 		   
 		   if(db_pwd.equals(pwd)) {
 			   result = 1;
@@ -514,6 +516,7 @@ public class BoardDAO {
 		   session.close();
 		   return result;
 	   }
+	   
 	   //레시피댓글 0904
 	   public static void recipereplyInsert(DataBoardReplyVO vo) {
 		   SqlSession session = ssf.openSession(true);
@@ -539,11 +542,94 @@ public class BoardDAO {
 		   session.commit(); 
 		   session.close();
 	   }
-	//수정하기
 	   public static void recipereplyUpdate(DataBoardReplyVO vo) {
 		   SqlSession session = ssf.openSession(true);
 		   System.out.println("session의값은?"+session);
 		   session.update("datareplyUpdate",vo); 
 		   session.close();
+	   }
+	   //==============
+	   
+	   // 게시판리스트
+	   public static List<ImgBoardVO> imgListData(Map map) {
+		   List<ImgBoardVO> list = new ArrayList<ImgBoardVO>();
+		   
+		   // db연결
+		   SqlSession session = ssf.openSession();
+		   list = session.selectList("imgListData",map);
+	
+		   // db해제
+		   session.close();
+		   return list;
+	   }
+	   //글쓰기
+	   public static void imgInsert(ImgBoardVO vo) {
+		   System.err.println("글쓰기 확인 ok---1");
+		   SqlSession session = ssf.openSession(true); 
+		   System.err.println("글쓰기 확인 ok---2");
+		   session.insert("imgInsert",vo);
+		   System.err.println("글쓰기 확인 ok---3");
+
+
+		   System.out.println("이름은?"+vo.getName());
+		   System.out.println("내용은?"+vo.getContent());
+		   session.close();
+	   }
+	   
+	   public static int imgTotalPage(Map map) {
+		   int total = 0;
+		   SqlSession session = null;
+		   try {
+			   session = ssf.openSession();
+			   total = session.selectOne("imgTotalPage", map);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if(session!=null)
+			session.close();
+		}
+		   return total;
+	   }
+	   public static int imgRowCount(Map map) {
+		   int count=0;
+		   SqlSession session = ssf.openSession();
+		   count=session.selectOne("imgRowCount",map);
+		   session.close();
+		   return count;
+	   }
+	   
+	   //imgDelete
+	   public static void imgDelete(int no) {
+		   SqlSession session = ssf.openSession();
+		   session.delete("imgDelete",no);
+		   session.commit(); 
+		   session.close();
+	   }
+	   //imgUpdate
+	   public static int imgUpdate(ImgBoardVO vo) {
+		   int no=0;
+		   SqlSession session = ssf.openSession();
+		   //비번확인
+		   String pwd = session.selectOne("imgGetPwd", vo.getNo());
+		   System.out.println("pwd디비 비번은"+pwd);
+		   if(pwd.equals(vo.getPwd())) {
+			   no = vo.getNo();
+			   session.update("imgUpdate", vo);
+			   session.commit();   
+		   } 
+		   session.close();
+		   return no;
+	   }
+	   
+	   //
+	   public static ImgBoardVO imgdata(int no, String type) {
+		   ImgBoardVO vo = new ImgBoardVO();
+		   SqlSession session = ssf.openSession();
+		   vo = session.selectOne("imgdata",no);
+		   System.out.println(vo.getName());
+		   System.out.println(vo.getFilename());
+		   System.out.println(vo.getContent());
+		   session.close();
+		   return vo;
 	   }
 }

@@ -29,14 +29,25 @@ $(function(){
 <style type="text/css">
 	.row {
 		margin: 0px auto;
-		width: 700px;
+		width: 1200px;
 	}
 </style>
 </head>
 <body>
+<div class="hero-wrap hero-bread"
+		style="background-image: url('../main/images/bg_3.jpg');">
+		<div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="../main/main.do">Home</a></span></p>
+            <h1 class="mb-0 bread" class="jua">상세보기</h1>
+          </div>
+        </div>
+      </div>
+		</div>
 <section class="ftco-section ftco-degree-bg">
 	<div class="container">
-		<h2 class="text-center">내용보기</h2>
+
 		<div class="row">
 			<table class="table">
 				<tr>
@@ -69,73 +80,16 @@ $(function(){
 				</tr>
 				<tr>
 					<th colspan="4" class="text-right">
-						<a href="../databoard/databoard_update.do?no=${vo.no }&page=${curpage}" class="btn btn-sm btn-success">수정</a>
-						<a href="#" class="btn btn-sm btn-warning">삭제</a>
-						<a href="databoard_list.do?page=${curpage }" class="btn btn-sm btn-success">목록</a>
+						<a href="../databoard/databoard_update.do?no=${vo.no }&page=${curpage }" class="btn btn-sm btn-success">수정</a>
+						<a href="../databoard/databoard_delete.do?no=${vo.no }" class="btn btn-sm btn-warning">삭제</a>
+						<a href="../databoard/databoard_list.do?page=${curpage }" class="btn btn-sm btn-success">목록</a>
 					</th>
 				</tr>
 				
 			</table>
 		</div>
-		<div class="row">
-			<h3>댓글</h3>
-			
-			<table class="table">
-				<c:if test="${len==0 }">
-					<tr>
-						<td>댓글이 없습니다</td>
-					</tr>
-				</c:if>
-				<c:if test="${len>0 }">
-					<tr>
-						<td>
-							<c:forEach var="rvo" items="${list }">
-								<table class="table">
-									<tr>
-										<td class="text-left">${rvo.name }(${rvo.dbday })</td>
-										<td class="text-right">
-											<c:if test="${sessionScope.id==rvo.id }">
-												<a href="#" class="btn btn-xs btn-success del_update" value="${rvo.no }">수정</a>
-												<a href="reply_delete0801.jsp?no=${rvo.no}&bno=${vo.no}&page=${curpage}" class="btn btn-xs btn-warning">삭제</a>
-											</c:if>
-										</td>
-									</tr>
-									<tr>
-										<td colspan="2" valign="top">
-											<pre style="background-color: rgb(92,70,45); opacity:0.5; color:#FFF">${rvo.msg }</pre>
-										</td>
-									</tr>
-									<tr id="del${rvo.no }" style="display:none" class="dels">
-										<td colspan="2">
-											<form action="reply_update0801.jsp" method="post">
-												<textarea rows="3" cols="70" name="msg" style="float:left">${rvo.msg }</textarea>
-												<input type="hidden" name="bno" value="${vo.no }">
-												<input type="hidden" name="page" value="${curpage }">
-												<input type="hidden" name="no" value="${rvo.no }">
-												<input type=submit value="수정하기" style="height:60px" class="btn btn-sm btn-success">
-											</form>
-										</td>
-									</tr>
-								</table> 
-							</c:forEach>
-						</td>
-					</tr>
-				</c:if>
-			</table>
-			
-			<table class="table">
-				<tr>
-					<td>
-						<form action="reply_insert0801.jsp" method="post">
-							<textarea rows="3" cols="70" name="msg" style="float:left"></textarea>
-							<input type="hidden" name="bno" value="${vo.no }">
-							<input type="hidden" name="page" value="${curpage }">
-							<input type=submit value="댓글쓰기" style="height:60px" class="btn btn-sm btn-success">
-						</form>
-					</td>
-				</tr>
-			</table>
-		</div>
+		
 	</div>
+</section>
 </body>
 </html>

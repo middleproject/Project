@@ -35,10 +35,19 @@ $(function(){
 </head>
 <body>
 	<div class="hero-wrap hero-bread"
-		style="background-image: url('../main/images/bg_2.jpg');"></div>
+		style="background-image: url('../main/images/bg_3.jpg');">
+		<div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="../main/main.do">Home</a></span></p>
+            <h1 class="mb-0 bread" class="jua">문의게시판</h1>
+          </div>
+        </div>
+      </div>
+		</div>
 	<section class="ftco-section ftco-degree-bg">
 	<div class="container">
-		<h1 class="text-center">문의게시판</h1>
+
 		<div class="row">
 			<table class="table">
 				<tr>
@@ -91,7 +100,10 @@ $(function(){
 								<!-- content창 보여줬다 사라짐 -->
 								<tr id="u${vo.boardno }" style="display:none">
 									<th><img src="re.png" width="20" height="20"></th>
-									<th class="text-left" colspan="2">		
+									<th class="text-left" colspan="2">	
+									<c:forEach begin="0" end="${vo.grouptab }">
+											&nbsp;&nbsp;
+										</c:forEach>	
 										${vo.content }
 									</th>
 										
@@ -100,7 +112,7 @@ $(function(){
 							
 							<c:if test="${sessionScope.id!=null }"> 
 									<td colspan="2">
-										<a href="../bQnA/qboard_update.do?no=${vo.boardno }" class="btn btn-sm btn-primary">수정</a>
+										<a href="../bQnA/qboard_update.do?no=${vo.boardno }&page=${curpage}" class="btn btn-sm btn-primary">수정</a>
 									
 										<a href="../bQnA/qboard_delete.do?no=${vo.boardno }" class="btn btn-sm btn-danger">삭제</a>
 									<!-- sessionScope 관리자인 상태 에서만 답글쓰기 허용 -->
@@ -140,5 +152,6 @@ $(function(){
 			</table>
 		</div>
 	</div>
+</section>
 </body>
 </html>

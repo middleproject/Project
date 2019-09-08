@@ -25,10 +25,16 @@
 	<select id="boardTotalPage" resultType="int" parameterType="java.util.Map">
 		SELECT CEIL(COUNT(*)/5.0) FROM board
 		WHERE categoryno = #{categoryno}
+		<if test="fs!=null and fs!=''"> 
+			AND ${fs} LIKE '%'|| #{textsearch} ||'%'
+		</if>
 	</select>
 	<select id="boardRowCount" resultType="int" parameterType="java.util.Map">
 		SELECT COUNT(*) FROM board
 		WHERE categoryno = #{categoryno}
+		<if test="fs!=null and fs!=''"> 
+			AND ${fs} LIKE '%'|| #{textsearch} ||'%'
+		</if>
 	</select>
 	<insert id="boardInsert" parameterType="BoardVO">
 		INSERT INTO board(boardno,categoryno,subject,name,content,pwd) VALUES(
@@ -67,6 +73,11 @@
 	 	name=#{name}, subject=#{subject}, content=#{content}
 	 	WHERE boardno=#{boardno}
 	 </update>
+   		<update parameterType="int" id="bQnADepthDecrement">
+   			UPDATE board SET
+   			depth=depth-1
+   			WHERE boardno=#{boardno} 
+   		</update>
 	<!-- 검색-->
     <select id="boardListDataTEST" resultType="BoardVO" parameterType="java.util.Map">
 		SELECT boardno,subject,name,dbday,hit,num ,content,categoryno
@@ -80,9 +91,17 @@
 	</select>
     <!-- 댓글넣기 -->
       <insert id="replyInsert" parameterType="ReplyVO">
-    	INSERT INTO Reply(replyno,boardno,name,msg,group_id) VALUES(
+    	INSERT INTO Reply(
+    		replyno
+    		,boardno
+    		,id
+    		,name
+    		,msg
+    		,group_id
+    		) VALUES(
 	    	Reply_no_seq.nextval, <!-- 시퀀스만든것 자동증가에 nextval줌 -->
 	    	#{boardno},
+	    	#{id},
 	    	#{name},
 	    	#{msg},
 	    	(SELECT NVL(MAX(group_id)+1,1) FROM Reply) 
@@ -226,7 +245,7 @@
 			
 		<!-- 답글읽기 -->
 		<select id="bQnARead" resultType="BoardVO"  parameterType="int">
-			SELECT groupid,groupstep,grouptab
+			SELECT groupid,groupstep,grouptab,depth,root
 			FROM board
 			WHERE boardno=#{boardno}
 			
@@ -255,14 +274,20 @@
                
    			)
 		</insert>
-    		<update id="bQnADepthplus" parameterType="int">
-		  	  UPDATE board SET
-		    	depth=depth+1
-		    	WHERE boardno=#{boardno} 
-   			 </update>
+  	<update id="bQnADepthplus" parameterType="int">
+  	 	UPDATE board SET
+    	depth=depth+1
+    	WHERE boardno=#{boardno} 
+ 	 </update>
+ 	<!-- 게시물삭제 -->
+    <delete id="QnADelete" parameterType="int">
+    	DELETE FROM board
+    	WHERE boardno=#{boardno}
+    </delete>
    			 
    	<!-- 첨부파일게시판 -->
 	<select id="databoardListData" parameterType="java.util.Map" resultType="DataBoardVO">
+
 		SELECT notice,no,subject,name,dbday,hit,num
 		FROM (SELECT notice,no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD')as dbday,hit,rownum as num
 		FROM(SELECT notice,no,subject,name,regdate,hit
@@ -274,13 +299,14 @@
 		FROM(SELECT notice,no,subject,name,regdate,hit
 		FROM databoard ORDER BY no DESC))
 		WHERE num BETWEEN #{start} AND #{end} 
-		
-		
+
+	 
 	</select>
 
 	<!-- ★notice추가 했음!!! -->
 	<insert id="dataInsert" parameterType="DataBoardVO">
-		INSERT INTO databoard(notice,no,name,subject,content,pwd,filename,filesize) VALUES(
+		INSERT INTO databoard(notice,no,name,subject,content,
+		pwd,filename,filesize) VALUES(
 		#{notice},
 		(SELECT NVL(MAX(no)+1,1) FROM databoard),
 		#{name},
@@ -419,29 +445,71 @@
     </delete>
     
     <!-- 레시피댓글 0904-->
-	<insert parameterType="DataBoardReplyVO" id="recipereplyInsert">
-		INSERT INTO databoardReply(no,cno,name,id,msg,group_id) VALUES(
-		(SELECT NVL(MAX(no)+1,1) 
-		FROM databoardReply),#{cno},#{name},#{id},#{msg},
-		(SELECT NVL(MAX(group_id)+1,1) 
-		FROM databoardReply)) 
-	</insert>
-
-	<select parameterType="int" resultType="DataBoardReplyVO" id="recipereplyListData">
-		SELECT no,cno,name,id,msg,TO_CHAR(regdate,'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') as dbday,group_tab
-		FROM databoardReply
-		WHERE cno=#{cno}
-		ORDER BY group_id DESC, group_step ASC 
+      <insert id="recipereplyInsert" parameterType="DataBoardReplyVO">
+    	INSERT INTO databoardReply(no,cno,name,id,msg) VALUES(
+	    	(SELECT NVL(MAX(no)+1,1) FROM databoardReply),
+	    	#{cno},
+	    	#{name},
+	    	#{id},
+	    	#{msg}
+    		)	
+    </insert>
+    <select id="recipereplyListData" resultType="DataBoardReplyVO" parameterType="int"> <!-- bno -->
+    	SELECT no,cno,name,id,msg,TO_CHAR(regdate,'YYYY-mm-DD') as dbday, rownum as num
+    	FROM databoardReply
+    	WHERE cno=#{cno}
+    	ORDER BY no ASC
+    </select>
+     <delete id="recipereplyDelete" parameterType="int">
+    	DELETE FROM databoardReply
+    	WHERE no=#{no}
+    </delete>
+     <update id="recipereplyUpdate" parameterType="DataBoardReplyVO">
+    	UPDATE databoardReply SET
+    	msg=#{msg}
+    	WHERE no=#{no}
+    </update>
+    
+ <!-- ============== -->
+      <select id="imgListData" resultType="ImgBoardVO" parameterType="java.util.Map">
+		SELECT no,name,content,filename,TO_CHAR(day,'YYYY-MM-DD') as dbday
+		FROM imgboard
+		WHERE no BETWEEN #{start} AND #{end}	
+		ORDER BY no DESC
 	</select>
-	
-	<delete parameterType="int" id="recipereplyDelete">
-		DELETE FROM databoardReply
-		WHERE no=#{no} 
-	</delete>
-
-	<update parameterType="DataBoardReplyVO" id="recipereplyUpdate">
-		UPDATE databoardReply SET
-		msg=#{msg}
-		WHERE no=#{no} 
-	</update>
+	<select  id="imgTotalPage" parameterType="java.util.Map" resultType="int">	
+		SELECT CEIL(COUNT(*)/5.0) FROM imgboard 
+	</select>
+	<select id="imgRowCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM imgboard 
+	</select>
+	<insert id="imgInsert" parameterType="ImgBoardVO">
+		INSERT INTO imgboard(no,name,content,pwd,filename,filesize) VALUES(
+		(SELECT NVL(MAX(no)+1,1) FROM imgboard),
+		#{name},
+		#{content},
+		#{pwd },
+		#{filename},
+		#{filesize}
+		) 
+	</insert>
+	 <delete id="imgDelete" parameterType="int">
+    	DELETE FROM imgboard
+    	WHERE no=#{no}
+    </delete>
+    <!-- 수정하기 -->
+	 <select id="imgGetPwd" resultType="String" parameterType="int">
+	 	SELECT pwd FROM imgboard
+	 	WHERE no=#{no}
+	 </select>
+	 <update id="imgUpdate" parameterType="BoardVO">
+	 	UPDATE imgboard SET
+	 	name=#{name}, content=#{content}
+	 	WHERE no=#{no}
+	 </update>
+     <select id="imgdata" resultType="ImgBoardVO" parameterType="int">
+	 	SELECT no,name,content,TO_CHAR(day,'YYYY-MM-DD') as dbday,filename
+	 	FROM imgboard
+	 	WHERE no=#{no}
+	 </select>
 </mapper>

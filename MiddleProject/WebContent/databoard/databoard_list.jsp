@@ -15,9 +15,19 @@
 </style>
 </head>
 <body>
-	<div class="hero-wrap hero-bread"
-		style="background-image: url('../main/images/bg_1.jpg');"></div>
+<div class="hero-wrap hero-bread"
+		style="background-image: url('../main/images/bg_3.jpg');">
+		<div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="../main/main.do">Home</a></span></p>
+            <h1 class="mb-0 bread" class="jua">첨부파일게시판</h1>
+          </div>
+        </div>
+      </div>
+	</div>
 <section class="ftco-section ftco-degree-bg">
+	
 	<div class="container">
 		<h1 class="text-center">자료실</h1>
 		<div class="row">
@@ -45,7 +55,7 @@
 				
 					
 						<tr bgcolor="${vo.notice==1?'#E6FFE6':'' }" > 
-							<th width="10%" class="text-center">${vo.no }</th>
+							<th width="10%" class="text-center">${vo.num }</th>
 							<th width="45%" class="text-left"><a href="../databoard/databoard_detail.do?no=${vo.no }&page=${curpage}">${vo.subject }</a></th>
 							<th width="15%" class="text-center">${vo.name }</th>
 							<th width="20%" class="text-center">${vo.dbday }</th>
@@ -77,5 +87,6 @@
 			</table>
 		</div>
 	</div>
+</section>
 </body>
 </html>

@@ -12,9 +12,6 @@
    width:900px;
 }
 </style>
-<!-- 
-     Javascript AND XML  => AJAX
- -->
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -28,7 +25,7 @@ $(function(){
 		var no=$('#no').val();
 		$.ajax({
 			type:'post',
-			url:'board_delete_ok.do',
+			url:'databoard_delete_ok.do',
 			data:{no:no,pwd:pwd},
 			success:function(response)
 			{
@@ -41,7 +38,7 @@ $(function(){
 				}
 				else
 				{
-					location.href="../board/board_list.do";
+					location.href="../databoard/databoard_list.do";
 				}
 			}
 		});
@@ -50,6 +47,7 @@ $(function(){
 </script>
 </head>
 <body>
+<section class="ftco-section ftco-degree-bg">
   <%-- 삭제하기  --%>
   <div class="container">
     <h2 class="text-center">삭제하기</h2>
@@ -59,7 +57,7 @@ $(function(){
 	          <th class="text-right" width=30%>비밀번호</th>
 	          <th class="text-left" width=70%>
 	            <input type=password name=pwd size=15 id="pwd">
-	            <input type=hidden name=no value="${boardno }" id="no">
+	            <input type=hidden name=no value="${no }" id="no">
 	          </th>
 	        </tr>
 	        <tr>
@@ -73,5 +71,6 @@ $(function(){
 	      </table>
     </div>
   </div>
+    </section>
 </body>
 </html>

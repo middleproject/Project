@@ -13,66 +13,51 @@
 </style>
 </head>
 <body>
-	<div class="hero-wrap hero-bread"
-		style="background-image: url('../main/images/bg_3.jpg');">
+
+<div class="hero-wrap hero-bread"
+		style="background-image: url('../main/images/bg_2.jpg');">
 		<div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
           	<p class="breadcrumbs"><span class="mr-2"><a href="../main/main.do">Home</a></span></p>
-            <h1 class="mb-0 bread" class="jua">첨부파일 글쓰기</h1>
+            <h1 class="mb-0 bread" class="jua">글쓰기</h1>
           </div>
         </div>
       </div>
 		</div>
 <section class="ftco-section ftco-degree-bg">
-<div class="container">
+	<div class="container">
 		<div class="row">
-		<form method="post" action="../databoard/databoard_insert_ok.do" enctype="multipart/form-data"> <!-- ★파일업로드 시키고싶으면 enctype 필수추가 -->
+		<form method="post" action="../bimage/img_insert_ok.do" enctype="multipart/form-data">
+		<!-- 카테고리번호주기 -->
 			<table class="table">
 				<tr>
-					<th class="text-right" width="15%">유형선택</th>
-					<th width="85%" align="left">
-						
-							<select name="notice" class="input-sm">
-								<option value="nomaltext">일반글</option>
-								<option value="noticetext">공지글</option>
-							</select>
-						
+					<th class="text-right warning" width="20%">이름</th>
+					<th width="80%" class="text-left">
+						<input type="text" name="name" size="15">
 					</th>
 				</tr>
 				<tr>
-					<th class="text-right info" width="15%">이름</th>
-					<th width="85%"  align="left">
-						<input type="text" name="name" size="15"> 
-					</th>
-				</tr>
-				<tr>
-					<th class="text-right info" width="15%">제목</th>
-					<th width="85%">
-						<input type="text" name="subject" size="45">
-					</th>
-				</tr>
-				<tr>
-					<th class="text-right info" width="15%">내용</th>
-					<th width="85%">
+					<th class="text-right warning" width="20%">내용</th>
+					<th width="80%" class="text-left">
 						<textarea rows="10" cols="55" name="content"></textarea>
 					</th>
 				</tr>
-				<tr>
-					<th class="text-right info" width="15%">첨부파일</th>
-					<th width="85%">
+		 		<tr>
+					<th class="text-right warning" width="20%">첨부파일</th>
+					<th width="80%">
 						<input type="file" name="upload" size="20">
 					</th>
 				</tr>
 				<tr>
-					<th class="text-right info" width="15%">비밀번호</th>
-					<th width="85%">
+					<th class="text-right warning" width="20%">비밀번호</th>
+					<th width="80%" class="text-left">
 						<input type="password" name="pwd" size="10">
 					</th>
 				</tr>
 				<tr>
 					<th colspan="2" class="text-center">
-						<input type="submit" value="글쓰기" class="btn btn-sm btn-success" >  
+						<input type="submit" value="글쓰기" class="btn btn-sm btn-primary" > 
 						<input type="button" value="취소" class="btn btn-sm btn-danger" onclick="javascript:history.back()"> 
 					</th>
 				</tr>
