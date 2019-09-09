@@ -267,7 +267,7 @@
 	</insert>
 	<!-- 히트 업데이트 -->
 	<update id="todayHitUpdate" parameterType="int">
-		update recipe set hit = hit+1 where recipeno = #{recipeno}
+		update todayhit set hit = hit+1 where recipeno = #{recipeno}
 	</update>
 	<select id="todayHitList" resultType="TodayHitVO">
 		select no,recipeno,hit,num
