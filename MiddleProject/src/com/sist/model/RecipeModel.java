@@ -687,4 +687,21 @@ public class RecipeModel {
 		
 			return "redirect:../recipe/recipe_detail.do?no="+bno;
 		}
+		@RequestMapping("recipe/lately.do")
+		public String recipe_lately(Model model){
+			List<RecipeVO> list = new ArrayList<RecipeVO>();
+			HttpSession session = model.getRequest().getSession();
+			String id = (String)session.getAttribute("id");
+			Cookie[] cookies = model.getRequest().getCookies();
+			for(int i=0; i < cookies.length;i++){
+				if(cookies[i].getName().startsWith(id)){
+					String recipeno = cookies[i].getValue();
+					RecipeVO vo = RecipeDAO.recipeDetailnoUpdate(Integer.parseInt(recipeno));
+					list.add(vo);
+				}
+			}
+			model.addAttribute("list", list);
+			model.addAttribute("main_jsp", "../recipe/lately.jsp");
+			return "../main/main.jsp";
+		}
 }

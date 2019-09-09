@@ -1,8 +1,8 @@
 package com.sist.vo;
 
+import java.io.Serializable;
 
-
-public class RecipeVO {
+public class RecipeVO implements Serializable {
 	private int no;
 	private String poster;
 	private String summary_in;

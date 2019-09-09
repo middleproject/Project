@@ -1,5 +1,6 @@
 package com.sist.vo;
 
+import java.io.Serializable;
 import java.util.*;
 /*
  * "ID" VARCHAR2(500 BYTE), 
@@ -15,7 +16,7 @@ import java.util.*;
 	"PAY" NUMBER DEFAULT 0, 
  */
 
-public class MemberVO {
+public class MemberVO implements Serializable{
 	private String id;
 	private String pwd;
 	private String name;
