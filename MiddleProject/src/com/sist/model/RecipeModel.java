@@ -139,6 +139,8 @@ public class RecipeModel {
 		HttpSession session = model.getRequest().getSession();
 		String id = (String)session.getAttribute("id");
 		String no = model.getRequest().getParameter("no");
+		//투데이 히트 업데이트
+		
 		// 읽은 목록
 		if(id!=null){
 			ReadVO readvo = new ReadVO();

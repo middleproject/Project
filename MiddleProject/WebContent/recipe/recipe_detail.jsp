@@ -118,7 +118,7 @@ $(function(){
 		});
 	});
 	$('.remove').click(function(){
-		var msgno = $('#remove').attr("data-no");
+		var msgno = $('#number').attr("data-no");
 		alert(msgno);
 		$.ajax({
 			type:'post',
