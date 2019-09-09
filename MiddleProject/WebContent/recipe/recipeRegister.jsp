@@ -14,6 +14,11 @@ hr {
    border-color: teal;
    border-left: 5px;
 }
+
+.btn2{
+color: black;
+background-color: white;
+}
 </style>
 
 
@@ -38,14 +43,14 @@ hr {
                      <div class="form-group">
 
                         <label>레시피 제목 </label> <input type="text" name="summary"
-                           style="margin-left: 100px;">
+                           style="margin-left: 100px; width: 300px;">
                      </div>
                   </div>
                   <div class="col-md-10">
-                     <label style="margin-right: 95px;">사진 올리기</label> <input
-                        type='file' id="imgInput" name="poster[0]" /> <img id="image_section" width=300
+                     <label style="margin-right: 100px;">사진 올리기</label> <input
+                        type='file' id="imgInput"  name="poster[0]" /> <img id="image_section"  width=300
                         height=300
-                        style="position: relative; right: -195px; top: 25px; margin-bottom: 30px;">
+                        style="position: relative; right: -180px; top: 25px; margin-bottom: 30px;">
                   </div>
                </div>
 
@@ -53,19 +58,20 @@ hr {
                   <div class="form-group">
                      <label style="position: relative; top: -80px;">요리 소개 </label>
                      <textarea name="summary_in"
-                        style="margin-left: 115px; width: 250px; height: 100px">
+                        style="position: relative; right: -98px; width: 300px; height: 100px; margin-top: 20px;">
                         </textarea>
                   </div>
                </div>
 
                <div class="col-md-10">
                   <div class="form-group">
-                     <label style="margin-right: 115px;">요리정보</label> <select name=info1>
+                     <label style="margin-right: 101px;">요리정보</label> 
+                     <select name=info1 style="margin-right: 21px;">
                         <option>인원</option>
                         <option>1~2인분</option>
                         <option>3~4인분</option>
                         <option>5인분 이상</option>
-                     </select> <select name=info2>
+                     </select> <select name=info2 style="margin-right: 21px;">
                         <option>시간</option>
                         <option>10~30분</option>
                         <option>30~60분</option>
@@ -82,55 +88,65 @@ hr {
 
 
                <hr>
+				<label name="textbox1" style="position: relative; right: -12px;">재료</label>
 
-               <input type="text" name="textbox1" placeholder="재료"
-                  style="background-color: yellow; width: 150px;">
                <div class="col-md-8">
                   <input type="text" name="ingre1" placeholder="예)돼지고기"
-                     style="position: relative; left: 220px; top: -34px; margin-bottom: 10px;">
+                     style="position: relative; right: -165px; top: -34px; margin-bottom: 10px;">
                </div>
                <div class="col-md-8">
                   <input type="text" name="ingre2" placeholder="예)양배추"
-                     style="position: relative; left: 220px; top: -34px; margin-bottom: 10px;">
+                     style="position: relative; right: -165px; top: -34px; margin-bottom: 10px;">
                </div>
                <div class="col-md-8">
                   <input type="text" name="ingre3" placeholder="예)참기름"
-                     style="position: relative; left: 220px; top: -34px; margin-bottom: 10px;">
+                     style="position: relative; right: -165px; top: -34px; margin-bottom: 10px;">
                </div>
 
                <input type="button" value="추가"
-                  style="position: relative; left: 500px; bottom: 165px;"
+                  style="position: relative; right: -430px; bottom: 165px;"
                   onclick="add();">
-               <div id="textdiv"></div>
+               <div id="textdiv" style="margin-bottom: -50px;"></div>
                <hr>
 
-               <label style="position: relative; top: -100px;">요리 과정</label>
+               <label style="position: relative; right: -12px; top:-130px;">요리 과정</label>
 
-            
-
-               <input type='file' id="imgInput2" style="position: relative; left: -50px; top: -50px;" name="poster[1]" /> <img
-                  " id="image_section2" width="300" height=300; style="position: relative; left: -350px; bottom: -150px; " >
-                     
-                     <textarea
-                  style="position: relative; left: 0px; top:-20px; width: 400px; height: 150px; margin-top: 200px;"
+					<label style="position: relative; left:-60px; bottom: -80px; margin-bottom: 500px;">사진 첨부</label>
+            	    <textarea
+                  style="position: relative; right:-40px; top:10px; width: 400px; height: 150px;"
                   placeholder="예)라면을 끓일떄 물을 3분간 끓이고 스프넣고 후레이크넣고 면을 넣습니다."
                   name="step"></textarea>
-               <hr>
+               <hr >
+            
+            	
+
+               <input type='file' id="imgInput2" style="position: relative; right:-170px; top: -625px;" name="poster[1]" />
+<img
+                   id="image_section2" width="300" height=300; style="position: relative;top: -400px; left:-150px; bottom: -150px;" >
+                     
+                 
 
 
-               <label>요리 팁</label>
+               <label style="position: relative; left:-615px; top:-130px;">요리 팁</label>
                <div class="col-md-8">
+               
+					
                   <textarea
-                     style="position: relative; left: 160px; top: -34px; width: 400px; height: 150px;"
+                     style="position: relative; left: 153px; top: -300px; width: 400px; height: 150px; margin-bottom: -50px; "
                      placeholder="예)고기에는 소금보다 설탕을 먼저넣어야 단맛이 겉돌지 않고 육질이 부드러워요"
                      name="tip"></textarea>
-
+                     
+                     
                </div>
-               <hr>
+                    
+               
+               <hr style="margin-top: -200px;">
                <label>요리완성 사진</label>
                <div class="col-md-8">
-                  <input type='file' id="imgInput3"  name="poster[2]" style="position: relative; left: -20px; bottom:-10px; margin-bottom: 50px;" /> <img
-                  id="image_section3" width="300" height=300 />
+               
+                  <input type='file' id="imgInput3"  name="poster[2]" style="position:relative;right: -150px; top:-30px; " /> 
+                  <img
+                  id="image_section3" width=300; height=300; style="position:relative; right: -150px; top:-10px;  " />
 
                </div>
 
@@ -138,7 +154,7 @@ hr {
                <label>태그</label>
                <div class="col-md-8">
                   <input type="text" name="tag"
-                     style="position: relative; left: 220px; top: -34px;" name="tag">
+                     style="position: relative; right:-150px; top: -34px;" name="tag">
                </div>
 
                <hr>
@@ -175,7 +191,7 @@ hr {
          $("#textdiv")
                .append(
                      "<br>"
-                           + "<input type='text'  name='ingre"+num+"' style='position: relative; left: 235px; top:-90px; margin-bottom: 10px; '/>");
+                           + "<input type='text'  name='ingre"+num+"' style='position: relative; right: -180px; top:-90px; margin-bottom: 10px; '/>");
          num++;
          
       }
