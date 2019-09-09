@@ -24,7 +24,7 @@
     WHERE ino=#{ino} and mno=1
   </select> 
   <select id="searchIngreData" resultType="RecipeVO" parameterType="hashmap">
-    SELECT summary,made,poster
+    SELECT *
     FROM recipe
     WHERE ingre like '%'||#{ingre}||'%' AND <![CDATA[rownum<=12]]>
   </select>
@@ -34,7 +34,7 @@
   </select>
   
   <select id="searchDifficultyData" resultType="RecipeVO" parameterType="hashmap">
-    SELECT summary,made,poster
+    SELECT *
     FROM recipe
     WHERE info like '%'||#{info}||'%' AND <![CDATA[rownum<=12]]>
   </select>

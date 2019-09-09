@@ -74,26 +74,13 @@ $(function(){
 		});
 	});
 });
-$(function difficulty(){
-	$('.difficulty').click(function difficulty(){
-		var difficultystep=$(this).attr("data-difficultystep");
-		
-		
-		$('#difficultystep').text(difficultystep);
-		
-		$.ajax({
-			type:'post',
-			url:'../search/difficultylist.do',
-			data:{info:difficultystep},
-			success:function(response)
-			{
-				
-				$('#difficultylist').html(response);
-			}
-		});
+
+$(function(){
+	$('#searchbutton').click(function(){
+		var key = $('#key').val();
+		location.href="../recipe/recipe_list.do?key="+key;
 	});
 });
-
 </script>
 </head>
 <body>
@@ -112,8 +99,9 @@ $(function difficulty(){
         <div class="row d-flex justify-content-center py-5">
           <div class="col-md-6 d-flex align-items-center">
            <form class="search">
-  <input class="searchTerm" placeholder="Enter your search term ..." /><input class="searchButton" type="submit" />
+  <input type="text" class="searchTerm"  id="key"/><input class="searchButton" type="submit" id="searchbutton" />
 </form>
+
           </div>
         </div>
       </div>
@@ -124,14 +112,11 @@ $(function difficulty(){
     			<div class="col-md-10 mb-5 text-center ">
     				<ul class="product-category" >
     				 <c:forEach var="vo" items="${list }">
-    					  <li class="ingrelist" data-name="${vo.ingrename }" data-no="${vo.ingreno }"><a href="#" class="active">${vo.ingrename }</a></li>
+    					  <li class="ingrelist" data-name="${vo.ingrename }" data-no="${vo.ingreno }"><a class="active">${vo.ingrename }</a></li>
     					</c:forEach> 
     					<br>
     					<div id="searchlist"></div>
-    					<br>
-    					<c:forEach var="dvo" items="${dlist }">
-    					<li class="difficulty" data-difficultystep="${dvo.difficultystep }"><a href="#" class="active">${dvo.difficultystep }</a></li>
-    					</c:forEach>
+    					
     					
     					
     				</ul>
@@ -148,13 +133,13 @@ $(function difficulty(){
           <div class="col text-center">
             <div class="block-27" >
               <ul>
-                <li><a href="#">&lt;</a></li>
+                <li><a>&lt;</a></li>
                 <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&gt;</a></li>
+                <li><a>2</a></li>
+                <li><a>3</a></li>
+                <li><a>4</a></li>
+                <li><a>5</a></li>
+                <li><a>&gt;</a></li>
               </ul>
             </div>
           </div>
