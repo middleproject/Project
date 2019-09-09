@@ -294,56 +294,7 @@ $(function(){
       <!-- Modal content -->
     <div class="modal-content">
     <span class="close">&times;</span>                                                               
-    
-    <!-- <form action="../reserve/final.do" method="post">
-	<table class="table" style="width: 550px;" >
-		
-		
-		<tr>
-			<td colspan="2"><img id="fimg" src="" width=500px height="500px"></td>
-		</tr> 
-		<tr>
-			<td class="text-left">레시피 번호 :</td>
-			<td class="text-left" id="frecipeno">
-			<input type="hidden" id="hrecipeno" name="no" value="">
-			</td>
-			
-		</tr>
-		<tr>
-			<td class="text-left">레시피 제목 :</td>
-			<td class="text-left" id="frecipetitle">
-			<input type="hidden" id="hrecipetitle" name="title" value="">
-			</td>
-		</tr>
-		<tr>
-			<td class="text-left">요리사(id) :</td>
-			<td class="text-left" id="fcheif" title="">
-			<input type="hidden" id="hcheif" name=id value="">
-			</td>
-		</tr>
-		<tr>
-			<td class="text-left">날짜(시간대) :</td>
-			<td class="text-left" id="fdate" title="">
-			<input type="hidden" id="hdate" name="date" value="">
-			<input type="hidden" id="htime" name="time" value="">
-			</td>
-		</tr>
-		<tr>
-			<td class="text-left">제시된 가격 :</td>
-			<td class="text-left" id="fprice">
-			<input type="hidden" id="hprice" name="price" value="">
-			</td>
-		</tr>
-		<tr>
-			<td class="text-left">요청사항 :</td>
-			<td class="text-left" id="fcommand">
-			<input type="hidden" id="hcommand" name="command" value="">
-			</td>
-		</tr>
-	</table>
-	<center><input type="submit" class="btn btn-info"></center>
-	</form> -->
-      </div>
+    </div>
  
     </div>
 </body>

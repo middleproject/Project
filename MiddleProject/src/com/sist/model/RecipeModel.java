@@ -162,9 +162,9 @@ public class RecipeModel {
 		int wishCount = 0;
 		if(id!=null) wishCount = RecipeDAO.wishCount(wvo);
 		
-		List<IngredetailVO> homeList = new ArrayList<IngredetailVO>(); // 인그리 디테일 받을 값
+/*		List<IngredetailVO> homeList = new ArrayList<IngredetailVO>(); // 인그리 디테일 받을 값
 		List<IngredetailVO> lotteList = new ArrayList<IngredetailVO>();
-		List<IngredetailVO> emartList = new ArrayList<IngredetailVO>();
+		List<IngredetailVO> emartList = new ArrayList<IngredetailVO>();*/
 		List<String> ilist = new ArrayList<String>(); // 인그리 디테일 넘길 값
 		List<RecipeVO> list = new ArrayList<RecipeVO>();
 		// 로그인 세션
@@ -201,7 +201,7 @@ public class RecipeModel {
 				complete = vo.getComplete().substring(0,vo.getComplete().indexOf(","));
 				model.addAttribute("complete", complete);
 			}
-			if(vo.getIngre()!=null){
+			/*if(vo.getIngre()!=null){
 				StringTokenizer st = new StringTokenizer(vo.getIngre(),",");
 				while(st.hasMoreTokens()){
 					ilist.add(st.nextToken());
@@ -225,7 +225,7 @@ public class RecipeModel {
 						}
 				}
 				model.addAttribute("ilist", ilist);
-			}
+			}*/
 			if(vo.getTag()!=null){
 				tagStr = vo.getTag().split(",");
 				map.put("tagStr", tagStr);
@@ -268,14 +268,15 @@ public class RecipeModel {
 			model.addAttribute("wishCount", wishCount);
 			model.addAttribute("folloCount", folloCount);
 			model.addAttribute("count", ilist.size());
-			model.addAttribute("homelist", homeList);
+/*			model.addAttribute("homelist", homeList);
 			model.addAttribute("lottelist", lotteList);
-			model.addAttribute("emartlist", emartList);
+			model.addAttribute("emartlist", emartList);*/
 			model.addAttribute("tagStr", tagStr);
 			model.addAttribute("list", list);
 			model.addAttribute("info", info);
 			model.addAttribute("step", step);
 			model.addAttribute("step_poster", step_poster);
+			model.addAttribute("no", no);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -287,6 +288,50 @@ public class RecipeModel {
 		model.addAttribute("main_jsp", "../recipe/recipe_detail.jsp");
 		return "../main/main.jsp";
 	}
+	
+	
+	@RequestMapping("recipe/popupmart.do")
+	public String recipe_pop(Model model){
+		String no = model.getRequest().getParameter("no");
+		System.out.println("no::"+no);
+		List<String> ilist = new ArrayList<String>(); // 인그리 디테일 넘길 값
+		List<IngredetailVO> homeList = new ArrayList<IngredetailVO>(); // 인그리 디테일 받을 값
+		List<IngredetailVO> lotteList = new ArrayList<IngredetailVO>();
+		List<IngredetailVO> emartList = new ArrayList<IngredetailVO>();
+		RecipeVO vo = RecipeDAO.recipeDetailData(Integer.parseInt(no));
+		if(vo.getIngre()!=null){
+			StringTokenizer st = new StringTokenizer(vo.getIngre(),",");
+			while(st.hasMoreTokens()){
+				ilist.add(st.nextToken());
+			}
+		}
+		
+			for(String ingre:ilist){
+				
+				List<IngredetailVO> slist = RecipeDAO.IngrePrice(ingre);
+				if(slist!=null){
+					for(IngredetailVO ivo:slist){
+						if(ivo.getMno()==1){
+							System.out.println(ivo.getMno());
+							homeList.add(ivo);
+						}else if(ivo.getMno()==2){
+							lotteList.add(ivo);
+							System.out.println(ivo.getMno());
+						}else{
+							emartList.add(ivo);
+							System.out.println(ivo.getMno());
+						}
+					}
+			}
+			model.addAttribute("ilist", ilist);
+		}
+			
+			model.addAttribute("homelist", homeList);
+			model.addAttribute("lottelist", lotteList);
+			model.addAttribute("emartlist", emartList);
+		return "../recipe/popupmart.jsp";
+	}
+	
 	
 	@RequestMapping("recipe/follow_ok.do")
 	public String recipe_follow_ok(Model model){
