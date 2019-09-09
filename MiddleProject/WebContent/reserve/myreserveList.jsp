@@ -130,8 +130,23 @@ $(function(){
 									</c:if>
 								</c:if>
 									<c:if test="${vo.checheif==10 }">
-									
-											<td colspan="9">예약이 취소된 항목입니다.</td>
+											<c:if test="${sessionScope.admin==0 }">
+												<td>${vo.name }</td>
+											</c:if>
+											<c:if test="${sessionScope.admin==2 }">
+												<td>${vo.userid }</td>
+											</c:if>
+											<td class="text-center">${vo.summary }</td>
+											<td class="text-center">${vo.rdate }</td>
+											<td class="text-center">${vo.rtime }</td>
+											<td class="text-center">${vo.price }</td>
+											<td class="text-center">${vo.msg }</td>
+											<td colspan="2">취소됨</td>
+										
+									</c:if>
+									<c:if test="${vo.checheif==2 }">
+											
+											<td colspan="2">완료</td>
 										
 									</c:if>
 								</tr>

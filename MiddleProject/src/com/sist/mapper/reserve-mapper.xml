@@ -75,18 +75,19 @@
 <select id="reservepage" parameterType="java.util.Map" resultType="int">
 	select CEIL(COUNT(*)/5.0)
 	from reserve
-	<if test="data==1">
+		<if test="data==1">
 		WHERE checheif!=2 AND checheif!=10 AND cheifid=#{id}
 	</if>
 	<if test="data==2">
-		WHERE checheif=2 OR checheif=10 AND cheifid=#{id}
+		WHERE (checheif=2 OR checheif=10) AND cheifid=#{id}
 	</if>
 	<if test="data==3">
-		WHERE checheif!=2 AND checheif!=10 AND userid=#{id}
+		WHERE checheif!=2 AND checheif!=10 AND userid=#{id} 
 	</if>
 	<if test="data==4">
-		WHERE checheif=2 OR checheif=10 AND userid=#{id}
+		WHERE (checheif=2 OR checheif=10) AND userid=#{id}
 	</if>
+	AND complete=0
 </select>
 <select id="reserveList" parameterType="java.util.Map" resultType="ReserveVO">
 	SELECT no,name,summary,rdate,rtime,price,msg,checheif,userid,cheifid,num FROM 
