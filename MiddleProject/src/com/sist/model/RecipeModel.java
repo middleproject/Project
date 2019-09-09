@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
@@ -140,7 +141,9 @@ public class RecipeModel {
 		String id = (String)session.getAttribute("id");
 		String no = model.getRequest().getParameter("no");
 		//투데이 히트 업데이트
-		
+		Cookie cookie = new Cookie(id+no, String.valueOf(no));
+		cookie.setMaxAge(60*60*24);
+		model.getResponse().addCookie(cookie);
 		// 읽은 목록
 		if(id!=null){
 			ReadVO readvo = new ReadVO();
