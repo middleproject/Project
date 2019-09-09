@@ -56,11 +56,18 @@ public class MainModel {
 		List<TodayHitVO> tList = new ArrayList<TodayHitVO>();
 		List<RecipeVO> rlist = new ArrayList<RecipeVO>();
 		tList = RecipeDAO.todayHitList();
-		/*for(TodayHitVO tvo:tList){
-			RecipeVO vo = RecipeDAO.recipeDetailData(tvo.getRecipeno());
-			vo.setHit(tvo.getHit());
-			rlist.add(vo);
-		}*/
+		System.out.println("tListªÁ¿Ã¡Ó:"+tList.size());
+		for(TodayHitVO tvo:tList){
+			try {
+				RecipeVO vo = RecipeDAO.recipeDetailnoUpdate(tvo.getRecipeno());
+				vo.setHit(tvo.getHit());
+				rlist.add(vo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			System.out.println("tvo:"+tvo.getRecipeno());
+		}
 		
 		session.setAttribute("rlist", rlist);
 		session.setAttribute("followCount", followCount);

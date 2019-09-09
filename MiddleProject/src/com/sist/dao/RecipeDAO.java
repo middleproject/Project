@@ -90,6 +90,14 @@ public class RecipeDAO {
 		   session.close();
 		   return vo;
 	   }
+	   //no update Detail
+	   public static RecipeVO recipeDetailnoUpdate(int no){
+		   RecipeVO vo = new RecipeVO();
+		   SqlSession session = ssf.openSession();
+		   vo = session.selectOne("detailData",no);
+		   session.close();
+		   return vo;
+	   }
 	   // hot Recipe
 	   public static List<RecipeVO> recipeHotRecipe(int num){
 		   SqlSession session = ssf.openSession();
