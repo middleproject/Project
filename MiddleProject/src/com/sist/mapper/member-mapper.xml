@@ -67,5 +67,12 @@
    	<select id="selectId" parameterType="String" resultType="MemberVO">
    		SELECT * from MEMBER where id = #{id}
    	</select>
-
+	<!-- 쉐프 찾기 -->
+	<select id="chefAllData" resultType="MemberVO">
+		select id,name,addr1,pay,poster,reservecount,num
+		from (select id,name,addr1,pay,poster,reservecount,rownum as num
+		from (select id,name,addr1,pay,poster,reservecount 
+		from member where admin=2 order by reservecount desc))
+		where num &lt;6 
+	</select>
 </mapper>

@@ -236,52 +236,22 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
         <div class="row ftco-animate">
           <div class="col-md-12">
             <div class="carousel-testimony owl-carousel">
-            
+            <c:forEach var="mvo" items="${mList }">
               <div class="item">
                 <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/2_hjh.png)">
+                  <div class="user-img mb-5" style="background-image: url(${mvo.poster})">
                     <span class="quote d-flex align-items-center justify-content-center">
                       <i class="icon-quote-left"></i>
                     </span>
                   </div>
                   <div class="text text-center">
-                    <p class="mb-5 pl-4 line">회원이 쓴글이 여기들어 갈 예정 뭐 <br>"안녕하세요 허정현입ㄴ..." 등등</p>
-                    <p class="name">허 정현</p>
+                    <p class="mb-5 pl-4 line">${mvo.intro }</p>
+                    <p class="name">${mvo.name }</p>
                     <span class="position">Team member6</span>
                   </div>
                 </div>
               </div>
-              
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/2_jr.png)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5 pl-4 line">회원이 쓴글이 여기들어 갈 예정 뭐 <br>"안녕하세요 허정현입ㄴ..." 등등</p>
-                    <p class="name">주 란</p>
-                    <span class="position">Team member5</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/2_wbs.png)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5 pl-4 line">회원이 쓴글이 여기들어 갈 예정 뭐 <br>"안녕하세요 허정현입ㄴ..." 등등</p>
-                    <p class="name">원 병선</p>
-                    <span class="position">Team member3</span>
-                  </div>
-                </div>
-              </div>
-              
+			</c:forEach>
             </div>
           </div>
         </div>

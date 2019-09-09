@@ -68,7 +68,12 @@ public class MainModel {
 			
 			System.out.println("tvo:"+tvo.getRecipeno());
 		}
+		// е╬ 5╫╕га
+		List<MemberVO> mList = new ArrayList<MemberVO>();
+		mList = MemberDAO.chefAllData();
 		
+		
+		session.setAttribute("mList", mList);
 		session.setAttribute("rlist", rlist);
 		session.setAttribute("followCount", followCount);
 		session.setAttribute("msgCount", msgCount);
