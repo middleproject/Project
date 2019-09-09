@@ -9,7 +9,7 @@
 <style type="text/css">
 .row {
    margin: 0px auto;
-   width:900px;
+   width:1200px;
 }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
@@ -47,10 +47,19 @@ $(function(){
 </script>
 </head>
 <body>
+	<div class="hero-wrap hero-bread"
+		style="background-image: url('../main/images/bg_3.jpg');">
+		<div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p><span class="mr-2"><a href="../main/main.do">Home</a></span></p>
+            <h1 class="mb-4">삭제하기</h1>
+          </div>
+        </div>
+      </div>
+		</div>
 <section class="ftco-section ftco-degree-bg">
-  <%-- 삭제하기  --%>
   <div class="container">
-    <h2 class="text-center">삭제하기</h2>
     <div class="row">
 	      <table class="table text-center">
 	        <tr>

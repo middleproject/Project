@@ -20,8 +20,15 @@ public class ImgBoardVO {
 	private int filesize;
 	private String dbday;
 	private Date day;
+	private int num;
 	
 	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public Date getDay() {
 		return day;
 	}

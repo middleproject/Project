@@ -13,12 +13,24 @@
 </style>
 </head>
 <body>
+<div class="hero-wrap hero-bread"
+		style="background-image: url('../main/images/bg_3.jpg');">
+		<div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p><span class="mr-2"><a href="../main/main.do">Home</a></span></p>
+            <h1 class="mb-4">문의글쓰기</h1>
+          </div>
+        </div>
+      </div>
+		</div>
+<section class="ftco-section ftco-degree-bg">
 	<div class="container">
-	<h2 class="text-center">문의글쓰기</h2>
+
 		<div class="row">
 		<form method="post" action="../bQnA/qboard_insert_ok.do">
 			<input type="hidden" name="categoryno" id="categoryno"  value="${boardDis }" > <!-- ♥ -->
-			<input type="text" name="memberid" id="memberid" value="${sessionScope.id }">
+			<input type="hidden" name="memberid" id="memberid" value="${sessionScope.id }">
 			<table class="table">
 				<tr> 
 					<th class="text-right warning" width="20%">이름</th>
@@ -54,5 +66,6 @@
 			</form>
 		</div>
 	</div>
+	</section>
 </body>
 </html>

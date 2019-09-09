@@ -371,6 +371,7 @@ public class BoardDAO {
 		   SqlSession session = ssf.openSession(true); 
 		   System.out.println("------------- 3 ");
 		   session.insert("dataInsert",vo);
+		   System.out.println("------------- 4 ");
 		   session.close();
 	   }
 	   
@@ -631,5 +632,13 @@ public class BoardDAO {
 		   System.out.println(vo.getContent());
 		   session.close();
 		   return vo;
+	   }
+	   //공지(notice=1)일경우 카운트
+	   public static int noticeCount(){
+		   int count = 0;
+		   SqlSession session = ssf.openSession();
+		   count = session.selectOne("noticeCount");
+		   session.close();
+		   return count;
 	   }
 }

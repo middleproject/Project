@@ -538,7 +538,7 @@ public class BoardModel {
 				int curpage = Integer.parseInt(page);
 				
 				Map map = new HashMap();
-				int rowSize = 5;
+				int rowSize = 10;
 				int start = (curpage*rowSize)-(rowSize-1);
 				int end = curpage*rowSize;
 				
@@ -553,7 +553,17 @@ public class BoardModel {
 				int count = BoardDAO.dataRowCount(map);
 				count = count-((curpage*rowSize)-rowSize);
 				String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-
+				
+				//공지(notice=1)일경우 카운트, 3개의 공지만 보여줄것
+				/*int no = BoardDAO.noticeCount();
+				if(no>3){
+					totalpage=totalpage-3;
+					count = count+3;
+				}else{
+					totalpage=totalpage-no;
+					count = count+no;
+				}*/
+				
 				model.addAttribute("today", today);
 				model.addAttribute("curpage", curpage);
 				model.addAttribute("totalpage", totalpage);
@@ -815,7 +825,7 @@ public class BoardModel {
 				int curpage = Integer.parseInt(page);
 				
 				Map map = new HashMap();
-				int rowSize = 10;
+				int rowSize = 5;
 				int start = (curpage*rowSize)-(rowSize-1);
 				int end = curpage*rowSize;
 				
@@ -854,7 +864,7 @@ public class BoardModel {
 				try {
 					model.getRequest().setCharacterEncoding("UTF-8");
 					
-					String path="c:\\mvcDev\\mvcStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\MiddleProject5\\main";
+					String path="c:\\mvcDev\\mvcStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\MiddleProject8\\main";
 					String enctype="UTF-8";
 					int size=100*1024*1024; //최대한으로 들어갈수있는 파일 크기가 100메가(1024KB, 1024*1024KB=MB)
 					

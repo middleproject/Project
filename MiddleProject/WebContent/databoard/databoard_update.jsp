@@ -8,7 +8,7 @@
 <style type="text/css">
 	.row {
 		margin: 0px auto;
-		width: 900px;
+		width: 1200px;
 	}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
@@ -71,8 +71,8 @@ $(function() {
 		<div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="../main/main.do">Home</a></span></p>
-            <h1 class="mb-0 bread" class="jua">수정하기</h1>
+          	<p><span class="mr-2"><a href="../main/main.do">Home</a></span></p>
+            <h1 class="mb-4">수정하기</h1>
           </div>
         </div>
       </div>
@@ -84,37 +84,37 @@ $(function() {
        <table class="table">
          <tr>
            <th class="text-right info" width=15%>이름</th>
-           <td width=85%>
+           <th width=85% class="text-left">
              <input type=text  name=name size=15 class="input-sm" value="${vo.name }" id="name">
              <input type=hidden name=no value="${vo.no }" id="no">
              <input type=hidden id="page" name=page value="${page }">
-           </td>
+           </th>
          </tr>
          <tr>
            <th class="text-right info" width=15%>제목</th>
-           <td width=85%>
+           <th width=85% class="text-left">
              <input type=text name=subject size=45 class="input-sm" value="${vo.subject }" id="sub">
-           </td>
+           </th>
          </tr>
          <tr>
            <th class="text-right info" width=15%>내용</th>
-           <td width=85%>
+           <th width=85% class="text-left">
              <textarea rows="10" cols="55" name=content id="cont">${vo.content }</textarea>
-           </td>
+           </th>
          </tr>
          <tr>
            <th class="text-right info" width=15%>비밀번호</th>
-           <td width=85%>
+           <th width=85% class="text-left">
              <input type="password" name=pwd size=10 class="input-sm" id="pwd">
-           </td>
+           </th>
          </tr>
          <tr>
-           <td colspan="2" class="text-center">
+           <th colspan="2" class="text-center">
              <input type="button" value="수정" class="btn btn-sm btn-primary">
              <input type="button" value="취소" class="btn btn-sm btn-danger"
                onclick="javascript:history.back()"
              >
-           </td>
+           </th>
          </tr>
        </table>
        </form>

@@ -235,7 +235,7 @@
 	    	)
 		</insert>
 		<select id="QnATotalPage" resultType="int" parameterType="java.util.Map">
-			SELECT CEIL(COUNT(*)/5.0) FROM board
+			SELECT CEIL(COUNT(*)/10.0) FROM board
 			WHERE categoryno = #{categoryno}
 		</select>
 		<select id="QnARowCount" resultType="int" parameterType="java.util.Map">
@@ -300,7 +300,6 @@
 		FROM databoard ORDER BY no DESC))
 		WHERE num BETWEEN #{start} AND #{end} 
 
-	 
 	</select>
 
 	<!-- ★notice추가 했음!!! -->
@@ -472,10 +471,16 @@
     
  <!-- ============== -->
       <select id="imgListData" resultType="ImgBoardVO" parameterType="java.util.Map">
-		SELECT no,name,content,filename,TO_CHAR(day,'YYYY-MM-DD') as dbday
+<!-- 	SELECT no,name,content,filename,TO_CHAR(day,'YYYY-MM-DD') as dbday
 		FROM imgboard
 		WHERE no BETWEEN #{start} AND #{end}	
-		ORDER BY no DESC
+		ORDER BY no DESC -->
+		SELECT no,name,content,filename,dbday,num
+        FROM(SELECT no,name,content,filename,TO_CHAR(day,'YYYY-MM-DD') as dbday, rownum as num
+		FROM(SELECT no,name,content,filename,day
+		FROM imgboard ORDER BY no DESC))
+		WHERE num BETWEEN #{start} AND #{end}
+		
 	</select>
 	<select  id="imgTotalPage" parameterType="java.util.Map" resultType="int">	
 		SELECT CEIL(COUNT(*)/5.0) FROM imgboard 
@@ -511,5 +516,10 @@
 	 	SELECT no,name,content,TO_CHAR(day,'YYYY-MM-DD') as dbday,filename
 	 	FROM imgboard
 	 	WHERE no=#{no}
+	 </select>
+	 
+	 <!-- 공지(notice=1)일경우 카운트 -->
+	 <select id="noticeCount" resultType="int">
+	 	SELECT count(*) FROM databoard WHERE notice=1
 	 </select>
 </mapper>

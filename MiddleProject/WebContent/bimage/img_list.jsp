@@ -19,8 +19,8 @@
 		<div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="../main/main.do">Home</a></span></p>
-            <h1 class="mb-10 bread" class="jua">이미지게시판</h1>
+          	<p><span class="mr-2"><a href="../main/main.do">Home</a></span></p>
+            <h1 class="mb-4">이미지 게시판</h1>
           </div>
         </div>
       </div>
@@ -39,9 +39,10 @@
 				</tr>
 			</table>
 			<table class="table">
+			<c:set var="count" value="${count }"/>
 			<c:forEach var="vo" items="${list }">
 				<tr>
-					<th width="50%" class="text-left">NO．${vo.no }&nbsp;&nbsp;&nbsp;<font color="red">♥</font>${vo.name }님<font color="red">♥</font>
+					<th width="50%" class="text-left">NO．${count }&nbsp;&nbsp;&nbsp;<font color="red">♥</font>${vo.name }님<font color="red">♥</font>
 					&nbsp;&nbsp;&nbsp;${vo.dbday } 작성</th>
 					<th>
 			      		
@@ -51,6 +52,7 @@
          
                     </th>
 				</tr>
+				<c:set var="count" value="${count-1 }"/>
 				<tr>
 					<th colspan="2" width="100%" class="text-left">${vo.content }</th>
 				</tr>

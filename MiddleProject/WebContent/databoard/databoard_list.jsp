@@ -20,8 +20,8 @@
 		<div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="../main/main.do">Home</a></span></p>
-            <h1 class="mb-0 bread" class="jua">첨부파일게시판</h1>
+          	<p><span class="mr-2"><a href="../main/main.do">Home</a></span></p>
+            <h1 class="mb-4">첨부파일 게시판</h1>
           </div>
         </div>
       </div>
@@ -29,7 +29,6 @@
 <section class="ftco-section ftco-degree-bg">
 	
 	<div class="container">
-		<h1 class="text-center">자료실</h1>
 		<div class="row">
 			<table class="table">
 				<tr>
@@ -51,18 +50,68 @@
 					<th width="20%" class="text-center">작성일</th>
 					<th width="10%" class="text-center">조회수</th>
 				</tr>
+				<%-- <c:set var="count" value="${count }"/>
 				<c:forEach var="vo" items="${list }" varStatus="s">
-				
-					
 						<tr bgcolor="${vo.notice==1?'#E6FFE6':'' }" > 
-							<th width="10%" class="text-center">${vo.num }</th>
+							<c:if test="${vo.notice==1 }">
+								<th width="10%" class="text-center"><font color="red">[공지]</font>
+								</th>
+							</c:if>
+							<c:if test="${vo.notice!=1 }">
+								<th width="10%" class="text-center">${count }</th>
+								<c:set var="count" value="${count-1 }"/>
+							</c:if>
+								
 							<th width="45%" class="text-left"><a href="../databoard/databoard_detail.do?no=${vo.no }&page=${curpage}">${vo.subject }</a></th>
 							<th width="15%" class="text-center">${vo.name }</th>
 							<th width="20%" class="text-center">${vo.dbday }</th>
 							<th width="10%" class="text-center">${vo.hit }</th>
 						</tr>
-					
+				</c:forEach>	 
+					<c:forEach var="vo" items="${list }" varStatus="s">
+						<tr bgcolor="${vo.notice==1?'#E6FFE6':'' }" > 
+							<c:if test="${vo.notice==1 }">
+								<th width="10%" class="text-center"><font color="red">[공지]</font>
+								</th>
+							</c:if>
+							<c:if test="${vo.notice!=1 }">
+								<th width="10%" class="text-center">[일반]</th>			
+							</c:if>
+								
+							<th width="45%" class="text-left"><a href="../databoard/databoard_detail.do?no=${vo.no }&page=${curpage}">${vo.subject }</a></th>
+							<th width="15%" class="text-center">${vo.name }</th>
+							<th width="20%" class="text-center">${vo.dbday }</th>
+							<th width="10%" class="text-center">${vo.hit }</th>
+						</tr>
+				</c:forEach>
+				--%>
+				<c:set var="count" value="${count }"/>
+				<c:forEach var="vo" items="${list }" varStatus="s">
+					<c:if test="${s.index<3 && vo.notice==1 }">
+						<tr bgcolor="${vo.notice==1?'#E6FFE6':'' }" > 
+							<th width="10%" class="text-center">
+								<c:if test="${vo.notice==1}"><font color="#CD1F48">[공지]</font></c:if>
+							</th>
+							<th width="45%" class="text-left"><a href="../databoard/databoard_detail.do?no=${vo.no }&page=${curpage}">${vo.subject }</a></th>
+							<th width="15%" class="text-center">${vo.name }</th>
+							<th width="20%" class="text-center">${vo.dbday }</th>
+							<th width="10%" class="text-center">${vo.hit }</th>
+						</tr>
+					</c:if>
+					<c:if test="${s.index>2 && vo.notice!=1 }">
+						<tr> 
+							<th width="10%" class="text-center">
+								<%-- ${count+1 } 포기--%>[일반]
+							</th>
+							<th width="45%" class="text-left"><a href="../databoard/databoard_detail.do?no=${vo.no }&page=${curpage}">${vo.subject }</a></th>
+							<th width="15%" class="text-center">${vo.name }</th>
+							<th width="20%" class="text-center">${vo.dbday }</th>
+							<th width="10%" class="text-center">${vo.hit }</th>
+						</tr>
+					</c:if>
+					<c:set var="count" value="${count-1 }"/>
 				</c:forEach>	
+				
 			</table>
 			
 			<table class="table">
