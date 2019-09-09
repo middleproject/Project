@@ -487,4 +487,29 @@ public class RecipeDAO {
 			} 
 		   return list;
 	   }
+	   //삭제해야될 리스트
+	   public static List<Integer> todayDeleteList(){
+		   List<Integer> list = new ArrayList<Integer>();
+		   SqlSession session = null;
+		   try {
+				session = ssf.openSession();
+				list = session.selectList("todayDeleteList");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally{
+				if(session!=null) session.close();
+			} 
+		   return list;
+	   }
+	   public static void todayHitDelete(int recipeno){
+		   SqlSession session = null;
+		   try {
+				session = ssf.openSession();
+				session.delete("todayHitDelete",recipeno);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally{
+				if(session!=null) session.close();
+			} 
+	   }
 }

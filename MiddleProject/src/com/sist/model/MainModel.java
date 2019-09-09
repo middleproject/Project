@@ -48,13 +48,21 @@ public class MainModel {
 		}
 		// 당일 리스트 삭제 관련
 		List<Integer> dList = new ArrayList<Integer>();
-		
+		dList = RecipeDAO.todayDeleteList();
+		for(int recipeno:dList){
+			RecipeDAO.todayHitDelete(recipeno);
+		}
 		// 당일 최다 조회수 레시피 관련
 		List<TodayHitVO> tList = new ArrayList<TodayHitVO>();
+		List<RecipeVO> rlist = new ArrayList<RecipeVO>();
 		tList = RecipeDAO.todayHitList();
+		/*for(TodayHitVO tvo:tList){
+			RecipeVO vo = RecipeDAO.recipeDetailData(tvo.getRecipeno());
+			vo.setHit(tvo.getHit());
+			rlist.add(vo);
+		}*/
 		
-		
-		session.setAttribute("tlist", tList);
+		session.setAttribute("rlist", rlist);
 		session.setAttribute("followCount", followCount);
 		session.setAttribute("msgCount", msgCount);
 		session.setAttribute("Wishcount", Wishcount);

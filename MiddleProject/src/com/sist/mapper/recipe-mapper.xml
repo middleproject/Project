@@ -278,6 +278,9 @@
 	</select>
 	<!-- 하루 지난 히트 컬럼 찾기 -->
 	<select id="todayDeleteList" resultType="int">
-		select recipeno from todayHit where (TO_CHAR(sysdate,'DD-HH24')-TO_CHAR(regdate,'DD-HH24')) &lt;0
+		select recipeno from todayHit where NOT TO_CHAR(regdate,'YYYY-MM-DD') = TO_CHAR(sysdate,'YYYY-MM-DD')
 	</select>
+	<delete id="todayHitDelete" parameterType="int">
+		delete from todayHit where recipeno = #{recipeno}
+	</delete>
 </mapper>
