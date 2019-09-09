@@ -65,8 +65,6 @@ public class MainModel {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			System.out.println("tvo:"+tvo.getRecipeno());
 		}
 		// е╬ 5╫╕га
 		List<MemberVO> mList = new ArrayList<MemberVO>();
