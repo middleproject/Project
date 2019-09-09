@@ -592,6 +592,7 @@ public class ReserveModel {
 					System.out.println("@@@cheifid : "+vo.getCheifid());
 			}
 			
+			System.out.println("@@@@@@@@@@@"+endpage);
 			
 			model.addAttribute("list", list);
 			model.addAttribute("data", data);
