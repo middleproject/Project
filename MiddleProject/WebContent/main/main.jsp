@@ -150,9 +150,9 @@
 	            <li class="nav-item dropdown">
 	              	  <a class="jua dropdown-toggle" href="#" id="dropdown06" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">회원정보</a>
 		              <div class="dropdown-menu jua" aria-labelledby="dropdown04">
-		              	<a class="dropdown-item jua" href="#">마이페이지</a>
-		              	<a class="dropdown-item jua" href="#">회원수정</a>
-		              	<a class="dropdown-item jua" href="#">회원삭제</a>
+		              	<a class="dropdown-item jua" href="../mypage/mypageMain.do">마이페이지</a>
+		              	<a class="dropdown-item jua" href="../mypage/memberModify.do">회원수정</a>
+		              	<a class="dropdown-item jua" href="../member/memberDelete.do">회원삭제</a>
 		              	<a class="dropdown-item jua" href="../recipe/follow.do">팔로우 레시피</a>
 		              </div>
 	            </li>

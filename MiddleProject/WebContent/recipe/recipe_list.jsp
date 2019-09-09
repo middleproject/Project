@@ -17,6 +17,8 @@ $(function(){
 <meta charset="UTF-8">
 </head>
 <body>
+	<div class="hero-wrap hero-bread"
+		style="background-image: url('../main/images/bg_1.jpg');"></div>
 	 <section class="ftco-section ftco-degree-bg">
       <div class="container">
      	<div>

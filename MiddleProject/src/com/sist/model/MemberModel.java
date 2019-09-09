@@ -217,10 +217,17 @@ public class MemberModel {
 	}
 
 	// 캐시충전
-	@RequestMapping("member/memberDelete.do")
+	@RequestMapping("member/cashPage.do")
 	public String member_cash(Model model) {
+		model.addAttribute("main_jsp", "../member/cashPage.jsp");
+		return "../main/main.jsp";
+	}
+	@RequestMapping("member/memberDelete.do")
+	public String member_delete(Model model) {
 		model.addAttribute("main_jsp", "../member/memberDelete.jsp");
 		return "../main/main.jsp";
 	}
+	
+	
 
 }

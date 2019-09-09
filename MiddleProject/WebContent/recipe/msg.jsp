@@ -56,6 +56,8 @@ $(function(){
 <meta charset="UTF-8">
 </head>
 <body>
+	<div class="hero-wrap hero-bread"
+		style="background-image: url('../main/images/bg_1.jpg');"></div>
 										
 	<div class="ftco-section ftco-cart">
 		<div class="container">

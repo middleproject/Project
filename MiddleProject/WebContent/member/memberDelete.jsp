@@ -7,32 +7,28 @@
 
 
 <style type="text/css">
-.textbox{
-width: 250px;
-height: 35px;
-
-margin-left: 5px;
-
-}
-.font{
-color: black;
-
+.textbox {
+	width: 250px;
+	height: 35px;
+	margin-left: 5px;
 }
 
-.btn2{
-width: 80px; 
-height: 30px; 
-color: black; 
-background-color: white;
-margin-left: -50px;
+.font {
+	color: black;
 }
 
-.textbox{
-border: 1px solid #6E6E6E;
-   border-radius: 4px;
+.btn2 {
+	width: 80px;
+	height: 30px;
+	color: black;
+	background-color: white;
+	margin-left: -50px;
 }
 
-
+.textbox {
+	border: 1px solid #6E6E6E;
+	border-radius: 4px;
+}
 </style>
 
 
@@ -46,8 +42,8 @@ border: 1px solid #6E6E6E;
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
-					<form id="join_frm" name="userInfo" method="post" action="signUp_ok.do"
-						class="signUp" onsubmit="return validate();">
+					<form id="" name="" method="post"
+						action="" class="" onsubmit="return validate();">
 						<h3 class="mb-4 billing-heading">회원 탈퇴</h3>
 						<p style="border-bottom: solid">
 						<div class="row align-items-end">
@@ -57,19 +53,23 @@ border: 1px solid #6E6E6E;
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
-								<label class="font">비밀번호</label> <input type="password"
-										class="textbox" placeholder="" id="pwd" name="pwd"
-										required>
-										
+									<label class="font">비밀번호</label> <input type="password"
+										class="textbox" placeholder="" id="pwd" name="pwd" required>
+
 								</div>
 							</div>
-						
-
-
-
+							<div class="w-100"></div>
+							<div class="col-md-6"
+								style="position: relative; left: 200px; bottom: -20px; margin-top: 30px">
+								<input type="submit" value="탈퇴하기" style="margin-right: 20px;">
+								
+								
+								 <a	href="../mypage/mypageMain.do"><input type="button"
+									value="탈퇴취소"></a>
+							</div>
 						</div>
 					</form>
-					
+
 					<!-- END -->
 				</div>
 
@@ -90,7 +90,8 @@ border: 1px solid #6E6E6E;
 	$(function() {
 
 		//비밀번호 확인
-		$('#pwd2').keyup(
+		$('#pwd2')
+				.keyup(
 						function() {
 							if ($('#pwd').val() != $('#pwd2').val()) {
 								if ($('#pwd2').val() != '') {
@@ -105,7 +106,7 @@ border: 1px solid #6E6E6E;
 	});
 </script>
 
-	<!-- function openIdChk(){
+<!-- function openIdChk(){
 		window.name="parentForm";
 		window.open=("idcheckForm.jsp", "chkForm",
 				"width=500, height=300, resizable=no, scrollbars=no");	

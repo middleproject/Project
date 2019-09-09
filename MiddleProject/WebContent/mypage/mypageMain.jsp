@@ -84,11 +84,11 @@ border: 1px solid black;
 							<a href="../recipe/msg.do" type="button" class="btn">쪽지확인</a>
 							</div>
 							
-							<div class="float-unit"  ><p class="font" >내 식단보기<p>
+							<div class="float-unit"  ><p class="font" >예약내역<p>
 							<div class="w-100"></div>
-							<img src="images/bab.jpeg" alt="My Image" width="100px" height="100px">
-							<p> 등록한 식단 ?개<p>
-							<a href="../main/main.do" type="button" class="btn">식단보기</a>
+							<img src="images/reserved.png" alt="My Image" width="100px" height="100px">
+							<p> 예약내역 ?개<p>
+							<a href="../main/main.do" type="button" class="btn">예약확인</a>
 							</div>
 							
 							<div class="float-unit"  ><p class="font" >즐겨찾기<p>
@@ -98,12 +98,6 @@ border: 1px solid black;
 							<a href="../recipe/follow.do" type="button" class="btn">확인하기</a>
 							</div>
 							
-							<div class="float-unit"  ><p class="font" >예약내역<p>
-							<div class="w-100"></div>
-							<img src="images/reserved.png" alt="My Image" width="100px" height="100px">
-							<p> 예약한내역 ?개<p>
-							<a href="../reserve/myreserveList.do" type="button" class="btn">예약확인</a>
-							</div>
 							
 							
 							<div class="float-unit"  ><p class="font" >내 게시글보기<p>
@@ -111,6 +105,13 @@ border: 1px solid black;
 							<img src="images/note.png" alt="My Image" width="100px" height="100px">
 							<p> 내가작성한글 ?개<p>
 							<a href="../main/main.do" type="button" class="btn">글 확인하기</a>
+							</div>
+							
+							<div class="float-unit"  ><p class="font" >회원탈퇴<p>
+							<div class="w-100"></div>
+							<img src="images/reserved.png" alt="My Image" width="100px" height="100px">
+							<p>잘가세요 <p>
+							<a href="../member/memberDelete.do" type="button" class="btn">탈퇴하기</a>
 							</div>
 							
 							

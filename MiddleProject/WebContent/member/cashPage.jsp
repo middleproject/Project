@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>캐시충전</title>
 
 <!-- <style type="text/css">
 .vr { 
@@ -41,7 +41,7 @@
 							<div class="col-md-6">
 								<div style="position: relative; bottom: -40px; right: -20px;">충전금액</div>
 								<div style="position: relative; bottom: -10px; right: -220px;">?원</div>
-								<div style="position: relative; top: -15px; right: -420px;">내
+								<div style="position: relative; top: -15px; right: -420px;">보유
 									캐쉬</div>
 
 							</div>
@@ -53,16 +53,16 @@
 						<div class="col-md-10">
 						
 						<div style="margin: 20px 20px -10px 20px;">
-						<input type="radio">1000원 
+						<input type="radio" name="selectCash">1000원 
 						</div>
 						<div style="margin: 20px 20px -10px 20px; position: relative;right: -130px; top: -36px;">
-						<input type="radio">5000원 
+						<input name="selectCash" type="radio">5000원 
 						</div>
 						<div style="margin: 20px 20px -10px 20px;position: relative;right: -270px; top: -73px;">
-						<input type="radio">10000원 
+						<input name="selectCash" type="radio">10000원 
 						</div>
 						<div style="margin: -50px 20px -10px 20px;">
-						직접입력　<input type="text" style="width: 100px;">원
+						<input name="selectCash" type="radio">직접입력　<input type="text" style="width: 100px;">원
 						</div>		
 							
 						</div>
@@ -73,8 +73,8 @@
 						
 						
 						<div style="margin: 20px 20px -10px 20px;">
-						<input type="radio">무통장 입금
-						<input type="radio">쿠폰등록
+						<input name="selectSudan"type="radio">무통장 입금
+						<input name="selectSudan"type="radio">쿠폰등록
 						</div>
 					
 						
