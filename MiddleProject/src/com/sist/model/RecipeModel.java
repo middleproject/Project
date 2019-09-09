@@ -9,9 +9,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -19,12 +25,14 @@ import com.sist.controller.Controller;
 import com.sist.controller.Model;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
+import com.sist.manager.NaverBlogManager;
 import com.sist.vo.DataBoardReplyVO;
 import com.sist.vo.FollowVO;
 import com.sist.vo.IngredetailVO;
 import com.sist.vo.MsgVO;
 import com.sist.vo.ReadVO;
 import com.sist.vo.RecipeVO;
+import com.sist.vo.RecommandVO;
 import com.sist.vo.WishVO;
 @Controller("recipeModel")
 public class RecipeModel {
@@ -702,6 +710,65 @@ public class RecipeModel {
 			}
 			model.addAttribute("list", list);
 			model.addAttribute("main_jsp", "../recipe/lately.jsp");
+			return "../main/main.jsp";
+		}
+		@RequestMapping("recipe/recommend.do")
+		public String recipe_recommend(Model model){
+			try {
+				model.getRequest().setCharacterEncoding("UTF-8");
+			} catch (Exception e) {}
+			NaverBlogManager n = new NaverBlogManager();
+			String json = n.blogGetData("·¹½ÃÇÇ");
+			List<String> bList = new ArrayList<String>();
+			try {
+			   	JSONParser jp = new JSONParser();
+				JSONObject obj = (JSONObject)jp.parse(json);
+				JSONArray arr=(JSONArray)obj.get("items");
+				for(int i=0;i<arr.size();i++){
+					JSONObject js = (JSONObject)arr.get(i);
+					String desc =(String)js.get("description");
+					desc= desc.replace("<", "");
+					desc= desc.replace(">", "");
+					desc= desc.replace("/", "");
+					desc= desc.replaceAll("[A-Za-z]", "");
+					desc= desc.replace("&", "");
+					desc= desc.replace("#", "");
+					desc= desc.replace(",", "");
+					bList.add(desc);
+				}
+			} catch (Exception e) {}
+				List<RecipeVO> mList = RecipeDAO.recipeAllData();
+			   int[] count = new int[mList.size()];
+			   Pattern[] p = new Pattern[mList.size()];
+			   for(int i=0; i<p.length;i++){
+				   p[i]=Pattern.compile(mList.get(i).getSummary());
+				   // Â¥°í,Â¥´Ù,Â¥´Ï,Â¬´Ï´Ù -> Â¥[°¡-ÆR]+
+			   }
+			   Matcher[] m = new Matcher[mList.size()];
+			   for(String s:bList){
+				   for(int i=0;i<m.length;i++){
+					   m[i]=p[i].matcher(s);
+					   while(m[i].find()){
+						   count[i]++;
+					   }
+				   }
+			   }
+			   List<RecipeVO> list= new ArrayList<RecipeVO>();
+			   List<RecommandVO> rList = new ArrayList<RecommandVO>();
+			   for(int i=0; i<mList.size();i++){
+				   if(count[i]>1){
+					   System.out.println(mList.get(i).getSummary()+":"+count[i]);
+					   list.add(mList.get(i));
+					   RecommandVO vo = new RecommandVO();
+					   vo.setCount(count[i]);
+					   vo.setTitle(mList.get(i).getSummary());
+					   rList.add(vo);
+				   }
+			 }
+		
+			model.addAttribute("rList", rList);
+			model.addAttribute("list", list);
+			model.addAttribute("main_jsp", "../recipe/recommend.jsp");
 			return "../main/main.jsp";
 		}
 }
