@@ -242,7 +242,7 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
                   <div class="user-img mb-5" style="background-image: url(${mvo.poster})">
                     <span class="quote d-flex align-items-center justify-content-center">
                       <i class="icon-quote-left"></i>
-                    </span>
+                    < /span>
                   </div>
                   <div class="text text-center">
                     <p class="mb-5 pl-4 line">${mvo.intro }</p>

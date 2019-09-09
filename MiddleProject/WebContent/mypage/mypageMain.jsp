@@ -80,7 +80,7 @@ border: 1px solid black;
 							<div class="float-unit"  ><p class="font" >쪽지함<p>
 							<div class="w-100"></div>
 							<img src="images/msg.jpg" alt="My Image" width="100px" height="100px">
-							<p> 새로운 쪽지 ?개<p>
+							<p> 새로운 쪽지 ${msgCount }개<p>
 							<a href="../recipe/msg.do" type="button" class="btn">쪽지확인</a>
 							</div>
 							
@@ -94,8 +94,8 @@ border: 1px solid black;
 							<div class="float-unit"  ><p class="font" >즐겨찾기<p>
 							<div class="w-100"></div>
 							<img src="images/smail.png" alt="My Image" width="100px" height="100px">
-							<p> 등록한 즐겨찾기 ?개<p>
-							<a href="../recipe/follow.do" type="button" class="btn">확인하기</a>
+							<p> 등록한 즐겨찾기 ${wishCount }개<p>
+							<a href="../recipe/wishRecipe.do" type="button" class="btn">확인하기</a>
 							</div>
 							
 							

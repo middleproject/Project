@@ -6,6 +6,7 @@ import com.sist.controller.Controller;
 import com.sist.controller.Model;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.MemberDAO;
+import com.sist.dao.RecipeDAO;
 import com.sist.vo.MemberVO;
 
 @Controller("mypageModel")
@@ -16,6 +17,11 @@ public class MypageModel {
 		HttpSession session = model.getRequest().getSession();
 		String id = (String)session.getAttribute("id");
 		MemberVO vo = MemberDAO.memberAllData(id);
+		int wishCount =MemberDAO.wishCount(id);
+		int msgCount = RecipeDAO.msgCount(id);
+		
+		model.addAttribute("msgCount", msgCount);
+		model.addAttribute("wishCount", wishCount);
 		model.addAttribute("vo", vo);
 		model.addAttribute("main_jsp", "../mypage/mypageMain.jsp");
 		return "../main/main.jsp";
