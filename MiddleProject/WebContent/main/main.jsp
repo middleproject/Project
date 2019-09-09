@@ -98,7 +98,7 @@
 							 <!-- 2019-9.1 지우-->
 						    <a href="../recipe/msg.do"><span class="text" style="color:white;">&nbsp;쪽지(${msgCount })<c:if test="${msgCount>0 }"><sup><font color=red>NEW</font></sup></c:if>&nbsp;&nbsp;</span></a>
 						    <a href="../recipe/follow.do"><span class="text" style="color:white;">&nbsp;새글 (${followCount })<c:if test="${followCount>0 }"><sup><font color=red>NEW</font></sup></c:if></span></a>
-						    <span class="text" style="color:white;">&nbsp;Cash${sessionScope.pay }</span>
+						    <span class="text" style="color:white;">&nbsp;Cash${sessionScope.pay }원</span>
 						</c:if>
 				    </div>
 			    </div>

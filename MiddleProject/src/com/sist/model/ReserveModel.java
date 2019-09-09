@@ -482,6 +482,8 @@ public class ReserveModel {
 			} catch (Exception e) {}
 			
 			HttpSession session = model.getRequest().getSession();
+			
+			
 			String poster=model.getRequest().getParameter("poster");
 			String no=model.getRequest().getParameter("no");
 			String name=model.getRequest().getParameter("name");
@@ -494,8 +496,8 @@ public class ReserveModel {
 			String price=model.getRequest().getParameter("price");		
 			String msg=model.getRequest().getParameter("msg");	
 			String userid=(String)session.getAttribute("id");
-			/*Integer paym=(Integer)session.getAttribute("pay");
-			System.out.println("@pay:"+paym);*/
+			Integer paym=(Integer)session.getAttribute("pay");
+			
 			
 			try{
 				ReserveVO vo=new ReserveVO();
@@ -513,6 +515,7 @@ public class ReserveModel {
 				map.put("id", userid);
 				map.put("price", price);
 				ReserveDAO.reserveInsert(vo,map);
+				session.setAttribute("pay", paym-Integer.parseInt(price));
 				
 			}catch (Exception e) {
 				e.printStackTrace();
@@ -761,9 +764,11 @@ public class ReserveModel {
 			if(comp.equals("확인")){
 				map.put("cancel", "dont");
 				ReserveDAO.reserveUpdate(map);
+				
 			}else if(comp.equals("취소")){
 				map.put("cancel", "cando");
 				ReserveDAO.reserveUpdate(map);
+				
 			}
 			
 			return "redirect:../reserve/myreserveList.do";
