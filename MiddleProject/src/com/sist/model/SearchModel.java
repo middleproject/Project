@@ -35,10 +35,10 @@ public class SearchModel {
 		  map.put("end", end);*/
 		 
 	   List<IngreVO> list=SearchDAO.IngreListData();
-	   
+	   List<DifficultyVO> dlist=SearchDAO.DifficultyListData();
 	   
 	    //model.addAttribute("curpage", curpage); 
-	 	
+	    model.addAttribute("dlist", dlist);
 	    model.addAttribute("list", list);
 		model.addAttribute("main_jsp", "../search/search.jsp");
 		return "../main/main.jsp";
@@ -49,9 +49,9 @@ public class SearchModel {
 	   {
 		   String ino=model.getRequest().getParameter("ino");
 		   List<String> list=SearchDAO.IngredetailData(Integer.parseInt(ino));
-		   List<DifficultyVO> dlist=SearchDAO.DifficultyListData();
+		   
 		   model.addAttribute("list", list);
-		   model.addAttribute("dlist", dlist);	
+		   	
 		   return "searchlist.jsp";
 	   }
 	 @RequestMapping("search/searchingre.do")

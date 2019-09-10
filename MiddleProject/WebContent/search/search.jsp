@@ -54,6 +54,25 @@
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+$(function difficulty(){
+	$('.difficulty').click(function difficulty(){
+		var difficultystep=$(this).attr("data-difficultystep");
+		
+		
+		$('#difficultystep').text(difficultystep);
+		
+		$.ajax({
+			type:'post',
+			url:'../search/difficultylist.do',
+			data:{info:difficultystep},
+			success:function(response)
+			{
+				
+				$('#difficultylist').html(response);
+			}
+		});
+	});
+});
 $(function(){
 	$('.ingrelist').click(function(){
 		var ingreposter=$(this).attr("data-poster");
@@ -114,8 +133,12 @@ $(function(){
     				 <c:forEach var="vo" items="${list }">
     					  <li class="ingrelist" data-name="${vo.ingrename }" data-no="${vo.ingreno }"><a class="active">${vo.ingrename }</a></li>
     					</c:forEach> 
-    					<br>
+    					<br><br>
     					<div id="searchlist"></div>
+    					<br>
+    					<c:forEach var="dvo" items="${dlist }">
+    					<li class="difficulty" data-difficultystep="${dvo.difficultystep }"><a class="active">${dvo.difficultystep }</a></li>
+    					</c:forEach>
     					
     					
     					

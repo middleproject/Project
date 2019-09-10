@@ -42,7 +42,7 @@
 
    <div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="../recipe/recipe_detail.do?no=${vo.no }" class="img-prod"><img class="img-fluid" src="${vo.poster }" alt="Colorlib Template">
+    					<a href="../recipe/recipe_detail.do?no=${vo.no }" class="img-prod"><img class="img-fluid" src="${vo.poster }" alt="Colorlib Template" style="width: 400px; height: 400px;">
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
