@@ -62,12 +62,21 @@ public class SearchModel {
 		 }catch(Exception ex){}
 		 String ingre=model.getRequest().getParameter("ingre");
 		 String info = model.getRequest().getParameter("info");
+		 String ingre2 = model.getRequest().getParameter("ingre2");
 		 if(info==null){
 			 info="";
 		 }
+		 if(ingre2==null){
+			 ingre2="";
+		 }
+		 if(ingre==null){
+			 ingre="";
+		 }
+		 System.out.println("검색:여러개"+info+ingre+ingre2);
 		   Map map=new HashMap();
 		   map.put("ingre", ingre);
 		   map.put("info", info);
+		   map.put("ingre2", ingre2);
 		   
 		   List<RecipeVO> list=SearchDAO.searchIngreData(map);
 		   for(RecipeVO vo:list)

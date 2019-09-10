@@ -13,7 +13,7 @@
 $(function(){
 	$('.searchlist').click(function(){
 		var ingredetailname=$(this).attr("data-detailname");
-		
+		$('#choice3').val(ingredetailname);
 		
 		$.ajax({
 			type:'post',

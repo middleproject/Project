@@ -77,18 +77,18 @@ $(function(){
 		var key = $('.searchTerm').val();
 		var ingre = $('#choice').val();
 		var info = $('#choice2').val();
-		
 		location.href="../recipe/recipe_list.do?key="+key+"&ingre="+ingre+"&info="+info;
 	});
 	
 	$('.difficulty').click(function(){
 		var ingre = $('#choice').val();
 		var info = $(this).attr("data-difficultystep");
-		alert(ingre+info);
+		var ingre2 = $('#choice3').val();
+		alert(ingre+info+ingre2);
 		$.ajax({
 			type:'post',
 			url:'../search/searchingre.do',
-			data:{ino:ingre,info:info},
+			data:{ingre:ingre,info:info,ingre2:ingre2},
 			success:function(response)
 			{
 				$('#searchingre').html(response);
@@ -139,7 +139,7 @@ $(function(){
     						<li class="difficulty" data-difficultystep="${dvo.difficultystep }"><a class="active">${dvo.difficultystep }</a></li>
     					</c:forEach>
     					<input type="hidden" id="choice2" >
-    					
+    					<input type="hidden" id="choice3">
     					
     				</ul>
     				</div>
