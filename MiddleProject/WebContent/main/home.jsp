@@ -277,8 +277,8 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
             <span class="price">$10? <a href="#">now $5 only??</a></span>
             <div id="timer" class="d-flex mt-5">
 						  <div class="time" id="days"></div>
-						  <div class="time pl-3">00</div>
-						  <div class="time pl-3">00</div>
+						  <div class="time pl-3" id="Total">${TotalCount }</div>
+						  <div class="time pl-3" id="Today">${TodayCount }</div>
 						  <div class="time pl-3">00</div>
 						</div>
           </div>

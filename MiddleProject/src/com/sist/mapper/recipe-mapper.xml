@@ -291,7 +291,7 @@
 		update visit set hit = 0 where name = #{name}
 	</update>
 	<update id="homeUpade">
-		update visit set hit = hit+1;
+		update visit set hit = hit+1
 	</update>
 	<select id="selectVisit" parameterType="String" resultType="int">
 		select hit from visit where name=#{name}

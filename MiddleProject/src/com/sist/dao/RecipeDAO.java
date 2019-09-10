@@ -524,7 +524,7 @@ public class RecipeDAO {
 		   int count =0;
 		   SqlSession session = null;
 		   try {
-				session = ssf.openSession();
+				session = ssf.openSession(true);
 				count = session.selectOne("homeCount");
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -537,7 +537,7 @@ public class RecipeDAO {
 	   public static void zeroupdate(String name){
 		   SqlSession session = null;
 		   try {
-				session = ssf.openSession();
+				session = ssf.openSession(true);
 				session.update("homeCountUpdate",name);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -549,12 +549,25 @@ public class RecipeDAO {
 	   public static void homeUpdate(){
 		   SqlSession session = null;
 		   try {
-				session = ssf.openSession();
+				session = ssf.openSession(true);
 				session.update("homeUpade");
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally{
 				if(session!=null) session.close();
 			} 
+	   }
+	   public static int selectVisit(String name){
+		   int count=0;
+		   SqlSession session = null;
+		   try {
+				session = ssf.openSession();
+				count = session.selectOne("selectVisit",name);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally{
+				if(session!=null) session.close();
+			} 
+		   return count;
 	   }
 }

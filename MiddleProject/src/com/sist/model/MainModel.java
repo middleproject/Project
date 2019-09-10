@@ -70,13 +70,16 @@ public class MainModel {
 		List<MemberVO> mList = new ArrayList<MemberVO>();
 		mList = MemberDAO.chefAllData();
 		// Á¶È¸¼ö !
-				int visitCount=0;
-				visitCount = RecipeDAO.homeCount();
-				if(visitCount!=0){
-					RecipeDAO.zeroupdate("today");
-				}
-				RecipeDAO.homeUpdate();
-		
+		int visitCount=0;
+		visitCount = RecipeDAO.homeCount();
+		if(visitCount!=0){
+			RecipeDAO.zeroupdate("today");
+		}
+		RecipeDAO.homeUpdate();
+		int TotalCount = RecipeDAO.selectVisit("total");
+		int TodayCount = RecipeDAO.selectVisit("today");
+		session.setAttribute("TotalCount", TotalCount);
+		session.setAttribute("TodayCount", TodayCount);
 		session.setAttribute("mList", mList);
 		session.setAttribute("rlist", rlist);
 		session.setAttribute("followCount", followCount);
