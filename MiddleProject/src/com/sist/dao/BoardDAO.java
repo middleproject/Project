@@ -570,8 +570,6 @@ public class BoardDAO {
 		   System.err.println("글쓰기 확인 ok---2");
 		   session.insert("imgInsert",vo);
 		   System.err.println("글쓰기 확인 ok---3");
-
-
 		   System.out.println("이름은?"+vo.getName());
 		   System.out.println("내용은?"+vo.getContent());
 		   session.close();

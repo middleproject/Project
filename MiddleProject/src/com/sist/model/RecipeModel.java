@@ -554,7 +554,7 @@ public class RecipeModel {
 		} catch (Exception e) {}
 		HttpSession session = model.getRequest().getSession();
 		String id = (String)session.getAttribute("id");
-		String path="c:\\mvcDev\\mvcStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\MiddleProject\\main";
+		String path="c:\\mvcDev\\mvcStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\MiddleProject\\main";
 		String enctype="UTF-8";
 		int size=100*1024*1024; 
 		MultipartRequest mr=null;
@@ -609,13 +609,13 @@ public class RecipeModel {
 		String complete=poster[2];
 		String poster1 = poster[0];
 		RecipeVO vo = new RecipeVO();
-		vo.setComplete("http://localhost:8080/MiddleProject/main/"+complete+",");
-		vo.setPoster("http://localhost:8080/MiddleProject/main/"+poster1);
+		vo.setComplete("http://211.238.142.186:8080/MiddleProject/main/"+complete+",");
+		vo.setPoster("http://211.238.142.186:8080/MiddleProject/main/"+poster1);
 		vo.setInfo(info);
 		vo.setIngre(ingre);
 		vo.setMade(id);
 		vo.setStep(step);
-		vo.setSTEP_POSTER("http://localhost:8080/MiddleProject/main/"+step_poster);
+		vo.setSTEP_POSTER("http://211.238.142.186:8080/MiddleProject/main/"+step_poster);
 		vo.setTip(tip);
 		vo.setTag(tag);
 		vo.setImage("");

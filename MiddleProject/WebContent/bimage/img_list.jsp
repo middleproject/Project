@@ -57,7 +57,8 @@
 				<tr>
 					<th colspan="2" width="100%" class="text-right">
 					
-						<img src="../main/${vo.filename}" style="border-radius: 25px;" width="750" height="400">
+						<img src="../main/${vo.filename}" style="border-radius: 25px;" width="750" height="400"> 
+					<%-- 	<img src="http://localhost:8080/MiddleProject/main/"+"${vo.filename}" style="border-radius: 25px;" width="750" height="400"> --%>
 					</th>
 					
 				</tr>

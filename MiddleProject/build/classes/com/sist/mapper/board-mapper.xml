@@ -235,7 +235,7 @@
 	    	)
 		</insert>
 		<select id="QnATotalPage" resultType="int" parameterType="java.util.Map">
-			SELECT CEIL(COUNT(*)/10.0) FROM board
+			SELECT CEIL(COUNT(*)/5.0) FROM board
 			WHERE categoryno = #{categoryno}
 		</select>
 		<select id="QnARowCount" resultType="int" parameterType="java.util.Map">
@@ -317,7 +317,7 @@
 		) 
 	</insert>
 	<select  id="dataTotalPage" parameterType="java.util.Map" resultType="int">	
-		SELECT CEIL(COUNT(*)/5.0) FROM databoard 
+		SELECT CEIL(COUNT(*)/10.0) FROM databoard 
 	</select>
 	<select id="dataRowCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*) FROM databoard 

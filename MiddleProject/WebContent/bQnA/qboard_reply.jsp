@@ -27,8 +27,8 @@
 
 		<div class="row">				
 		<form method="post" action="../bQnA/qboard_reply_ok.do">
-			<input type="text" name="categoryno" id="categoryno"  value="${boardDis }" >
-			<input type="text" name="bno" value="${boardno }" >
+			<input type="hidden" name="categoryno" id="categoryno"  value="${boardDis }" >
+			<input type="hidden" name="bno" value="${boardno }" >
 	
 			<table class="table">
 				<tr> 
