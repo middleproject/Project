@@ -105,7 +105,7 @@ $(function(){
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span></p>
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html"></a></span></p>
             <h1 class="mb-0 bread">Search</h1>
           </div>
         </div>
@@ -115,7 +115,7 @@ $(function(){
       <div class="container py-4">
         <div class="row d-flex justify-content-center py-5">
           <div class="col-md-6 d-flex align-items-center">
-           <<div class="search">
+           <div class="search">
   			<input type="text" class="searchTerm"/><input class="searchButton" type="button"  />
 			</div>
 
