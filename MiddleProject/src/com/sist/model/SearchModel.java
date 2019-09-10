@@ -61,8 +61,13 @@ public class SearchModel {
 			 model.getRequest().setCharacterEncoding("UTF-8");
 		 }catch(Exception ex){}
 		 String ingre=model.getRequest().getParameter("ingre");
+		 String info = model.getRequest().getParameter("info");
+		 if(info==null){
+			 info="";
+		 }
 		   Map map=new HashMap();
 		   map.put("ingre", ingre);
+		   map.put("info", info);
 		   
 		   List<RecipeVO> list=SearchDAO.searchIngreData(map);
 		   for(RecipeVO vo:list)

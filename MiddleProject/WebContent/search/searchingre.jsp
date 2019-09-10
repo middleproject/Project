@@ -69,6 +69,8 @@
     				</div>
     			</div>
     			</c:forEach>
+  
+        </div>
   <script src="../main/js/jquery.min.js"></script>
   <script src="../main/js/jquery-migrate-3.0.1.min.js"></script>
   <script src="../main/js/popper.min.js"></script>

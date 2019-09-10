@@ -26,7 +26,14 @@
   <select id="searchIngreData" resultType="RecipeVO" parameterType="hashmap">
     SELECT *
     FROM recipe
-    WHERE ingre like '%'||#{ingre}||'%' AND <![CDATA[rownum<=12]]>
+    where	<![CDATA[rownum<=12]]>
+				<if test="ingre!=null and ingre!=''">
+					and ingre LIKE '%'||#{ingre}||'%'
+				</if>
+				<if test="info!=null and info!=''">
+					and info LIKE '%'||#{info}||'%'
+				</if>
+		
   </select>
  
   <select id="DifficultyListData" resultType="DifficultyVO">

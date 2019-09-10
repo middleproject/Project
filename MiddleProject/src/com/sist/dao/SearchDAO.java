@@ -84,12 +84,12 @@ public class SearchDAO {
 		   }
 		   return list;
 	   }
-	   public static List<String> IngredetailData(int ino) {
+	   public static List<String> IngredetailData(int no) {
 			List<String> list = new ArrayList<String>();
 			SqlSession session = null;
 			try {
 				session = ssf.openSession();
-				list = session.selectList("ingredetailData", ino);
+				list = session.selectList("ingredetailData", no);
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			} finally {

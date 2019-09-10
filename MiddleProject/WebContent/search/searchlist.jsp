@@ -21,7 +21,6 @@ $(function(){
 			data:{ingre:ingredetailname},
 			success:function(response)
 			{
-				
 				$('#searchingre').html(response);
 			}
 		});
