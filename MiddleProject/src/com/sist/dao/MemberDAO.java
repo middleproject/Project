@@ -1,8 +1,6 @@
 package com.sist.dao;
 
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -29,7 +27,7 @@ public class MemberDAO {
 		}
 		return count;
 	}
-	
+
 	public static MemberVO isLogin(String id, String pwd) {
 		MemberVO vo = new MemberVO();
 		SqlSession session = null;
@@ -90,11 +88,20 @@ public class MemberDAO {
 	}
 
 	// 회원 탈퇴
-	public static void memberDelete(String id) {
-		SqlSession session = ssf.openSession(true);
+	public static String memberDelete(String id, String pwd) {
+		MemberVO vo = new MemberVO();
+		String msg = "";
+		SqlSession session = null;
 
 		try {
-			session.insert("memberDelete", id);
+			session = ssf.openSession(true);
+			vo = session.selectOne("memberGetPwd", id);
+			if (vo.getPwd().equals(pwd)) {
+				session.delete("memberDelete", id);
+				msg = "OK";
+			} else {
+				msg = "FAIL";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -102,6 +109,8 @@ public class MemberDAO {
 				session.close();
 			}
 		}
+
+		return msg;
 	}
 
 	// 아이디 찾기
@@ -158,8 +167,9 @@ public class MemberDAO {
 	public static MemberVO memberAllData(String id) {
 		SqlSession session = null;
 		MemberVO vo = new MemberVO();
-		session = ssf.openSession();
+
 		try {
+			session = ssf.openSession();
 			vo = session.selectOne("selectId", id);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -169,8 +179,57 @@ public class MemberDAO {
 		}
 		return vo;
 	}
-	//쉐프 찾기
-	public static List<MemberVO> chefAllData(){
+
+	// 회원수정하기
+	public static void memberModify(MemberVO vo) {
+		SqlSession session = null;
+		try {
+			session = ssf.openSession(true);
+			session.update("memModify", vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+
+	}
+
+	// 캐시충전하기
+	public static void memPayUpdate(Map map) {
+		SqlSession session = null;
+
+		try {
+			session = ssf.openSession(true);
+			session.update("memPayUpdate", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+
+	// 현재 보유 캐시 확인
+	public static int memChkPay(String id) {
+		SqlSession session = null;
+		int pay = 0;
+
+		try {
+			session = ssf.openSession();
+			pay = session.selectOne("memChkPay", id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+
+		return pay;
+	}
+
+	// 쉐프 찾기
+	public static List<MemberVO> chefAllData() {
 		List<MemberVO> list = new ArrayList<MemberVO>();
 		SqlSession session = null;
 		try {
@@ -184,5 +243,4 @@ public class MemberDAO {
 		}
 		return list;
 	}
-
 }

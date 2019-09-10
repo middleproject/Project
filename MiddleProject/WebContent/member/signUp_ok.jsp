@@ -11,5 +11,6 @@
 <c:if test="${result!='OK' }">
 	<script>
 		alert("오류발생, 다시 시도 해주세요");
+		history.back();
 	</script>
 </c:if>

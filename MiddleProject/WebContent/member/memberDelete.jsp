@@ -42,8 +42,7 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
-					<form id="" name="" method="post"
-						action="" class="" onsubmit="return validate();">
+					<form method="post" action="../member/memberDel_ok.do" onsubmit="return validate();">
 						<h3 class="mb-4 billing-heading">회원 탈퇴</h3>
 						<p style="border-bottom: solid">
 						<div class="row align-items-end">
@@ -53,9 +52,9 @@
 							<div class="w-100"></div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="font">비밀번호</label> <input type="password"
-										class="textbox" placeholder="" id="pwd" name="pwd" required>
-
+									<label class="font">비밀번호</label> 
+									<input type="password" class="textbox" id="pwd" name="pwd" required>
+									<input type="hidden" name="id" value="${sessionScope.id }">
 								</div>
 							</div>
 							<div class="w-100"></div>

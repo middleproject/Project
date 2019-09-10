@@ -1,78 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.member-mapper">
-   <!-- login -->
-   <!-- 1. id 존재여부  -->
-   <select id="memberIdCount" resultType="int" parameterType="String">
-     SELECT COUNT(*)
-     FROM member
-     WHERE id=#{id}
-   </select>
-   <!-- 2. 비밀번호 확인 -->
-   <select id="memberGetPwd" resultType="MemberVO" parameterType="String">
-     SELECT pwd,admin,name,pay
-     FROM member
-     WHERE id=#{id}
-   </select>
-   
-   
-   <!-- 3. 회원가입 -->
-   <insert id="memberSignUp" parameterType="MemberVO">
-   	INSERT INTO member(id,pwd,name,email,tel,phone,addr1,addr2,sex,admin,pay,birthday) VALUES(
-   		#{id},
-   		#{pwd},
-   		#{name},
-   		#{email},
-   		#{tel},
-   		#{phone},
-   		#{addr1},
-   		#{addr2},
-   		#{sex},
-   		#{admin},
-   		#{pay},
-   		#{birthday}
-   	)
-   	</insert>
-   <!-- 4. 회원탈퇴 -->
-    <delete id="memberDelete" parameterType="String">
-   	DELETE FROM member
-   	WHERE id=#{id}
-   </delete>
-   <!-- 장바구니 개 수 출력 -->
-   	 <select id="MywishCount" parameterType="String" resultType="int">
-   		select count(*) from wish where id = #{id}
-   	</select> 
-   	
-   	<!-- email 존재여부  -->
-   <select id="memberEmailCount" resultType="int" parameterType="String">
-     SELECT COUNT(*)
-     FROM member
-     WHERE email=#{email}
-   </select>
-   	
-   	<!-- 아이디 찾기 -->
-   <select id="memIdFind" parameterType="String" resultType="String">
-   	SELECT id
-   	FROM member
-   	WHERE email=#{email}
-   </select>
-   
-   <!-- 비밀번호 찾기 -->
-   <select id="memPwdFind" parameterType="String" resultType="String">
-   	SELECT pwd
-   	FROM member
-   	WHERE email=#{email} 
-   </select>
-   <!-- 마이페이지  회원정보-->
-   	<select id="selectId" parameterType="String" resultType="MemberVO">
-   		SELECT * from MEMBER where id = #{id}
-   	</select>
+	<!-- login -->
+	<!-- 1. id 존재여부 -->
+	<select id="memberIdCount" resultType="int" parameterType="String">
+		SELECT COUNT(*)
+		FROM member
+		WHERE id=#{id}
+	</select>
+	<!-- 2. 비밀번호 확인 -->
+	<select id="memberGetPwd" resultType="MemberVO" parameterType="String">
+		SELECT pwd,admin,name,pay
+		FROM member
+		WHERE id=#{id}
+	</select>
+
+
+	<!-- 3. 회원가입 -->
+	<insert id="memberSignUp" parameterType="MemberVO">
+		INSERT INTO
+		member(id,pwd,name,email,tel,phone,addr1,addr2,sex,admin,pay,birthday)
+		VALUES(
+		#{id},
+		#{pwd},
+		#{name},
+		#{email},
+		#{tel},
+		#{phone},
+		#{addr1},
+		#{addr2},
+		#{sex},
+		#{admin},
+		#{pay},
+		#{birthday}
+		)
+	</insert>
+	<!-- 4. 회원탈퇴 -->
+	<delete id="memberDelete" parameterType="String">
+		DELETE FROM member
+		WHERE
+		id=#{id}
+	</delete>
+	<!-- 5. 회원수정 -->
+	<update id="memModify" parameterType="MemberVO">
+		UPDATE member SET
+		pwd=#{pwd},
+		email=#{email},
+		tel=#{tel},
+		phone=#{phone},
+		addr1=#{addr1},
+		addr2=#{addr2},
+		sex=#{sex},
+		birthday=#{birthday}
+		WHERE id=#{id}
+	</update>
+
+	<!-- 장바구니 개 수 출력 -->
+	<select id="MywishCount" parameterType="String" resultType="int">
+		select count(*) from wish where id = #{id}
+	</select>
+
+	<!-- email 존재여부 -->
+	<select id="memberEmailCount" resultType="int" parameterType="String">
+		SELECT COUNT(*)
+		FROM member
+		WHERE email=#{email}
+	</select>
+
+	<!-- 아이디 찾기 -->
+	<select id="memIdFind" parameterType="String" resultType="String">
+		SELECT
+		id
+		FROM member
+		WHERE email=#{email}
+	</select>
+
+	<!-- 비밀번호 찾기 -->
+	<select id="memPwdFind" parameterType="String" resultType="String">
+		SELECT pwd
+		FROM member
+		WHERE email=#{email}
+	</select>
+	<!-- 마이페이지 회원정보 -->
+	<select id="selectId" parameterType="String" resultType="MemberVO">
+		SELECT *
+		from MEMBER where id = #{id}
+	</select>
+	<!-- 캐시 충전 -->
+	<update id="memPayUpdate" parameterType="java.util.Map">
+		UPDATE member SET
+		pay=pay+#{cash}
+		WHERE id=#{id}
+	</update>
+	<!-- 현재 캐시 확인 -->
+	<select id="memChkPay" parameterType="String" resultType="int">
+		SELECT
+		pay
+		FROM member
+		WHERE id=#{id}
+	</select>
 	<!-- 쉐프 찾기 -->
 	<select id="chefAllData" resultType="MemberVO">
-		select id,name,addr1,pay,poster,reservecount,num,intro
-		from (select id,name,addr1,pay,poster,reservecount,rownum as num,intro
-		from (select id,name,addr1,pay,poster,reservecount,intro
-		from member where admin=2 order by reservecount desc))
-		where num &lt;6 
+		select
+		id,name,addr1,pay,poster,reservecount,num,intro
+		from (select
+		id,name,addr1,pay,poster,reservecount,rownum as num,intro
+		from (select
+		id,name,addr1,pay,poster,reservecount,intro
+		from member where admin=2
+		order by reservecount desc))
+		where num &lt;6
 	</select>
 </mapper>

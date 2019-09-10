@@ -18,10 +18,6 @@
 
 </head>
 
-
-
-
-
 <body>
 	<div class="hero-wrap hero-bread"
 		style="background-image: url('../main/images/bg_1.jpg');"></div>
@@ -30,64 +26,67 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-xl-7 ftco-animate">
-				<form id="join_frm" name="userInfo" method="post"
-					action="signUp_ok.do" class="signUp" onsubmit="return validate();">
+				<form method="post" action="cashPage_ok.do" class="Cash" onsubmit="return validate();">
 					<h3 class="mb-4 billing-heading">캐시 충전</h3>
 					<p style="border-bottom: solid">
 					<div style="border: 1px solid #444444; height: 600px;">
 
-						<div
-							style="margin: 20px; border: 1px solid gray; height: 100px;">
+						<div style="margin: 20px; border: 1px solid gray; height: 100px;">
 							<div class="col-md-6">
-								<div style="position: relative; bottom: -40px; right: -20px;">충전금액</div>
-								<div style="position: relative; bottom: -10px; right: -220px;">?원</div>
-								<div style="position: relative; top: -15px; right: -420px;">보유
-									캐쉬</div>
-
+								<div style="position: relative; bottom: -40px; right: -20px;">충전금액
+							</div>
+								<div id="charge" name="charge" style="position: relative; bottom: -10px; right: -100px;">
+								</div>
+								<div style="position: relative; top: -15px; right: -420px;">현재: ${sessionScope.pay}원</div>
+								
 							</div>
 						</div>
 
 						<div style="margin: 20px 20px -10px 20px;">충전금액선택</div>
 						<hr>
-						
+
 						<div class="col-md-10">
-						
-						<div style="margin: 20px 20px -10px 20px;">
-						<input type="radio" name="selectCash">1000원 
-						</div>
-						<div style="margin: 20px 20px -10px 20px; position: relative;right: -130px; top: -36px;">
-						<input name="selectCash" type="radio">5000원 
-						</div>
-						<div style="margin: 20px 20px -10px 20px;position: relative;right: -270px; top: -73px;">
-						<input name="selectCash" type="radio">10000원 
-						</div>
-						<div style="margin: -50px 20px -10px 20px;">
-						<input name="selectCash" type="radio">직접입력　<input type="text" style="width: 100px;">원
-						</div>		
-							
+
+							<div style="margin: 20px 20px -10px 20px;">
+								<input type="radio" name="selectCash" value="1000">1000원
+							</div>
+							<div
+								style="margin: 20px 20px -10px 20px; position: relative; right: -130px; top: -36px;">
+								<input type="radio" name="selectCash" value="5000">5000원
+							</div>
+							<div
+								style="margin: 20px 20px -10px 20px; position: relative; right: -270px; top: -73px;">
+								<input type="radio" name="selectCash" value="10000">10000원
+							</div>
+							<div style="margin: -50px 20px -10px 20px;">
+								<input type="radio" name="selectCash" value="직접입력">직접입력   <input
+									type="text" name="money" id="money" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" readonly="readonly" style="width: 100px;">원
+							</div>
+
 						</div>
 						<div style="margin: 100px 20px -10px 20px;">결제수단선택</div>
 						<hr style="margin-bottom: 20px;">
-						
-						
-						
-						
+
+
+
+
 						<div style="margin: 20px 20px -10px 20px;">
-						<input name="selectSudan"type="radio">무통장 입금
-						<input name="selectSudan"type="radio">쿠폰등록
+							<input name="paymentMethod" type="radio">무통장 입금 <input
+								name="paymentMethod" type="radio">쿠폰등록
 						</div>
-					
-						
-							<div class="col-md-10" style="position: relative; bottom: -100px; right: -200px;">
+
+
+						<div class="col-md-10"
+							style="position: relative; bottom: -100px; right: -200px;">
 							<input type="submit" value="충전하기">
-							<input type="submit" value="취소하기">
-							</div>
-						
+							<input type="button" value="취소하기">
+						</div>
+
 
 					</div>
-					</form>
+				</form>
 			</div>
-		
+
 
 		</div>
 
@@ -95,4 +94,24 @@
 	</div>
 	</section>
 </body>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('input:radio[name="selectCash"]').change(function() {
+			$('#money').val("");
+			if ($(this).val() == "직접입력") {
+				$('#money').attr("readonly", false);
+			} else {
+				$('#money').attr("readonly", true);
+				$('#money').val($(this).val());
+				$('#charge').text($(this).val());
+			}
+		});
+		
+		$('#money').keyup(function(){
+			$('#charge').text($('#money').val());
+		});
+
+	});
+</script>
 </html>

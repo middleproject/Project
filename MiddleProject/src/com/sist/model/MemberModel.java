@@ -2,6 +2,7 @@ package com.sist.model;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
@@ -31,6 +32,7 @@ public class MemberModel {
 			session.setAttribute("name", vo.getName());
 			session.setAttribute("admin", vo.getAdmin());
 			session.setAttribute("pay", vo.getPay());
+			
 		}
 		/*
 		 * System.out.println("아이디:" + id); System.out.println("이름:" +
@@ -147,14 +149,6 @@ public class MemberModel {
 	public String memIdFind_ok(Model model) {
 		String email = model.getRequest().getParameter("email");
 		String id = MemberDAO.memIdFind(email);
-		/*
-		 * if(!id.equals("ERROR")){ HttpSession session =
-		 * model.getRequest().getSession(); session.setAttribute("id", id); }
-		 */
-		/*
-		 * System.out.println("email: " + email); System.out.println("id: " +
-		 * id);
-		 */
 
 		model.addAttribute("result", id);
 
@@ -179,14 +173,44 @@ public class MemberModel {
 		model.addAttribute("result", result);
 		return "../member/pwdFind_ok.jsp";
 	}
-
+	
 	// 회원 탈퇴
-	@RequestMapping("member/deleteUser.do")
-	public String deleteUser_ok(Model model) {
-		String id = model.getRequest().getParameter("id");
-
-		MemberDAO.memberDelete(id);
+	@RequestMapping("member/memberDelete.do")
+	public String member_delete(Model model) {
+		model.addAttribute("main_jsp", "../member/memberDelete.jsp");
 		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("member/memberDel_ok.do")
+	public String deleteUser_ok(Model model) {
+		try {
+			model.getRequest().setCharacterEncoding("UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		String msg = "";
+		HttpSession session = model.getRequest().getSession();
+
+		String id = model.getRequest().getParameter("id");
+		String pwd = model.getRequest().getParameter("pwd");
+
+		msg = MemberDAO.memberDelete(id, pwd);
+		if(msg == "OK") {
+			session.invalidate();
+			Cookie[] cookies = model.getRequest().getCookies();
+			// 쿠키 삭제(수명 0)
+			if (cookies != null) {
+				for (Cookie c : cookies) {
+					c.setMaxAge(0);
+					model.getResponse().addCookie(c);
+				}
+			}
+		}
+		
+		model.addAttribute("msg", msg);
+		
+		return "../member/memberDel_ok.jsp";
 
 	}
 
@@ -208,9 +232,9 @@ public class MemberModel {
 	public String idcheck_result(Model model) {
 		String id = model.getRequest().getParameter("id");
 		int count = MemberDAO.IdCheck(id);
-		System.out.println("======================");
+		/*System.out.println("======================");
 		System.out.println(id);
-		System.out.println(count);
+		System.out.println(count);*/
 		model.addAttribute("result", count);
 
 		return "../member/idcheck_result.jsp";
@@ -222,11 +246,35 @@ public class MemberModel {
 		model.addAttribute("main_jsp", "../member/cashPage.jsp");
 		return "../main/main.jsp";
 	}
-	@RequestMapping("member/memberDelete.do")
-	public String member_delete(Model model) {
-		model.addAttribute("main_jsp", "../member/memberDelete.jsp");
-		return "../main/main.jsp";
+	@RequestMapping("member/cashPage_ok.do")
+	public String member_cash_ok(Model model) {
+		HttpSession session = model.getRequest().getSession();
+		Map cashMap = new HashMap();
+		
+		String id = (String)session.getAttribute("id");
+		String money = model.getRequest().getParameter("money");
+		System.out.println("충전금액: " + money);
+		System.out.println("아이디: " + id);
+		
+		cashMap.put("cash", Integer.parseInt(money));
+		cashMap.put("id", id);
+		
+		try {
+			MemberDAO.memPayUpdate(cashMap);			// 캐시 추가
+			int currentCash = MemberDAO.memChkPay(id);	// 현재 캐시 확인
+			
+			session.setAttribute("pay", currentCash);		
+			model.addAttribute("result", "OK");
+			model.addAttribute("curCash", currentCash);
+		} catch (Exception e) {
+			model.addAttribute("result", "FAIL");
+			System.out.println("캐쉬충전오류");
+			e.printStackTrace();
+		}
+
+		return "../member/cashPage_ok.jsp";
 	}
+	
 	
 	
 
