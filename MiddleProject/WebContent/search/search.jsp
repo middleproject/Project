@@ -84,7 +84,6 @@ $(function(){
 		var ingre = $('#choice').val();
 		var info = $(this).attr("data-difficultystep");
 		var ingre2 = $('#choice3').val();
-		alert(ingre+info+ingre2);
 		$.ajax({
 			type:'post',
 			url:'../search/searchingre.do',
