@@ -30,9 +30,9 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
 	          <div class="row slider-text justify-content-center align-items-center doHyeon" data-scrollax-parent="true">
 	            <div class="col-md-12 ftco-animate text-center">
 	              
-	              <h1 class="mb-2">I have no any sanggak &amp; because</h1>
-	              <h2 class="subheading mb-4">I have no any sanggak  &amp; because</h2>
-	              <p><a href="../recipe/recipe_list.do" class="btn btn-primary">최근 등록된 따끈따근한 레시피</a></p>
+	              <h1 class="mb-2">Recently Registered &amp; Recipe</h1>
+	              <h2 class="subheading mb-4">최근 등록된  &amp; 따끈따끈한 레시피</h2>
+	              <p><a href="../recipe/recipe_list.do" class="btn btn-primary">최근 등록된 레시피</a></p>
 	            </div>
 
 	          </div>
@@ -45,8 +45,13 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
 	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
 	            <div class="col-sm-12 ftco-animate text-center">
+
+	              <h1 class="mb-2">Notice</h1>
+	              <h2 class="subheading mb-4">Notice &amp; of the Week </h2>
+
 	              <h1 class="mb-2">@@@@hi hello &amp; JSP</h1>
 	              <h2 class="subheading mb-4">Spring &amp; JAVA </h2>
+
 	              <p><a href="../databoard/databoard_list.do" class="btn btn-primary">금주의 공지사항</a></p>
 	            </div>
 
@@ -60,9 +65,15 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
 	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
 	            <div class="col-sm-12 ftco-animate text-center">
+
+	              <h1 class="mb-2">I have any sangak </h1>
+	              <h2 class="subheading mb-4">I have any  &amp; sangak </h2>
+	              <p><a href="#" class="btn btn-primary">yes</a></p>
+
 	              <h1 class="mb-2">hi hello &amp; Spring</h1>
 	              <h2 class="subheading mb-4">nodes.js  &amp; JAVA </h2>
 	              <p><a href="../search/search.do" class="btn btn-primary">원하는 레시피를 찾아보세요!!</a></p>
+
 	            </div>
 
 	          </div>
@@ -98,7 +109,7 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
               <div class="media-body">
                 <!-- <h3 class="heading">예약하기</h3>    -->   
                 <c:if test="${sessionScope.id!=null }">
-		         	 <h3 class="heading"><a href="../reserve/reserve.do" class="jua">예약하기</a></h3>
+		         	 <h3 class="heading"><a href="../reserve/reserve.do">예약하기</a></h3>
 		         </c:if>
 		         <c:if test="${sessionScope.id==null }">
 		         	 <h3 class="heading"><a onclick="javascript:alert('로그인을 하세요');">예약하기</a></h3>
@@ -114,7 +125,12 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
             		<span class="flaticon-award"></span>
               </div>
               <div class="media-body">
-                <h3 class="heading">지갑충전</h3>
+                <c:if test="${sessionScope.id!=null }">
+		         	 <h3 class="heading"><a href="../member/cashPage.do">지갑충전</a></h3>
+		         </c:if>
+		         <c:if test="${sessionScope.id==null }">
+		         	 <h3 class="heading"><a onclick="javascript:alert('로그인을 하세요');">지갑충전</a></h3>
+		         </c:if>   
                 <span>Check the diet list</span>
               </div>
             </div>      
