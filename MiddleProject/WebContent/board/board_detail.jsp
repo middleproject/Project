@@ -114,7 +114,7 @@ var u= 0;
 										<c:forEach var="i" begin="1" end="${rvo.group_tab }">
 											&nbsp;&nbsp;
 										</c:forEach>
-										<img src="re4.png" width="15px" height="15px">
+										<img src="re4.png" width="15px" height="15px"> 
 									</c:if>
 									<font color="red">♥</font><font color="grey"><b>${rvo.name }</b></font><font color="red">♥</font>&nbsp;&nbsp;${rvo.dbday }
 								</th>
