@@ -236,18 +236,18 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
         <div class="row ftco-animate">
           <div class="col-md-12">
             <div class="carousel-testimony owl-carousel">
-            <c:forEach var="mvo" items="${mList }">
+            <c:forEach var="mvo" items="${mList }" varStatus="s">
               <div class="item">
                 <div class="testimony-wrap p-4 pb-5">
                   <div class="user-img mb-5" style="background-image: url(${mvo.poster})">
                     <span class="quote d-flex align-items-center justify-content-center">
                       <i class="icon-quote-left"></i>
-                    < /span>
+                    </span>
                   </div>
                   <div class="text text-center">
                     <p class="mb-5 pl-4 line">${mvo.intro }</p>
                     <p class="name">${mvo.name }</p>
-                    <span class="position">Team member6</span>
+                    <span class="position">member${s.index }</span>
                   </div>
                 </div>
               </div>
