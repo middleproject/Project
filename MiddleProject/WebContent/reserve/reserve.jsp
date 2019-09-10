@@ -22,8 +22,8 @@
         /* Modal Content/Box */
         .modal-content {
             background-color: #fefefe;
-            margin: 5% auto; /* 15% from the top and centered */
-            padding: 20px;
+            margin: 2% auto; /* 15% from the top and centered */
+            padding: 10px;
             border: 1px solid #888;
             width: 50%; /* Could be more or less, depending on screen size */                          
         }
