@@ -115,6 +115,15 @@ border: 1px solid black;
                      </div>
                      
                      
+                   
+                     
+                     <div class="float-unit"  ><p class="font" >최근에 본 레시피<p>
+                     <div class="w-100"></div>
+                     <img src="images/nun.jpeg" alt="My Image" width="90px" height="90px">
+                     <P style="margin-top: 10px;">총 ?개를 봤어요</P>
+                     <a href="../recipe/lately.do" type="button" class="btn">보러가기</a>
+                     </div>
+                     
                      
                      <div class="float-unit"  ><p class="font" >회원탈퇴<p>
                      <div class="w-100"></div>
