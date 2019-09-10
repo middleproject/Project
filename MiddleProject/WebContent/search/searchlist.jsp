@@ -18,7 +18,7 @@ $(function(){
 		$.ajax({
 			type:'post',
 			url:'../search/searchingre.do',
-			data:{ingre:ingredetailname},
+			data:{ingre2:ingredetailname},
 			success:function(response)
 			{
 				$('#searchingre').html(response);

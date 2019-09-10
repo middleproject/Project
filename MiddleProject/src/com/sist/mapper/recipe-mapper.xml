@@ -283,4 +283,17 @@
 	<delete id="todayHitDelete" parameterType="int">
 		delete from todayHit where recipeno = #{recipeno}
 	</delete>
+	<!-- 날짜 초기화  선택-->
+	<select id="homeCount" resultType="int">
+		select count(*) from visit where NOT TO_CHAR(regdate,'YYYY-MM-DD') = TO_CHAR(sysdate,'YYYY-MM-DD') and name='today'
+	</select>
+	<update id="homeCountUpdate" parameterType="String">
+		update visit set hit = 0 where name = #{name}
+	</update>
+	<update id="homeUpade">
+		update visit set hit = hit+1;
+	</update>
+	<select id="selectVisit" parameterType="String" resultType="int">
+		select hit from visit where name=#{name}
+	</select>
 </mapper>

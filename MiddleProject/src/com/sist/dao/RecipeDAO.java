@@ -520,4 +520,41 @@ public class RecipeDAO {
 				if(session!=null) session.close();
 			} 
 	   }
+	   public static int homeCount(){
+		   int count =0;
+		   SqlSession session = null;
+		   try {
+				session = ssf.openSession();
+				count = session.selectOne("homeCount");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally{
+				if(session!=null) session.close();
+			} 
+		   return count;
+	   }
+	   // 오늘 아니면 초기화!
+	   public static void zeroupdate(String name){
+		   SqlSession session = null;
+		   try {
+				session = ssf.openSession();
+				session.update("homeCountUpdate",name);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally{
+				if(session!=null) session.close();
+			} 
+	   }
+	   // 전체와 투데이 히트 업데이트
+	   public static void homeUpdate(){
+		   SqlSession session = null;
+		   try {
+				session = ssf.openSession();
+				session.update("homeUpade");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally{
+				if(session!=null) session.close();
+			} 
+	   }
 }

@@ -69,7 +69,13 @@ public class MainModel {
 		// 탑 5쉐프
 		List<MemberVO> mList = new ArrayList<MemberVO>();
 		mList = MemberDAO.chefAllData();
-		
+		// 조회수 !
+				int visitCount=0;
+				visitCount = RecipeDAO.homeCount();
+				if(visitCount!=0){
+					RecipeDAO.zeroupdate("today");
+				}
+				RecipeDAO.homeUpdate();
 		
 		session.setAttribute("mList", mList);
 		session.setAttribute("rlist", rlist);

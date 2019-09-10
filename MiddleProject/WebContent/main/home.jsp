@@ -32,7 +32,7 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
 	              
 	              <h1 class="mb-2">I have no any sanggak &amp; because</h1>
 	              <h2 class="subheading mb-4">I have no any sanggak  &amp; because</h2>
-	              <p><a href="#" class="btn btn-primary">최근 인기있는 요리법</a></p>
+	              <p><a href="../recipe/recipe_list.do" class="btn btn-primary">최근 등록된 따끈따근한 레시피</a></p>
 	            </div>
 
 	          </div>
@@ -47,7 +47,7 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
 	            <div class="col-sm-12 ftco-animate text-center">
 	              <h1 class="mb-2">@@@@hi hello &amp; JSP</h1>
 	              <h2 class="subheading mb-4">Spring &amp; JAVA </h2>
-	              <p><a href="#" class="btn btn-primary">오라클 사세요</a></p>
+	              <p><a href="databoard/databoard_list.do" class="btn btn-primary">금주의 공지사항</a></p>
 	            </div>
 
 	          </div>
