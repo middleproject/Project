@@ -115,14 +115,15 @@
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item active jua"><a href="../main/main.do" class="jua">홈</a></li>
 	          <li class="nav-item"><a href="../search/search.do" class="jua">검색</a></li>
-	         <li class="nav-item dropdown">
+	          <li class="nav-item"><a href="../recipe/recipe_list.do" class="jua">요리보기</a></li>
+	        <!--  <li class="nav-item dropdown">
               <a class="dropdown-toggle jua" href="../recipe/recipe_list.do" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">요리</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
               	<a class="dropdown-item jua" href="../recipe/recipe_list.do">요리보기</a>
               	<a class="dropdown-item jua" href="#">식단</a>
                 <a class="dropdown-item jua" href="#">좋아하는 요리</a>
               </div>
-            </li>
+            </li> -->
 	         <li class="nav-item dropdown">
               <a class="jua dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">게시판</a>
               <div class="dropdown-menu jua" aria-labelledby="dropdown04">
@@ -144,7 +145,6 @@
 	         </c:if>
 	          
 	         
-	          <li class="nav-item"><a href="#" class="jua">실시간 상담</a></li>
 	          <c:if test="${sessionScope.admin==0 || sessionScope.admin==2 }">
 	            <li class="nav-item dropdown">
 	              	  <a class="jua dropdown-toggle" href="#" id="dropdown06" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">회원정보</a>
