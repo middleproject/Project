@@ -162,10 +162,10 @@ $(function(){
         /* Modal Content/Box */
         .modal-content {
             background-color: #fefefe;
-            margin: 5% auto; /* 15% from the top and centered */
-            padding: 20px;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 10px;
             border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */                          
+            width: 90%; /* Could be more or less, depending on screen size */                          
         }
         /* The Close Button */
         .close {

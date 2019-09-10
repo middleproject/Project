@@ -175,9 +175,9 @@ public class RecipeModel {
 		int wishCount = 0;
 		if(id!=null) wishCount = RecipeDAO.wishCount(wvo);
 		
-/*		List<IngredetailVO> homeList = new ArrayList<IngredetailVO>(); // 인그리 디테일 받을 값
+		List<IngredetailVO> homeList = new ArrayList<IngredetailVO>(); // 인그리 디테일 받을 값
 		List<IngredetailVO> lotteList = new ArrayList<IngredetailVO>();
-		List<IngredetailVO> emartList = new ArrayList<IngredetailVO>();*/
+		List<IngredetailVO> emartList = new ArrayList<IngredetailVO>();
 		List<String> ilist = new ArrayList<String>(); // 인그리 디테일 넘길 값
 		List<RecipeVO> list = new ArrayList<RecipeVO>();
 		// 로그인 세션
@@ -214,7 +214,7 @@ public class RecipeModel {
 				complete = vo.getComplete().substring(0,vo.getComplete().indexOf(","));
 				model.addAttribute("complete", complete);
 			}
-			/*if(vo.getIngre()!=null){
+			if(vo.getIngre()!=null){
 				StringTokenizer st = new StringTokenizer(vo.getIngre(),",");
 				while(st.hasMoreTokens()){
 					ilist.add(st.nextToken());
@@ -238,7 +238,7 @@ public class RecipeModel {
 						}
 				}
 				model.addAttribute("ilist", ilist);
-			}*/
+			}
 			if(vo.getTag()!=null){
 				tagStr = vo.getTag().split(",");
 				map.put("tagStr", tagStr);
@@ -277,7 +277,7 @@ public class RecipeModel {
 			DataBoardReplyVO replyvo = new DataBoardReplyVO();
 			replyvo.setBno(Integer.parseInt(no));
 			model.addAttribute("replylist", replylist);
-			
+			model.addAttribute("ilist", ilist);
 			model.addAttribute("wishCount", wishCount);
 			model.addAttribute("folloCount", folloCount);
 			model.addAttribute("count", ilist.size());
