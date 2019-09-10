@@ -24,16 +24,18 @@
     WHERE ino=#{ino} and mno=1
   </select> 
   <select id="searchIngreData" resultType="RecipeVO" parameterType="hashmap">
-    SELECT *
-    FROM recipe
-    where	rownum &lt;=12
-				  <if test="ingre2!=null and ingre2!=''">
+    SELECT no,summary,summary_in,poster,made,hit,num
+    from (select no,summary,summary_in,poster,made,hit,rownum as num
+    from (select no,summary,summary_in,poster,made,hit
+    from recipe <where>
+    			<if test="ingre2!=null and ingre2!=''">
 					and ingre LIKE '%'||#{ingre2}||'%'
 				</if> 
 				<if test="info!=null and info!=''">
 					and info LIKE '%'||#{info}||'%'
 				</if>  
-		
+    			</where>))
+    where	rownum &lt;=12
   </select>
  
   <select id="DifficultyListData" resultType="DifficultyVO">

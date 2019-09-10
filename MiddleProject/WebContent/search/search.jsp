@@ -83,6 +83,7 @@ $(function(){
 	$('.difficulty').click(function(){
 		var ingre = $('#choice').val();
 		var info = $(this).attr("data-difficultystep");
+		$('#choice2').val(info);
 		var ingre2 = $('#choice3').val();
 		$.ajax({
 			type:'post',
