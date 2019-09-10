@@ -84,30 +84,37 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
               </div>
               
               <div class="media-body">
-              	
                 <h3 class="heading"><a href="../recipe/recipeRegister.do">레시피 등록</a></h3>
                 <span>Recipe Registration</span>
               </div>
             </div>      
           </div>
+          
           <div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services mb-md-0 mb-4">
               <div class="icon bg-color-2 d-flex justify-content-center align-items-center mb-2">
             		<span class="flaticon-diet"></span>
               </div>
               <div class="media-body">
-                <h3 class="heading">예약하기</h3>
+                <!-- <h3 class="heading">예약하기</h3>    -->   
+                <c:if test="${sessionScope.id!=null }">
+		         	 <h3 class="heading"><a href="../reserve/reserve.do" class="jua">예약하기</a></h3>
+		         </c:if>
+		         <c:if test="${sessionScope.id==null }">
+		         	 <h3 class="heading"><a onclick="javascript:alert('로그인을 하세요');">예약하기</a></h3>
+		         </c:if>         
                 <span>Recipe reservation</span>
               </div>
             </div>    
           </div>
+          
           <div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services mb-md-0 mb-4">
               <div class="icon bg-color-3 d-flex justify-content-center align-items-center mb-2">
             		<span class="flaticon-award"></span>
               </div>
               <div class="media-body">
-                <h3 class="heading">식단 구경</h3>
+                <h3 class="heading">지갑충전</h3>
                 <span>Check the diet list</span>
               </div>
             </div>      
@@ -118,7 +125,7 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
             		<span class="flaticon-customer-service"></span>
               </div>
               <div class="media-body">
-                <h3 class="heading">문의하기</h3>
+                <h3 class="heading"><a href="../bQnA/qboard_list.do">문의하기</a></h3>
                 <span>24/7 Support</span>
               </div>
             </div>      
