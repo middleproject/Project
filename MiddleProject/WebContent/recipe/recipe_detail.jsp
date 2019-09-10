@@ -378,15 +378,7 @@ $(function(){
                 </div>
               </form>
             </div>
-            <div class="sidebar-box ftco-animate">
-            	<h3 class="heading">Categories</h3>
-              <ul class="categories">
-                <li><a href="#">Vegetables <span>(12)</span></a></li>
-                <li><a href="#">Fruits <span>(22)</span></a></li>
-                <li><a href="#">Juice <span>(37)</span></a></li>
-                <li><a href="#">Dries <span>(42)</span></a></li>
-              </ul>
-            </div>
+            
 
             <div class="sidebar-box ftco-animate">
               <h3 class="heading">Related Recipe</h3>
@@ -421,10 +413,7 @@ $(function(){
               </div>
             </div>
 
-            <div class="sidebar-box ftco-animate">
-              <h3 class="heading">Paragraph</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-            </div>
+            
 			</div>
 			
 		</div>
