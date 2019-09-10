@@ -60,7 +60,7 @@ $(function difficulty(){
 		
 		
 		$('#difficultystep').text(difficultystep);
-		
+		$('#choice2').val(difficultystep);
 		$.ajax({
 			type:'post',
 			url:'../search/difficultylist.do',
@@ -80,6 +80,7 @@ $(function(){
 		var ingreno=$(this).attr("data-no");
 		$('#ingreposter').attr("src",ingreposter);
 		$('#ingrename').text(ingrename);
+		$('#choice').val(ingrename);
 		
 		$.ajax({
 			type:'post',
@@ -92,14 +93,17 @@ $(function(){
 			}
 		});
 	});
-});
-
-$(function(){
-	$('#searchbutton').click(function(){
-		var key = $('#key').val();
-		location.href="../recipe/recipe_list.do?key="+key;
+	
+	$('.searchButton').click(function(){
+		var key = $('.searchTerm').val();
+		var ingre = $('#choice').val();
+		var info = $('#choice2').val();
+		
+		location.href="../recipe/recipe_list.do?key="+key+"&ingre="+ingre+"&info="+info;
 	});
 });
+
+
 </script>
 </head>
 <body>
@@ -117,9 +121,9 @@ $(function(){
       <div class="container py-4">
         <div class="row d-flex justify-content-center py-5">
           <div class="col-md-6 d-flex align-items-center">
-           <form class="search">
-  <input type="text" class="searchTerm"  id="key"/><input class="searchButton" type="submit" id="searchbutton" />
-</form>
+           <<div class="search">
+  			<input type="text" class="searchTerm"/><input class="searchButton" type="button"  />
+			</div>
 
           </div>
         </div>
@@ -132,14 +136,15 @@ $(function(){
     				<ul class="product-category" >
     				 <c:forEach var="vo" items="${list }">
     					  <li class="ingrelist" data-name="${vo.ingrename }" data-no="${vo.ingreno }"><a class="active">${vo.ingrename }</a></li>
-    					</c:forEach> 
+    					</c:forEach>
+    					<input type="hidden" id="choice" > 
     					<br><br>
     					<div id="searchlist"></div>
     					<br>
     					<c:forEach var="dvo" items="${dlist }">
     					<li class="difficulty" data-difficultystep="${dvo.difficultystep }"><a class="active">${dvo.difficultystep }</a></li>
     					</c:forEach>
-    					
+    					<input type="hidden" id="choice2" >
     					
     					
     				</ul>
