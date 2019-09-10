@@ -65,17 +65,15 @@ $(function() {
 </script>
 </head>
 <body>
-	<div class="hero-wrap hero-bread"
-		style="background-image: url('../main/images/bg_3.jpg');">
-		<div class="container">
+	 <div class="hero-wrap hero-bread" style="background-image: url('../main/images/bg_2.jpg');">
+      <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p><span class="mr-2"><a href="../main/main.do">Home</a></span></p>
-            <h1 class="mb-4">수정하기</h1>
+            <h1 class="mb-0 bread" class="jua">수정하기</h1>
           </div>
         </div>
       </div>
-		</div>
+    </div>
 <section class="ftco-section ftco-degree-bg">
 <div class="container">
 		<div class="row">

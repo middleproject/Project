@@ -864,7 +864,7 @@ public class BoardModel {
 				try {
 					model.getRequest().setCharacterEncoding("UTF-8");
 					
-					String path="c:\\mvcDev\\mvcStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\MiddleProject8\\main";
+					String path="c:\\mvcDev\\mvcStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\MiddleProject\\main";
 					String enctype="UTF-8";
 					int size=100*1024*1024; //최대한으로 들어갈수있는 파일 크기가 100메가(1024KB, 1024*1024KB=MB)
 					
