@@ -47,7 +47,7 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
 	            <div class="col-sm-12 ftco-animate text-center">
 	              <h1 class="mb-2">@@@@hi hello &amp; JSP</h1>
 	              <h2 class="subheading mb-4">Spring &amp; JAVA </h2>
-	              <p><a href="databoard/databoard_list.do" class="btn btn-primary">금주의 공지사항</a></p>
+	              <p><a href="../databoard/databoard_list.do" class="btn btn-primary">금주의 공지사항</a></p>
 	            </div>
 
 	          </div>
@@ -62,7 +62,7 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
 	            <div class="col-sm-12 ftco-animate text-center">
 	              <h1 class="mb-2">hi hello &amp; Spring</h1>
 	              <h2 class="subheading mb-4">nodes.js  &amp; JAVA </h2>
-	              <p><a href="#" class="btn btn-primary">JAVA 사세요</a></p>
+	              <p><a href="../search/search.do" class="btn btn-primary">원하는 레시피를 찾아보세요!!</a></p>
 	            </div>
 
 	          </div>
