@@ -52,8 +52,6 @@ public class MypageModel {
 		String pwd = model.getRequest().getParameter("pwd"); // 비밀번호
 		String name = model.getRequest().getParameter("name"); // 이름
 		String sex = model.getRequest().getParameter("sex"); // 성별
-		String email1 = model.getRequest().getParameter("email1");
-		String email2 = model.getRequest().getParameter("email2");
 		String tel1 = model.getRequest().getParameter("tel1"); // 집전화
 		String tel2 = model.getRequest().getParameter("tel2");
 		String tel3 = model.getRequest().getParameter("tel3");
@@ -67,7 +65,7 @@ public class MypageModel {
 		String exAddr = model.getRequest().getParameter("exAddr"); // 참고항목
 		String birthday = model.getRequest().getParameter("birthday"); // 생년월일
 		
-		String email = email1 + "@" + email2; // aaa@aaa.com
+		
 		String tel = tel1 + tel2 + tel3; // 02-222-111
 		String phone = phone1 + phone2 + phone3; // 010-2020-1818
 		Date date = Date.valueOf(birthday);
@@ -76,7 +74,6 @@ public class MypageModel {
 		System.out.println("id:" + id);
 		System.out.println("pwd:" + pwd);
 		System.out.println("name:" + name);
-		System.out.println("email:" + email);
 		System.out.println("tel:" + tel);
 		System.out.println("phone:" + phone);
 		System.out.println("addr1:" + zipcode);
@@ -87,7 +84,6 @@ public class MypageModel {
 		MemberVO vo = MemberDAO.memberAllData(id);
 		try {
 			vo.setPwd(pwd);
-			vo.setEmail(email);
 			vo.setTel(tel);
 			vo.setPhone(phone);
 			vo.setAddr1(zipcode);

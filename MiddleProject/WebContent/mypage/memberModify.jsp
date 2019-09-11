@@ -110,7 +110,7 @@ $(function(){
 							<div class="col-md-6">
 								<div class="form-group">
 									<div style="color:red;">* <label class="font">아이디</label> <input type="text" class="textbox"
-										placeholder="영문,숫자 조합가능" id="id" name="id" value="${vo.id }" required>
+										placeholder="영문,숫자 조합가능" id="id" name="id" value="${vo.id }" readonly="readonly" required>
 								</div>
 								</div>
 							</div>
@@ -138,7 +138,7 @@ $(function(){
 							<div class="col-md-4" style="margin-top: -20px;">
 								<div class="form-group">
 									<div style="color:red;">*<label class="font">이름</label> <input type="text" class="textbox"
-										placeholder="" id="name" name="name" class="name" value="${vo.name }" required>
+										placeholder="" id="name" name="name" class="name" value="${vo.name }" readonly="readonly" required>
 								</div>
 								</div>
 							</div>
@@ -158,7 +158,7 @@ $(function(){
 							</div>
 
 							<div class="w-100"></div>
-							<div class="col-md-4">
+							<div class="col-md-8">
 								<div class="form-group">
 									<div style="color:red;">*<label class="font">생년월일</label> <input type="date" class="textbox"
 										id="birthday" name="birthday" placeholder="생년월일을 선택해주세요" 
@@ -168,14 +168,14 @@ $(function(){
 							</div>
 
 							<div class="w-100"></div>
-							<div class="col-md-4">
+							<div class="col-md-12">
 								<div class="form-group">
 									<div style="color:red;">*<label class="font">이메일</label> <input type="text" id="email1"
-										 class="textbox" name="email1" style="width: 230px; mar " required>
+										 class="textbox" name="email1" style="width: 230px; mar " value="${vo.email }" required>
 								</div>
 								</div>
-							</div>
-
+							</div> 
+						<!-- 
 							<div class="col-md-0">
 								<div class="form-group">
 									<label>@</label>
@@ -187,7 +187,7 @@ $(function(){
 									<input type="text" id="email2"class="textbox" name="email2" style="width: 230px; position: relative; right: -10px;">
 									
 								</div>
-							</div>
+							</div> 
 							<div class="col-md-0">
 								<div class="form-group">
 									<select id="emailSelection" name="emailSelection"
@@ -200,7 +200,7 @@ $(function(){
 									</select>
 								</div>
 							</div>
-
+							-->
 
 
 							<div class="w-100"></div>
@@ -344,7 +344,7 @@ $(function(){
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-	$(function() {
+	/* $(function() {
 		$('select[name="emailSelection"]').change(function() {
 			if ($(this).val() == "직접입력") {
 				$('#email2').val("");
@@ -354,7 +354,7 @@ $(function(){
 				$("#email2").attr("readonly", true);
 			}
 		});
-	});
+	}); */
 </script>
 
 

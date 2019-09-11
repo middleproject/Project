@@ -45,7 +45,6 @@
 	<update id="memModify" parameterType="MemberVO">
 		UPDATE member SET
 		pwd=#{pwd},
-		email=#{email},
 		tel=#{tel},
 		phone=#{phone},
 		addr1=#{addr1},
