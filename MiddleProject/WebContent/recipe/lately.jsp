@@ -15,7 +15,7 @@
 	<section class="ftco-section" >
 	<div class="container" >
 		<div class="row justify-content-center" >
-				<p style="position: relative; left: -350px;">총 ?개의 맛있는 레시피가 있습니다.</p>	
+				<p style="position: relative; left: -350px;">최근 본 레시피</p>	
 
 				<div class="col-md-14" style="text-align: center; margin-left: 100px;">
 				<c:forEach var="vo" items="${list }">
@@ -39,19 +39,6 @@
 									</div>
 								</div>
 							</div>
-							<!--     						 <div class="bottom-area d-flex px-3">
-	    						<div class="m-auto d-flex">
-	    							<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-	    								<span><i class="ion-ios-menu"></i></span>
-	    							</a>
-	    							<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-	    								<span><i class="ion-ios-cart"></i></span>
-	    							</a>
-	    							<a href="#" class="heart d-flex justify-content-center align-items-center ">
-	    								<span><i class="ion-ios-heart"></i></span>
-	    							</a>
-    							</div>
-    						</div>  -->
 						</div>
 					</div>
 					</c:forEach>

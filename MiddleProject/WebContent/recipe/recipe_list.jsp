@@ -23,7 +23,7 @@ $(function(){
       <div class="container">
      	<div>
 			<c:if test="${key!=null && key.trim()!='' }">
-					<h2 class="text-center">'${key }' 검색 결과 입니다</h2><br>
+					<h2 class="text-center">검색 결과 입니다</h2><br>
 				</c:if>
 				</div>
         <div class="row">
@@ -100,10 +100,7 @@ $(function(){
               </div>
             </div>
 
-            <div class="sidebar-box ftco-animate">
-              <h3 class="heading">최근 인기 쉐프?</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-            </div>
+    
           </div>
                 </div>
                 

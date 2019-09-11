@@ -15,7 +15,7 @@
 	<section class="ftco-section" >
 	<div class="container" >
 		<div class="row justify-content-center" >
-				<p style="position: relative; left: -350px;">총 ?개의 맛있는 레시피가 있습니다.</p>	
+				<p style="position: relative; left: -350px;">찜한 레시피.</p>	
 
 				<div class="col-md-14" style="text-align: center; margin-left: 100px;">
 				<c:forEach var="vo" items="${list }">

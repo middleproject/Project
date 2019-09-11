@@ -35,7 +35,10 @@ $(function(){
         }
     }
 	
-	
+    $('#search').click(function(){
+		var key = $('#key').val();
+		location.href="../recipe/recipe_list.do?key="+key;
+	});
 	
 	$('#myBtn').click(function(){
 		var no=$(this).attr("title");
@@ -370,11 +373,11 @@ $(function(){
 					
 				</div>
 				    <div class="col-lg-4 sidebar ftco-animate">
-            <div class="sidebar-box">
+             <div class="sidebar-box">
               <form action="#" class="search-form">
                 <div class="form-group">
-                  <span class="icon ion-ios-search"></span>
-                  <input type="text" class="form-control" placeholder="Search...">
+                  <span class="icon ion-ios-search" id="search"></span>
+                  <input type="text" class="form-control" placeholder="Search..." id="key">
                 </div>
               </form>
             </div>
