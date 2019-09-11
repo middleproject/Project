@@ -155,8 +155,8 @@
 		order by regdate desc)
 	</select> -->
 	<select id="madeSearchRecipe" resultType="int" parameterType="FollowVO">
-		select no,num
-		from (select no,poster,summary,summary_in,hit,regdate,rownum as num,made 
+		select no
+		from (select no,poster,summary,summary_in,hit,regdate,made 
 		from recipe where
 				made LIKE '%'||#{follow}||'%' and #{day} &lt;= TO_CHAR(regdate,'YYYY-MM-DD') 
 		order by regdate desc)
@@ -288,7 +288,7 @@
 		select count(*) from visit where NOT TO_CHAR(regdate,'YYYY-MM-DD') = TO_CHAR(sysdate,'YYYY-MM-DD') and name='today'
 	</select>
 	<update id="homeCountUpdate" parameterType="String">
-		update visit set hit = 0 where name = #{name}
+		update visit set hit = 0, regdate= sysdate where name = #{name}
 	</update>
 	<update id="homeUpade">
 		update visit set hit = hit+1

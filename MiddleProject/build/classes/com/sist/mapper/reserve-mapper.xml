@@ -11,9 +11,9 @@
 		and addr2 LIKE '%'||#{area}||'%'	
 </select>
 <select id="chiefList" parameterType="java.util.Map" resultType="MemberVO">
-	SELECT id,poster,name,addr2,reserveCount,num 
-	FROM (SELECT id,poster,name,addr2,reserveCount,rownum as num 
-	FROM (SELECT id,poster,name,addr2,reserveCount,admin 
+	SELECT id,poster,name,addr2,reserveCount,intro,num 
+	FROM (SELECT id,poster,name,addr2,reserveCount,intro,rownum as num 
+	FROM (SELECT id,poster,name,addr2,reserveCount,intro,admin 
 	FROM member 
 	WHERE addr2 like '%'||#{area}||'%' AND admin=2
 	ORDER BY 5 DESC))

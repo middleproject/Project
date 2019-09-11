@@ -26,6 +26,15 @@ $(function(){
 </script>
 </head>
 <body>
+	 <div class="hero-wrap hero-bread" style="background-image: url('../main/images/bg_1.jpg');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h1 class="mb-0 bread" class="jua">Follow Recipes</h1>
+          </div>
+        </div>
+      </div>
+    </div>
 	<section class="ftco-section ftco-cart">
 			<div class="container">
 				<div class="row">
@@ -44,14 +53,9 @@ $(function(){
 						    </thead>
 						    <tbody>
 						    <c:forEach var="vo" items="${list }">
-						    	
-						    		
 								      <tr class="text-center">
-								      
-								        <td class="product-remove remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-								        
+								        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
 								        <td class="image-prod"><div class="img" style="background-image:url(${vo.poster});"></div></td>
-								        
 								        <td class="product-name">
 								        	<a href="../recipe/recipe_detail.do?no=${vo.no }">
 								        	<c:if test="${vo.read==false }">

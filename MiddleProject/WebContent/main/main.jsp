@@ -60,10 +60,14 @@
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
 						    <span class="text">010-2916-3239</span>
 					    </div>
-					    <div class="col-md pr-4 d-flex topper align-items-center">
-					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-						    <span class="text">qpp666@naver.com</span>
-					    </div>
+					    <c:if test="${sessionScope.id!=null }">
+						    <div class="col-md pr-4 d-flex topper align-items-center">
+						    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
+							  
+							    <a href="../recipe/lately.do"><span class="text">recent recipe</span></a><!-- 로그인후 -->
+						     
+						    </div>
+					     </c:if>  
 					    <div class="col-md pr-1 d-flex topper align-items-left text-left">
 						    
 					    </div>
@@ -96,7 +100,7 @@
 							</c:if>
 							 <!-- 2019-9.1 지우-->
 						    <a href="../recipe/msg.do"><span class="text" style="color:white;">&nbsp;쪽지(${msgCount })<c:if test="${msgCount>0 }"><sup><font color=red>NEW</font></sup></c:if>&nbsp;&nbsp;</span></a>
-						    <a href="../recipe/follow.do"><span class="text" style="color:white;">&nbsp;새글 (${followCount })<c:if test="${followCount>0 }"><sup><font color=red>NEW</font></sup></c:if></span></a>
+						    <a href="../recipe/follow.do"><span class="text" style="color:white;">&nbsp;알림 (${followCount })<c:if test="${followCount>0 }"><sup><font color=red>NEW</font></sup></c:if></span></a>
 						    <span class="text" style="color:white;">&nbsp;Cash${sessionScope.pay }원</span>
 						</c:if>
 				    </div>
@@ -127,10 +131,10 @@
 	         <li class="nav-item dropdown">
               <a class="jua dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">게시판</a>
               <div class="dropdown-menu jua" aria-labelledby="dropdown04">
-              	<a class="dropdown-item jua" href="../bimage/img_list.do">이미지 게시판</a>
-                <a class="dropdown-item jua" href="../bQnA/qboard_list.do">문의 게시판</a>
-                <a class="dropdown-item jua" href="../board/board_list.do">자유 게시판</a>
-                <a class="dropdown-item jua" href="../databoard/databoard_list.do">자료실</a>
+              	<a class="dropdown-item jua" href="../bimage/img_list.do">이미지게시판</a>
+                <a class="dropdown-item jua" href="../bQnA/qboard_list.do">문의게시판</a>
+                <a class="dropdown-item jua" href="../board/board_list.do">자유게시판</a>
+                <a class="dropdown-item jua" href="../databoard/databoard_list.do">공지사항</a>
               </div>
             </li>
             
@@ -190,7 +194,7 @@
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">요리보고 조리보고</h2>
-              <p>1조 프로젝트로 만개의 레시피를 모방하여 재구축시킨 사이트다 역시 영어가 간지나긴 한다.</p>
+              <p>Eat, Share, Be Happy.</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -243,7 +247,7 @@
           <div class="col-md-12 text-center">
 
             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This site is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">박지우 김경훈 원병선 이준석 주　란 허정현</a>
 						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						</p>
           </div>

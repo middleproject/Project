@@ -74,7 +74,7 @@ $(function(){
 			                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span>${vo.hit }</a></div> --%>
 			                </div>
 			                <h3 class="heading"><a href="#">${vo.name }</a></h3>
-			                <p>여기다 소개를 넣을까 예약현황을 넣을까</p>
+			                <p>${vo.intro}</p>
 			               
 			                <p><div title="${vo.id}" class="btn btn-primary py-2 px-3 cheifSelect">예약하기</div></p>
 			              </div>

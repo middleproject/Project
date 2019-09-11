@@ -46,11 +46,11 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
 
 	            <div class="col-sm-12 ftco-animate text-center">
 
-	              <h1 class="mb-2">Notice</h1>
-	              <h2 class="subheading mb-4">Notice &amp; of the Week </h2>
+	              <h1 class="mb-2">A Notice Of The Week</h1>
+	              <h2 class="subheading mb-4">Please &amp; check it </h2>
 
-	              <h1 class="mb-2">@@@@hi hello &amp; JSP</h1>
-	              <h2 class="subheading mb-4">Spring &amp; JAVA </h2>
+	             <!--  <h1 class="mb-2">@@@@hi hello &amp; JSP</h1>
+	              <h2 class="subheading mb-4">Spring &amp; JAVA </h2> -->
 
 	              <p><a href="../databoard/databoard_list.do" class="btn btn-primary">금주의 공지사항</a></p>
 	            </div>
@@ -66,12 +66,12 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
 
 	            <div class="col-sm-12 ftco-animate text-center">
 
-	              <h1 class="mb-2">I have any sangak </h1>
-	              <h2 class="subheading mb-4">I have any  &amp; sangak </h2>
-	              <p><a href="#" class="btn btn-primary">yes</a></p>
+	              <h1 class="mb-2">Is There Any Recipe You Want? </h1>
+	              <h2 class="subheading mb-4">Search &amp; for it </h2>
+<!-- 	              <p><a href="../search/search.do" class="btn btn-primary">검색</a></p> -->
 
-	              <h1 class="mb-2">hi hello &amp; Spring</h1>
-	              <h2 class="subheading mb-4">nodes.js  &amp; JAVA </h2>
+	              <h1 class="mb-2">We Have Everything</h1>
+	              <h2 class="subheading mb-4">Find The Recipe  &amp; You Want </h2>
 	              <p><a href="../search/search.do" class="btn btn-primary">원하는 레시피를 찾아보세요!!</a></p>
 
 	            </div>
@@ -131,7 +131,7 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
 		         <c:if test="${sessionScope.id==null }">
 		         	 <h3 class="heading"><a onclick="javascript:alert('로그인을 하세요');">지갑충전</a></h3>
 		         </c:if>   
-                <span>Check the diet list</span>
+                <span>Charging</span>
               </div>
             </div>      
           </div>
@@ -142,7 +142,7 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
               </div>
               <div class="media-body">
                 <h3 class="heading"><a href="../bQnA/qboard_list.do">문의하기</a></h3>
-                <span>24/7 Support</span>
+                <span>To contact</span>
               </div>
             </div>      
           </div>
@@ -154,9 +154,9 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
 		<div class="container">
 				<div class="row justify-content-center mb-3 pb-3">
           <div class="col-md-12 heading-section text-center ftco-animate">
-          	<span class="subheading">recommendation</span>
+          	<span class="subheading">List Of Recipes Divided By Material</span>
             <h2 class="mb-4">재료별로 나눈 레시피 목록</h2>
-            <p>여기에는 뭘 적을지 생각해 봅시다 내일까지 5개씩 가져오세요 검사합니다</p>
+            <p>육류/해산물류/과일류/채소류/가공식품류/곡류</p>
           </div>
         </div>   		
     	</div>
@@ -212,9 +212,9 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
     	<div class="container">
 				<div class="row justify-content-center mb-3 pb-3">
           <div class="col-md-12 heading-section text-center ftco-animate">
-          	<span class="subheading">recommendation++</span>
-            <h2 class="mb-4">회원님이 자주보는 카테고리로 추천한다고 하는걸 모라고하까</h2>
-            <p>여기도 뭐라적을지 생각해보세요 10개씩 해오세요 검사합니다</p>
+          	<span class="subheading">Today's Popular Recipes</span>
+            <h2 class="mb-4">오늘의 인기요리 BEST8</h2>
+            <p>오늘 하루 회원님들이 가장 많이 찾은 요리 8가지</p>
           </div>
         </div>   		
     	</div>
@@ -252,8 +252,8 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
         <div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 heading-section ftco-animate text-center">
           	<span class="subheading">Popular Chef</span>
-            <h2 class="mb-4">가장 바쁜 요리사(?)</h2>
-            <p>또 또 여기도 뭐라적을지 만들어오세요 30개씩 검사함 ㅇㅇ</p>
+            <h2 class="mb-4">이달의 쉐프</h2>
+            <p>이달의 팔로우가 많은 인기요리사</p>
           </div>
         </div>
         <div class="row ftco-animate">
@@ -288,15 +288,15 @@ section.hero > div.home-slider > div.slider-item > div.doHyeon > h1{
           <div class="col-md-6 heading-section ftco-animate deal-of-the-day ftco-animate">
           	<span class="subheading">Site visitors</span>
             <h2 class="mb-4">방문자 수</h2>
-            <p>이걸 왜 이렇게 크고 멋있게 뽑아야되는지 모르겠어서 그런데 다른기능 생각나는사람 있으면 말해주세요</p>
-            <h3><a href="#">Spinach??</a></h3>
-            <span class="price">$10? <a href="#">now $5 only??</a></span>
             <div id="timer" class="d-flex mt-5">
-						  <div class="time" id="days"></div>
-						  <div class="time pl-3" id="Total">${TotalCount }</div>
-						  <div class="time pl-3" id="Today">${TodayCount }</div>
-						  <div class="time pl-3">00</div>
-						</div>
+				<div class="time pl-3" id="Total">${TotalCount }<span>TOTAL</span></div>
+			  	<div class="time pl-3" id="Today">${TodayCount }<span>TODAY</span></div>
+			</div>
+			<p>총 방문자수　　| 오늘의 방문자수</p>
+            <p></p>
+            <h3><a href="http://www.10000recipe.com/">Benchmarking</a></h3>
+            <span class="price"><a href="https://www.sist.co.kr/index.do">Made By-쌍용강북교육센터 G강의장</a></span>
+
           </div>
         </div>   		
     	</div>

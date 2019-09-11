@@ -9,13 +9,19 @@
 </head>	
 
 <body>
-	<div class="hero-wrap hero-bread"
-		style="background-image: url('../main/images/bg_1.jpg');"></div>
-
+	 <div class="hero-wrap hero-bread" style="background-image: url('../main/images/bg_1.jpg');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h1 class="mb-0 bread" class="jua">Wish Recipes</h1>
+          </div>
+        </div>
+      </div>
+    </div>
 	<section class="ftco-section" >
 	<div class="container" >
 		<div class="row justify-content-center" >
-				<p style="position: relative; left: -350px;">총 ?개의 맛있는 레시피가 있습니다.</p>	
+				<p style="position: relative; left: -350px;">찜한 레시피.</p>	
 
 				<div class="col-md-14" style="text-align: center; margin-left: 100px;">
 				<c:forEach var="vo" items="${list }">

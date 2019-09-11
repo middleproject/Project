@@ -38,6 +38,7 @@ $(function(){
     					<li><a class="active jiyock" name="광주">광주광역시</a></li>
     					<li><a class="active jiyock" name="울산">울산광역시</a></li>
     					<li><a class="active jiyock" name="세종">세종특별자치시</a></li>
+    					<br>
     				</ul>
 
     			</div>

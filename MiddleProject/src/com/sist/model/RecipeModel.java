@@ -371,8 +371,8 @@ public class RecipeModel {
 		String follow = model.getRequest().getParameter("follow");
 		System.out.println("팔로우취소"+follow);
 		FollowVO vo = new FollowVO();
-		vo.setFollow(follow);
 		vo.setId(id);
+		vo.setFollow(follow);
 		RecipeDAO.followDelete(vo);
 		return "../recipe/unfollow_ok.jsp";
 	}
@@ -384,6 +384,7 @@ public class RecipeModel {
 		HttpSession session = model.getRequest().getSession();
 		
 		String id =(String)session.getAttribute("id");
+		System.out.println("로그인 아이디:"+id);
 		List<FollowVO> madeList =new ArrayList<FollowVO>();
 		List<RecipeVO> list = new ArrayList<RecipeVO>();
 		List<Integer> rList = new  ArrayList<Integer>(); // 읽은 레시피
@@ -399,18 +400,20 @@ public class RecipeModel {
 			iList=(RecipeDAO.followSearchRecipe(vo));
 		}
 		rList = RecipeDAO.readIntRecipe(id);
-		System.out.println("i사이즈:"+iList.size());
-		System.out.println("r사이즈:"+iList.size());
 		for(int i:iList){
+			if(rList.size()==0){
+				zvo = RecipeDAO.recipeDetailData(i);
+				list.add(zvo);
+			}
 			for(int j:rList){
 				if(i==j){
-					zvo = RecipeDAO.wishAllData(i);
+					zvo = RecipeDAO.recipeDetailData(i);
 					zvo.setRead(true);
+					list.add(zvo);
 				}
 			}
-			list.add(zvo);
 		}
-		System.out.println(list.size());
+		System.out.println("팔로우 사이즈:"+list.size());
 		model.addAttribute("list", list);
 		model.addAttribute("main_jsp", "../recipe/follow.jsp");
 		return "../main/main.jsp";
@@ -578,7 +581,7 @@ public class RecipeModel {
 				  ingre = ingre1+","+ingre2+","+ingre3+","+ingre4+","+ingre5;
 				if(ingre6!=null){
 					String ingre7 = mr.getParameter("ingre7");
-					 ingre = ingre1+","+ingre2+","+ingre3+","+ingre4+","+ingre5+"##"+ingre6;
+					 ingre = ingre1+","+ingre2+","+ingre3+","+ingre4+","+ingre5+","+ingre6;
 					if(ingre7!=null){
 						 ingre = ingre1+","+ingre2+","+ingre3+","+ingre4+","+ingre5+","+ingre6+","+ingre7;
 					}
