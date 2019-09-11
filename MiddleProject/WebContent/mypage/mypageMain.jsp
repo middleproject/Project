@@ -109,7 +109,7 @@ border: 1px solid black;
                      <div class="float-unit"  ><p class="font" >내 게시글보기<p>
                      <div class="w-100"></div>
                      <img src="images/note.png" alt="My Image" width="100px" height="100px">
-                     <p> 내가작성한글 ?개<p>
+                     <p> 내가작성한글 <p>
                      <a href="../main/main.do" type="button" class="btn">글 확인하기</a>
                      </div>
                      
@@ -126,7 +126,7 @@ border: 1px solid black;
                      <div class="float-unit"  ><p class="font" >최근에 본 레시피<p>
                      <div class="w-100"></div>
                      <img src="images/nun.jpeg" alt="My Image" width="90px" height="90px">
-                     <P style="margin-top: 10px;">총 ?개를 봤어요</P>
+                     <P style="margin-top: 10px;"></P>
                      <a href="../recipe/lately.do" type="button" class="btn">보러가기</a>
                      </div>
                      

@@ -73,15 +73,20 @@ border: 1px solid black;
 							<div class="float-unit" ><p class="font" >회원 관리<p>
 							<div class="w-100"></div>
 							<img src="images/man.PNG" alt="My Image" width="100px" height="100px">
+<<<<<<< HEAD
 							<p> 총 회원 ${memCount }명 <p> 
 							<a href="../mypage/memberManagement.do" type="button" class="btn">관리하기</a>
+=======
+							<p> 총 회원 <p> 
+							<a href="" type="button" class="btn">관리하기</a>
+>>>>>>> branch 'master' of https://github.com/middleproject/Project.git
 							</div>
 							
 																					
 							<div class="float-unit" ><p class="font" >예약 금액처리<p>
 							<div class="w-100"></div>
 							<img src="images/man.PNG" alt="My Image" width="100px" height="100px">
-							<p> 총 ?건 <p> 
+							<p>  <p> 
 							<a href="../reserve/adminlist.do" type="button" class="btn">관리하기</a>
 							</div>
 
