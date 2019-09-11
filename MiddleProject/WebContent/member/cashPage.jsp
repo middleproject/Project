@@ -74,8 +74,8 @@
                      <input name="paymentMethod" type="radio">무통장 입금 <input
                         name="paymentMethod" type="radio" style="margin-left: 20px;">쿠폰등록
                   </div>
-
-
+				  
+				  
                   <div class="col-md-10"
                      style="position: relative; bottom: -130px; right: -200px; ">
                      <input type="submit" value="충전하기" style="width: 100px; height: 35px; border-color: #527eee;background-color: #5e8afb; color: white;"> 
