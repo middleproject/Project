@@ -250,13 +250,13 @@ public class MemberModel {
 	public String member_cash_ok(Model model) {
 		HttpSession session = model.getRequest().getSession();
 		Map cashMap = new HashMap();
-		
+		String cash = model.getRequest().getParameter("selectCash");
 		String id = (String)session.getAttribute("id");
-		String money = model.getRequest().getParameter("money");
-		System.out.println("충전금액: " + money);
+		
+		System.out.println("충전금액: " + cash);
 		System.out.println("아이디: " + id);
 		
-		cashMap.put("cash", Integer.parseInt(money));
+		cashMap.put("cash", Integer.parseInt(cash));
 		cashMap.put("id", id);
 		
 		try {
@@ -275,7 +275,7 @@ public class MemberModel {
 		return "../member/cashPage_ok.jsp";
 	}
 	
-
+	
 	
 
 }
