@@ -6,22 +6,24 @@
 <head>
 
 
+
 <style type="text/css">
 .textbox {
 	width: 250px;
-	height: 35px;
-	margin-left: 5px;
-		border: 1px solid #6E6E6E;
-	border-radius: 4px;
+	height: 30px;
 }
 
 .font {
-	color: black;
+	color: blue;
+	position: relative;
+	bottom: -3px;
+}
+.font2{
+color: black;
+font-size: 18px;
 }
 
-.font2 {
-	color: blue;
-}
+
 
 .btn2 {
 	width: 80px;
@@ -31,10 +33,31 @@
 	margin-left: -50px;
 }
 
+.textbox {
+	border: 1px solid #6E6E6E;
+	border-radius: 4px;
+}
+
+hr {
+	border: 1px solid #CDD5D5;
+	width: 800px;
+}
+
+.s {
+	width: 200px;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+	color: blue;
+	background: #F0F9FA;
+}
+
+
 </style>
 
 
-<link rel="stylesheet" href="shadow/css/shadowbox.css">
+
+<link rel="stylesheet" href="../member/shadow/css/shadowbox.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript" src="shadow/js/shadowbox.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -95,229 +118,281 @@ $(function(){
 </script>
 </head>
 <body>
-	 <div class="hero-wrap hero-bread" style="background-image: url('../main/images/bg_1.jpg');">
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-0 bread" class="jua">Member Modification</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-
-	<section class="ftco-section">
+	<div class="hero-wrap hero-bread"
+		style="background-image: url('../main/images/bg_1.jpg');"></div>
+<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
 					<form id="modify_frm" name="userInfo" method="post" action="modify_ok.do"
 						onsubmit="return validate();">
-						<h3 class="mb-4 billing-heading">회원 정보 수정</h3>
-						<p style="border-bottom: solid">
+
+						<h3 class="mb-4 billing-heading">정보 수정</h3>
+						<hr>
 						<div class="row align-items-end">
-							<div class="col-md-6">
-								<div class="form-group">
-									<div style="color:red;">* <label class="font">아이디</label> <input type="text" class="textbox"
-										placeholder="영문,숫자 조합가능" id="id" name="id" value="${vo.id }" readonly="readonly" required>
-								</div>
-								</div>
-							</div>
 
-							<div class="w-100"></div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<div style="color:red;">*<label class="font">비밀번호</label> <input type="password"
-										class="textbox" placeholder="" id="pwd" name="pwd"
-										required>
-										</div>
-								</div>
-							</div>
-							<div class="w-100"></div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label class="font">비밀번호 확인</label> <input type="password"
-										class="textbox" placeholder="" id="pwd2" name="pwd2"
-										required>
-								</div>
-								<label id=lable style="position:relative; top: -45px; right: -270px;"></label>
-							</div>
-
-							<div class="w-100"></div>
-							<div class="col-md-4" style="margin-top: -20px;">
-								<div class="form-group">
-									<div style="color:red;">*<label class="font">이름</label> <input type="text" class="textbox"
-										placeholder="" id="name" name="name" class="name" value="${vo.name }" readonly="readonly" required>
-								</div>
-								</div>
-							</div>
-
-							<div class="w-100" ></div>
-							<div class="col-md-8">
-								<div class="form-group">
-									<div style="color:red;">*<label class="font">성별</label>
-									<div class="w-100"></div>
+							<div class="col-md-10">
+								<div class="form-group" style="margin-top: -5px;">
+									<div class="s"
+										style="position: relative; top: -10px; height: 65px; position: relative; margin-bottom: -50x;">
+										
+											 <label class="font">아이디</label>
+										
 									</div>
-									<input type="radio" style="width: 15px; height: 15px;"
-										name="sex" value="남자"> <label style="font-size: 15px;">남자</label>
-									<input type="radio" style="width: 15px; height: 15px;"
-										name="sex" value="여자"> <label style="font-size: 15px;">여자</label>
+									<label class="font2" style="position: relative; right: -227px; top: -55px; color: black;">
+										${vo.id }</label> 
+										
+										<input type="hidden" class="textbox"
+                              placeholder="영문,숫자 조합가능" id="id" name="id" value="${vo.id }" required><label>${vo.id }</label>
+										
+										
+									<hr style="margin-top: -50px; margin-bottom: -3px;">
 								</div>
-								
 							</div>
 
+
+
+
 							<div class="w-100"></div>
-							<div class="col-md-8">
+							<div class="col-md-10">
+								<div class="form-group" style="margin-top: -2px;">
+									<div class="s"
+										style="position: relative; top: -10px; height: 65px; position: relative; margin-bottom: -50x;">
+										
+											 <label class="font">비밀번호</label>
+										
+									</div>
+									<input type="password" class="textbox" placeholder="" id="pwd"
+										name="pwd"
+										style="position: relative; right: -220px; top: -65PX;"
+										required> <label
+										style="position: relative; right: -227px; top: -70px;">*
+										영문/숫자/특수문자을 조합하여 최소 9자이상 13자 이내 대소문자 구별</label>
+									<hr style="margin-top: -76px;">
+								</div>
+							</div>
+
+
+							<div class="w-100"></div>
+							<div class="col-md-10"
+								style="margin-top: -5px; margin-bottom: 2px;">
 								<div class="form-group">
-									<div style="color:red;">*<label class="font">생년월일</label> <input type="date" class="textbox"
-										id="birthday" name="birthday" placeholder="생년월일을 선택해주세요" 
+									<div class="s"
+										style="position: relative; top: -10px; height: 65px; position: relative; margin-bottom: -65x;">
+
+										<label class="font">비밀번호 확인</label>
+
+									</div>
+									<input type="password" class="textbox" placeholder="" id="pwd2"
+										name="pwd2"
+										style="position: relative; right: -220px; top: -62PX;"
 										required>
-</div>
 								</div>
+								<label id=lable
+									style="position: relative; top: -106px; right: -480px; margin-bottom: -50px;"></label>
+
+								<hr style="margin-top: -81px; margin-bottom: -23px;">
 							</div>
 
 							<div class="w-100"></div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<div style="color:red;">*<label class="font">이메일</label> <input type="text" id="email1"
-										 class="textbox" name="email1" style="width: 230px; mar " value="${vo.email }" required>
+							<div class="col-md-10">
+								<div class="form-group" style="margin-bottom: -21px;">
+									<div class="s"
+										style="position: relative; bottom: -23px; height: 50px; position: relative; margin-bottom: -50x;">
+										
+											<label class="font" style="position: relative;right: -23px;">성명</label>
+										<label class="font2" style="position: relative;  right:-130px; top:10px; color: black;">
+										${vo.name }</label> 
+										<input type="hidden" class="textbox"
+										placeholder="" id="name" name="name" class="name" value="${vo.name }" required>
+
+									</div>
+
+									
+
 								</div>
-								</div>
-							</div> 
-						<!-- 
-							<div class="col-md-0">
-								<div class="form-group">
-									<label>@</label>
-								</div>
+								<hr style="position: relative; bottom: -30px;">
 							</div>
 
-							<div class="col-md-4">
-								<div class="form-group">
-									<input type="text" id="email2"class="textbox" name="email2" style="width: 230px; position: relative; right: -10px;">
+
+
+							<div class="w-100"></div>
+							<div class="col-md-10" style="margin-top: 5px;">
+								<div class="form-group"
+									style=" margin-bottom: -40px;">
+									<div class="s"
+										style="position: relative; bottom: -10PX; height: 65px; position: relative; margin-bottom: -50x;">
+										
+											 <label class="font" style="position: relative;right: -10px;">성별</label>
+												<label class="font2" style="position: relative;  right:-130px; top:10px; color: black;">
+										${vo.sex }</label> 
+										<input type="hidden" class="textbox"
+										placeholder="" id="sex" name="sex" class="sex" value="${vo.sex }" required>
+									</div>
+								<hr style="position: relative;top: -5px;">
+							</div>
+</div>
+
+
+							<div class="w-100"></div>
+							<div class="col-md-10" >
+								<div class="form-group"
+									style="margin-bottom: -35px; margin-top: 10px;">
+									<div class="s"
+										style="position: relative; bottom: -10PX; height: 65px; position: relative; margin-bottom: -50x;">
+										
+											 <label class="font">생년월일</label>
+										
+									</div>
+									<input type="date" class="textbox" id="birthday"
+										name="birthday" placeholder="생년월일을 선택해주세요"
+										style="position: relative; right: -220PX; top: -38px;"
+										required>
+								</div>
+								<hr>
+							</div>
+
+
+							<div class="w-100"></div>
+							<div class="col-md-10">
+								<div class="form-group"
+									style="margin-top: -25px; margin-bottom: -65px;">
+									<div class="s"
+										style="position: relative; bottom: -10PX; height: 75px; position: relative; margin-bottom: -50x;">
+										
+											 <label class="font" style="position: relative; top: -5px;">이메일</label>
+										
+									</div>
+									<input type="text" id="email1" class="textbox" name="email1"
+										style="width: 250px; position: relative; top: -50px; right: -220px;"
+										value="${vo.email }"  required> 
+
 									
 								</div>
-							</div> 
-							<div class="col-md-0">
-								<div class="form-group">
-									<select id="emailSelection" name="emailSelection"
-										style="width: 120px; height: 33px; position: relative; right: -70px; border: 1px solid black;
-   border-radius: 4px;">
-										<option>직접입력</option>
-										<option>naver.com</option>
-										<option>daum.net</option>
-										<option>goole.com</option>
-									</select>
-								</div>
+			
+								<hr style="position: relative; bottom: -5px;">
 							</div>
-							-->
+
+
+
 
 
 							<div class="w-100"></div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label class="font">집 전화</label>
-									<div class="w-100"></div>
-									<select style="width: 80px; height: 33px;" name="tel1" class="textbox">
+							<div class="col-md-10">
+								<div class="form-group"
+									style="margin-top: -35px; margin-bottom: -35px;">
+									<div class="s"
+										style="position: relative; bottom: -23px; height: 50px; position: relative; margin-bottom: -50x;">
+										<label class="font">집 전화</label>
+
+									</div>
+									<select
+										style="width: 80px; height: 33px; position: relative; right: -225px; top: -13px;"
+										name="tel1" class="textbox">
 										<option>02</option>
 										<option>031</option>
 										<option>041</option>
-									</select> - <input type="tel" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-									 size="5px" name="tel2" class="textbox" style="width: 80px; height: 33px; "> 
-									- <input
-										type="tel" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-										  size="5px" name="tel3" class="textbox" style="width: 80px; height: 33px;">
+									</select> - <input type="tel"
+										onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+										size="5px" name="tel2" class="textbox"
+										style="width: 80px; height: 33px; position: relative; right: -225px; top: -13px;">
+									- <input type="tel"
+										onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+										size="5px" name="tel3" class="textbox"
+										style="width: 80px; height: 33px; position: relative; right: -225px; top: -13px;">
 								</div>
+								<hr style="position: relative; bottom: -10px;">
 							</div>
 
 							<div class="w-100"></div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<div style="color:red;">*<label class="font">휴대 전화</label>
-									<div class="w-100"></div>
+							<div class="col-md-10">
+								<div class="form-group"
+									style="margin-top: -30px; margin-bottom: -35px;">
+									<div class="s"
+										style="position: relative; bottom: -23px; height: 50px; position: relative; margin-bottom: -50x;">
+										
+											 <label class="font">휴대 전화</label>
+										
 									</div>
-									<select style="width: 80px; height: 33px;" name="phone1" class="textbox	">
+
+									<select
+										style="width: 80px; height: 33px; position: relative; right: -225px; top: -15px;"
+										name="phone1" class="textbox">
 										<option>010</option>
 										<option>011</option>
 										<option>016</option>
-									</select> - <input type="tel" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-									  size="5px" required name="phone2" class="textbox" style="width: 80px; height: 33px;">
-									- <input type="tel"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-									 size="5px" required name="phone3" class="textbox" style="width: 80px; height: 33px;">
+									</select> - <input type="tel"
+										onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+										size="5px" required name="phone2" class="textbox"
+										style="width: 80px; height: 33px; position: relative; right: -225px; top: -15px;">
+									- <input type="tel"
+										onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+										size="5px" required name="phone3" class="textbox"
+										style="width: 80px; height: 33px; position: relative; right: -225px; top: -15px;">
 								</div>
+								<hr style="position: relative; bottom: -10px;">
 							</div>
 							<div class="w-100"></div>
-							<div class="col-md-6">
+							<div class="col-md-10" style=" margin-top: -5px;" >
 								<div class="form-group">
-									<div style="color:red;">*<label style="color: black">우편번호</label>
-									<div class="w-100"></div>
-									<input type="text" readonly="readonly" id="addr1" name="addr1" class="textbox"required style="position: relative; right: 5px;">
-				</div>
-								</div>
+									<div class="s"
+										style="bottom: -23px; height: 200px; margin-bottom: -50x;">
+										
+											 <label class="font">우편 번호</label>
+										
+									</div>
+									<input type="text" readonly="readonly" id="addr1" name="addr1"
+										class="textbox" required
+										style="position: relative; right: -225px; top: -160px; width: 200px;">
 
-							</div>
-
-							<div class="col-md-2">
-								<div class="form-group">
 									<input type="button"
-										style="width: 90px; height: 35px; font-size: 15px"
+										style="width: 90px; height: 35px; position: relative; right: -290px; top: -160px; font-size: 15px"
 										class="btn2 textbox" value="검색" name="postBtn" id="postBtn">
 
-								</div>
+									<input type="text" class="textbox" placeholder="주소"
+										style="position: relative; right: -225px; top: -135px; width: 500px;"
+										id="addr2" name="addr2">
 
-							</div>
 
-							<div class="w-100"></div>
-							<div class="col-md-10">
-								<div class="form-group">
-									<input type="text" class="textbox" placeholder="주소" style="width: 500px; margin-left: 0px;"
-										id="addr2" name="addr2" >
-								</div>
-							</div>
-							<div class="col-md-10">
-								<div class="form-group">
 									<!-- 사용자 입력 부분(상세주소) -->
-									<input type="text" class="textbox" placeholder="상세주소" style="width: 250px; margin-left: 0px;"
-										id="addr3" name="addr3" >
-										<input type="text" class="textbox" placeholder="참고항목" style="width: 250px; margin-left: 270px; position: relative;top: -35px; "
-										id="exAddr" name="exAddr" >
+									<input type="text" class="textbox" placeholder="상세주소"
+										style="width: 250px; position: relative; right: -225px; top: -130px;"
+										id="addr3" name="addr3"> <input type="text"
+										class="textbox" placeholder="참고항목"
+										style="width: 250px; position: relative; right: -225px; top: -130px;"
+										id="exAddr" name="exAddr">
 								</div>
+								<hr style="margin-top: -115px;"> 
 							</div>
 
 
-							<div class="w-100"></div>
-							<div class="col-md-2">
-								<div class="form-group">
-									<label></label>
 
+							<div class="w-100"></div>
+							<div class="col-md-10" style="margin-bottom: 300px;">
+
+								<div class="form-group ">
+
+									<input type="submit"  value="수정완료"
+									style="position: relative; right: -250px; border-color: #527eee;background-color: #5e8afb; color: white; width: 100px; height: 50px;">
+
+
+
+
+									<a href="../main/main.do"><input type="button" value="수정취소"
+									style="position: relative; right: -280px; border-color: #527eee;background-color: #5e8afb; color: white; width:100px; height: 50px;"></a>
 								</div>
-							</div>
-
-							<div class="w-100"></div>
-							
-							<div class="col-md-2">
-							<p style="border-bottom: solid; width: 650px; margin-top: -70px;">
-								<div class="form-group">
 								
-									<input type="submit" class=" btn-success btn-lg" value="수정완료">
-								</div>
 							</div>
-							<div class="col-md-2"></div>
-							<div class="col-md-2"></div>
-
-							<div class="col-md-6">
-								<div class="form-group">
-									<input type="button" class="btn-warning btn-lg" value="수정취소"
-										onclick="javascript:history.back()">
-								</div>
 							</div>
-
-
-						</div>
 					</form>
-					
-					<!-- END -->
 				</div>
 
+
+
 			</div>
+
 		</div>
+
 	</section>
 
 	<!-- .section -->
@@ -351,7 +426,7 @@ $(function(){
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-	/* $(function() {
+	$(function() {
 		$('select[name="emailSelection"]').change(function() {
 			if ($(this).val() == "직접입력") {
 				$('#email2').val("");
@@ -361,7 +436,7 @@ $(function(){
 				$("#email2").attr("readonly", true);
 			}
 		});
-	}); */
+	});
 </script>
 
 
