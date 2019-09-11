@@ -275,7 +275,7 @@ public class MemberModel {
 		return "../member/cashPage_ok.jsp";
 	}
 	
-	
+
 	
 
 }

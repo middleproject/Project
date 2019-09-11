@@ -1,6 +1,7 @@
 package com.sist.model;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,7 +19,7 @@ public class MypageModel {
 	public String mypage_Main(Model model) {
 		HttpSession session = model.getRequest().getSession();
 		String id = (String) session.getAttribute("id");
-		MemberVO vo = MemberDAO.memberAllData(id);
+		MemberVO vo = MemberDAO.memberData(id);
 		int wishCount =MemberDAO.wishCount(id);
 		int msgCount = RecipeDAO.msgCount(id);
 		
@@ -33,7 +34,7 @@ public class MypageModel {
 	public String mypage_memberModify(Model model) {
 		HttpSession session = model.getRequest().getSession();
 		String id = (String) session.getAttribute("id");
-		MemberVO vo = MemberDAO.memberAllData(id);
+		MemberVO vo = MemberDAO.memberData(id);
 		model.addAttribute("vo", vo);
 		model.addAttribute("main_jsp", "../mypage/memberModify.jsp");
 		return "../main/main.jsp";
@@ -81,7 +82,7 @@ public class MypageModel {
 		System.out.println("sex:" + sex);
 		System.out.println("date:" + date);
 		
-		MemberVO vo = MemberDAO.memberAllData(id);
+		MemberVO vo = MemberDAO.memberData(id);
 		try {
 			vo.setPwd(pwd);
 			vo.setTel(tel);
@@ -100,13 +101,30 @@ public class MypageModel {
 		
 		return "../mypage/modify_ok.jsp";
 	}
-	// 관리자 페이지
+	// 관리자 페이지(메인)
 	@RequestMapping("mypage/adminpageMain.do")
 	public String adminpage_main(Model model) {
-
+		
+		int count = MemberDAO.countAllMember();
+		
+		model.addAttribute("memCount", count);
 		model.addAttribute("main_jsp", "../mypage/adminpageMain.jsp");
 		return "../main/main.jsp";
 
+	}
+	
+	// 회원 관리 페이지
+	@RequestMapping("mypage/memberManagement.do")
+	public String memberManagement(Model model) {
+		try {
+			model.getRequest().setCharacterEncoding("UTF-8");
+		} catch (Exception e) {}
+		
+		List list = MemberDAO.memAllData();
+		
+		model.addAttribute("list", list);
+		model.addAttribute("main_jsp", "../mypage/memberManagement.jsp");
+		return "../main/main.jsp";
 	}
 
 }

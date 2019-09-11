@@ -73,8 +73,8 @@ border: 1px solid black;
 							<div class="float-unit" ><p class="font" >회원 관리<p>
 							<div class="w-100"></div>
 							<img src="images/man.PNG" alt="My Image" width="100px" height="100px">
-							<p> 총 회원 ?명 <p> 
-							<a href="" type="button" class="btn">관리하기</a>
+							<p> 총 회원 ${memCount }명 <p> 
+							<a href="../mypage/memberManagement.do" type="button" class="btn">관리하기</a>
 							</div>
 							
 																					

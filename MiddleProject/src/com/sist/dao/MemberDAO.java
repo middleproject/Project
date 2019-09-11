@@ -164,7 +164,7 @@ public class MemberDAO {
 	}
 
 	// 회원정보 가져오기
-	public static MemberVO memberAllData(String id) {
+	public static MemberVO memberData(String id) {
 		SqlSession session = null;
 		MemberVO vo = new MemberVO();
 
@@ -243,4 +243,38 @@ public class MemberDAO {
 		}
 		return list;
 	}
+	
+	// 총 회원 수
+	public static int countAllMember() {
+		int count = 0;
+		SqlSession session = null;
+		
+		try {
+			session = ssf.openSession();
+			count = session.selectOne("countAllMember");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+		
+		return count;
+	}
+	
+	// 회원 목록 가져오기
+		public static List<MemberVO> memAllData() {
+			List<MemberVO> list = new ArrayList<MemberVO>();
+			SqlSession session = null;
+			try {
+				session = ssf.openSession();
+				list = session.selectList("memAllData");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (session != null)
+					session.close();
+			}
+			return list;
+		}
 }
