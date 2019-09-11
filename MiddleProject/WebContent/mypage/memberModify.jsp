@@ -266,7 +266,7 @@ $(function(){
 									<input type="text" id="email1" class="textbox" name="email1"
 										style="width: 250px; position: relative; top: -50px; right: -220px;"
 										value="${vo.email }"  required> 
-
+ 
 									
 								</div>
 			
