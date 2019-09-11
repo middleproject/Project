@@ -114,5 +114,8 @@
 	<select id="countAllMember" resultType="int">
 		SELECT COUNT(*) FROM member
 	</select>
-
+	<!-- 멤버 찾기 -->
+	<select id="memAllData" resultType="MemberVO">
+		SELECT id,name,admin FROM member
+	</select>
 </mapper>
