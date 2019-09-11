@@ -155,8 +155,8 @@
 		order by regdate desc)
 	</select> -->
 	<select id="madeSearchRecipe" resultType="int" parameterType="FollowVO">
-		select no,num
-		from (select no,poster,summary,summary_in,hit,regdate,rownum as num,made 
+		select no
+		from (select no,poster,summary,summary_in,hit,regdate,made 
 		from recipe where
 				made LIKE '%'||#{follow}||'%' and #{day} &lt;= TO_CHAR(regdate,'YYYY-MM-DD') 
 		order by regdate desc)
