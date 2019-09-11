@@ -96,7 +96,7 @@
 							</c:if>
 							 <!-- 2019-9.1 지우-->
 						    <a href="../recipe/msg.do"><span class="text" style="color:white;">&nbsp;쪽지(${msgCount })<c:if test="${msgCount>0 }"><sup><font color=red>NEW</font></sup></c:if>&nbsp;&nbsp;</span></a>
-						    <a href="../recipe/follow.do"><span class="text" style="color:white;">&nbsp;새글 (${followCount })<c:if test="${followCount>0 }"><sup><font color=red>NEW</font></sup></c:if></span></a>
+						    <a href="../recipe/follow.do"><span class="text" style="color:white;">&nbsp;알림 (${followCount })<c:if test="${followCount>0 }"><sup><font color=red>NEW</font></sup></c:if></span></a>
 						    <span class="text" style="color:white;">&nbsp;Cash${sessionScope.pay }원</span>
 						</c:if>
 				    </div>
@@ -127,10 +127,10 @@
 	         <li class="nav-item dropdown">
               <a class="jua dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">게시판</a>
               <div class="dropdown-menu jua" aria-labelledby="dropdown04">
-              	<a class="dropdown-item jua" href="../bimage/img_list.do">이미지 게시판</a>
-                <a class="dropdown-item jua" href="../bQnA/qboard_list.do">문의 게시판</a>
-                <a class="dropdown-item jua" href="../board/board_list.do">자유 게시판</a>
-                <a class="dropdown-item jua" href="../databoard/databoard_list.do">자료실</a>
+              	<a class="dropdown-item jua" href="../bimage/img_list.do">이미지게시판</a>
+                <a class="dropdown-item jua" href="../bQnA/qboard_list.do">문의게시판</a>
+                <a class="dropdown-item jua" href="../board/board_list.do">자유게시판</a>
+                <a class="dropdown-item jua" href="../databoard/databoard_list.do">공지사항</a>
               </div>
             </li>
             
