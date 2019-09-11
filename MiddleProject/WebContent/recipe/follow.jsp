@@ -53,14 +53,9 @@ $(function(){
 						    </thead>
 						    <tbody>
 						    <c:forEach var="vo" items="${list }">
-						    	
-						    		
 								      <tr class="text-center">
-								      
-								        <td class="product-remove remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-								        
+								        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
 								        <td class="image-prod"><div class="img" style="background-image:url(${vo.poster});"></div></td>
-								        
 								        <td class="product-name">
 								        	<a href="../recipe/recipe_detail.do?no=${vo.no }">
 								        	<c:if test="${vo.read==false }">
