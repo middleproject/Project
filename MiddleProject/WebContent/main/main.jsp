@@ -60,10 +60,14 @@
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
 						    <span class="text">010-2916-3239</span>
 					    </div>
-					    <div class="col-md pr-4 d-flex topper align-items-center">
-					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-						    <span class="text">qpp666@naver.com</span>
-					    </div>
+					    <c:if test="${sessionScope.id!=null }">
+						    <div class="col-md pr-4 d-flex topper align-items-center">
+						    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
+							  
+							    <a href="../recipe/lately.do"><span class="text">recent recipe</span></a><!-- 로그인후 -->
+						     
+						    </div>
+					     </c:if>  
 					    <div class="col-md pr-1 d-flex topper align-items-left text-left">
 						    
 					    </div>
