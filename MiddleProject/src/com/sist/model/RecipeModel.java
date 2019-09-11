@@ -372,6 +372,7 @@ public class RecipeModel {
 		System.out.println("팔로우취소"+follow);
 		FollowVO vo = new FollowVO();
 		vo.setId(id);
+		vo.setFollow(follow);
 		RecipeDAO.followDelete(vo);
 		return "../recipe/unfollow_ok.jsp";
 	}
