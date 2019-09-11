@@ -400,7 +400,6 @@ public class RecipeModel {
 			iList=(RecipeDAO.followSearchRecipe(vo));
 		}
 		rList = RecipeDAO.readIntRecipe(id);
-		System.out.println("i°ª:"+iList.get(0).intValue());
 		for(int i:iList){
 			if(rList.size()==0){
 				zvo = RecipeDAO.recipeDetailData(i);
