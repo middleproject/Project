@@ -82,7 +82,7 @@
                      <input type="submit" value="충전하기" style="width: 100px; height: 35px; border-color: #527eee;background-color: #5e8afb; color: white;"> 
                      <a href="../mypage/mypageMain.do"><input type="button"
                         value="취소하기" style="background-color: #5e8afb; color: white; width: 100px; height: 35px; border-color: #527eee"></a>
-                  </div> 
+                  </div>
 
 
                </div>
