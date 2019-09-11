@@ -38,13 +38,13 @@
 	<!-- 4. 회원탈퇴 -->
 	<delete id="memberDelete" parameterType="String">
 		DELETE FROM member
-		WHERE id=#{id}
+		WHERE
+		id=#{id}
 	</delete>
 	<!-- 5. 회원수정 -->
 	<update id="memModify" parameterType="MemberVO">
 		UPDATE member SET
 		pwd=#{pwd},
-		email=#{email},
 		tel=#{tel},
 		phone=#{phone},
 		addr1=#{addr1},
@@ -68,7 +68,8 @@
 
 	<!-- 아이디 찾기 -->
 	<select id="memIdFind" parameterType="String" resultType="String">
-		SELECT id
+		SELECT
+		id
 		FROM member
 		WHERE email=#{email}
 	</select>
@@ -81,7 +82,8 @@
 	</select>
 	<!-- 마이페이지 회원정보 -->
 	<select id="selectId" parameterType="String" resultType="MemberVO">
-		SELECT * from MEMBER where id = #{id}
+		SELECT *
+		from MEMBER where id = #{id}
 	</select>
 	<!-- 캐시 충전 -->
 	<update id="memPayUpdate" parameterType="java.util.Map">
@@ -91,8 +93,29 @@
 	</update>
 	<!-- 현재 캐시 확인 -->
 	<select id="memChkPay" parameterType="String" resultType="int">
-		SELECT pay
+		SELECT
+		pay
 		FROM member
 		WHERE id=#{id}
+	</select>
+	<!-- 쉐프 찾기 -->
+	<select id="chefAllData" resultType="MemberVO">
+		select
+		id,name,addr1,pay,poster,reservecount,num,intro
+		from (select
+		id,name,addr1,pay,poster,reservecount,rownum as num,intro
+		from (select
+		id,name,addr1,pay,poster,reservecount,intro
+		from member where admin=2
+		order by reservecount desc))
+		where num &lt;6
+	</select>
+	<!--  총 회원 수 확인 -->
+	<select id="countAllMember" resultType="int">
+		SELECT COUNT(*) FROM member
+	</select>
+	<!-- 멤버 찾기 -->
+	<select id="memAllData" resultType="MemberVO">
+		SELECT id,name,admin
 	</select>
 </mapper>

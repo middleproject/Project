@@ -68,10 +68,6 @@
 	</div>
 </body>
 <script type="text/javascript">
-	$('#delete_btn').click(function(){
-		if(confirm("정말 탈퇴시키시겠습니까?") == true) {
-			
-		}
-	})
+
 </script>
 </html>
